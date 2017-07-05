@@ -22,6 +22,7 @@ import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 import com.jfinal.plugin.druid.DruidPlugin;
+
 import javax.sql.DataSource;
 
 /**

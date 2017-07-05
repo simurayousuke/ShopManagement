@@ -30,8 +30,8 @@ public class IndexController extends BaseController {
     /**
      * The entry point of index
      */
-    public void index(){
-renderTemplate("index.html");
+    public void index() {
+        renderTemplate("index.html");
     }
 
 }

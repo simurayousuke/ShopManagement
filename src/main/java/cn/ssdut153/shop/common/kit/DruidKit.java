@@ -48,7 +48,7 @@ public class DruidKit {
      * Get Cookie from Request.
      *
      * @param request HttpServletRequest
-     * @param name name of cookie
+     * @param name    name of cookie
      * @return value of cookie
      */
     private static String getCookie(HttpServletRequest request, String name) {
@@ -60,7 +60,7 @@ public class DruidKit {
      * Get Cookie Object from Request.
      *
      * @param request HttpServletRequest
-     * @param name name of cookie
+     * @param name    name of cookie
      * @return Cookie Object
      */
     private static Cookie getCookieObject(HttpServletRequest request, String name) {
