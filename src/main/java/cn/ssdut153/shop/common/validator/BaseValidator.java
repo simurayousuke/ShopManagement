@@ -22,9 +22,16 @@ import com.jfinal.validate.Validator;
  * This is the base validator.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
 public abstract class BaseValidator extends Validator {
+
+    public BaseValidator() {
+        // 短路验证
+        shortCircuit = true;
+    }
+
 }
