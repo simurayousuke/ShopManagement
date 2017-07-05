@@ -18,6 +18,7 @@ package cn.ssdut153.shop.common;
 
 import cn.ssdut153.shop.common.handler.StaticHandler;
 import cn.ssdut153.shop.common.kit.DruidKit;
+import cn.ssdut153.shop.common.model._MappingKit;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallFilter;
@@ -39,7 +40,8 @@ import com.jfinal.template.Engine;
  * This is the config of JFinal.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -98,7 +100,7 @@ public class Config extends JFinalConfig {
     private ActiveRecordPlugin getActiveRecordPlugin(DruidPlugin dp) {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
         arp.setDialect(new PostgreSqlDialect());
-//        _MappingKit.mapping(arp);
+        _MappingKit.mapping(arp);
         arp.setBaseSqlTemplatePath(PathKit.getRootClassPath() + "/sql");
         arp.addSqlTemplate("all.sql");
         return arp;
