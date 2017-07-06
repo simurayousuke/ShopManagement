@@ -16,6 +16,7 @@
 
 package cn.ssdut153.shop.common;
 
+import cn.ssdut153.shop.common.directive.CompressDirective;
 import cn.ssdut153.shop.common.handler.StaticHandler;
 import cn.ssdut153.shop.common.kit.DruidKit;
 import cn.ssdut153.shop.common.kit.ShortMessageKit;
@@ -150,6 +151,7 @@ public class Config extends JFinalConfig {
     @Override
     public void configEngine(Engine me) {
         me.addSharedFunction("_view/_common/_layout.html");
+        me.addDirective("compress", new CompressDirective());
     }
 
     /**
