@@ -26,6 +26,10 @@ import java.util.List;
 
 /**
  * 使用 Jsoup 对 html 进行过滤
+ *
+ * @author Hu Wenqiang
+ * @version 1.0.1
+ * @since 1.0.0
  */
 @SuppressWarnings("rawtypes")
 public class JsoupFilter {

@@ -22,7 +22,8 @@ import com.jfinal.plugin.redis.Redis;
  * The help kit for Redis.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class RedisKit {
