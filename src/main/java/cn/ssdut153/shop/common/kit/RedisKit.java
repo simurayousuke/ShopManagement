@@ -17,7 +17,6 @@
 package cn.ssdut153.shop.common.kit;
 
 import com.jfinal.plugin.redis.Redis;
-import com.sun.org.apache.regexp.internal.RE;
 
 /**
  * The help kit for Redis.
@@ -35,7 +34,7 @@ public class RedisKit {
 
     // todo 返回User
     public static String getUsernameByToken(String token) {
-        return token == null ? null : Redis.use("token").get(token);
+        return null == token ? null : Redis.use("token").get(token);
     }
 
     // todo 设置User
@@ -47,10 +46,10 @@ public class RedisKit {
      * set captcha code into redis
      *
      * @param number phone number
-     * @param code captcha code
+     * @param code   captcha code
      */
-    public static void setCaptcha(String number,String code){
-        Redis.use("shortMessageCaptcha").setex(number,15*60,code);
+    public static void setCaptcha(String number, String code) {
+        Redis.use("shortMessageCaptcha").setex(number, 15 * 60, code);
     }
 
     /**
@@ -59,11 +58,11 @@ public class RedisKit {
      * @param number number
      * @return captcha code
      */
-    public static String getCaptcha(String number){
-        return number == null ? null :Redis.use("shortMessageCaptcha").get(number);
+    public static String getCaptcha(String number) {
+        return null == number ? null : Redis.use("shortMessageCaptcha").get(number);
     }
 
-    public static void delCaptcha(String number){
+    public static void delCaptcha(String number) {
         Redis.use("shortMessageCaptcha").del(number);
     }
 

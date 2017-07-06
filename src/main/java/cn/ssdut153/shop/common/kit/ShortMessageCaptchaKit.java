@@ -16,15 +16,14 @@
 
 package cn.ssdut153.shop.common.kit;
 
-import com.jfinal.plugin.redis.Redis;
-
 import java.util.Random;
 
 /**
  * The help kit for Generating and Validating short message captcha.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class ShortMessageCaptchaKit {
@@ -37,9 +36,9 @@ public class ShortMessageCaptchaKit {
      * @param length number of chars of captcha
      * @return captcha code
      */
-    private static String generateCode(int length){
+    private static String generateCode(int length) {
         Random random = new Random();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             int number = random.nextInt(base.length());
             sb.append(base.charAt(number));
@@ -52,8 +51,8 @@ public class ShortMessageCaptchaKit {
      *
      * @param base string
      */
-    public static void setBase(String base){
-        ShortMessageCaptchaKit.base =base;
+    public static void setBase(String base) {
+        ShortMessageCaptchaKit.base = base;
     }
 
     /**
@@ -62,26 +61,25 @@ public class ShortMessageCaptchaKit {
      * @param number phone number
      * @return captcha code
      */
-    public static String generateCaptcha(String number){
-        String code=generateCode(6);
-        RedisKit.setCaptcha(number,code);
+    public static String generateCaptcha(String number) {
+        String code = generateCode(6);
+        RedisKit.setCaptcha(number, code);
         return code;
     }
 
     /**
      * validate captcha code.
      *
-     * @param number phone number
+     * @param number  phone number
      * @param captcha input captcha code
      * @return boolean
      */
-    public static boolean validate(String number,String captcha){
-        boolean status=false;
-        if(captcha.equals(RedisKit.getCaptcha(number))){
-            RedisKit.delCaptcha(number);
-            status=true;
+    public static boolean validate(String number, String captcha) {
+        if (!captcha.equals(RedisKit.getCaptcha(number))) {
+            return false;
         }
-        return status;
+        RedisKit.delCaptcha(number);
+        return true;
     }
 
 }

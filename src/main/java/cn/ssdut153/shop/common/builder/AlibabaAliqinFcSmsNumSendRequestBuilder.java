@@ -16,22 +16,23 @@
 
 package cn.ssdut153.shop.common.builder;
 
-import com.taobao.api.ApiException;
+import com.jfinal.kit.JsonKit;
+import com.jfinal.kit.Kv;
 import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 
 /**
  * Builder of AlibabaAliqinFcSmsNumSendRequest.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class AlibabaAliqinFcSmsNumSendRequestBuilder {
 
-    AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+    private AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
 
-    public AlibabaAliqinFcSmsNumSendRequestBuilder(String name,String operation,String code,String number,String extend) {
+    public AlibabaAliqinFcSmsNumSendRequestBuilder(String name, String operation, String code, String number, String extend) {
         req.setExtend(extend);
         req.setSmsType("normal");
         req.setSmsFreeSignName("庄云");
@@ -40,15 +41,20 @@ public class AlibabaAliqinFcSmsNumSendRequestBuilder {
         req.setSmsTemplateCode("SMS_63950001");
     }
 
-    public AlibabaAliqinFcSmsNumSendRequestBuilder(String name,String operation,String code,String number) {
+    public AlibabaAliqinFcSmsNumSendRequestBuilder(String name, String operation, String code, String number) {
         req.setSmsType("normal");
         req.setSmsFreeSignName("庄云");
-        req.setSmsParamString("{\"name\":\"" + name + "\",\"platform\":\"庄云网\",\"operation\":\"" + operation + "\",\"code\":\"" + code + "\"}");
+        Kv kv = Kv.by("name", name)
+                .set("platform", "庄云网")
+                .set("operation", operation)
+                .set("code", code);
+        req.setSmsParamString(JsonKit.toJson(kv));
         req.setRecNum(number);
         req.setSmsTemplateCode("SMS_63950001");
     }
 
-    public AlibabaAliqinFcSmsNumSendRequest build(){
+    public AlibabaAliqinFcSmsNumSendRequest build() {
         return req;
     }
+
 }
