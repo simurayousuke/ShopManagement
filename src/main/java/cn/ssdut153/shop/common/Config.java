@@ -18,9 +18,11 @@ package cn.ssdut153.shop.common;
 
 import cn.ssdut153.shop.common.handler.StaticHandler;
 import cn.ssdut153.shop.common.kit.DruidKit;
+import cn.ssdut153.shop.common.kit.ShortMessageKit;
 import cn.ssdut153.shop.common.model._MappingKit;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.util.JdbcConstants;
+import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
@@ -41,7 +43,7 @@ import com.jfinal.template.Engine;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.4
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -109,15 +111,25 @@ public class Config extends JFinalConfig {
     /**
      * Get RedisPlugin.
      *
-     * @return RedisPlugin Object
+     * @return RedisPlugin Object for token
      */
-    private RedisPlugin getRedisPlugin() {
+    private RedisPlugin getTokenRedisPlugin() {
         return new RedisPlugin("token", p.get("redis.host"), p.getInt("redis.port"), p.getInt("redis.timeOut"), p.get("redis.password"), p.getInt("redis.database.token"));
+    }
+
+    /**
+     * Get RedisPlugin.
+     *
+     * @return RedisPlugin Object for captcha
+     */
+    private RedisPlugin getCaptchaedisPlugin() {
+        return new RedisPlugin("shortMessageCaptcha", p.get("redis.host"), p.getInt("redis.port"), p.getInt("redis.timeOut"), p.get("redis.password"), p.getInt("redis.database.captcha"));
     }
 
     /**
      * @see com.jfinal.config.JFinalConfig#configConstant(Constants)
      */
+    @Override
     public void configConstant(Constants me) {
         me.setDevMode(true);
         me.setJsonFactory(new MixedJsonFactory());
@@ -127,6 +139,7 @@ public class Config extends JFinalConfig {
     /**
      * @see com.jfinal.config.JFinalConfig#configRoute(Routes)
      */
+    @Override
     public void configRoute(Routes me) {
         me.add(new FrontRoutes());
     }
@@ -134,6 +147,7 @@ public class Config extends JFinalConfig {
     /**
      * @see com.jfinal.config.JFinalConfig#configEngine(Engine)
      */
+    @Override
     public void configEngine(Engine me) {
         me.addSharedFunction("_view/_common/_layout.html");
     }
@@ -141,16 +155,19 @@ public class Config extends JFinalConfig {
     /**
      * @see com.jfinal.config.JFinalConfig#configPlugin(Plugins)
      */
+    @Override
     public void configPlugin(Plugins me) {
         DruidPlugin dp = getDruidPlugin();
         me.add(dp);
         me.add(getActiveRecordPlugin(dp));
-        me.add(getRedisPlugin());
+        me.add(getTokenRedisPlugin());
+        me.add(getCaptchaedisPlugin());
     }
 
     /**
      * @see com.jfinal.config.JFinalConfig#configInterceptor(Interceptors)
      */
+    @Override
     public void configInterceptor(Interceptors me) {
 
     }
@@ -158,9 +175,22 @@ public class Config extends JFinalConfig {
     /**
      * @see com.jfinal.config.JFinalConfig#configHandler(Handlers)
      */
+    @Override
     public void configHandler(Handlers me) {
         me.add(DruidKit.getDruidStatViewHandler());
         me.add(new StaticHandler());
+    }
+
+    @Override
+    public void afterJFinalStart() {
+        if (null != wallFilter) {
+            WallConfig wallConfig = wallFilter.getConfig();
+            wallConfig.setSelectUnionCheck(false);
+            wallConfig.setMultiStatementAllow(true);
+            wallConfig.setNoneBaseStatementAllow(true);
+            wallConfig.setMergeAllow(true);
+        }
+        ShortMessageKit.getMe().init(p.get("aldy.url"), p.get("aldy.appkey"), p.get("aldy.secret"));
     }
 
 }

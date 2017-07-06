@@ -114,6 +114,13 @@
             <version>1.10.3</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/taobao-sdk-java.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
