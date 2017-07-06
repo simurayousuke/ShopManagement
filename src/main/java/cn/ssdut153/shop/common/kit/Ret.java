@@ -16,7 +16,7 @@
 
 package cn.ssdut153.shop.common.kit;
 
-import com.jfinal.json.Json;
+import com.jfinal.kit.JsonKit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
@@ -42,7 +42,7 @@ public class Ret extends HashMap {
     /**
      * create a ret with a k,v pair.
      *
-     * @param key key
+     * @param key   key
      * @param value value
      * @return Ret
      */
@@ -150,7 +150,7 @@ public class Ret extends HashMap {
     /**
      * set a pair of k,v into a ret.
      *
-     * @param key key
+     * @param key   key
      * @param value value
      * @return Ret
      */
@@ -291,7 +291,7 @@ public class Ret extends HashMap {
      * @return json string
      */
     public String toJson() {
-        return Json.getJson().toJson(this);
+        return JsonKit.toJson(this);
     }
 
 }

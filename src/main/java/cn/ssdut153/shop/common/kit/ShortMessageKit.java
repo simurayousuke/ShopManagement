@@ -38,31 +38,30 @@ public class ShortMessageKit {
     /**
      * singleton
      */
-    private static final ShortMessageKit me=new ShortMessageKit();
+    private static final ShortMessageKit me = new ShortMessageKit();
     /**
      * alidayu's client
      */
     private static TaobaoClient client = null;
 
     /**
-     *
      * @return singleton
      */
-    public static ShortMessageKit getMe(){
+    public static ShortMessageKit getMe() {
         return me;
     }
 
     /**
      * initialize a client of alidayu.
      *
-     * @param url request url
+     * @param url    request url
      * @param appkey app key
      * @param secret app secret
      */
     public void init(String url, String appkey, String secret) {
-        if (client == null) {
+        if (null == client) {
             synchronized (ShortMessageKit.class) {
-                if (client == null) {
+                if (null == client) {
                     client = new DefaultTaobaoClient(url, appkey, secret);
                 }
             }
@@ -72,27 +71,27 @@ public class ShortMessageKit {
     /**
      * send short message.
      *
-     * @param name username
+     * @param name      username
      * @param operation operation type
-     * @param code captcha code
-     * @param number phone number
+     * @param code      captcha code
+     * @param number    phone number
      * @return json string
      */
-    public String send(String name, String operation, String code,String number) {
-        if(client==null){
+    public String send(String name, String operation, String code, String number) {
+        if (null == client) {
             return "";
         }
-        AlibabaAliqinFcSmsNumSendRequestBuilder ab=new AlibabaAliqinFcSmsNumSendRequestBuilder(name,operation,code ,number);
+        AlibabaAliqinFcSmsNumSendRequestBuilder ab = new AlibabaAliqinFcSmsNumSendRequestBuilder(name, operation, code, number);
         AlibabaAliqinFcSmsNumSendRequest req = ab.build();
         AlibabaAliqinFcSmsNumSendResponse rsp = null;
         try {
             rsp = client.execute(req);
         } catch (ApiException e) {
-            log.error(e.toString(),e);
+            log.error(e.toString(), e);
         }
-        if(null==rsp){
+        if (null == rsp) {
             return "";
-        }else {
+        } else {
             return rsp.getBody();
         }
     }

@@ -25,10 +25,15 @@ import javax.servlet.http.HttpServletRequest;
  * This is the monitor of database.
  *
  * @author Yang Zhizhuang
+ * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
 public class DruidKit {
+
+    private DruidKit() {
+
+    }
 
     /**
      * Get the DruidStatViewHandler.

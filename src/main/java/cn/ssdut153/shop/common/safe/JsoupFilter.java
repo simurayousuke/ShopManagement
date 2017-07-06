@@ -36,6 +36,10 @@ public class JsoupFilter {
     private static final Whitelist contentWhitelist = createContentWhitelist();
     private static final Document.OutputSettings notPrettyPrint = new Document.OutputSettings().prettyPrint(false);
 
+    private JsoupFilter() {
+
+    }
+
     private static Whitelist createContentWhitelist() {
         return Whitelist.relaxed()
                 /*

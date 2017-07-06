@@ -36,6 +36,10 @@ public class EmailKit {
     private static String fromEmail;
     private static String password;
 
+    private EmailKit() {
+
+    }
+
     /**
      * 初始化发送邮箱的信息
      *
