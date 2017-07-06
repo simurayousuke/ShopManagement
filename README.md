@@ -1,5 +1,3 @@
-[toc]
-
 # Shop Management
 
 大连理工大学软件学院2017年小学期大作业
@@ -9,6 +7,7 @@
  杨志庄、胡文强、杨森、马天荟、于镇滔
 
 # 技术栈
+
 ## 前端
 * [ZUI](http://zui.sexy/) 前端框架
 * [jQuery](http://jquery.com/) js框架
@@ -16,6 +15,7 @@
 * [respond](https://github.com/scottjehl/respond) 响应式布局兼容IE8
 * [excanvas](https://code.google.com/p/explorercanvas/) canvas兼容IE8
 * [bootbox](http://bootboxjs.com/#) 提示框
+
 ## 后端
 * [com.jfinal.jfinal](https://mvnrepository.com/artifact/com.jfinal/jfinal)
 * [com.jfinal.cos](https://mvnrepository.com/artifact/com.jfinal/cos)
