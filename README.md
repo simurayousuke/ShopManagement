@@ -24,6 +24,8 @@
 * [org.slf4j.slf4j-api](https://mvnrepository.com/artifact/org.slf4j/slf4j-api)
 * [org.slf4j.slf4j-nop](https://mvnrepository.com/artifact/org.slf4j/slf4j-nop)
 * [org.slf4j.slf4j-log4j12](https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12)
+* [org.slf4j.jul-to-slf4j](https://mvnrepository.com/artifact/org.slf4j/jul-to-slf4j)
+* [org.slf4j.jcl-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j)
 * [log4j.log4j](https://mvnrepository.com/artifact/log4j/log4j)
 * [org.postgresql.postgresql](https://mvnrepository.com/artifact/org.postgresql/postgresql)
 * [javax.servlet.javax.servlet-api](https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api)
