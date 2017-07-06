@@ -30,6 +30,10 @@ public class ShortMessageCaptchaKit {
 
     private static String base = "0123456789";
 
+    private ShortMessageCaptchaKit() {
+
+    }
+
     /**
      * generate captcha code with base chars.
      *

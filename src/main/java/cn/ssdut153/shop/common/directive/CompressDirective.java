@@ -39,19 +39,19 @@ public class CompressDirective extends Directive {
     /**
      * 排除pre/script/style标签
      */
-    private final static Pattern ignoredPattern = Pattern.compile("(<pre>(.|\n)*?</pre>)|(<script>(.|\n)*?</script>)|(<style>(.|\n)*?</style>)");
+    private static final Pattern ignoredPattern = Pattern.compile("(<pre>(.|\n)*?</pre>)|(<script>(.|\n)*?</script>)|(<style>(.|\n)*?</style>)");
     /**
      * 匹配一段字符串中间的空白
      */
-    private final static Pattern matchedPattern = Pattern.compile("\\s+");
+    private static final Pattern matchedPattern = Pattern.compile("\\s+");
     /**
      * 匹配一段字符串开头和结尾的空格
      */
-    private final static Pattern startEndPattern = Pattern.compile("(^\\s+)|(\\s+$)");
+    private static final Pattern startEndPattern = Pattern.compile("(^\\s+)|(\\s+$)");
     /**
      * 匹配两个标签中间的空格
      */
-    private final static Pattern tagPattern = Pattern.compile("> <");
+    private static final Pattern tagPattern = Pattern.compile("> <");
 
     @Override
     public void exec(Env env, Scope scope, Writer writer) {
