@@ -82,3 +82,6 @@ hs_err_pid*
 
 .idea
 *.iml
+/test/
+/lib/taobao-sdk-java-source.jar
+!/lib/taobao-sdk-java.jar
