@@ -1,0 +1,33 @@
+@media (min-width: 1200px) {
+    #seize {
+        display: inline-block;
+        width: 1200px;
+    }
+
+    #login-container {
+        display: inline-block;
+        width: 400px;
+        border: 1px solid #DDDDDD;
+        margin-top: 30px;
+    }
+}
+
+#tab-content {
+    margin: 20px;
+    margin-bottom: 15px;
+}
+
+.captcha {
+    display: inline-block;
+    height: 30px;
+    float: right;
+}
+
+.captcha-div {
+    width: calc(100% - 90px);
+    float: left;
+}
+
+.full {
+    width: 100%;
+}
