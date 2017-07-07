@@ -45,8 +45,8 @@ public class EmailService {
     }
 
     public boolean send(Email email,String tag){
-        // todo access key/secret
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "<your accessKey>", "<your accessSecret>");
+        // todo 将access key/secret 分离到配置文件中
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIXC0H7wLVEjiN", "yrNRDAImooxiw8TVFfcLprof3CfCD2");
         IAcsClient client = new DefaultAcsClient(profile);
         SingleSendMailRequest request = new SingleSendMailRequestBuilder(email,tag).build();
         try {
