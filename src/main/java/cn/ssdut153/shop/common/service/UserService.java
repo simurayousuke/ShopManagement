@@ -86,6 +86,16 @@ public class UserService {
     }
 
     /**
+     * find user by email
+     *
+     * @param email email
+     * @return User object
+     */
+    public User findUserByEmail(String email) {
+        return userDao.findFirst(userDao.getSqlPara("user.findByEmail", email));
+    }
+
+    /**
      * register a user and log the action.
      *
      * @param user User object
@@ -125,14 +135,36 @@ public class UserService {
      * @param captcha     captcha code
      * @param ip          ip address
      * @return token or null
+     * @throws LogException if save to log fail
      */
     public String loginByPhone(String phoneNumber, String captcha, String ip) {
         Boolean status = ShortMessageCaptchaService.getInstance().validate(phoneNumber, captcha);
         if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
                 .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
-            throw new LogException("Can not log phoneLogin action");
+            throw new LogException("Can not log username phoneLogin action");
         }
         User user = findUserByPhoneNumber(phoneNumber);
+        return status ? RedisKit.setAndGetToken(user) : null;
+    }
+
+    /**
+     * validate user with email&password
+     *
+     * @param email    email
+     * @param password password
+     * @param ip       ip address
+     * @return token or null
+     * @throws LogException if save to log fail
+     */
+    public String loginByEmail(String email, String password, String ip) {
+        User user = findUserByEmail(email);
+        if (null == user) {
+            return null;
+        }
+        Boolean status = hash(password, user.getSalt()).equals(user.getPwd());
+        if (!new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription(status.toString()).save()) {
+            throw new LogException("Can not log email login action");
+        }
         return status ? RedisKit.setAndGetToken(user) : null;
     }
 

@@ -16,17 +16,21 @@
 
 package cn.ssdut153.shop.login;
 
+import cn.ssdut153.shop.common.exception.LogException;
 import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class LoginService {
 
     public static final LoginService me = new LoginService();
+    private static final Logger log = LoggerFactory.getLogger(LoginService.class);
     private static final UserService srv = UserService.getInstance();
 
     /**
@@ -38,8 +42,16 @@ public class LoginService {
      * @return 返回信息
      */
     public Ret loginByUsername(String username, String password, String ip) {
-        String token = srv.login(username, password, ip);
-        return Ret.succeed().set("token", token);
+        try {
+            String token = srv.login(username, password, ip);
+            if (null == token) {
+                return Ret.fail("username or password wrong");
+            }
+            return Ret.succeed().set("token", token);
+        } catch (LogException e) {
+            log.error(e.getMessage(), e);
+            return Ret.fail("internal exception");
+        }
     }
 
     /**
@@ -51,7 +63,16 @@ public class LoginService {
      * @return 返回信息
      */
     public Ret loginByEmail(String email, String password, String ip) {
-        return Ret.fail();
+        try {
+            String token = srv.loginByEmail(email, password, ip);
+            if (null == token) {
+                return Ret.fail("email or password wrong");
+            }
+            return Ret.succeed().set("token", token);
+        } catch (LogException e) {
+            log.error(e.getMessage(), e);
+            return Ret.fail("internal exception");
+        }
     }
 
     /**
@@ -63,8 +84,16 @@ public class LoginService {
      * @return 返回信息
      */
     public Ret loginByPhone(String phone, String captcha, String ip) {
-        String token = srv.loginByPhone(phone, captcha, ip);
-        return Ret.succeed().set("token", token);
+        try {
+            String token = srv.loginByPhone(phone, captcha, ip);
+            if (null == token) {
+                return Ret.fail("phone or captcha wrong");
+            }
+            return Ret.succeed().set("token", token);
+        } catch (LogException e) {
+            log.error(e.getMessage(), e);
+            return Ret.fail("internal exception");
+        }
     }
 
 }
