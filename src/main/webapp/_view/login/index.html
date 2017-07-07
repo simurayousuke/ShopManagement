@@ -1,0 +1,28 @@
+#set(title="用户登录")
+#@layout()
+#define body()
+<form class="form-horizontal" id="formLogin">
+    <div class="form-group">
+        <label for="username" class="col-sm-2">账号</label>
+        <div class="col-md-6 col-sm-10">
+            <input type="text" class="form-control" id="username" placeholder="电子邮件/手机号/用户名">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pwd" class="col-sm-2">密码</label>
+        <div class="col-md-6 col-sm-10">
+            <input type="password" class="form-control" id="pwd" placeholder="密码">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pwd" class="col-sm-2">验证码</label>
+        <input type="text" placeholder="验证码" name="captcha" class="form-control" id="captcha-input">
+        <img src="" id="captcha-img" title="点击刷新">
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" id="submitLogin">登录</button>
+        </div>
+    </div>
+</form>
+#end
