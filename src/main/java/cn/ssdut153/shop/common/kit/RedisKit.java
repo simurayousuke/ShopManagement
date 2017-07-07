@@ -16,6 +16,8 @@
 
 package cn.ssdut153.shop.common.kit;
 
+import cn.ssdut153.shop.common.model.User;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.redis.Redis;
 
 /**
@@ -23,7 +25,7 @@ import com.jfinal.plugin.redis.Redis;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class RedisKit {
@@ -35,18 +37,40 @@ public class RedisKit {
     private static final String TOKEN = "token";
     private static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
 
-    // todo 返回User
-    public static String getUsernameByToken(String token) {
-        return null == token ? null : Redis.use(TOKEN).get(token);
-    }
-
-    // todo 设置User
-    public static void setToken(String username, String token) {
-        Redis.use(TOKEN).setex(token, 3600, username);
+    /**
+     * set token and return its value.
+     *
+     * @param user User Object
+     * @return token
+     */
+    public static String setAndGetToken(User user){
+        String token= StrKit.getRandomUUID();
+        setToken(user,token);
+        return token;
     }
 
     /**
-     * set captcha code into redis
+     * get User Object by token.
+     *
+     * @param token token
+     * @return User Object or null
+     */
+    public static User getUserByToken(String token) {
+        return null == token ? null : Redis.use(TOKEN).get(token);
+    }
+
+    /**
+     * set token for User.
+     *
+     * @param user User object
+     * @param token token
+     */
+    public static void setToken(User user, String token) {
+        Redis.use(TOKEN).setex(token, 3600, user);
+    }
+
+    /**
+     * set captcha code into redis.
      *
      * @param number phone number
      * @param code   captcha code
@@ -56,7 +80,7 @@ public class RedisKit {
     }
 
     /**
-     * get captcha code from redis
+     * get captcha code from redis.
      *
      * @param number number
      * @return captcha code
@@ -65,6 +89,11 @@ public class RedisKit {
         return null == number ? null : Redis.use(SHORT_MESSAGE_CAPTCHA).get(number);
     }
 
+    /**
+     * delete captcha by phone number.
+     *
+     * @param number phone number
+     */
     public static void delCaptcha(String number) {
         Redis.use(SHORT_MESSAGE_CAPTCHA).del(number);
     }

@@ -17,6 +17,7 @@
 package cn.ssdut153.shop.common.service;
 
 import cn.ssdut153.shop.common.exception.LogException;
+import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.model.Log;
 import cn.ssdut153.shop.common.model.User;
 import com.jfinal.aop.Duang;
@@ -28,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class UserService {
@@ -101,18 +102,18 @@ public class UserService {
      * @param username username
      * @param password password
      * @param ip       ip address
-     * @return success or not
+     * @return token or null
      */
-    public boolean login(String username, String password, String ip) {
+    public String login(String username, String password, String ip) {
         User user = findUserByUsername(username);
         if (null == user) {
-            return false;
+            return null;
         }
         Boolean status = hash(password, user.getSalt()).equals(user.getPwd());
         if (!new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription(status.toString()).save()) {
             throw new LogException("Can not log login action");
         }
-        return status;
+        return status? RedisKit.setAndGetToken(user):null;
     }
 
     /**
@@ -121,15 +122,26 @@ public class UserService {
      * @param phoneNumber phone number
      * @param captcha     captcha code
      * @param ip          ip address
-     * @return success or not
+     * @return token or null
      */
-    public boolean loginByPhone(String phoneNumber, String captcha, String ip) {
+    public String loginByPhone(String phoneNumber, String captcha, String ip) {
         Boolean status = ShortMessageCaptchaService.validate(phoneNumber, captcha);
         if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
                 .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
             throw new LogException("Can not log phoneLogin action");
         }
-        return status;
+        User user=findUserByPhoneNumber(phoneNumber);
+        return status?RedisKit.setAndGetToken(user):null;
+    }
+
+    /**
+     * validate token.
+     *
+     * @param token token
+     * @return User Object or null
+     */
+    public User validateToken(String token){
+        return RedisKit.getUserByToken(token);
     }
 
 }
