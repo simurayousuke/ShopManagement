@@ -26,7 +26,6 @@ import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.*;
-import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PathKit;
@@ -44,7 +43,7 @@ import com.jfinal.template.Engine;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.6
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -74,19 +73,20 @@ public class Config extends JFinalConfig {
         }
     }
 
-    public static void main(String[] args) {
-        JFinal.start("src/main/webapp", 8080, "/");
-    }
-
     /**
      * Get the Druid Plugin added with WallFilter and StatFilter.
      *
      * @return DruidPlugin for Postgres
      */
     public static DruidPlugin getDruidPlugin() {
-        DruidPlugin dp = new DruidPlugin(p.get("postgres.url"), p.get("postgres.username"), p.get("postgres.password"), p.get("postgres.driverClass"));
-        if (null == wallFilter)
+        String url = p.get("postgres.url");
+        String username = p.get("postgres.username");
+        String password = p.get("postgres.password");
+        String driverClass = p.get("postgres.driverClass");
+        DruidPlugin dp = new DruidPlugin(url, username, password, driverClass);
+        if (null == wallFilter) {
             wallFilter = new WallFilter();
+        }
         wallFilter.setDbType(JdbcConstants.POSTGRESQL);
         StatFilter statFilter = new StatFilter();
         dp.addFilter(wallFilter);
@@ -115,7 +115,13 @@ public class Config extends JFinalConfig {
      * @return RedisPlugin Object for token
      */
     private RedisPlugin getTokenRedisPlugin() {
-        return new RedisPlugin("token", p.get("redis.host"), p.getInt("redis.port"), p.getInt("redis.timeOut"), p.get("redis.password"), p.getInt("redis.database.token"));
+        String cacheName = "token";
+        String host = p.get("redis.host");
+        int port = p.getInt("redis.port");
+        int timeout = p.getInt("redis.timeout");
+        String password = p.get("redis.password");
+        int database = p.getInt("redis.database.token");
+        return new RedisPlugin(cacheName, host, port, timeout, password, database);
     }
 
     /**
@@ -124,7 +130,13 @@ public class Config extends JFinalConfig {
      * @return RedisPlugin Object for captcha
      */
     private RedisPlugin getCaptchaedisPlugin() {
-        return new RedisPlugin("shortMessageCaptcha", p.get("redis.host"), p.getInt("redis.port"), p.getInt("redis.timeOut"), p.get("redis.password"), p.getInt("redis.database.captcha"));
+        String cacheName = "shortMessageCaptcha";
+        String host = p.get("redis.host");
+        int port = p.getInt("redis.port");
+        int timeout = p.getInt("redis.timeout");
+        String password = p.get("redis.password");
+        int database = p.getInt("redis.database.captcha");
+        return new RedisPlugin(cacheName, host, port, timeout, password, database);
     }
 
     /**
@@ -132,7 +144,7 @@ public class Config extends JFinalConfig {
      */
     @Override
     public void configConstant(Constants me) {
-        me.setDevMode(true);
+        me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(new MixedJsonFactory());
         me.setViewType(ViewType.JFINAL_TEMPLATE);
     }
@@ -185,6 +197,11 @@ public class Config extends JFinalConfig {
 
     @Override
     public void afterJFinalStart() {
+        setWallFilter();
+        initShortMessageKit();
+    }
+
+    private void setWallFilter() {
         if (null != wallFilter) {
             WallConfig wallConfig = wallFilter.getConfig();
             wallConfig.setSelectUnionCheck(false);
@@ -192,7 +209,13 @@ public class Config extends JFinalConfig {
             wallConfig.setNoneBaseStatementAllow(true);
             wallConfig.setMergeAllow(true);
         }
-        ShortMessageKit.getMe().init(p.get("aldy.url"), p.get("aldy.appkey"), p.get("aldy.secret"));
+    }
+
+    private void initShortMessageKit() {
+        String url = p.get("aldy.url");
+        String appkey = p.get("aldy.appkey");
+        String secret = p.get("aldy.secret");
+        ShortMessageKit.getMe().init(url, appkey, secret);
     }
 
 }
