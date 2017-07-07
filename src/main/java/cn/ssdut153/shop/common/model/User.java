@@ -7,5 +7,5 @@ import cn.ssdut153.shop.common.model.base.BaseUser;
  */
 @SuppressWarnings("serial")
 public class User extends BaseUser<User> {
-	
+
 }

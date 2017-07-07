@@ -7,5 +7,5 @@ import cn.ssdut153.shop.common.model.base.BaseEmail;
  */
 @SuppressWarnings("serial")
 public class Email extends BaseEmail<Email> {
-	
+
 }

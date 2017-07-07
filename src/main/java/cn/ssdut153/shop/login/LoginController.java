@@ -17,11 +17,13 @@
 package cn.ssdut153.shop.login;
 
 import cn.ssdut153.shop.common.controller.BaseController;
+import cn.ssdut153.shop.common.kit.IpKit;
+import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.kit.Ret;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class LoginController extends BaseController {
@@ -41,7 +43,12 @@ public class LoginController extends BaseController {
     public void username() {
         String username = getPara("username");
         String password = getPara("password");
-        Ret ret = srv.loginByUsername(username, password);
+        String ip = IpKit.getRealIp(getRequest());
+        Ret ret = srv.loginByUsername(username, password, ip);
+        if (ret.isSucceed()) {
+            String token = ret.getAs("token");
+            setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
+        }
         renderJson(ret);
     }
 
@@ -50,8 +57,13 @@ public class LoginController extends BaseController {
      */
     public void phone() {
         String phone = getPara("phone");
-        String captcha = getPara("captcha");
-        Ret ret = srv.loginByPhone(phone, captcha);
+        String captcha = getPara("phoneCaptcha");
+        String ip = IpKit.getRealIp(getRequest());
+        Ret ret = srv.loginByPhone(phone, captcha, ip);
+        if (ret.isSucceed()) {
+            String token = ret.getAs("token");
+            setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
+        }
         renderJson(ret);
     }
 
@@ -61,7 +73,12 @@ public class LoginController extends BaseController {
     public void email() {
         String email = getPara("email");
         String password = getPara("password");
-        Ret ret = srv.loginByEmail(email, password);
+        String ip = IpKit.getRealIp(getRequest());
+        Ret ret = srv.loginByEmail(email, password, ip);
+        if (ret.isSucceed()) {
+            String token = ret.getAs("token");
+            setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
+        }
         renderJson(ret);
     }
 

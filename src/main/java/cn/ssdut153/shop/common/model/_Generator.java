@@ -17,7 +17,6 @@
 package cn.ssdut153.shop.common.model;
 
 import cn.ssdut153.shop.common.Config;
-import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
 import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
@@ -36,7 +35,7 @@ public class _Generator {
 
     public static void main(String[] args) {
         String baseModelPackageName = "cn.ssdut153.shop.common.model.base";
-        String baseModelOutputDir =  "src/main/java/cn/ssdut153/shop/common/model/base";
+        String baseModelOutputDir = "src/main/java/cn/ssdut153/shop/common/model/base";
 
         String modelPackageName = "cn.ssdut153.shop.common.model";
         String modelOutputDir = baseModelOutputDir + "/..";

@@ -43,9 +43,9 @@ public class RedisKit {
      * @param user User Object
      * @return token
      */
-    public static String setAndGetToken(User user){
-        String token= StrKit.getRandomUUID();
-        setToken(user,token);
+    public static String setAndGetToken(User user) {
+        String token = StrKit.getRandomUUID();
+        setToken(user, token);
         return token;
     }
 
@@ -62,7 +62,7 @@ public class RedisKit {
     /**
      * set token for User.
      *
-     * @param user User object
+     * @param user  User object
      * @param token token
      */
     public static void setToken(User user, String token) {

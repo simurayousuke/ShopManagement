@@ -7,5 +7,5 @@ import cn.ssdut153.shop.common.model.base.BaseLog;
  */
 @SuppressWarnings("serial")
 public class Log extends BaseLog<Log> {
-	
+
 }

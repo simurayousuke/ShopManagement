@@ -37,7 +37,9 @@ public class UserService {
     private static final User userDao = new User().dao();
     private static UserService instance = Duang.duang(UserService.class);
 
-    private UserService(){}
+    private UserService() {
+
+    }
 
     /**
      * get UserService instance
@@ -113,7 +115,7 @@ public class UserService {
         if (!new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription(status.toString()).save()) {
             throw new LogException("Can not log login action");
         }
-        return status? RedisKit.setAndGetToken(user):null;
+        return status ? RedisKit.setAndGetToken(user) : null;
     }
 
     /**
@@ -130,8 +132,8 @@ public class UserService {
                 .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
             throw new LogException("Can not log phoneLogin action");
         }
-        User user=findUserByPhoneNumber(phoneNumber);
-        return status?RedisKit.setAndGetToken(user):null;
+        User user = findUserByPhoneNumber(phoneNumber);
+        return status ? RedisKit.setAndGetToken(user) : null;
     }
 
     /**
@@ -140,7 +142,7 @@ public class UserService {
      * @param token token
      * @return User Object or null
      */
-    public User validateToken(String token){
+    public User validateToken(String token) {
         return RedisKit.getUserByToken(token);
     }
 

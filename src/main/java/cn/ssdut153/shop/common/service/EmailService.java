@@ -37,18 +37,19 @@ import com.jfinal.kit.PropKit;
  */
 public class EmailService {
 
-    private static EmailService instance=new EmailService();
+    private static EmailService instance = new EmailService();
 
-    private EmailService(){}
+    private EmailService() {
+    }
 
-    public static EmailService getInstance(){
+    public static EmailService getInstance() {
         return instance;
     }
 
-    public boolean send(Email email,String tag){
+    public boolean send(Email email, String tag) {
         IClientProfile profile = DefaultProfile.getProfile(PropKit.get("mailSender.region"), PropKit.get("mailSender.key"), PropKit.get("mailSender.secret"));
         IAcsClient client = new DefaultAcsClient(profile);
-        SingleSendMailRequest request = new SingleSendMailRequestBuilder(email,tag).build();
+        SingleSendMailRequest request = new SingleSendMailRequestBuilder(email, tag).build();
         try {
             SingleSendMailResponse httpResponse = client.getAcsResponse(request);
         } catch (ClientException e) {

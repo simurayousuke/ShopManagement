@@ -7,5 +7,5 @@ import cn.ssdut153.shop.common.model.base.BaseFile;
  */
 @SuppressWarnings("serial")
 public class File extends BaseFile<File> {
-	
+
 }
