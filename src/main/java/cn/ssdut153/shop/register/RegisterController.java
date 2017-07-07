@@ -17,6 +17,9 @@
 package cn.ssdut153.shop.register;
 
 import cn.ssdut153.shop.common.controller.BaseController;
+import cn.ssdut153.shop.common.kit.IpKit;
+import cn.ssdut153.shop.common.kit.Ret;
+import cn.ssdut153.shop.common.model.User;
 
 /**
  * @author Hu Wenqiang
@@ -24,5 +27,26 @@ import cn.ssdut153.shop.common.controller.BaseController;
  * @since 1.0.0
  */
 public class RegisterController extends BaseController {
+
+    private static final RegisterService srv = RegisterService.me;
+
+    public void index() {
+        render("index.html");
+    }
+
+    public void email() {
+        User user = getModel(User.class, "");
+        String email = getPara("email");
+        String ip = IpKit.getRealIp(getRequest());
+        Ret ret = srv.registerByEmail(user, email, ip);
+        renderJson(ret);
+    }
+
+    public void phone() {
+        User user = getModel(User.class, "");
+        String ip = IpKit.getRealIp(getRequest());
+        Ret ret = srv.registerByPhone(user, ip);
+        renderJson(ret);
+    }
 
 }

@@ -16,11 +16,24 @@
 
 package cn.ssdut153.shop.register;
 
+import cn.ssdut153.shop.common.kit.Ret;
+import cn.ssdut153.shop.common.model.User;
+
 /**
  * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
 public class RegisterService {
+
+    public static final RegisterService me = new RegisterService();
+
+    public Ret registerByEmail(User user, String email, String ip) {
+        return Ret.fail();
+    }
+
+    public Ret registerByPhone(User user, String ip) {
+        return Ret.fail();
+    }
 
 }
