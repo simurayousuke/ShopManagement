@@ -24,7 +24,7 @@ import com.jfinal.core.Controller;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class RegisterValidator extends BaseValidator {
+public class PhoneRegisterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {

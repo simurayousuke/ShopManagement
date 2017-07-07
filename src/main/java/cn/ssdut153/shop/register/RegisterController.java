@@ -20,20 +20,27 @@ import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.IpKit;
 import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.model.User;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Hu Wenqiang
  * @version 1.0.1
  * @since 1.0.0
  */
+@Before({NoUrlPara.class})
 public class RegisterController extends BaseController {
 
     private static final RegisterService srv = RegisterService.me;
 
+    @Before({GET.class})
     public void index() {
         render("index.html");
     }
 
+    @Before({POST.class, EmailRegisterValidator.class})
     public void email() {
         User user = getModel(User.class, "");
         String email = getPara("email");
@@ -42,6 +49,7 @@ public class RegisterController extends BaseController {
         renderJson(ret);
     }
 
+    @Before({POST.class, PhoneRegisterValidator.class})
     public void phone() {
         User user = getModel(User.class, "");
         String ip = IpKit.getRealIp(getRequest());
