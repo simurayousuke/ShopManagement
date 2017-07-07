@@ -16,11 +16,49 @@
 
 package cn.ssdut153.shop.login;
 
+import cn.ssdut153.shop.common.kit.Ret;
+
 /**
  * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
 public class LoginService {
+
+    public static final LoginService me = new LoginService();
+
+    /**
+     * 用户名登录
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 返回信息
+     */
+    public Ret loginByUsername(String username, String password) {
+        return null;
+    }
+
+
+    /**
+     * 邮箱登录
+     *
+     * @param email   邮箱
+     * @param captcha 验证码
+     * @return 返回信息
+     */
+    public Ret loginByEmail(String email, String captcha) {
+        return null;
+    }
+
+    /**
+     * 手机号登录
+     *
+     * @param phone    手机号
+     * @param password 密码
+     * @return 返回信息
+     */
+    public Ret loginByPhone(String phone, String password) {
+        return null;
+    }
 
 }
