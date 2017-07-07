@@ -1,0 +1,13 @@
+create table t_file
+(
+	id serial not null
+		constraint t_file_pkey
+			primary key,
+	url text not null,
+	file_name text not null,
+	type varchar(10) default ''::character varying not null,
+	size bigint default (-1) not null
+)
+;
+
+
