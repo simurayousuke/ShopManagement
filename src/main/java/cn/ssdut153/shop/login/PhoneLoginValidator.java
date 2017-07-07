@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package cn.ssdut153.shop.register;
+package cn.ssdut153.shop.login;
 
 import cn.ssdut153.shop.common.kit.Ret;
-import cn.ssdut153.shop.common.model.User;
+import cn.ssdut153.shop.common.validator.BaseValidator;
+import com.jfinal.core.Controller;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.0
  * @since 1.0.0
  */
-public class RegisterService {
+public class PhoneLoginValidator extends BaseValidator {
 
-    public static final RegisterService me = new RegisterService();
-
-    public Ret registerByEmail(User user, String email, String ip) {
-        return Ret.fail();
+    @Override
+    protected void validate(Controller c) {
+        validateRegex("phone", "^$", Ret.MSG, "wrong format phone");
     }
 
-    public Ret registerByPhone(User user, String ip) {
-        return Ret.fail();
+    @Override
+    protected void handleError(Controller c) {
+        c.setAttr(Ret.STATUS, false);
+        c.renderJson();
     }
 
 }

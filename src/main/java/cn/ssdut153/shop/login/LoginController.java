@@ -16,16 +16,22 @@
 
 package cn.ssdut153.shop.login;
 
+import cn.ssdut153.shop.common.captcha.CaptchaValidator;
 import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.IpKit;
 import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.kit.Ret;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
+@Before({NoUrlPara.class})
 public class LoginController extends BaseController {
 
     private static final LoginService srv = LoginService.me;
@@ -33,6 +39,7 @@ public class LoginController extends BaseController {
     /**
      * 加载页面
      */
+    @Before({GET.class})
     public void index() {
         render("index.html");
     }
@@ -40,6 +47,7 @@ public class LoginController extends BaseController {
     /**
      * 用户名登录
      */
+    @Before({POST.class, CaptchaValidator.class, UsernameLoginValidator.class})
     public void username() {
         String username = getPara("username");
         String password = getPara("password");
@@ -55,9 +63,10 @@ public class LoginController extends BaseController {
     /**
      * 手机号登录
      */
+    @Before({POST.class, PhoneLoginValidator.class})
     public void phone() {
         String phone = getPara("phone");
-        String captcha = getPara("phoneCaptcha");
+        String captcha = getPara("phone_captcha");
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = srv.loginByPhone(phone, captcha, ip);
         if (ret.isSucceed()) {
@@ -70,6 +79,7 @@ public class LoginController extends BaseController {
     /**
      * 邮箱登录
      */
+    @Before({POST.class, CaptchaValidator.class, EmailLoginValidator.class})
     public void email() {
         String email = getPara("email");
         String password = getPara("password");

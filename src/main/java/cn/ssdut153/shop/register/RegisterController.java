@@ -23,7 +23,7 @@ import cn.ssdut153.shop.common.model.User;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class RegisterController extends BaseController {

@@ -16,6 +16,7 @@
 
 package cn.ssdut153.shop.login;
 
+import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -24,16 +25,17 @@ import com.jfinal.core.Controller;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class LoginValidator extends BaseValidator {
+public class UsernameLoginValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-
+        validateString("username", 3, 20, Ret.MSG, "wrong username length");
     }
 
     @Override
     protected void handleError(Controller c) {
-
+        c.setAttr(Ret.STATUS, false);
+        c.renderJson();
     }
 
 }
