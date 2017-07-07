@@ -91,9 +91,6 @@ public class Config extends JFinalConfig {
         StatFilter statFilter = new StatFilter();
         dp.addFilter(wallFilter);
         dp.addFilter(statFilter);
-        dp.setMinIdle(2);
-        dp.setInitialSize(3);
-        dp.setMaxActive(5);
         return dp;
     }
 

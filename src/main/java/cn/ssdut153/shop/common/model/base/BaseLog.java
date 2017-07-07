@@ -63,4 +63,13 @@ public abstract class BaseLog<M extends BaseLog<M>> extends Model<M> implements 
 		return get("join_id");
 	}
 
+	public M setDescription(java.lang.String description) {
+		set("description", description);
+		return (M)this;
+	}
+
+	public java.lang.String getDescription() {
+		return get("description");
+	}
+
 }
