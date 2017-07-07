@@ -25,7 +25,7 @@ import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class AlibabaAliqinFcSmsNumSendRequestBuilder {
@@ -33,16 +33,8 @@ public class AlibabaAliqinFcSmsNumSendRequestBuilder {
     private AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
 
     public AlibabaAliqinFcSmsNumSendRequestBuilder(String name, String operation, String code, String number, String extend) {
+        this(name, operation, code, number);
         req.setExtend(extend);
-        req.setSmsType("normal");
-        req.setSmsFreeSignName("庄云");
-        Kv kv = Kv.by("name", name)
-                .set("platform", "庄云网")
-                .set("operation", operation)
-                .set("code", code);
-        req.setSmsParamString(JsonKit.toJson(kv));
-        req.setRecNum(number);
-        req.setSmsTemplateCode("SMS_63950001");
     }
 
     public AlibabaAliqinFcSmsNumSendRequestBuilder(String name, String operation, String code, String number) {
