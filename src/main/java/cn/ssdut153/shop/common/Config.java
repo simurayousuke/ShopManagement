@@ -43,7 +43,7 @@ import com.jfinal.template.Engine;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
