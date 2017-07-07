@@ -11,28 +11,41 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- *  limitations under the License.
+ * limitations under the License.
  */
 
-package cn.ssdut153.shop.common.kit;
+package cn.ssdut153.shop.common.service;
+
+import cn.ssdut153.shop.common.kit.RedisKit;
 
 import java.util.Random;
 
 /**
- * The help kit for Generating and Validating short message captcha.
+ * The service for Generating and Validating short message captcha.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
-public class ShortMessageCaptchaKit {
+public class ShortMessageCaptchaService {
+
+    /**
+     * singleton
+     */
+    private static ShortMessageCaptchaService instance=new ShortMessageCaptchaService();
+
+    private ShortMessageCaptchaService(){}
+
+    /**
+     * get ShortMessageCaptchaService instance
+     *
+     * @return singleton
+     */
+    public static ShortMessageCaptchaService getInstance(){return instance;}
 
     private static String base = "0123456789";
 
-    private ShortMessageCaptchaKit() {
-
-    }
 
     /**
      * generate captcha code with base chars.
@@ -40,7 +53,7 @@ public class ShortMessageCaptchaKit {
      * @param length number of chars of captcha
      * @return captcha code
      */
-    private static String generateCode(int length) {
+    private String generateCode(int length) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
@@ -55,8 +68,8 @@ public class ShortMessageCaptchaKit {
      *
      * @param base string
      */
-    public static void setBase(String base) {
-        ShortMessageCaptchaKit.base = base;
+    public void setBase(String base) {
+        ShortMessageCaptchaService.base = base;
     }
 
     /**
@@ -65,7 +78,7 @@ public class ShortMessageCaptchaKit {
      * @param number phone number
      * @return captcha code
      */
-    public static String generateCaptcha(String number) {
+    public String generateCaptcha(String number) {
         String code = generateCode(6);
         RedisKit.setCaptcha(number, code);
         return code;
@@ -78,7 +91,7 @@ public class ShortMessageCaptchaKit {
      * @param captcha input captcha code
      * @return boolean
      */
-    public static boolean validate(String number, String captcha) {
+    public boolean validate(String number, String captcha) {
         if (!captcha.equals(RedisKit.getCaptcha(number))) {
             return false;
         }

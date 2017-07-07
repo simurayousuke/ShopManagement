@@ -20,7 +20,6 @@
 ## 后端
 * [com.jfinal.jfinal](https://mvnrepository.com/artifact/com.jfinal/jfinal)
 * [com.jfinal.cos](https://mvnrepository.com/artifact/com.jfinal/cos)
-* [com.jfinal.jetty-server](https://mvnrepository.com/artifact/com.jfinal/jetty-server)
 * [org.slf4j.slf4j-api](https://mvnrepository.com/artifact/org.slf4j/slf4j-api)
 * [org.slf4j.slf4j-nop](https://mvnrepository.com/artifact/org.slf4j/slf4j-nop)
 * [org.slf4j.slf4j-log4j12](https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12)
@@ -35,4 +34,7 @@
 * [com.alibaba.druid](https://mvnrepository.com/artifact/com.alibaba/druid)
 * [org.apache.commons.commons-email](https://mvnrepository.com/artifact/org.apache.commons/commons-email)
 * [org.jsoup.jsoup](https://mvnrepository.com/artifact/org.jsoup/jsoup)
+* [com.aliyun.aliyun-java-sdk-core](https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core)
+* [com.aliyun.aliyun-java-sdk-dm](https://mvnrepository.com/artifact/https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dm)
+* [com.aliyun.oss.aliyun-sdk-oss](https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss)
 * com.taobao.api

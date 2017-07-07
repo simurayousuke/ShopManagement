@@ -16,7 +16,10 @@
 
 package cn.ssdut153.shop.common;
 
+import cn.ssdut153.shop.common.captcha.CaptchaController;
 import cn.ssdut153.shop.index.IndexController;
+import cn.ssdut153.shop.login.LoginController;
+import cn.ssdut153.shop.register.RegisterController;
 import com.jfinal.config.Routes;
 
 /**
@@ -34,6 +37,9 @@ public class FrontRoutes extends Routes {
     public void config() {
         setBaseViewPath("/_view");
         add("/", IndexController.class, "index");
+        add("/login", LoginController.class);
+        add("/register", RegisterController.class);
+        add("/captcha", CaptchaController.class);
     }
 
 }

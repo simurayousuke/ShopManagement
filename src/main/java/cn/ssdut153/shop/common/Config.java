@@ -26,7 +26,6 @@ import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.*;
-import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PathKit;
@@ -44,7 +43,7 @@ import com.jfinal.template.Engine;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -72,10 +71,6 @@ public class Config extends JFinalConfig {
             LogKit.logNothing(e);
             return PropKit.use("config.properties");
         }
-    }
-
-    public static void main(String[] args) {
-        JFinal.start("src/main/webapp", 8080, "/");
     }
 
     /**
