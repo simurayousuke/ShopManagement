@@ -115,8 +115,8 @@ public class UserService {
      * validate user with phone number&captcha.
      *
      * @param phoneNumber phone number
-     * @param captcha captcha code
-     * @param ip ip address
+     * @param captcha     captcha code
+     * @param ip          ip address
      * @return success or not
      */
     public boolean loginByPhone(String phoneNumber, String captcha, String ip) {
