@@ -1,6 +1,7 @@
 #sql("findByUsername")
-SELECT * FROM _users WHERE username = #para(0)
+SELECT * FROM t_user WHERE username = #para(0)
 #end
-#sql("findByIdentifier")
-SELECT * FROM _users WHERE identifier = #para(0)
+#sql("findByPhoneNumber")
+SELECT * FROM t_user WHERE phone = #para(0)
 #end
+

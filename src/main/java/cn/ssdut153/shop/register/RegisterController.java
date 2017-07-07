@@ -14,30 +14,15 @@
  * limitations under the License.
  */
 
-package cn.ssdut153.shop.common;
+package cn.ssdut153.shop.register;
 
-import cn.ssdut153.shop.index.IndexController;
-import cn.ssdut153.shop.login.LoginController;
-import cn.ssdut153.shop.register.RegisterController;
-import com.jfinal.config.Routes;
+import cn.ssdut153.shop.common.controller.BaseController;
 
 /**
- * This is the route config of the program.
- *
- * @author Yang Zhizhuang
+ * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
-public class FrontRoutes extends Routes {
-
-    /**
-     * @see com.jfinal.config.Routes#config()
-     */
-    public void config() {
-        setBaseViewPath("/_view");
-        add("/", IndexController.class, "index");
-        add("/login", LoginController.class);
-        add("/register", RegisterController.class);
-    }
+public class RegisterController extends BaseController {
 
 }

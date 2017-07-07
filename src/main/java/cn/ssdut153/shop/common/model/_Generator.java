@@ -36,7 +36,7 @@ public class _Generator {
 
     public static void main(String[] args) {
         String baseModelPackageName = "cn.ssdut153.shop.common.model.base";
-        String baseModelOutputDir = PathKit.getWebRootPath() + "/../src/main/java/cn/ssdut153/shop/common/model/base";
+        String baseModelOutputDir =  "src/main/java/cn/ssdut153/shop/common/model/base";
 
         String modelPackageName = "cn.ssdut153.shop.common.model";
         String modelOutputDir = baseModelOutputDir + "/..";
@@ -51,7 +51,7 @@ public class _Generator {
         generator.setDialect(new PostgreSqlDialect());
         generator.setGenerateChainSetter(true);
         generator.setGenerateDataDictionary(false);
-        generator.setRemovedTableNamePrefixes("s_");
+        generator.setRemovedTableNamePrefixes("t_");
         generator.generate();
     }
 }
