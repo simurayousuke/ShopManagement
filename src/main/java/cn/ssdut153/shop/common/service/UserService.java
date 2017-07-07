@@ -25,6 +25,8 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 
 /**
+ * The service for user-oriented actions.
+ *
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
@@ -33,6 +35,8 @@ public class UserService {
 
     private static final User userDao = new User().dao();
     private static UserService instance = Duang.duang(UserService.class);
+
+    private UserService(){}
 
     /**
      * get UserService instance

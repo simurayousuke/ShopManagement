@@ -21,7 +21,7 @@ import cn.ssdut153.shop.common.kit.RedisKit;
 import java.util.Random;
 
 /**
- * The help kit for Generating and Validating short message captcha.
+ * The service for Generating and Validating short message captcha.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
