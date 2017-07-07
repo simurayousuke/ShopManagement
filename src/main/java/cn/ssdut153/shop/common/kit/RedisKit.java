@@ -25,7 +25,7 @@ import com.jfinal.plugin.redis.Redis;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class RedisKit {
@@ -37,7 +37,7 @@ public class RedisKit {
     private static final String TOKEN = "token";
     private static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
 
-    public RedisKit() {
+    private RedisKit() {
 
     }
 

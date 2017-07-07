@@ -7,4 +7,3 @@ $("#formLogin").submit(function (e) {
         data: form.serialize()
     });
 });
-    

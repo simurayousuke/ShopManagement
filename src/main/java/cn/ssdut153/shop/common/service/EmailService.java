@@ -26,6 +26,8 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.jfinal.kit.PropKit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -38,6 +40,7 @@ import com.jfinal.kit.PropKit;
  */
 public class EmailService {
 
+    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
     /**
      * singleton
      */
@@ -69,7 +72,7 @@ public class EmailService {
         try {
             SingleSendMailResponse httpResponse = client.getAcsResponse(request);
         } catch (ClientException e) {
-            e.printStackTrace();
+            log.error(e.getErrMsg(), e);
         }
         return false;
     }

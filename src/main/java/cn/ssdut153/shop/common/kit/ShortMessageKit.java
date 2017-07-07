@@ -29,7 +29,8 @@ import org.slf4j.LoggerFactory;
  * The help kit for SMS.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class ShortMessageKit {
@@ -58,13 +59,9 @@ public class ShortMessageKit {
      * @param appkey app key
      * @param secret app secret
      */
-    public void init(String url, String appkey, String secret) {
+    public synchronized void init(String url, String appkey, String secret) {
         if (null == client) {
-            synchronized (ShortMessageKit.class) {
-                if (null == client) {
-                    client = new DefaultTaobaoClient(url, appkey, secret);
-                }
-            }
+            client = new DefaultTaobaoClient(url, appkey, secret);
         }
     }
 

@@ -26,7 +26,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -45,7 +45,7 @@ public abstract class BaseValidator extends Validator {
         }
         try {
             BigDecimal temp = new BigDecimal(value.trim());
-            if (temp.compareTo(min) == -1 || temp.compareTo(max) == 1) {
+            if (temp.compareTo(min) < 0 || temp.compareTo(max) > 0) {
                 addError(errorKey, errorMessage);
             }
         } catch (Exception e) {
@@ -54,16 +54,19 @@ public abstract class BaseValidator extends Validator {
     }
 
     protected void validateBigDecimal(String field, String errorKey, String errorMessage) {
+
         String value = controller.getPara(field);
         if (StrKit.isBlank(value)) {
             addError(errorKey, errorMessage);
             return;
         }
+
         try {
             new BigDecimal(value.trim());
         } catch (Exception e) {
             addError(errorKey, errorMessage);
         }
+
     }
 
 }
