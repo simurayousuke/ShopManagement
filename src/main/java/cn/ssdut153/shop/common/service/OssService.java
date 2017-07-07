@@ -50,6 +50,7 @@ public class OssService {
     private OSSClient client = new OSSClient(PropKit.get("ossWriter.endpoint"), PropKit.get("ossWriter.key"), PropKit.get("ossWriter.secret"));
 
     private OssService() {
+
     }
 
     /**
@@ -64,23 +65,23 @@ public class OssService {
     /**
      * upload file to oss via InputStream.
      *
-     * @param key key
+     * @param key      key
      * @param filename filename
-     * @param userId user id
-     * @param ip ip address
-     * @param input InputStream
-     * @param size file size
+     * @param userId   user id
+     * @param ip       ip address
+     * @param input    InputStream
+     * @param size     file size
      * @param fileType file type
      * @return PutObjectResult
-     * @throws OSSException OSSException
+     * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
     // todo 事务
     // todo 上传成功判断
-    public PutObjectResult upload(String key,String filename,int userId,String ip,String fileType, InputStream input,long size) throws OSSException, ClientException {
-        cn.ssdut153.shop.common.model.File f=new cn.ssdut153.shop.common.model.File().setUrl(key).setFileName(filename).setSize(size).setType(fileType);
+    public PutObjectResult upload(String key, String filename, int userId, String ip, String fileType, InputStream input, long size) {
+        cn.ssdut153.shop.common.model.File f = new cn.ssdut153.shop.common.model.File().setUrl(key).setFileName(filename).setSize(size).setType(fileType);
         f.save();
-        Log log=new Log().setIp(ip).setOperation("upload").setUserId(userId);
+        Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
         return client.putObject(bucketName, key, input);
     }
@@ -88,22 +89,22 @@ public class OssService {
     /**
      * upload file to oss via File.
      *
-     * @param key ket
+     * @param key      ket
      * @param filename filename
-     * @param userId user id
-     * @param ip ip address
+     * @param userId   user id
+     * @param ip       ip address
      * @param fileType file type
-     * @param file File
+     * @param file     File
      * @return PutObjectResult
-     * @throws OSSException OSSException
+     * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
     // todo 事务
     // todo 上传成功判断
-    public PutObjectResult upload(String key,String filename,int userId,String ip,String fileType, File file) throws OSSException, ClientException {
-        cn.ssdut153.shop.common.model.File f=new cn.ssdut153.shop.common.model.File().setUrl(key).setFileName(filename).setSize(file.length()).setType(fileType);
+    public PutObjectResult upload(String key, String filename, int userId, String ip, String fileType, File file) {
+        cn.ssdut153.shop.common.model.File f = new cn.ssdut153.shop.common.model.File().setUrl(key).setFileName(filename).setSize(file.length()).setType(fileType);
         f.save();
-        Log log=new Log().setIp(ip).setOperation("upload").setUserId(userId);
+        Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
         return client.putObject(bucketName, key, file);
     }
@@ -128,7 +129,7 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public List<OSSObjectSummary> getList() throws OSSException, ClientException {
+    public List<OSSObjectSummary> getList() {
         ObjectListing objectListing = client.listObjects(bucketName);
         return objectListing.getObjectSummaries();
     }
@@ -140,7 +141,7 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public void del(String key) throws OSSException, ClientException {
+    public void del(String key) {
         client.deleteObject(bucketName, key);
     }
 
@@ -152,7 +153,7 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public boolean isExist(String key) throws OSSException, ClientException {
+    public boolean isExist(String key) {
         return client.doesObjectExist(bucketName, key);
     }
 
@@ -164,7 +165,7 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public List<OSSObjectSummary> getFileList(String keyPrefix) throws OSSException, ClientException {
+    public List<OSSObjectSummary> getFileList(String keyPrefix) {
         ObjectListing objectListing = client.listObjects(bucketName, keyPrefix);
         return objectListing.getObjectSummaries();
     }

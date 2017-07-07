@@ -59,7 +59,7 @@ public class EmailService {
      * send email.
      *
      * @param email Email Object
-     * @param tag tag defined at aliyun
+     * @param tag   tag defined at aliyun
      * @return boolean
      */
     public boolean send(Email email, String tag) {

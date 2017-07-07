@@ -37,10 +37,6 @@ public class UserService {
     private static final User userDao = new User().dao();
     private static UserService instance = Duang.duang(UserService.class);
 
-    private UserService() {
-
-    }
-
     /**
      * get UserService instance
      *

@@ -33,19 +33,30 @@ public class ShortMessageCaptchaService {
     /**
      * singleton
      */
-    private static ShortMessageCaptchaService instance=new ShortMessageCaptchaService();
+    private static ShortMessageCaptchaService instance = new ShortMessageCaptchaService();
+    private static String base = "0123456789";
 
-    private ShortMessageCaptchaService(){}
+    private ShortMessageCaptchaService() {
+
+    }
 
     /**
      * get ShortMessageCaptchaService instance
      *
      * @return singleton
      */
-    public static ShortMessageCaptchaService getInstance(){return instance;}
+    public static ShortMessageCaptchaService getInstance() {
+        return instance;
+    }
 
-    private static String base = "0123456789";
-
+    /**
+     * set the char set of captcha
+     *
+     * @param base string
+     */
+    public static void setBase(String base) {
+        ShortMessageCaptchaService.base = base;
+    }
 
     /**
      * generate captcha code with base chars.
@@ -61,15 +72,6 @@ public class ShortMessageCaptchaService {
             sb.append(base.charAt(number));
         }
         return sb.toString();
-    }
-
-    /**
-     * set the char set of captcha
-     *
-     * @param base string
-     */
-    public void setBase(String base) {
-        ShortMessageCaptchaService.base = base;
     }
 
     /**

@@ -1,14 +1,10 @@
-/**
- * Created by forre on 2017/7/7.
- */
-
 $("#formLogin").submit(function (e) {
-    form = $(this);
+    e.preventDefault();
+    var form = $(this);
     $.ajax({
-        type: 'post'
-        , url: ""
-        , data: form.serialize()
-        ,
+        type: 'post',
+        url: '',
+        data: form.serialize()
     });
 });
     

@@ -37,6 +37,10 @@ public class RedisKit {
     private static final String TOKEN = "token";
     private static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
 
+    public RedisKit() {
+
+    }
+
     /**
      * set token and return its value.
      *

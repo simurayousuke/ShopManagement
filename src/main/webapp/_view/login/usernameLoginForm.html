@@ -1,0 +1,29 @@
+<div class="tab-pane fade active in" id="login-username">
+    <form action="/login/username">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="icon-user"></i>
+            </span>
+            <input class="form-control" placeholder="用户名" type="text" id="username">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="icon-key"></i>
+            </span>
+            <input class="form-control" placeholder="密码" type="text" id="pwd-usernmae">
+        </div>
+        <br>
+        <div class="input-group full">
+            <div class="input-group captcha-div">
+                <span class="input-group-addon">
+                    <i class="icon-wrench"></i>
+                </span>
+                <input class="form-control" placeholder="验证码" type="text" id="input-captcha-username">
+            </div>
+            <img src="/assets/captcha.jpg" id="captcha-username" class="captcha" title="点击刷新">
+        </div>
+        <br>
+        <button class="btn btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>

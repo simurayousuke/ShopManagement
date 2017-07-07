@@ -1,0 +1,32 @@
+<div class="tab-pane fade" id="login-cellphone">
+    <form action="/login/phone">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="icon-phone"></i>
+            </span>
+            <input class="form-control" placeholder="手机号" type="text" id="cellphone">
+        </div>
+        <br>
+        <div class="input-group full">
+            <div class="input-group captcha-div">
+                <span class="input-group-addon">
+                    <i class="icon-wrench"></i>
+                </span>
+                <input class="form-control" placeholder="验证码" type="text" id="input-captcha-phone">
+            </div>
+            <img src="/assets/captcha.jpg" id="captcha-phone" class="captcha" title="点击刷新">
+        </div>
+        <br>
+        <div class="input-group full">
+            <div class="input-group captcha-div">
+                <span class="input-group-addon">
+                    <i class="icon-comment"></i>
+                </span>
+                <input class="form-control" placeholder="短信验证码" type="text" id="short-message">
+            </div>
+            <button class="btn captcha" type="button">重新发送</button>
+        </div>
+        <br>
+        <button class="btn btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>
