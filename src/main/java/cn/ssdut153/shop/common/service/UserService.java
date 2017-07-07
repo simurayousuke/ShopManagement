@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class UserService {
@@ -127,7 +127,7 @@ public class UserService {
      * @return token or null
      */
     public String loginByPhone(String phoneNumber, String captcha, String ip) {
-        Boolean status = ShortMessageCaptchaService.validate(phoneNumber, captcha);
+        Boolean status = ShortMessageCaptchaService.getInstance().validate(phoneNumber, captcha);
         if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
                 .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
             throw new LogException("Can not log phoneLogin action");

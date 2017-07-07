@@ -33,19 +33,35 @@ import com.jfinal.kit.PropKit;
  *
  * @author Yang Zhizhuang
  * @version 1.0.0
+ * @see com.aliyuncs.dm
  * @since 1.0.0
  */
 public class EmailService {
 
+    /**
+     * singleton
+     */
     private static EmailService instance = new EmailService();
 
     private EmailService() {
     }
 
+    /**
+     * get EmailService instance
+     *
+     * @return singleton
+     */
     public static EmailService getInstance() {
         return instance;
     }
 
+    /**
+     * send email.
+     *
+     * @param email Email Object
+     * @param tag tag defined at aliyun
+     * @return boolean
+     */
     public boolean send(Email email, String tag) {
         IClientProfile profile = DefaultProfile.getProfile(PropKit.get("mailSender.region"), PropKit.get("mailSender.key"), PropKit.get("mailSender.secret"));
         IAcsClient client = new DefaultAcsClient(profile);

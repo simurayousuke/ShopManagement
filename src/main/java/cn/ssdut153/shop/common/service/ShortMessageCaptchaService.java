@@ -25,16 +25,27 @@ import java.util.Random;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class ShortMessageCaptchaService {
 
+    /**
+     * singleton
+     */
+    private static ShortMessageCaptchaService instance=new ShortMessageCaptchaService();
+
+    private ShortMessageCaptchaService(){}
+
+    /**
+     * get ShortMessageCaptchaService instance
+     *
+     * @return singleton
+     */
+    public static ShortMessageCaptchaService getInstance(){return instance;}
+
     private static String base = "0123456789";
 
-    private ShortMessageCaptchaService() {
-
-    }
 
     /**
      * generate captcha code with base chars.
@@ -42,7 +53,7 @@ public class ShortMessageCaptchaService {
      * @param length number of chars of captcha
      * @return captcha code
      */
-    private static String generateCode(int length) {
+    private String generateCode(int length) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
@@ -57,7 +68,7 @@ public class ShortMessageCaptchaService {
      *
      * @param base string
      */
-    public static void setBase(String base) {
+    public void setBase(String base) {
         ShortMessageCaptchaService.base = base;
     }
 
@@ -67,7 +78,7 @@ public class ShortMessageCaptchaService {
      * @param number phone number
      * @return captcha code
      */
-    public static String generateCaptcha(String number) {
+    public String generateCaptcha(String number) {
         String code = generateCode(6);
         RedisKit.setCaptcha(number, code);
         return code;
@@ -80,7 +91,7 @@ public class ShortMessageCaptchaService {
      * @param captcha input captcha code
      * @return boolean
      */
-    public static boolean validate(String number, String captcha) {
+    public boolean validate(String number, String captcha) {
         if (!captcha.equals(RedisKit.getCaptcha(number))) {
             return false;
         }
