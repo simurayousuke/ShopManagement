@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class OssService {
 
-    private static final String bucketName = "shopmanagement";
+    private static final String BUCKET_NAME = "shopmanagement";
 
     /**
      * singleton
@@ -83,7 +83,7 @@ public class OssService {
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
-        return client.putObject(bucketName, key, input);
+        return client.putObject(BUCKET_NAME, key, input);
     }
 
     /**
@@ -106,7 +106,7 @@ public class OssService {
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
-        return client.putObject(bucketName, key, file);
+        return client.putObject(BUCKET_NAME, key, file);
     }
 
     /**
@@ -118,7 +118,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public InputStream download(String key) {
-        OSSObject ossObject = client.getObject(bucketName, key);
+        OSSObject ossObject = client.getObject(BUCKET_NAME, key);
         return ossObject.getObjectContent();
     }
 
@@ -130,7 +130,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public List<OSSObjectSummary> getList() {
-        ObjectListing objectListing = client.listObjects(bucketName);
+        ObjectListing objectListing = client.listObjects(BUCKET_NAME);
         return objectListing.getObjectSummaries();
     }
 
@@ -142,7 +142,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public void del(String key) {
-        client.deleteObject(bucketName, key);
+        client.deleteObject(BUCKET_NAME, key);
     }
 
     /**
@@ -153,8 +153,8 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public boolean isExist(String key) {
-        return client.doesObjectExist(bucketName, key);
+    public boolean isExist(String key) throws OSSException, ClientException {
+        return client.doesObjectExist(BUCKET_NAME, key);
     }
 
     /**
@@ -165,8 +165,8 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public List<OSSObjectSummary> getFileList(String keyPrefix) {
-        ObjectListing objectListing = client.listObjects(bucketName, keyPrefix);
+    public List<OSSObjectSummary> getFileList(String keyPrefix) throws OSSException, ClientException {
+        ObjectListing objectListing = client.listObjects(BUCKET_NAME, keyPrefix);
         return objectListing.getObjectSummaries();
     }
 
