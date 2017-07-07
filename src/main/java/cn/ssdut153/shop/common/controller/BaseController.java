@@ -22,6 +22,8 @@ import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.render.RenderManager;
 
+import java.math.BigDecimal;
+
 /**
  * This is the base controller.
  *
@@ -43,7 +45,7 @@ public abstract class BaseController extends Controller {
      *
      * @param value        带获取的请求参数
      * @param defaultValue 不存在时的默认值
-     * @return ，如果不存在则为<code>null</code>
+     * @return 如果不存在则为<code>null</code>
      * @throws com.jfinal.core.ActionException 不为空且无法转换为java.lang.Double
      */
     private Double toDouble(String value, Double defaultValue) {
@@ -55,11 +57,6 @@ public abstract class BaseController extends Controller {
             }
 
             String value2 = value.trim();
-
-            if (value2.startsWith("N") || value2.startsWith("n")) {
-                return -Double.parseDouble(value2.substring(1));
-            }
-
             return Double.parseDouble(value2);
 
         } catch (NumberFormatException e) {
@@ -78,7 +75,7 @@ public abstract class BaseController extends Controller {
      * @throws com.jfinal.core.ActionException 不为空且无法转换为java.lang.Double
      */
     public Double getParaToDouble(String name, Double defaultValue) {
-        return toDouble(getRequest().getParameter(name), defaultValue);
+        return toDouble(getPara(name), defaultValue);
     }
 
     /**
@@ -88,8 +85,42 @@ public abstract class BaseController extends Controller {
      * @return 转换后的值，如果不存在则为<code>null</code>
      * @throws com.jfinal.core.ActionException 不为空且无法转换为java.lang.Double
      */
-    protected Double getParaToDouble(String name) {
-        return toDouble(getRequest().getParameter(name), null);
+    public Double getParaToDouble(String name) {
+        return toDouble(getPara(name), null);
+    }
+
+    /**
+     * 从请求中获取并转换为<code>java.math.BigDecimal</code>类型
+     *
+     * @param value        带获取的请求参数
+     * @param defaultValue 不存在时的默认值
+     * @return 如果不存在则为<code>null</code>
+     * @throws com.jfinal.core.ActionException 不为空且无法转换为java.math.BigDecimal
+     */
+    private BigDecimal toBigDecimal(String value, BigDecimal defaultValue) {
+
+        try {
+
+            if (StrKit.isBlank(value)) {
+                return defaultValue;
+            }
+
+            String value2 = value.trim();
+            return new BigDecimal(value2);
+
+        } catch (NumberFormatException e) {
+            LogKit.logNothing(e);
+            throw new ActionException(400, renderManager.getRenderFactory().getErrorRender(400), "Can not parse the parameter \"" + value + "\" to BigDecimal value.");
+        }
+
+    }
+
+    public BigDecimal getParaToBigDecimal(String name, BigDecimal defaultValue) {
+        return toBigDecimal(getPara(name), defaultValue);
+    }
+
+    public BigDecimal getParaToBigDecimal(String name) {
+        return toBigDecimal(getPara(name), null);
     }
 
 }
