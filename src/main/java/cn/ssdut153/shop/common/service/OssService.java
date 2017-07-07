@@ -153,7 +153,7 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public boolean isExist(String key) throws OSSException, ClientException {
+    public boolean isExist(String key) {
         return client.doesObjectExist(BUCKET_NAME, key);
     }
 
@@ -165,7 +165,7 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    public List<OSSObjectSummary> getFileList(String keyPrefix) throws OSSException, ClientException {
+    public List<OSSObjectSummary> getFileList(String keyPrefix) {
         ObjectListing objectListing = client.listObjects(BUCKET_NAME, keyPrefix);
         return objectListing.getObjectSummaries();
     }
