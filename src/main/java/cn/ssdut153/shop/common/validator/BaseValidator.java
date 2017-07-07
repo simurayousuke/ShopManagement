@@ -16,14 +16,17 @@
 
 package cn.ssdut153.shop.common.validator;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
+
+import java.math.BigDecimal;
 
 /**
  * This is the base validator.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -32,6 +35,35 @@ public abstract class BaseValidator extends Validator {
     public BaseValidator() {
         // 短路验证
         shortCircuit = true;
+    }
+
+    protected void validateBigDecimal(String field, BigDecimal min, BigDecimal max, String errorKey, String errorMessage) {
+        String value = controller.getPara(field);
+        if (StrKit.isBlank(value)) {
+            addError(errorKey, errorMessage);
+            return;
+        }
+        try {
+            BigDecimal temp = new BigDecimal(value.trim());
+            if (temp.compareTo(min) == -1 || temp.compareTo(max) == 1) {
+                addError(errorKey, errorMessage);
+            }
+        } catch (Exception e) {
+            addError(errorKey, errorMessage);
+        }
+    }
+
+    protected void validateBigDecimal(String field, String errorKey, String errorMessage) {
+        String value = controller.getPara(field);
+        if (StrKit.isBlank(value)) {
+            addError(errorKey, errorMessage);
+            return;
+        }
+        try {
+            new BigDecimal(value.trim());
+        } catch (Exception e) {
+            addError(errorKey, errorMessage);
+        }
     }
 
 }

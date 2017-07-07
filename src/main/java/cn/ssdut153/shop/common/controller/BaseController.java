@@ -29,7 +29,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @see com.jfinal.core.Controller
  * @since 1.0.0
  */
