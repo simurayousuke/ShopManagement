@@ -34,7 +34,7 @@ import com.jfinal.plugin.activerecord.Db;
  */
 public class UserService {
 
-    private static final User userDao = new User().dao();
+    private static final User USER_DAO = new User().dao();
     private static UserService instance = Duang.duang(UserService.class);
 
     /**
@@ -68,7 +68,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByUsername(String username) {
-        return userDao.findFirst(userDao.getSqlPara("user.findByUsername", username));
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByUsername", username));
     }
 
     /**
@@ -78,7 +78,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByPhoneNumber(String phoneNumber) {
-        return userDao.findFirst(userDao.getSqlPara("user.findByPhoneNumber", phoneNumber));
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByPhoneNumber", phoneNumber));
     }
 
     /**
@@ -88,7 +88,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByEmail(String email) {
-        return userDao.findFirst(userDao.getSqlPara("user.findByEmail", email));
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByEmail", email));
     }
 
     /**
@@ -134,7 +134,7 @@ public class UserService {
      * @throws LogException if save to log fail
      */
     public String loginByPhone(String phoneNumber, String captcha, String ip) {
-        Boolean status = ShortMessageCaptchaService.me.validate(phoneNumber, captcha);
+        Boolean status = ShortMessageCaptchaService.ME.validate(phoneNumber, captcha);
         if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
                 .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
             throw new LogException("Can not log username phoneLogin action");

@@ -38,7 +38,7 @@ import com.jfinal.ext.interceptor.POST;
 @Before({NoUrlPara.class})
 public class LoginController extends BaseController {
 
-    private static final LoginService srv = LoginService.me;
+    private static final LoginService srv = LoginService.ME;
 
     /**
      * 登录页面

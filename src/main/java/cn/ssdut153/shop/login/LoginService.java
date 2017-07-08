@@ -33,9 +33,9 @@ import org.slf4j.LoggerFactory;
  */
 public class LoginService {
 
-    public static final LoginService me = new LoginService();
-    private static final Logger log = LoggerFactory.getLogger(LoginService.class);
-    private static final UserService srv = UserService.getInstance();
+    public static final LoginService ME = new LoginService();
+    private static final Logger LOG = LoggerFactory.getLogger(LoginService.class);
+    private static final UserService SRV = UserService.getInstance();
     private static final String INTERNAL_EXCEPTION = "internal exception";
 
     /**
@@ -48,13 +48,13 @@ public class LoginService {
      */
     public Ret loginByUsername(String username, String password, String ip) {
         try {
-            String token = srv.login(username, password, ip);
+            String token = SRV.login(username, password, ip);
             if (null == token) {
                 return Ret.fail("username or password wrong");
             }
             return Ret.succeed().set(RedisKit.COOKIE_ID, token);
         } catch (LogException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             return Ret.fail(INTERNAL_EXCEPTION);
         }
     }
@@ -69,13 +69,13 @@ public class LoginService {
      */
     public Ret loginByEmail(String email, String password, String ip) {
         try {
-            String token = srv.loginByEmail(email, password, ip);
+            String token = SRV.loginByEmail(email, password, ip);
             if (null == token) {
                 return Ret.fail("email or password wrong");
             }
             return Ret.succeed().set(RedisKit.COOKIE_ID, token);
         } catch (LogException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             return Ret.fail(INTERNAL_EXCEPTION);
         }
     }
@@ -89,13 +89,13 @@ public class LoginService {
      */
     public Ret loginByPhone(String phone, String ip) {
         try {
-            String token = srv.loginByPhone(phone, ip);
+            String token = SRV.loginByPhone(phone, ip);
             if (null == token) {
                 return Ret.fail("phone or captcha wrong");
             }
             return Ret.succeed().set(RedisKit.COOKIE_ID, token);
         } catch (LogException e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             return Ret.fail(INTERNAL_EXCEPTION);
         }
     }

@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 public class IpKit {
 
     private static final String UNKNOWN = "unknown";
-    private static final String[] headers=new String[]{
+    private static final String[] HEADERS=new String[]{
             "x-forwarded-for","Proxy-Client-IP","WL-Proxy-Client-IP","HTTP_CLIENT_IP","X-Real-IP"
     };
 
@@ -45,13 +45,13 @@ public class IpKit {
      */
     public static String getRealIp(HttpServletRequest request) {
         int i=0;
-        String ip = request.getHeader(headers[i]);
+        String ip = request.getHeader(HEADERS[i]);
         while(ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)){
-            if(i==headers.length-1){
+            if(i==HEADERS.length-1){
                 ip = request.getRemoteAddr();
                 break;
             }
-            ip=request.getHeader(headers[++i]);
+            ip=request.getHeader(HEADERS[++i]);
         }
         return ip;
     }

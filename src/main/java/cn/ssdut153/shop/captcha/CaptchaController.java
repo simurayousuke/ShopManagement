@@ -45,7 +45,7 @@ public class CaptchaController extends BaseController {
      */
     public void phone() {
         String phone = getPara("phone");
-        ShortMessageCaptchaService.me.generateCaptchaAndSend(phone);
+        ShortMessageCaptchaService.ME.generateCaptchaAndSend(phone);
         renderJson(Ret.succeed());
     }
 

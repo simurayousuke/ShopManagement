@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ShortMessageKit {
 
-    private static final Logger log = LoggerFactory.getLogger(ShortMessageKit.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ShortMessageKit.class);
     /**
      * alidayu's client
      */
@@ -77,7 +77,7 @@ public class ShortMessageKit {
         try {
             rsp = client.execute(req);
         } catch (ApiException e) {
-            log.error(e.toString(), e);
+            LOG.error(e.toString(), e);
         }
         if (null == rsp) {
             return "";

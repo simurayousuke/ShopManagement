@@ -97,7 +97,7 @@ public abstract class BaseValidator extends Validator {
     protected void validatePhoneCaptcha(String field1, String field2, String errorKey, String errorMessage) {
         String phone = controller.getPara(field1);
         String captcha = controller.getPara(field2);
-        if (!ShortMessageCaptchaService.me.validate(phone, captcha)) {
+        if (!ShortMessageCaptchaService.ME.validate(phone, captcha)) {
             addError(errorKey, errorMessage);
         }
     }

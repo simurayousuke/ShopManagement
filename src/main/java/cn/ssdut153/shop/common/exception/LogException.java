@@ -29,6 +29,7 @@ public class LogException extends RuntimeException {
      * @see java.lang.RuntimeException
      */
     public LogException() {
+        // RunTimeException默认构造函数
     }
 
     /**

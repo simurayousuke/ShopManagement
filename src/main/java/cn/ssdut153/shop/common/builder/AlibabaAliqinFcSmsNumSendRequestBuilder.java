@@ -32,7 +32,11 @@ public class AlibabaAliqinFcSmsNumSendRequestBuilder {
 
     private AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
 
-    public AlibabaAliqinFcSmsNumSendRequestBuilder(String name, String operation, String code, String number, String extend) {
+    public AlibabaAliqinFcSmsNumSendRequestBuilder(String name,
+                                                   String operation,
+                                                   String code,
+                                                   String number,
+                                                   String extend) {
         this(name, operation, code, number);
         req.setExtend(extend);
     }

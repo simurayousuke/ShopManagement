@@ -34,7 +34,7 @@ public class ShortMessageCaptchaService {
     /**
      * singleton
      */
-    public static final ShortMessageCaptchaService me = new ShortMessageCaptchaService();
+    public static final ShortMessageCaptchaService ME = new ShortMessageCaptchaService();
     private static String base = "0123456789";
 
     private ShortMessageCaptchaService() {

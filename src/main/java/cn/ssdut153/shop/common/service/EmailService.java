@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  */
 public class EmailService {
 
-    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
     /**
      * singleton
      */
@@ -74,7 +74,7 @@ public class EmailService {
         try {
             client.getAcsResponse(request);
         } catch (ClientException e) {
-            log.error(e.getErrMsg(), e);
+            LOG.error(e.getErrMsg(), e);
         }
         return false;
     }

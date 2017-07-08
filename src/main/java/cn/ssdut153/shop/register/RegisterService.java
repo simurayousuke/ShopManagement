@@ -28,7 +28,7 @@ import cn.ssdut153.shop.common.model.User;
  */
 public class RegisterService {
 
-    public static final RegisterService me = new RegisterService();
+    public static final RegisterService ME = new RegisterService();
 
     /**
      * 邮箱注册

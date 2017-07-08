@@ -35,7 +35,7 @@ import com.jfinal.ext.interceptor.POST;
 @Before({NoUrlPara.class})
 public class RegisterController extends BaseController {
 
-    private static final RegisterService srv = RegisterService.me;
+    private static final RegisterService SRV = RegisterService.ME;
 
     /**
      * 注册页面
@@ -53,7 +53,7 @@ public class RegisterController extends BaseController {
         User user = getModel(User.class, "");
         String email = getPara("email");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.registerByEmail(user, email, ip);
+        Ret ret = SRV.registerByEmail(user, email, ip);
         renderJson(ret);
     }
 
@@ -64,7 +64,7 @@ public class RegisterController extends BaseController {
     public void phone() {
         User user = getModel(User.class, "");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.registerByPhone(user, ip);
+        Ret ret = SRV.registerByPhone(user, ip);
         renderJson(ret);
     }
 
