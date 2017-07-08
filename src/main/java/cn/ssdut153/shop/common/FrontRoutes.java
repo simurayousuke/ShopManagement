@@ -26,7 +26,7 @@ import com.jfinal.config.Routes;
  * This is the route config of the program.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class FrontRoutes extends Routes {
@@ -34,6 +34,7 @@ public class FrontRoutes extends Routes {
     /**
      * @see com.jfinal.config.Routes#config()
      */
+    @Override
     public void config() {
         setBaseViewPath("/_view");
         add("/", IndexController.class, "index");

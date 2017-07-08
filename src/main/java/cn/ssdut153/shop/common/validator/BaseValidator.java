@@ -16,6 +16,7 @@
 
 package cn.ssdut153.shop.common.validator;
 
+import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
 
@@ -26,7 +27,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -51,6 +52,7 @@ public abstract class BaseValidator extends Validator {
                 addError(errorKey, errorMessage);
             }
         } catch (Exception e) {
+            LogKit.logNothing(e);
             addError(errorKey, errorMessage);
         }
     }
@@ -66,6 +68,7 @@ public abstract class BaseValidator extends Validator {
         try {
             new BigDecimal(value.trim());
         } catch (Exception e) {
+            LogKit.logNothing(e);
             addError(errorKey, errorMessage);
         }
 
