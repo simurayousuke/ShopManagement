@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * The service for sending email.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
@@ -70,7 +70,7 @@ public class EmailService {
         IAcsClient client = new DefaultAcsClient(profile);
         SingleSendMailRequest request = new SingleSendMailRequestBuilder(email, tag).build();
         try {
-            SingleSendMailResponse httpResponse = client.getAcsResponse(request);
+            client.getAcsResponse(request);
         } catch (ClientException e) {
             log.error(e.getErrMsg(), e);
         }

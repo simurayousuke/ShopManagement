@@ -30,7 +30,8 @@ import com.jfinal.ext.interceptor.POST;
  * 登录
  *
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @author Yang Zhizhuang
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before({NoUrlPara.class})
@@ -56,7 +57,7 @@ public class LoginController extends BaseController {
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = srv.loginByUsername(username, password, ip);
         if (ret.isSucceed()) {
-            String token = ret.getAs("token");
+            String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
         }
         renderJson(ret);
@@ -72,7 +73,7 @@ public class LoginController extends BaseController {
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = srv.loginByPhone(phone, captcha, ip);
         if (ret.isSucceed()) {
-            String token = ret.getAs("token");
+            String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
         }
         renderJson(ret);
@@ -88,7 +89,7 @@ public class LoginController extends BaseController {
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = srv.loginByEmail(email, password, ip);
         if (ret.isSucceed()) {
-            String token = ret.getAs("token");
+            String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
         }
         renderJson(ret);

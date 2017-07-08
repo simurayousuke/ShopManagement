@@ -17,6 +17,7 @@
 package cn.ssdut153.shop.login;
 
 import cn.ssdut153.shop.common.exception.LogException;
+import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.service.UserService;
 import org.slf4j.Logger;
@@ -26,7 +27,8 @@ import org.slf4j.LoggerFactory;
  * 登录服务
  *
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @author Yang Zhizhuang
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class LoginService {
@@ -34,6 +36,7 @@ public class LoginService {
     public static final LoginService me = new LoginService();
     private static final Logger log = LoggerFactory.getLogger(LoginService.class);
     private static final UserService srv = UserService.getInstance();
+    private static  final String INTERNAL_EXCEPTION="internal exception";
 
     /**
      * 用户名登录
@@ -49,10 +52,10 @@ public class LoginService {
             if (null == token) {
                 return Ret.fail("username or password wrong");
             }
-            return Ret.succeed().set("token", token);
+            return Ret.succeed().set(RedisKit.COOKIE_ID, token);
         } catch (LogException e) {
             log.error(e.getMessage(), e);
-            return Ret.fail("internal exception");
+            return Ret.fail(INTERNAL_EXCEPTION);
         }
     }
 
@@ -70,10 +73,10 @@ public class LoginService {
             if (null == token) {
                 return Ret.fail("email or password wrong");
             }
-            return Ret.succeed().set("token", token);
+            return Ret.succeed().set(RedisKit.COOKIE_ID, token);
         } catch (LogException e) {
             log.error(e.getMessage(), e);
-            return Ret.fail("internal exception");
+            return Ret.fail(INTERNAL_EXCEPTION);
         }
     }
 
@@ -91,10 +94,10 @@ public class LoginService {
             if (null == token) {
                 return Ret.fail("phone or captcha wrong");
             }
-            return Ret.succeed().set("token", token);
+            return Ret.succeed().set(RedisKit.COOKIE_ID, token);
         } catch (LogException e) {
             log.error(e.getMessage(), e);
-            return Ret.fail("internal exception");
+            return Ret.fail(INTERNAL_EXCEPTION);
         }
     }
 
