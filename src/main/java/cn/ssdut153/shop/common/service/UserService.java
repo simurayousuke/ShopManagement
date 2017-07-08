@@ -217,8 +217,23 @@ public class UserService {
      * @param code active code
      * @return boolean
      */
-    public boolean validateActiveCode(String code) {
+    public boolean validateActiveCodeForPhoneNumber(String code) {
         return RedisKit.getPhoneNumberByActiveCode(code) != null;
+    }
+
+    public String generateActiveCodeForEmail(String emailAddress){
+        // todo
+        return "";
+    }
+
+    public boolean validateActiveCodeWithEmail(String emailAddress,String code){
+        // todo
+        return false;
+    }
+
+    public boolean validateActiveCodeForEmail(String code){
+        // todo
+        return false;
     }
 
 }
