@@ -26,11 +26,13 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
 public abstract class BaseValidator extends Validator {
+
+    private static final String phonePattern = "^1[3|4|5|7|8][0-9]{9}$";
 
     public BaseValidator() {
         // 短路验证
@@ -67,6 +69,10 @@ public abstract class BaseValidator extends Validator {
             addError(errorKey, errorMessage);
         }
 
+    }
+
+    protected void validatePhone(String field, String errorKey, String errorMessage) {
+        validateRegex(field, phonePattern, errorKey, errorMessage);
     }
 
 }

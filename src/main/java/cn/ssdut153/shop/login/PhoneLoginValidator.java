@@ -22,14 +22,14 @@ import com.jfinal.core.Controller;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class PhoneLoginValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateRegex("phone", "^$", Ret.MSG, "wrong format phone");
+        validatePhone("phone", Ret.MSG, "wrong format phone");
     }
 
     @Override

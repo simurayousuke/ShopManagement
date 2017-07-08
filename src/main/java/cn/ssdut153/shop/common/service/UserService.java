@@ -134,7 +134,7 @@ public class UserService {
      * @throws LogException if save to log fail
      */
     public String loginByPhone(String phoneNumber, String captcha, String ip) {
-        Boolean status = ShortMessageCaptchaService.getInstance().validate(phoneNumber, captcha);
+        Boolean status = ShortMessageCaptchaService.me.validate(phoneNumber, captcha);
         if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
                 .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
             throw new LogException("Can not log username phoneLogin action");

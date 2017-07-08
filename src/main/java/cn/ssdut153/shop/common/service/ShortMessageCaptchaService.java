@@ -25,7 +25,7 @@ import java.util.Random;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class ShortMessageCaptchaService {
@@ -33,20 +33,11 @@ public class ShortMessageCaptchaService {
     /**
      * singleton
      */
-    private static ShortMessageCaptchaService instance = new ShortMessageCaptchaService();
+    public static final ShortMessageCaptchaService me = new ShortMessageCaptchaService();
     private static String base = "0123456789";
 
     private ShortMessageCaptchaService() {
 
-    }
-
-    /**
-     * get ShortMessageCaptchaService instance
-     *
-     * @return singleton
-     */
-    public static ShortMessageCaptchaService getInstance() {
-        return instance;
     }
 
     /**
@@ -78,12 +69,10 @@ public class ShortMessageCaptchaService {
      * generate a captcha code and save it into redis
      *
      * @param number phone number
-     * @return captcha code
      */
-    public String generateCaptcha(String number) {
+    public void generateCaptcha(String number) {
         String code = generateCode(6);
         RedisKit.setCaptcha(number, code);
-        return code;
     }
 
     /**

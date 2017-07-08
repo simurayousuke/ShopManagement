@@ -16,6 +16,8 @@
 
 package cn.ssdut153.shop.captcha;
 
+import cn.ssdut153.shop.common.kit.Ret;
+import cn.ssdut153.shop.common.service.ShortMessageCaptchaService;
 import cn.ssdut153.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -30,12 +32,17 @@ public class PhoneCaptchaValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-
+        String phone = c.getPara("phone");
+        String captcha = c.getPara("phone_captcha");
+        if (!ShortMessageCaptchaService.me.validate(phone, captcha)) {
+            addError(Ret.MSG, "wrong phone captcha");
+        }
     }
 
     @Override
     protected void handleError(Controller c) {
-
+        c.setAttr(Ret.STATUS, false);
+        c.renderJson();
     }
 
 }
