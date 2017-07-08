@@ -26,7 +26,8 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  * This is the captcha controller.
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 @Before({NoUrlPara.class})
@@ -44,7 +45,7 @@ public class CaptchaController extends BaseController {
      */
     public void phone() {
         String phone = getPara("phone");
-        ShortMessageCaptchaService.me.generateCaptcha(phone);
+        ShortMessageCaptchaService.me.generateCaptchaAndSend(phone);
         renderJson(Ret.succeed());
     }
 

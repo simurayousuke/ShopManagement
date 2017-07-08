@@ -17,6 +17,7 @@
 package cn.ssdut153.shop.common.service;
 
 import cn.ssdut153.shop.common.kit.RedisKit;
+import cn.ssdut153.shop.common.kit.ShortMessageKit;
 
 import java.util.Random;
 
@@ -25,7 +26,7 @@ import java.util.Random;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.5
  * @since 1.0.0
  */
 public class ShortMessageCaptchaService {
@@ -66,13 +67,35 @@ public class ShortMessageCaptchaService {
     }
 
     /**
-     * generate a captcha code and save it into redis
+     * generate a captcha code, save it into redis and send to user's phone.
+     *
+     * @param number phone number
+     * @param username username
+     * @param operation operation
+     */
+    public void generateCaptchaAndSend(String number,String username,String operation) {
+        String code = generateCode(6);
+        RedisKit.setCaptcha(number, code);
+        ShortMessageKit.send(username,operation,code,number);
+    }
+
+    /**
+     * generate a captcha code, save it into redis and send to user's phone.
+     *
+     * @param number phone number
+     * @param operation operation
+     */
+    public void generateCaptchaAndSend(String number,String operation) {
+        generateCaptchaAndSend(number,"用户",operation);
+    }
+
+    /**
+     * generate a captcha code, save it into redis and send to user's phone.
      *
      * @param number phone number
      */
-    public void generateCaptcha(String number) {
-        String code = generateCode(6);
-        RedisKit.setCaptcha(number, code);
+    public void generateCaptchaAndSend(String number) {
+        generateCaptchaAndSend(number,"用户","获取验证码");
     }
 
     /**

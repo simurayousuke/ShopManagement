@@ -19,6 +19,7 @@ package cn.ssdut153.shop.common;
 import cn.ssdut153.shop.common.directive.CompressDirective;
 import cn.ssdut153.shop.common.handler.StaticHandler;
 import cn.ssdut153.shop.common.kit.DruidKit;
+import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.kit.ShortMessageKit;
 import cn.ssdut153.shop.common.model._MappingKit;
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -37,13 +38,14 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * This is the config of JFinal.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.6
+ * @version 1.0.8
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -95,6 +97,32 @@ public class Config extends JFinalConfig {
     }
 
     /**
+     * config the redis pool.
+     *
+     * @param rp RedisPlugin
+     * @return rp self
+     */
+    private RedisPlugin configRedisPlugin(RedisPlugin rp) {
+        JedisPoolConfig config = rp.getJedisPoolConfig();
+        config.setMaxTotal(200);
+        config.setMaxIdle(50);
+        // 设置最小空闲数
+        config.setMinIdle(8);
+        config.setMaxWaitMillis(10000);
+        config.setTestOnBorrow(true);
+        config.setTestOnReturn(true);
+        // Idle时进行连接扫描
+        config.setTestWhileIdle(true);
+        // 表示idle object evitor两次扫描之间要sleep的毫秒数
+        config.setTimeBetweenEvictionRunsMillis(30000);
+        // 表示idle object evitor每次扫描的最多的对象数
+        config.setNumTestsPerEvictionRun(10);
+        // 表示一个对象至少停留在idle状态的最短时间，然后才能被idle object evitor扫描并驱逐；这一项只有在timeBetweenEvictionRunsMillis大于0时才有意义
+        config.setMinEvictableIdleTimeMillis(60000);
+        return rp;
+    }
+
+    /**
      * Get ActiveRecordPlugin.
      *
      * @param dp DruidPlugin returned by getDruidPlugin
@@ -115,13 +143,14 @@ public class Config extends JFinalConfig {
      * @return RedisPlugin Object for token
      */
     private RedisPlugin getTokenRedisPlugin() {
-        String cacheName = "token";
+        String cacheName = RedisKit.TOKEN;
         String host = p.get("redis.host");
         int port = p.getInt("redis.port");
         int timeout = p.getInt("redis.timeout");
         String password = p.get("redis.password");
         int database = p.getInt("redis.database.token");
-        return new RedisPlugin(cacheName, host, port, timeout, password, database);
+        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
+        return configRedisPlugin(rp);
     }
 
     /**
@@ -129,14 +158,15 @@ public class Config extends JFinalConfig {
      *
      * @return RedisPlugin Object for captcha
      */
-    private RedisPlugin getCaptchaedisPlugin() {
-        String cacheName = "shortMessageCaptcha";
+    private RedisPlugin getCaptchaRedisPlugin() {
+        String cacheName = RedisKit.SHORT_MESSAGE_CAPTCHA;
         String host = p.get("redis.host");
         int port = p.getInt("redis.port");
         int timeout = p.getInt("redis.timeout");
         String password = p.get("redis.password");
         int database = p.getInt("redis.database.captcha");
-        return new RedisPlugin(cacheName, host, port, timeout, password, database);
+        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
+        return configRedisPlugin(rp);
     }
 
     /**
@@ -175,7 +205,7 @@ public class Config extends JFinalConfig {
         me.add(dp);
         me.add(getActiveRecordPlugin(dp));
         me.add(getTokenRedisPlugin());
-        me.add(getCaptchaedisPlugin());
+        me.add(getCaptchaRedisPlugin());
     }
 
     /**
@@ -215,7 +245,7 @@ public class Config extends JFinalConfig {
         String url = p.get("aldy.url");
         String appkey = p.get("aldy.appkey");
         String secret = p.get("aldy.secret");
-        ShortMessageKit.getMe().init(url, appkey, secret);
+        ShortMessageKit.init(url, appkey, secret);
     }
 
 }

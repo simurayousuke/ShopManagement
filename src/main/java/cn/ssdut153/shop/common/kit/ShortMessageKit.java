@@ -30,27 +30,16 @@ import org.slf4j.LoggerFactory;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class ShortMessageKit {
 
     private static final Logger log = LoggerFactory.getLogger(ShortMessageKit.class);
     /**
-     * singleton
-     */
-    private static final ShortMessageKit me = new ShortMessageKit();
-    /**
      * alidayu's client
      */
     private static TaobaoClient client = null;
-
-    /**
-     * @return singleton
-     */
-    public static ShortMessageKit getMe() {
-        return me;
-    }
 
     /**
      * initialize a client of alidayu.
@@ -59,7 +48,7 @@ public class ShortMessageKit {
      * @param appkey app key
      * @param secret app secret
      */
-    public synchronized void init(String url, String appkey, String secret) {
+    public static synchronized void init(String url, String appkey, String secret) {
         if (null == client) {
             client = new DefaultTaobaoClient(url, appkey, secret);
         }
@@ -74,7 +63,7 @@ public class ShortMessageKit {
      * @param number    phone number
      * @return json string
      */
-    public String send(String name, String operation, String code, String number) {
+    public static String send(String name, String operation, String code, String number) {
         if (null == client) {
             return "";
         }

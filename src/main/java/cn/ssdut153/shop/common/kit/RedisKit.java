@@ -25,7 +25,7 @@ import com.jfinal.plugin.redis.Redis;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class RedisKit {
@@ -34,8 +34,8 @@ public class RedisKit {
      * the key in cookie of token.
      */
     public static final String COOKIE_ID = "token";
-    private static final String TOKEN = "token";
-    private static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
+    public static final String TOKEN = "token";
+    public static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
 
     private RedisKit() {
 
