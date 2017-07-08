@@ -28,6 +28,9 @@ import javax.servlet.http.HttpServletRequest;
 public class IpKit {
 
     private static final String UNKNOWN = "unknown";
+    private static final String[] headers=new String[]{
+            "x-forwarded-for","Proxy-Client-IP","WL-Proxy-Client-IP","HTTP_CLIENT_IP","X-Real-IP"
+    };
 
     private IpKit() {
 
@@ -40,21 +43,14 @@ public class IpKit {
      * @return 获取到的ip地址
      */
     public static String getRealIp(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("X-Real-IP");
-        }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
+        int i=0;
+        String ip = request.getHeader(headers[i]);
+        while(ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)){
+            ip=request.getHeader(headers[++i]);
+            if(i==headers.length){
+                ip = request.getRemoteAddr();
+                break;
+            }
         }
         return ip;
     }
