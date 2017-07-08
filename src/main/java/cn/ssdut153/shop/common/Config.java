@@ -45,7 +45,7 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.9
+ * @version 1.0.10
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -174,13 +174,29 @@ public class Config extends JFinalConfig {
      *
      * @return RedisPlugin Object for captcha
      */
-    private RedisPlugin getActiveCodeRedisPlugin() {
+    private RedisPlugin getPhoneActiveCodeRedisPlugin() {
         String cacheName = RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER;
         String host = p.get("redis.host");
         int port = p.getInt("redis.port");
         int timeout = p.getInt("redis.timeout");
         String password = p.get("redis.password");
-        int database = p.getInt("redis.database.token");
+        int database = p.getInt("redis.database.activePhone");
+        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
+        return configRedisPlugin(rp);
+    }
+
+    /**
+     * Get RedisPlugin.
+     *
+     * @return RedisPlugin Object for captcha
+     */
+    private RedisPlugin getEmailActiveCodeRedisPlugin() {
+        String cacheName = RedisKit.ACTIVE_CODE_FOR_EMAIL;
+        String host = p.get("redis.host");
+        int port = p.getInt("redis.port");
+        int timeout = p.getInt("redis.timeout");
+        String password = p.get("redis.password");
+        int database = p.getInt("redis.database.activeEmail");
         RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
         return configRedisPlugin(rp);
     }
@@ -222,7 +238,8 @@ public class Config extends JFinalConfig {
         me.add(getActiveRecordPlugin(dp));
         me.add(getTokenRedisPlugin());
         me.add(getCaptchaRedisPlugin());
-        me.add(getActiveCodeRedisPlugin());
+        me.add(getPhoneActiveCodeRedisPlugin());
+        me.add(getEmailActiveCodeRedisPlugin());
     }
 
     /**

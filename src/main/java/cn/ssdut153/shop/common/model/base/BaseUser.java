@@ -81,15 +81,6 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return get("email_status");
 	}
 
-	public M setEmailBindingTime(java.util.Date emailBindingTime) {
-		set("email_binding_time", emailBindingTime);
-		return (M)this;
-	}
-
-	public java.util.Date getEmailBindingTime() {
-		return get("email_binding_time");
-	}
-
 	public M setEmail(java.lang.String email) {
 		set("email", email);
 		return (M)this;
