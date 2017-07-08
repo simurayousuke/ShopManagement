@@ -1,5 +1,20 @@
 #set(title="用户注册")
 #@layout()
 #define body()
-
+<div style="text-align: center" class="container-fixed-md">
+    <div id="regist-container" class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-tab data-target="#regist-phone" data-toggle="tab">手机（推荐）</a></li>
+            <li><a data-tab data-target="#regist-email" data-toggle="tab">邮箱</a></li>
+        </ul>
+        <div class="tab-content">
+            #include("emailRegistForm.html")
+            #include("phoneRegistForm.html")
+        </div>
+    </div>
+</div>
 #end
+#define css()
+<link rel="stylesheet" href="assets/css/register.css">
+#end
+

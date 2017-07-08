@@ -1,15 +1,13 @@
-<div class="tab-pane fade input-gp" id="login-cellphone">
-    <form action="/login/phone">
+<div class="tab-pane fade active in input-gp" id="regist-phone">
+    <form action="/register/phone">
         <div class="input-group">
-            <span class="input-group-addon">
-                <em class="icon-phone"></em>
-            </span>
+            <span class="input-group-addon">+86</span>
             <input class="form-control" placeholder="手机号" type="text" id="cellphone">
         </div>
         <br>
         <div class="input-group full">
             <div class="input-group captcha-div">
-                <span class="input-group-addon">
+                <span class="input-group-addon span-length">
                     <em class="icon-wrench"></em>
                 </span>
                 <input class="form-control" placeholder="验证码" type="text" id="input-captcha-phone">
@@ -19,14 +17,14 @@
         <br>
         <div class="input-group full">
             <div class="input-group captcha-div">
-                <span class="input-group-addon">
+                <span class="input-group-addon span-length" >
                     <em class="icon-comment"></em>
                 </span>
                 <input class="form-control" placeholder="短信验证码" type="text" id="short-message">
             </div>
-            <a href="/captcha/phone" class="btn captcha" type="button">重新发送</a>
+            <a href="/captcha/phone" class="btn captcha" type="button">免费获取</a>
         </div>
         <br>
-        <button class="btn btn-primary btn-block" type="submit">登录</button>
+        <button class="btn btn-primary btn-block" type="submit">下一步</button>
     </form>
 </div>
