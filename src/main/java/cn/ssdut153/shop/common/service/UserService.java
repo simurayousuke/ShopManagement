@@ -204,7 +204,7 @@ public class UserService {
      * match phone number with active code.
      *
      * @param number phone number
-     * @param code active code
+     * @param code   active code
      * @return boolean
      */
     public boolean validateActiveCodeWithPhoneNumber(String number, String code) {
@@ -221,17 +221,17 @@ public class UserService {
         return RedisKit.getPhoneNumberByActiveCode(code) != null;
     }
 
-    public String generateActiveCodeForEmail(String emailAddress){
+    public String generateActiveCodeForEmail(String emailAddress) {
         // todo
         return "";
     }
 
-    public boolean validateActiveCodeWithEmail(String emailAddress,String code){
+    public boolean validateActiveCodeWithEmail(String emailAddress, String code) {
         // todo
         return false;
     }
 
-    public boolean validateActiveCodeForEmail(String code){
+    public boolean validateActiveCodeForEmail(String code) {
         // todo
         return false;
     }

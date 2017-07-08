@@ -69,24 +69,24 @@ public class ShortMessageCaptchaService {
     /**
      * generate a captcha code, save it into redis and send to user's phone.
      *
-     * @param number phone number
-     * @param username username
+     * @param number    phone number
+     * @param username  username
      * @param operation operation
      */
-    public void generateCaptchaAndSend(String number,String username,String operation) {
+    public void generateCaptchaAndSend(String number, String username, String operation) {
         String code = generateCode(6);
         RedisKit.setCaptcha(number, code);
-        ShortMessageKit.send(username,operation,code,number);
+        ShortMessageKit.send(username, operation, code, number);
     }
 
     /**
      * generate a captcha code, save it into redis and send to user's phone.
      *
-     * @param number phone number
+     * @param number    phone number
      * @param operation operation
      */
-    public void generateCaptchaAndSend(String number,String operation) {
-        generateCaptchaAndSend(number,"用户",operation);
+    public void generateCaptchaAndSend(String number, String operation) {
+        generateCaptchaAndSend(number, "用户", operation);
     }
 
     /**
@@ -95,7 +95,7 @@ public class ShortMessageCaptchaService {
      * @param number phone number
      */
     public void generateCaptchaAndSend(String number) {
-        generateCaptchaAndSend(number,"用户","获取验证码");
+        generateCaptchaAndSend(number, "用户", "获取验证码");
     }
 
     /**
