@@ -80,12 +80,12 @@ fabric.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-<<<<<<< HEAD
 .idea
 *.iml
 /test/
 !/lib/taobao-sdk-java.jar
-=======
 /src/main/resources/config-dev.properties
 !/src/main/webapp/assets/css/.gitkeep
->>>>>>> 9635c82e2e352adf2b5deb751fa2e435aae15dcf
+/.gradle/
+/build/
+/gradle/
