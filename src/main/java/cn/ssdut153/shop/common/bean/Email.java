@@ -25,13 +25,26 @@ package cn.ssdut153.shop.common.bean;
  */
 public class Email {
 
+    /**
+     * mail address
+     */
     private String to;
+    /**
+     * title
+     */
     private String title;
+    /**
+     * context
+     */
     private String context;
 
-    public Email() {
-    }
-
+    /**
+     * constructor
+     *
+     * @param to email address
+     * @param title title
+     * @param context context
+     */
     public Email(String to, String title, String context) {
         this.to = to;
         this.title = title;
