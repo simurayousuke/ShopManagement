@@ -38,3 +38,20 @@
 * [aliyun-java-sdk-dm](https://mvnrepository.com/artifact/https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dm) 邮件推送
 * [aliyun-sdk-oss](https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss) 对象存储
 * com.taobao.api(阿里大于API) 短信发送
+
+# 三方服务
+本部分介绍了本项目所使用的第三方服务。
+
+## 阿里云
+* CDN
+* ECS
+* PostgreSQL
+* Redis
+* OSS
+* Domain
+* DNS
+* DM
+* RAM
+
+## 阿里大于
+* SMS
