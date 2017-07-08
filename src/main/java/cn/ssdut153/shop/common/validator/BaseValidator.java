@@ -32,7 +32,7 @@ import java.math.BigDecimal;
  */
 public abstract class BaseValidator extends Validator {
 
-    private static final String phonePattern = "^1[3|4|5|7|8][0-9]{9}$";
+    private static final String PHONE_PATTERN = "^1[3|4|5|7|8][0-9]{9}$";
 
     public BaseValidator() {
         // 短路验证
@@ -72,7 +72,7 @@ public abstract class BaseValidator extends Validator {
     }
 
     protected void validatePhone(String field, String errorKey, String errorMessage) {
-        validateRegex(field, phonePattern, errorKey, errorMessage);
+        validateRegex(field, PHONE_PATTERN, errorKey, errorMessage);
     }
 
 }
