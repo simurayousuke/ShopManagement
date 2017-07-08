@@ -24,7 +24,7 @@ import com.jfinal.core.Controller;
  * 邮箱登录验证器
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class EmailLoginValidator extends BaseValidator {
@@ -32,6 +32,7 @@ public class EmailLoginValidator extends BaseValidator {
     @Override
     protected void validate(Controller c) {
         validateEmail("email", Ret.MSG, "wrong format email");
+        validateString("pwd", 6, 32, Ret.MSG, "wrong password length");
     }
 
     @Override

@@ -24,14 +24,15 @@ import com.jfinal.core.Controller;
  * 用户名登录验证器
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class UsernameLoginValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateString("username", 3, 20, Ret.MSG, "wrong username length");
+        validateString("username", 1, 20, Ret.MSG, "wrong username length");
+        validateString("pwd", 6, 32, Ret.MSG, "wrong password length");
     }
 
     @Override

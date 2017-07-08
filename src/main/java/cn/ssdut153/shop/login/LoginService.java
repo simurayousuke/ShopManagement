@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class LoginService {
@@ -36,7 +36,7 @@ public class LoginService {
     public static final LoginService me = new LoginService();
     private static final Logger log = LoggerFactory.getLogger(LoginService.class);
     private static final UserService srv = UserService.getInstance();
-    private static  final String INTERNAL_EXCEPTION="internal exception";
+    private static final String INTERNAL_EXCEPTION = "internal exception";
 
     /**
      * 用户名登录
@@ -83,14 +83,13 @@ public class LoginService {
     /**
      * 手机号登录
      *
-     * @param phone   手机号
-     * @param captcha 验证码
-     * @param ip      ip地址
+     * @param phone 手机号
+     * @param ip    ip地址
      * @return 返回信息
      */
-    public Ret loginByPhone(String phone, String captcha, String ip) {
+    public Ret loginByPhone(String phone, String ip) {
         try {
-            String token = srv.loginByPhone(phone, captcha, ip);
+            String token = srv.loginByPhone(phone, ip);
             if (null == token) {
                 return Ret.fail("phone or captcha wrong");
             }

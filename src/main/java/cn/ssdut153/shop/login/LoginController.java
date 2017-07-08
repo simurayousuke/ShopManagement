@@ -17,6 +17,7 @@
 package cn.ssdut153.shop.login;
 
 import cn.ssdut153.shop.captcha.ImageCaptchaValidator;
+import cn.ssdut153.shop.captcha.PhoneCaptchaValidator;
 import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.IpKit;
 import cn.ssdut153.shop.common.kit.RedisKit;
@@ -31,7 +32,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 @Before({NoUrlPara.class})
@@ -66,12 +67,11 @@ public class LoginController extends BaseController {
     /**
      * 手机号登录
      */
-    @Before({POST.class, PhoneLoginValidator.class})
+    @Before({POST.class, PhoneCaptchaValidator.class, PhoneLoginValidator.class})
     public void phone() {
         String phone = getPara("phone");
-        String captcha = getPara("phone_captcha");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.loginByPhone(phone, captcha, ip);
+        Ret ret = srv.loginByPhone(phone, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);

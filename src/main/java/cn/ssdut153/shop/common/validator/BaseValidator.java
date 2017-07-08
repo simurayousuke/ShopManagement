@@ -16,6 +16,7 @@
 
 package cn.ssdut153.shop.common.validator;
 
+import cn.ssdut153.shop.common.service.ShortMessageCaptchaService;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
@@ -27,7 +28,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -74,8 +75,31 @@ public abstract class BaseValidator extends Validator {
 
     }
 
+    /**
+     * 验证手机号格式
+     *
+     * @param field        手机号表单字段
+     * @param errorKey     错误key
+     * @param errorMessage 错误信息
+     */
     protected void validatePhone(String field, String errorKey, String errorMessage) {
         validateRegex(field, PHONE_PATTERN, errorKey, errorMessage);
+    }
+
+    /**
+     * 验证短信验证码
+     *
+     * @param field1       手机号表单
+     * @param field2       验证码表单字段
+     * @param errorKey     错误key
+     * @param errorMessage 错误信息
+     */
+    protected void validatePhoneCaptcha(String field1, String field2, String errorKey, String errorMessage) {
+        String phone = controller.getPara(field1);
+        String captcha = controller.getPara(field2);
+        if (!ShortMessageCaptchaService.me.validate(phone, captcha)) {
+            addError(errorKey, errorMessage);
+        }
     }
 
 }
