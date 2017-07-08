@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServletRequest;
  * 获取 ip 地址的工具类
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class IpKit {
