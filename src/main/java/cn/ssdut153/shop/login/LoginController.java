@@ -54,7 +54,7 @@ public class LoginController extends BaseController {
     @Before({POST.class, ImageCaptchaValidator.class, UsernameLoginValidator.class})
     public void username() {
         String username = getPara("username");
-        String password = getPara("password");
+        String password = getPara("pwd");
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = srv.loginByUsername(username, password, ip);
         if (ret.isSucceed()) {
@@ -85,7 +85,7 @@ public class LoginController extends BaseController {
     @Before({POST.class, ImageCaptchaValidator.class, EmailLoginValidator.class})
     public void email() {
         String email = getPara("email");
-        String password = getPara("password");
+        String password = getPara("pwd");
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = srv.loginByEmail(email, password, ip);
         if (ret.isSucceed()) {
