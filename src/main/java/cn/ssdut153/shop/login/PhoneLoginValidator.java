@@ -21,6 +21,8 @@ import cn.ssdut153.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
 /**
+ * 手机号登录验证器
+ *
  * @author Hu Wenqiang
  * @version 1.0.1
  * @since 1.0.0

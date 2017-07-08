@@ -27,6 +27,8 @@ import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
+ * 登录
+ *
  * @author Hu Wenqiang
  * @version 1.0.2
  * @since 1.0.0
@@ -37,7 +39,7 @@ public class LoginController extends BaseController {
     private static final LoginService srv = LoginService.me;
 
     /**
-     * 加载页面
+     * 登录页面
      */
     @Before({GET.class})
     public void index() {

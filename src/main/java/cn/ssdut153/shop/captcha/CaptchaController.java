@@ -32,10 +32,16 @@ import com.jfinal.ext.interceptor.NoUrlPara;
 @Before({NoUrlPara.class})
 public class CaptchaController extends BaseController {
 
+    /**
+     * 图片验证码
+     */
     public void image() {
         renderCaptcha();
     }
 
+    /**
+     * 短信验证码
+     */
     public void phone() {
         String phone = getPara("phone");
         ShortMessageCaptchaService.me.generateCaptcha(phone);

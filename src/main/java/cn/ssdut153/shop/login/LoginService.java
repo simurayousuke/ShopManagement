@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 登录服务
+ *
  * @author Hu Wenqiang
  * @version 1.0.2
  * @since 1.0.0

@@ -26,6 +26,8 @@ import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
+ * 注册
+ *
  * @author Hu Wenqiang
  * @version 1.0.1
  * @since 1.0.0
@@ -35,11 +37,17 @@ public class RegisterController extends BaseController {
 
     private static final RegisterService srv = RegisterService.me;
 
+    /**
+     * 注册页面
+     */
     @Before({GET.class})
     public void index() {
         render("index.html");
     }
 
+    /**
+     * 邮箱注册
+     */
     @Before({POST.class, EmailRegisterValidator.class})
     public void email() {
         User user = getModel(User.class, "");
@@ -49,6 +57,9 @@ public class RegisterController extends BaseController {
         renderJson(ret);
     }
 
+    /**
+     * 手机号注册
+     */
     @Before({POST.class, PhoneRegisterValidator.class})
     public void phone() {
         User user = getModel(User.class, "");
