@@ -191,6 +191,7 @@ public class UserService {
     }
 
     // todo 记录操作到数据库中
+
     /**
      * generate and get active code for phone number.
      *
@@ -236,7 +237,7 @@ public class UserService {
      * validate active code with email.
      *
      * @param emailAddress email address
-     * @param code active code
+     * @param code         active code
      * @return boolean
      */
     public boolean validateActiveCodeWithEmail(String emailAddress, String code) {
@@ -256,7 +257,7 @@ public class UserService {
     /**
      * bind email address for user.
      *
-     * @param user User Object
+     * @param user         User Object
      * @param emailAddress email address
      * @return boolean
      */
@@ -267,7 +268,7 @@ public class UserService {
     /**
      * bind email address for username.
      *
-     * @param username username
+     * @param username     username
      * @param emailAddress email address
      * @return boolean
      */
@@ -316,7 +317,7 @@ public class UserService {
      * validate then active email address for username
      *
      * @param username username
-     * @param code active code
+     * @param code     active code
      * @return boolean
      */
     public boolean validateThenActiveEmailAddressForUsername(String username, String code) {

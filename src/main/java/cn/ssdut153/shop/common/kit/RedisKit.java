@@ -121,7 +121,7 @@ public class RedisKit {
      * @return active code
      */
     public static String setActiveCodeForPhoneNumberAndGet(String number) {
-        String code=StrKit.getRandomUUID();
+        String code = StrKit.getRandomUUID();
         Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).setex(code, 15 * 60, number);
         return code;
     }
