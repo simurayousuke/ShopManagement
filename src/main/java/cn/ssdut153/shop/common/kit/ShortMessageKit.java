@@ -41,6 +41,10 @@ public class ShortMessageKit {
      */
     private static TaobaoClient client = null;
 
+    private ShortMessageKit() {
+
+    }
+
     /**
      * initialize a client of alidayu.
      *

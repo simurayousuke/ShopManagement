@@ -4,5 +4,6 @@
 }
 
 .main {
-    min-height: calc(100vh - 162px);
+    min-height: calc(100vh - 172px);
+    max-width: 100%;
 }
