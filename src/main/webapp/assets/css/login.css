@@ -1,9 +1,18 @@
-@media (min-width: 1200px) {
-    #seize {
+#seize {
+    display: none;
+}
+#login-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    border: 1px solid #DDDDDD;
+    margin-top: 30px;
+}
+@media (min-width: 768px) {
+    #seize{
         display: inline-block;
-        width: 1200px;
+        width: 368px;
     }
-
     #login-container {
         display: inline-block;
         width: 400px;
@@ -11,6 +20,48 @@
         margin-top: 30px;
     }
 }
+@media (min-width: 992px) {
+    #seize{
+        display: inline-block;
+        width: 592px;
+    }
+    #login-container {
+         display: inline-block;
+         width: 400px;
+         border: 1px solid #DDDDDD;
+         margin-top: 30px;
+     }
+}
+@media (min-width: 1200px) {
+    #seize {
+        display: inline-block;
+        width: 800px;
+    }
+    #login-container {
+         display: inline-block;
+         width: 400px;
+         border: 1px solid #DDDDDD;
+         margin-top: 30px;
+     }
+}
+
+@media (min-width: 1600px) {
+    #seize {
+        display: inline-block;
+        width: 1200px;
+    }
+    #login-container {
+        display: inline-block;
+        width: 400px;
+        border: 1px solid #DDDDDD;
+        margin-top: 30px;
+    }
+}
+
+
+
+
+
 
 #tab-content {
     margin: 20px;
