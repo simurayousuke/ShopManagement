@@ -45,11 +45,16 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.10
+ * @version 1.0.11
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
 public class Config extends JFinalConfig {
+
+    private static final String REDIS_HOST="redis.host";
+    private static final String REDIS_PORT="redis.port";
+    private static final String REDIS_TIMEOUT="redis.timeout";
+    private static final String REDIS_PASSWORD="redis.password";
 
     /**
      * Global config.
@@ -140,63 +145,15 @@ public class Config extends JFinalConfig {
     /**
      * Get RedisPlugin.
      *
-     * @return RedisPlugin Object for token
+     * @param cacheName cache name
+     * @param database database
+     * @return RedisPlugin Object
      */
-    private RedisPlugin getTokenRedisPlugin() {
-        String cacheName = RedisKit.TOKEN;
-        String host = p.get("redis.host");
-        int port = p.getInt("redis.port");
-        int timeout = p.getInt("redis.timeout");
-        String password = p.get("redis.password");
-        int database = p.getInt("redis.database.token");
-        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
-        return configRedisPlugin(rp);
-    }
-
-    /**
-     * Get RedisPlugin.
-     *
-     * @return RedisPlugin Object for captcha
-     */
-    private RedisPlugin getCaptchaRedisPlugin() {
-        String cacheName = RedisKit.SHORT_MESSAGE_CAPTCHA;
-        String host = p.get("redis.host");
-        int port = p.getInt("redis.port");
-        int timeout = p.getInt("redis.timeout");
-        String password = p.get("redis.password");
-        int database = p.getInt("redis.database.captcha");
-        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
-        return configRedisPlugin(rp);
-    }
-
-    /**
-     * Get RedisPlugin.
-     *
-     * @return RedisPlugin Object for captcha
-     */
-    private RedisPlugin getPhoneActiveCodeRedisPlugin() {
-        String cacheName = RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER;
-        String host = p.get("redis.host");
-        int port = p.getInt("redis.port");
-        int timeout = p.getInt("redis.timeout");
-        String password = p.get("redis.password");
-        int database = p.getInt("redis.database.activePhone");
-        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
-        return configRedisPlugin(rp);
-    }
-
-    /**
-     * Get RedisPlugin.
-     *
-     * @return RedisPlugin Object for captcha
-     */
-    private RedisPlugin getEmailActiveCodeRedisPlugin() {
-        String cacheName = RedisKit.ACTIVE_CODE_FOR_EMAIL;
-        String host = p.get("redis.host");
-        int port = p.getInt("redis.port");
-        int timeout = p.getInt("redis.timeout");
-        String password = p.get("redis.password");
-        int database = p.getInt("redis.database.activeEmail");
+    private RedisPlugin getRedisPlugin(String cacheName,int database){
+        String host = p.get(REDIS_HOST);
+        int port = p.getInt(REDIS_PORT);
+        int timeout = p.getInt(REDIS_TIMEOUT);
+        String password = p.get(REDIS_PASSWORD);
         RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
         return configRedisPlugin(rp);
     }
@@ -236,10 +193,10 @@ public class Config extends JFinalConfig {
         DruidPlugin dp = getDruidPlugin();
         me.add(dp);
         me.add(getActiveRecordPlugin(dp));
-        me.add(getTokenRedisPlugin());
-        me.add(getCaptchaRedisPlugin());
-        me.add(getPhoneActiveCodeRedisPlugin());
-        me.add(getEmailActiveCodeRedisPlugin());
+        me.add(getRedisPlugin(RedisKit.TOKEN,p.getInt("redis.database.token")));
+        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA,p.getInt("redis.database.captcha")));
+        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER,p.getInt("redis.database.activePhone")));
+        me.add(getRedisPlugin( RedisKit.ACTIVE_CODE_FOR_EMAIL,p.getInt("redis.database.activeEmail")));
     }
 
     /**
