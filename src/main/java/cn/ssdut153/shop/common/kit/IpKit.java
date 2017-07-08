@@ -47,11 +47,11 @@ public class IpKit {
         int i=0;
         String ip = request.getHeader(headers[i]);
         while(ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)){
-            ip=request.getHeader(headers[++i]);
-            if(i==headers.length){
+            if(i==headers.length-1){
                 ip = request.getRemoteAddr();
                 break;
             }
+            ip=request.getHeader(headers[++i]);
         }
         return ip;
     }
