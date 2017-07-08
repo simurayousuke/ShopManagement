@@ -16,7 +16,7 @@
 
 package cn.ssdut153.shop.login;
 
-import cn.ssdut153.shop.common.captcha.CaptchaValidator;
+import cn.ssdut153.shop.captcha.ImageCaptchaValidator;
 import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.IpKit;
 import cn.ssdut153.shop.common.kit.RedisKit;
@@ -47,7 +47,7 @@ public class LoginController extends BaseController {
     /**
      * 用户名登录
      */
-    @Before({POST.class, CaptchaValidator.class, UsernameLoginValidator.class})
+    @Before({POST.class, ImageCaptchaValidator.class, UsernameLoginValidator.class})
     public void username() {
         String username = getPara("username");
         String password = getPara("password");
@@ -79,7 +79,7 @@ public class LoginController extends BaseController {
     /**
      * 邮箱登录
      */
-    @Before({POST.class, CaptchaValidator.class, EmailLoginValidator.class})
+    @Before({POST.class, ImageCaptchaValidator.class, EmailLoginValidator.class})
     public void email() {
         String email = getPara("email");
         String password = getPara("password");

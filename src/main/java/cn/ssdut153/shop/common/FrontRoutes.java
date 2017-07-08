@@ -16,7 +16,7 @@
 
 package cn.ssdut153.shop.common;
 
-import cn.ssdut153.shop.common.captcha.CaptchaController;
+import cn.ssdut153.shop.captcha.CaptchaController;
 import cn.ssdut153.shop.index.IndexController;
 import cn.ssdut153.shop.login.LoginController;
 import cn.ssdut153.shop.register.RegisterController;

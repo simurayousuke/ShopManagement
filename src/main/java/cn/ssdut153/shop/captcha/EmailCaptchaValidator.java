@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
-package cn.ssdut153.shop.common.captcha;
+package cn.ssdut153.shop.captcha;
 
-import cn.ssdut153.shop.common.controller.BaseController;
-import com.jfinal.aop.Before;
-import com.jfinal.ext.interceptor.NoUrlPara;
+import cn.ssdut153.shop.common.validator.BaseValidator;
+import com.jfinal.core.Controller;
 
 /**
- * This is the captcha validator.
+ * This is the email captcha validator.
  *
  * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
-@Before({NoUrlPara.class})
-public class CaptchaController extends BaseController {
+public class EmailCaptchaValidator extends BaseValidator {
 
-    public void index() {
-        renderCaptcha();
+    @Override
+    protected void validate(Controller c) {
+
+    }
+
+    @Override
+    protected void handleError(Controller c) {
+
     }
 
 }

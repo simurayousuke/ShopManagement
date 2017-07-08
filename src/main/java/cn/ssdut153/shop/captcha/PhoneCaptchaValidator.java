@@ -14,30 +14,28 @@
  * limitations under the License.
  */
 
-package cn.ssdut153.shop.common.captcha;
+package cn.ssdut153.shop.captcha;
 
-import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
 /**
- * This is the captcha validator.
+ * This is the phone captcha validator
  *
  * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
-public class CaptchaValidator extends BaseValidator {
+public class PhoneCaptchaValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateCaptcha("captcha", Ret.MSG, "wrong captcha");
+
     }
 
     @Override
     protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
+
     }
 
 }
