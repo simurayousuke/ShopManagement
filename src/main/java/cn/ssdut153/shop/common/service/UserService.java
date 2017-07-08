@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.5
  * @since 1.0.0
  */
 public class UserService {
@@ -144,6 +144,22 @@ public class UserService {
     }
 
     /**
+     * should not be invoked unless the user is validated by the validator.
+     *
+     * @param phoneNumber phone number
+     * @param ip          ip address
+     * @return token
+     */
+    public String loginByPhone(String phoneNumber, String ip) {
+        if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
+                .getId()).setIp(ip).setOperation("phoneLogin").setDescription("true").save()) {
+            throw new LogException("Can not log username phoneLogin action");
+        }
+        User user = findUserByPhoneNumber(phoneNumber);
+        return RedisKit.setAndGetToken(user);
+    }
+
+    /**
      * validate user with email&password
      *
      * @param email    email
@@ -172,6 +188,37 @@ public class UserService {
      */
     public User validateToken(String token) {
         return RedisKit.getUserByToken(token);
+    }
+
+    /**
+     * generate and get active code for phone number.
+     *
+     * @param number phone number
+     * @return active code
+     */
+    public String generateActiveCodeForPhoneNumberAndGet(String number) {
+        return RedisKit.setActiveCodeForPhoneNumberAndGet(number);
+    }
+
+    /**
+     * match phone number with active code.
+     *
+     * @param number phone number
+     * @param code active code
+     * @return boolean
+     */
+    public boolean validateActiveCodeWithPhoneNumber(String number, String code) {
+        return number.equals(RedisKit.getPhoneNumberByActiveCode(code));
+    }
+
+    /**
+     * validate active code.
+     *
+     * @param code active code
+     * @return boolean
+     */
+    public boolean validateActiveCode(String code) {
+        return RedisKit.getPhoneNumberByActiveCode(code) != null;
     }
 
 }

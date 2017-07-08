@@ -25,7 +25,7 @@ import com.jfinal.plugin.redis.Redis;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.6
  * @since 1.0.0
  */
 public class RedisKit {
@@ -36,6 +36,7 @@ public class RedisKit {
     public static final String COOKIE_ID = "token";
     public static final String TOKEN = "token";
     public static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
+    public static final String ACTIVE_CODE_FOR_PHONE_NUMER = "activeCodeForPhoneNumber";
 
     private RedisKit() {
 
@@ -100,6 +101,47 @@ public class RedisKit {
      */
     public static void delCaptcha(String number) {
         Redis.use(SHORT_MESSAGE_CAPTCHA).del(number);
+    }
+
+    /**
+     * set active code for phone number.
+     *
+     * @param number phone number
+     * @param code   active code(uuid)
+     */
+    public static void setActiveCodeForPhoneNumber(String number, String code) {
+        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).setex(code, 15 * 60, number);
+    }
+
+    /**
+     * set and get active code for phone number.
+     *
+     * @param number phone number
+     * @return active code
+     */
+    public static String setActiveCodeForPhoneNumberAndGet(String number) {
+        String code=StrKit.getRandomUUID();
+        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).setex(code, 15 * 60, number);
+        return code;
+    }
+
+    /**
+     * get phone number by active code.
+     *
+     * @param code active code
+     * @return phone number or null
+     */
+    public static String getPhoneNumberByActiveCode(String code) {
+        return null == code ? null : Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).get(code);
+    }
+
+    /**
+     * delete active code.
+     *
+     * @param code active code
+     */
+    public static void delActiveCode(String code) {
+        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).del(code);
     }
 
 }

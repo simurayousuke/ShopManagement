@@ -45,7 +45,7 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.8
+ * @version 1.0.9
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -170,6 +170,22 @@ public class Config extends JFinalConfig {
     }
 
     /**
+     * Get RedisPlugin.
+     *
+     * @return RedisPlugin Object for captcha
+     */
+    private RedisPlugin getActiveCodeRedisPlugin() {
+        String cacheName = RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER;
+        String host = p.get("redis.host");
+        int port = p.getInt("redis.port");
+        int timeout = p.getInt("redis.timeout");
+        String password = p.get("redis.password");
+        int database = p.getInt("redis.database.token");
+        RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
+        return configRedisPlugin(rp);
+    }
+
+    /**
      * @see com.jfinal.config.JFinalConfig#configConstant(Constants)
      */
     @Override
@@ -206,6 +222,7 @@ public class Config extends JFinalConfig {
         me.add(getActiveRecordPlugin(dp));
         me.add(getTokenRedisPlugin());
         me.add(getCaptchaRedisPlugin());
+        me.add(getActiveCodeRedisPlugin());
     }
 
     /**
