@@ -17,21 +17,25 @@
 package cn.ssdut153.shop.index;
 
 import cn.ssdut153.shop.common.controller.BaseController;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * This is the controller of index
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
+@Before({NoUrlPara.class})
 public class IndexController extends BaseController {
 
     /**
      * The entry point of index
      */
     public void index() {
-        renderTemplate("index.html");
+        render("index.html");
     }
 
 }

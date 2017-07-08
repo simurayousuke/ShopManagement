@@ -19,6 +19,8 @@ package cn.ssdut153.shop.captcha;
 import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.service.ShortMessageCaptchaService;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * This is the captcha controller.
@@ -27,6 +29,7 @@ import cn.ssdut153.shop.common.service.ShortMessageCaptchaService;
  * @version 1.0.0
  * @since 1.0.0
  */
+@Before({NoUrlPara.class})
 public class CaptchaController extends BaseController {
 
     public void image() {
