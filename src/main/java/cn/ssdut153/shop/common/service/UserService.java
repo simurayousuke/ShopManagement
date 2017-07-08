@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.0
+ * @version 1.2.1
  * @since 1.0.0
  */
 public class UserService {
@@ -241,7 +241,7 @@ public class UserService {
      * @return boolean
      */
     public boolean validateActiveCodeWithEmail(String emailAddress, String code) {
-        return code.equals(RedisKit.getEmailAddressByActiveCode(code));
+        return emailAddress.equals(RedisKit.getEmailAddressByActiveCode(code));
     }
 
     /**
