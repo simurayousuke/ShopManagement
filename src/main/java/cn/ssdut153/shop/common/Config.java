@@ -45,16 +45,11 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.11
+ * @version 1.0.12
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
 public class Config extends JFinalConfig {
-
-    private static final String REDIS_HOST="redis.host";
-    private static final String REDIS_PORT="redis.port";
-    private static final String REDIS_TIMEOUT="redis.timeout";
-    private static final String REDIS_PASSWORD="redis.password";
 
     /**
      * Global config.
@@ -146,14 +141,14 @@ public class Config extends JFinalConfig {
      * Get RedisPlugin.
      *
      * @param cacheName cache name
-     * @param database database
+     * @param database  database
      * @return RedisPlugin Object
      */
-    private RedisPlugin getRedisPlugin(String cacheName,int database){
-        String host = p.get(REDIS_HOST);
-        int port = p.getInt(REDIS_PORT);
-        int timeout = p.getInt(REDIS_TIMEOUT);
-        String password = p.get(REDIS_PASSWORD);
+    private RedisPlugin getRedisPlugin(String cacheName, int database) {
+        String host = p.get("redis.host");
+        int port = p.getInt("redis.port");
+        int timeout = p.getInt("redis.timeout");
+        String password = p.get("redis.password");
         RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
         return configRedisPlugin(rp);
     }
@@ -193,10 +188,10 @@ public class Config extends JFinalConfig {
         DruidPlugin dp = getDruidPlugin();
         me.add(dp);
         me.add(getActiveRecordPlugin(dp));
-        me.add(getRedisPlugin(RedisKit.TOKEN,p.getInt("redis.database.token")));
-        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA,p.getInt("redis.database.captcha")));
-        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER,p.getInt("redis.database.activePhone")));
-        me.add(getRedisPlugin( RedisKit.ACTIVE_CODE_FOR_EMAIL,p.getInt("redis.database.activeEmail")));
+        me.add(getRedisPlugin(RedisKit.TOKEN, p.getInt("redis.database.token")));
+        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, p.getInt("redis.database.captcha")));
+        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, p.getInt("redis.database.activePhone")));
+        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, p.getInt("redis.database.activeEmail")));
     }
 
     /**
