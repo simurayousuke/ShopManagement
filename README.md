@@ -18,23 +18,23 @@
 * [bootbox](http://bootboxjs.com/#) 提示框
 
 ## 后端
-* [com.jfinal.jfinal](https://mvnrepository.com/artifact/com.jfinal/jfinal)
-* [com.jfinal.cos](https://mvnrepository.com/artifact/com.jfinal/cos)
-* [org.slf4j.slf4j-api](https://mvnrepository.com/artifact/org.slf4j/slf4j-api)
-* [org.slf4j.slf4j-nop](https://mvnrepository.com/artifact/org.slf4j/slf4j-nop)
-* [org.slf4j.slf4j-log4j12](https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12)
-* [org.slf4j.jul-to-slf4j](https://mvnrepository.com/artifact/org.slf4j/jul-to-slf4j)
-* [org.slf4j.jcl-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j)
-* [log4j.log4j](https://mvnrepository.com/artifact/log4j/log4j)
-* [org.postgresql.postgresql](https://mvnrepository.com/artifact/org.postgresql/postgresql)
-* [javax.servlet.javax.servlet-api](https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api)
-* [redis.clients.jedis](https://mvnrepository.com/artifact/redis.clients/jedis)
-* [de.ruedigermoeller.fst](https://mvnrepository.com/artifact/de.ruedigermoeller/fst)
-* [com.alibaba.fastjson](https://mvnrepository.com/artifact/com.alibaba/fastjson)
-* [com.alibaba.druid](https://mvnrepository.com/artifact/com.alibaba/druid)
-* [org.apache.commons.commons-email](https://mvnrepository.com/artifact/org.apache.commons/commons-email)
-* [org.jsoup.jsoup](https://mvnrepository.com/artifact/org.jsoup/jsoup)
-* [com.aliyun.aliyun-java-sdk-core](https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core)
-* [com.aliyun.aliyun-java-sdk-dm](https://mvnrepository.com/artifact/https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dm)
-* [com.aliyun.oss.aliyun-sdk-oss](https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss)
-* com.taobao.api
+* [JFinal](https://mvnrepository.com/artifact/com.jfinal/jfinal) 后端MVC框架
+* [JFinal.cos](https://mvnrepository.com/artifact/com.jfinal/cos) 文件上传组件
+* [slf4j-api](https://mvnrepository.com/artifact/org.slf4j/slf4j-api) 日志库
+* [slf4j-nop](https://mvnrepository.com/artifact/org.slf4j/slf4j-nop) 日志库
+* [slf4j-log4j12](https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12) 日志适配器
+* [jul-to-slf4j](https://mvnrepository.com/artifact/org.slf4j/jul-to-slf4j) 日志适配器
+* [jcl-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j) 日志适配器
+* [log4j](https://mvnrepository.com/artifact/log4j/log4j) 日志库
+* [postgresql](https://mvnrepository.com/artifact/org.postgresql/postgresql) PostgreSQL
+* [servlet-api](https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api) Servlet
+* [jedis](https://mvnrepository.com/artifact/redis.clients/jedis) Redis连接池
+* [fst](https://mvnrepository.com/artifact/de.ruedigermoeller/fst) 序列化、反序列化
+* [fastjson](https://mvnrepository.com/artifact/com.alibaba/fastjson) json序列化、反序列化
+* [druid](https://mvnrepository.com/artifact/com.alibaba/druid) 数据库连接池
+* [commons-email](https://mvnrepository.com/artifact/org.apache.commons/commons-email) 邮件服务
+* [jsoup](https://mvnrepository.com/artifact/org.jsoup/jsoup) xss攻击过滤
+* [aliyun-java-sdk-core](https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core) 阿里云sdk内核
+* [aliyun-java-sdk-dm](https://mvnrepository.com/artifact/https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-dm) 邮件推送
+* [aliyun-sdk-oss](https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss) 对象存储
+* com.taobao.api(阿里大于API) 短信发送
