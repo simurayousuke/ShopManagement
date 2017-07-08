@@ -20,7 +20,9 @@ import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.service.ShortMessageCaptchaService;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * This is the captcha controller.
@@ -30,12 +32,13 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  * @version 1.0.1
  * @since 1.0.0
  */
-@Before({NoUrlPara.class})
+@Before(NoUrlPara.class)
 public class CaptchaController extends BaseController {
 
     /**
      * 图片验证码
      */
+    @Before(GET.class)
     public void image() {
         renderCaptcha();
     }
@@ -43,6 +46,7 @@ public class CaptchaController extends BaseController {
     /**
      * 短信验证码
      */
+    @Before(POST.class)
     public void phone() {
         String phone = getPara("phone");
         ShortMessageCaptchaService.ME.generateCaptchaAndSend(phone);

@@ -32,7 +32,7 @@ import com.jfinal.ext.interceptor.POST;
  * @version 1.0.1
  * @since 1.0.0
  */
-@Before({NoUrlPara.class})
+@Before(NoUrlPara.class)
 public class RegisterController extends BaseController {
 
     private static final RegisterService SRV = RegisterService.ME;
@@ -40,7 +40,7 @@ public class RegisterController extends BaseController {
     /**
      * 注册页面
      */
-    @Before({GET.class})
+    @Before(GET.class)
     public void index() {
         render("index.html");
     }

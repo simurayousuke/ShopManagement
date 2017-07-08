@@ -35,7 +35,7 @@ import com.jfinal.ext.interceptor.POST;
  * @version 1.0.4
  * @since 1.0.0
  */
-@Before({NoUrlPara.class})
+@Before(NoUrlPara.class)
 public class LoginController extends BaseController {
 
     private static final LoginService srv = LoginService.ME;
@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
     /**
      * 登录页面
      */
-    @Before({GET.class})
+    @Before(GET.class)
     public void index() {
         render("index.html");
     }

@@ -30,12 +30,12 @@ public class PhoneRegisterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-
+        // todo 完成功能
     }
 
     @Override
     protected void handleError(Controller c) {
-
+        // todo 完成功能
     }
 
 }

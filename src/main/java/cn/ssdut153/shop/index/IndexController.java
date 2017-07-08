@@ -28,7 +28,7 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  * @version 1.0.1
  * @since 1.0.0
  */
-@Before({NoUrlPara.class})
+@Before(NoUrlPara.class)
 public class IndexController extends BaseController {
 
     /**
