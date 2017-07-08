@@ -17,10 +17,15 @@
     <![endif]-->
     <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
     <link href="//cdn.bootcss.com/zui/1.6.0/lib/bootbox/bootbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/common.css">
     #@css?()
 </head>
 <body>
-#@body()
+#include("nav.html")
+<div class="container main">
+    #@body()
+</div>
+#include("footer.html")
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
 <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
 <script src="//cdn.bootcss.com/zui/1.6.0/lib/bootbox/bootbox.min.js"></script>

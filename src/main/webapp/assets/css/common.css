@@ -1,0 +1,8 @@
+.footer {
+    text-align: center;
+    height: 100px;
+}
+
+.main {
+    min-height: calc(100vh - 162px);
+}
