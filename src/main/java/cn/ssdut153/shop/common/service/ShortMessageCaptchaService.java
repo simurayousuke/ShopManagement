@@ -26,7 +26,7 @@ import java.util.Random;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 public class ShortMessageCaptchaService {
@@ -111,6 +111,39 @@ public class ShortMessageCaptchaService {
         }
         RedisKit.delCaptcha(number);
         return true;
+    }
+
+    // todo 记录操作到数据库中
+
+    /**
+     * generate and get active code for phone number.
+     *
+     * @param number phone number
+     * @return active code
+     */
+    public String generateActiveCodeForPhoneNumberAndGet(String number) {
+        return RedisKit.setActiveCodeForPhoneNumberAndGet(number);
+    }
+
+    /**
+     * match phone number with active code.
+     *
+     * @param number phone number
+     * @param code   active code
+     * @return boolean
+     */
+    public boolean validateActiveCodeWithPhoneNumber(String number, String code) {
+        return number.equals(RedisKit.getPhoneNumberByActiveCode(code));
+    }
+
+    /**
+     * validate active code.
+     *
+     * @param code active code
+     * @return boolean
+     */
+    public boolean validateActiveCodeForPhoneNumber(String code) {
+        return RedisKit.getPhoneNumberByActiveCode(code) != null;
     }
 
 }

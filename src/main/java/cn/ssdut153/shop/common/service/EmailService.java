@@ -18,6 +18,8 @@ package cn.ssdut153.shop.common.service;
 
 import cn.ssdut153.shop.common.bean.Email;
 import cn.ssdut153.shop.common.builder.SingleSendMailRequestBuilder;
+import cn.ssdut153.shop.common.kit.RedisKit;
+import cn.ssdut153.shop.common.model.User;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
@@ -25,6 +27,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * The service for sending email.
  *
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
@@ -74,6 +77,109 @@ public class EmailService {
             log.error(e.getErrMsg(), e);
         }
         return false;
+    }
+
+    // todo 记录操作到数据库中
+
+    /**
+     * generate and get active code for email.
+     *
+     * @param emailAddress email address
+     * @return active code
+     */
+    public String generateActiveCodeForEmail(String emailAddress) {
+        return RedisKit.setActiveCodeForEmailAndGet(emailAddress);
+    }
+
+    /**
+     * validate active code with email.
+     *
+     * @param emailAddress email address
+     * @param code         active code
+     * @return boolean
+     */
+    public boolean validateActiveCodeWithEmail(String emailAddress, String code) {
+        return emailAddress.equals(RedisKit.getEmailAddressByActiveCode(code));
+    }
+
+    /**
+     * validate active code for email.
+     *
+     * @param code active code
+     * @return boolean
+     */
+    public boolean validateActiveCodeForEmail(String code) {
+        return RedisKit.getEmailAddressByActiveCode(code) != null;
+    }
+
+    /**
+     * bind email address for user.
+     *
+     * @param user         User Object
+     * @param emailAddress email address
+     * @return boolean
+     */
+    public boolean bindEmailAddressForUser(User user, String emailAddress) {
+        return user.setEmail(emailAddress).setEmailStatus(0).update();
+    }
+
+    /**
+     * bind email address for username.
+     *
+     * @param username     username
+     * @param emailAddress email address
+     * @return boolean
+     */
+    public boolean bindEmailAddressForUsername(String username, String emailAddress) {
+        return bindEmailAddressForUser(UserService.getInstance().findUserByUsername(username), emailAddress);
+    }
+
+    /**
+     * active email address for user
+     *
+     * @param user User Object
+     * @return boolean
+     */
+    private boolean activeEmailAddressForUser(User user) {
+        if (StrKit.isBlank(user.getEmail())) {
+            return false;
+        }
+        return user.setEmailStatus(1).update();
+    }
+
+    /**
+     * validate and then active email address for user
+     *
+     * @param user User Object
+     * @param code active code
+     * @return boolean
+     */
+    public boolean validateThenActiveEmailAddressForUser(User user, String code) {
+        if (!validateActiveCodeForEmail(code)) {
+            return false;
+        }
+        return activeEmailAddressForUser(user);
+    }
+
+    /**
+     * active email address for username
+     *
+     * @param username username
+     * @return boolean
+     */
+    private boolean activeEmailAddressForUsername(String username) {
+        return activeEmailAddressForUser(UserService.getInstance().findUserByUsername(username));
+    }
+
+    /**
+     * validate then active email address for username
+     *
+     * @param username username
+     * @param code     active code
+     * @return boolean
+     */
+    public boolean validateThenActiveEmailAddressForUsername(String username, String code) {
+        return validateThenActiveEmailAddressForUser(UserService.getInstance().findUserByUsername(username), code);
     }
 
 }

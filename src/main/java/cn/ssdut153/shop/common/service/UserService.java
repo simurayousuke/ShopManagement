@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.1
+ * @version 1.2.2
  * @since 1.0.0
  */
 public class UserService {
@@ -188,140 +188,6 @@ public class UserService {
      */
     public User validateToken(String token) {
         return RedisKit.getUserByToken(token);
-    }
-
-    // todo 记录操作到数据库中
-
-    /**
-     * generate and get active code for phone number.
-     *
-     * @param number phone number
-     * @return active code
-     */
-    public String generateActiveCodeForPhoneNumberAndGet(String number) {
-        return RedisKit.setActiveCodeForPhoneNumberAndGet(number);
-    }
-
-    /**
-     * match phone number with active code.
-     *
-     * @param number phone number
-     * @param code   active code
-     * @return boolean
-     */
-    public boolean validateActiveCodeWithPhoneNumber(String number, String code) {
-        return number.equals(RedisKit.getPhoneNumberByActiveCode(code));
-    }
-
-    /**
-     * validate active code.
-     *
-     * @param code active code
-     * @return boolean
-     */
-    public boolean validateActiveCodeForPhoneNumber(String code) {
-        return RedisKit.getPhoneNumberByActiveCode(code) != null;
-    }
-
-    /**
-     * generate and get active code for email.
-     *
-     * @param emailAddress email address
-     * @return active code
-     */
-    public String generateActiveCodeForEmail(String emailAddress) {
-        return RedisKit.setActiveCodeForEmailAndGet(emailAddress);
-    }
-
-    /**
-     * validate active code with email.
-     *
-     * @param emailAddress email address
-     * @param code         active code
-     * @return boolean
-     */
-    public boolean validateActiveCodeWithEmail(String emailAddress, String code) {
-        return emailAddress.equals(RedisKit.getEmailAddressByActiveCode(code));
-    }
-
-    /**
-     * validate active code for email.
-     *
-     * @param code active code
-     * @return boolean
-     */
-    public boolean validateActiveCodeForEmail(String code) {
-        return RedisKit.getEmailAddressByActiveCode(code) != null;
-    }
-
-    /**
-     * bind email address for user.
-     *
-     * @param user         User Object
-     * @param emailAddress email address
-     * @return boolean
-     */
-    public boolean bindEmailAddressForUser(User user, String emailAddress) {
-        return user.setEmail(emailAddress).setEmailStatus(0).update();
-    }
-
-    /**
-     * bind email address for username.
-     *
-     * @param username     username
-     * @param emailAddress email address
-     * @return boolean
-     */
-    public boolean bindEmailAddressForUsername(String username, String emailAddress) {
-        return bindEmailAddressForUser(findUserByUsername(username), emailAddress);
-    }
-
-    /**
-     * active email address for user
-     *
-     * @param user User Object
-     * @return boolean
-     */
-    private boolean activeEmailAddressForUser(User user) {
-        if (StrKit.isBlank(user.getEmail())) {
-            return false;
-        }
-        return user.setEmailStatus(1).update();
-    }
-
-    /**
-     * validate and then active email address for user
-     *
-     * @param user User Object
-     * @param code active code
-     * @return boolean
-     */
-    public boolean validateThenActiveEmailAddressForUser(User user, String code) {
-        if (!validateActiveCodeForEmail(code)) {
-            return false;
-        }
-        return activeEmailAddressForUser(user);
-    }
-
-    /**
-     * active email address for username
-     *
-     * @param username username
-     * @return boolean
-     */
-    private boolean activeEmailAddressForUsername(String username) {
-        return activeEmailAddressForUser(findUserByUsername(username));
-    }
-
-    /**
-     * validate then active email address for username
-     *
-     * @param username username
-     * @param code     active code
-     * @return boolean
-     */
-    public boolean validateThenActiveEmailAddressForUsername(String username, String code) {
-        return validateThenActiveEmailAddressForUser(findUserByUsername(username), code);
     }
 
 }
