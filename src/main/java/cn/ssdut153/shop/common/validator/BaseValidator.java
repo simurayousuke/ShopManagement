@@ -28,7 +28,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.6
+ * @version 1.0.7
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -37,11 +37,13 @@ public abstract class BaseValidator extends Validator {
     private static final String PHONE_PATTERN = "^1[3|4|5|7|8][0-9]{9}$";
 
     public BaseValidator() {
+        super();
         // 短路验证
         shortCircuit = true;
     }
 
-    protected void validateBigDecimal(String field, BigDecimal min, BigDecimal max, String errorKey, String errorMessage) {
+    protected void validateBigDecimal(String field, BigDecimal min, BigDecimal max,
+                                      String errorKey, String errorMessage) {
         String value = controller.getPara(field);
         if (StrKit.isBlank(value)) {
             addError(errorKey, errorMessage);
@@ -52,27 +54,10 @@ public abstract class BaseValidator extends Validator {
             if (temp.compareTo(min) < 0 || temp.compareTo(max) > 0) {
                 addError(errorKey, errorMessage);
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             LogKit.logNothing(e);
             addError(errorKey, errorMessage);
         }
-    }
-
-    protected void validateBigDecimal(String field, String errorKey, String errorMessage) {
-
-        String value = controller.getPara(field);
-        if (StrKit.isBlank(value)) {
-            addError(errorKey, errorMessage);
-            return;
-        }
-
-        try {
-            new BigDecimal(value.trim());
-        } catch (Exception e) {
-            LogKit.logNothing(e);
-            addError(errorKey, errorMessage);
-        }
-
     }
 
     /**

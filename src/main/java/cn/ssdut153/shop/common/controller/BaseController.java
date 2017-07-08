@@ -29,16 +29,16 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @see com.jfinal.core.Controller
  * @since 1.0.0
  */
 public abstract class BaseController extends Controller {
 
     /**
-     * renderManager
+     * RENDER_MANAGER
      */
-    private static final RenderManager renderManager = RenderManager.me();
+    private static final RenderManager RENDER_MANAGER = RenderManager.me();
 
     /**
      * 从请求中获取并转换为<code>java.lang.Double</code>类型
@@ -61,7 +61,8 @@ public abstract class BaseController extends Controller {
 
         } catch (NumberFormatException e) {
             LogKit.logNothing(e);
-            throw new ActionException(400, renderManager.getRenderFactory().getErrorRender(400), "Can not parse the parameter \"" + value + "\" to Double value.");
+            throw new ActionException(400, RENDER_MANAGER.getRenderFactory().getErrorRender(400),
+                    "Can not parse the parameter \"" + value + "\" to Double value.");
         }
 
     }
@@ -110,7 +111,8 @@ public abstract class BaseController extends Controller {
 
         } catch (NumberFormatException e) {
             LogKit.logNothing(e);
-            throw new ActionException(400, renderManager.getRenderFactory().getErrorRender(400), "Can not parse the parameter \"" + value + "\" to BigDecimal value.");
+            throw new ActionException(400, RENDER_MANAGER.getRenderFactory().getErrorRender(400),
+                    "Can not parse the parameter \"" + value + "\" to BigDecimal value.");
         }
 
     }

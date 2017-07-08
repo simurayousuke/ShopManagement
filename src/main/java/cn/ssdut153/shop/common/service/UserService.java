@@ -101,7 +101,8 @@ public class UserService {
     public boolean register(User user, String ip) {
         user.setSalt(StrKit.getRandomUUID());
         user.setPwd(hash(user.getPwd(), user.getSalt()));
-        return Db.tx(4, () -> user.save() && new Log().setIp(ip).setOperation("register").setUserId(user.getId()).save());
+        return Db.tx(4, () -> user.save() &&
+                new Log().setIp(ip).setOperation("register").setUserId(user.getId()).save());
     }
 
     /**
@@ -118,7 +119,8 @@ public class UserService {
             return null;
         }
         Boolean status = hash(password, user.getSalt()).equals(user.getPwd());
-        if (!new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription(status.toString()).save()) {
+        if (!new Log().setIp(ip).setOperation("login")
+                .setUserId(user.getId()).setDescription(status.toString()).save()) {
             throw new LogException("Can not log login action");
         }
         return status ? RedisKit.setAndGetToken(user) : null;
@@ -174,7 +176,8 @@ public class UserService {
             return null;
         }
         Boolean status = hash(password, user.getSalt()).equals(user.getPwd());
-        if (!new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription(status.toString()).save()) {
+        if (!new Log().setIp(ip).setOperation("login")
+                .setUserId(user.getId()).setDescription(status.toString()).save()) {
             throw new LogException("Can not log email login action");
         }
         return status ? RedisKit.setAndGetToken(user) : null;

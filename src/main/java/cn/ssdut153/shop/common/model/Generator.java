@@ -18,7 +18,6 @@ package cn.ssdut153.shop.common.model;
 
 import cn.ssdut153.shop.common.Config;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
-import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 import com.jfinal.plugin.druid.DruidPlugin;
 
@@ -28,12 +27,15 @@ import javax.sql.DataSource;
  * This can generate the ORM(Object Relational Mapping) of the database.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
-public class _Generator {
+public class Generator {
 
-    public static void main(String[] args) {
+    private Generator() {
+    }
+
+    /*public static void main(String... args) {
         String baseModelPackageName = "cn.ssdut153.shop.common.model.base";
         String baseModelOutputDir = "src/main/java/cn/ssdut153/shop/common/model/base";
 
@@ -43,7 +45,8 @@ public class _Generator {
         DruidPlugin druidPlugin = Config.getDruidPlugin();
         druidPlugin.start();
         DataSource dp = druidPlugin.getDataSource();
-        Generator generator = new Generator(dp, baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
+        com.jfinal.plugin.activerecord.generator.Generator generator = new com.jfinal.plugin.activerecord.generator.Generator(dp, baseModelPackageName,
+                baseModelOutputDir, modelPackageName, modelOutputDir);
         generator.setGenerateChainSetter(false);
         generator.setMetaBuilder(new MetaBuilder(dp));
         generator.setGenerateDaoInModel(false);
@@ -51,6 +54,7 @@ public class _Generator {
         generator.setGenerateChainSetter(true);
         generator.setGenerateDataDictionary(false);
         generator.setRemovedTableNamePrefixes("t_");
+        generator.setMappingKitClassName("MappingKit");
         generator.generate();
-    }
+    }*/
 }

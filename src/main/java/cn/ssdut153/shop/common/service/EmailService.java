@@ -36,13 +36,17 @@ import org.slf4j.LoggerFactory;
  * The service for sending email.
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
+@SuppressWarnings("unused")
 public class EmailService {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
+    private static final String REGION = PropKit.get("mailSender.region");
+    private static final String KEY = PropKit.get("mailSender.key");
+    private static final String SECRET = PropKit.get("mailSender.secret");
     /**
      * singleton
      */
@@ -68,7 +72,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean send(Email email, String tag) {
-        IClientProfile profile = DefaultProfile.getProfile(PropKit.get("mailSender.region"), PropKit.get("mailSender.key"), PropKit.get("mailSender.secret"));
+        IClientProfile profile = DefaultProfile.getProfile(REGION, KEY, SECRET);
         IAcsClient client = new DefaultAcsClient(profile);
         SingleSendMailRequest request = new SingleSendMailRequestBuilder(email, tag).build();
         try {

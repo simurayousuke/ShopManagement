@@ -32,13 +32,13 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
 public class LoginController extends BaseController {
 
-    private static final LoginService srv = LoginService.ME;
+    private static final LoginService SRV = LoginService.ME;
 
     /**
      * 登录页面
@@ -56,7 +56,7 @@ public class LoginController extends BaseController {
         String username = getPara("username");
         String password = getPara("pwd");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.loginByUsername(username, password, ip);
+        Ret ret = SRV.loginByUsername(username, password, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
@@ -71,7 +71,7 @@ public class LoginController extends BaseController {
     public void phone() {
         String phone = getPara("phone");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.loginByPhone(phone, ip);
+        Ret ret = SRV.loginByPhone(phone, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
@@ -87,7 +87,7 @@ public class LoginController extends BaseController {
         String email = getPara("email");
         String password = getPara("pwd");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.loginByEmail(email, password, ip);
+        Ret ret = SRV.loginByEmail(email, password, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);

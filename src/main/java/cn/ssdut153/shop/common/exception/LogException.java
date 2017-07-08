@@ -20,7 +20,7 @@ package cn.ssdut153.shop.common.exception;
  * Exception occurred during logging.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class LogException extends RuntimeException {
@@ -30,6 +30,7 @@ public class LogException extends RuntimeException {
      */
     public LogException() {
         // RunTimeException默认构造函数
+        super();
     }
 
     /**

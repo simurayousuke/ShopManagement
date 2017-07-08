@@ -25,12 +25,16 @@ import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class AlibabaAliqinFcSmsNumSendRequestBuilder {
 
-    private AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+    private AlibabaAliqinFcSmsNumSendRequest req;
+
+    private AlibabaAliqinFcSmsNumSendRequestBuilder() {
+        req = new AlibabaAliqinFcSmsNumSendRequest();
+    }
 
     public AlibabaAliqinFcSmsNumSendRequestBuilder(String name,
                                                    String operation,

@@ -25,7 +25,7 @@ import com.jfinal.plugin.redis.Redis;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.8
+ * @version 1.0.9
  * @since 1.0.0
  */
 public class RedisKit {
@@ -151,9 +151,9 @@ public class RedisKit {
      * @param emailAddress email address
      * @return active code
      */
-    public static String setActiveCodeForEmailAndGet(String emailAddress){
-        String code=StrKit.getRandomUUID();
-        Redis.use(ACTIVE_CODE_FOR_EMAIL).setex(code,2*60*60,emailAddress);
+    public static String setActiveCodeForEmailAndGet(String emailAddress) {
+        String code = StrKit.getRandomUUID();
+        Redis.use(ACTIVE_CODE_FOR_EMAIL).setex(code, 2 * 60 * 60, emailAddress);
         return code;
     }
 
@@ -163,8 +163,8 @@ public class RedisKit {
      * @param code active code
      * @return email address
      */
-    public static String getEmailAddressByActiveCode(String code){
-        return null==code?null:Redis.use(ACTIVE_CODE_FOR_EMAIL).get(code);
+    public static String getEmailAddressByActiveCode(String code) {
+        return null == code ? null : Redis.use(ACTIVE_CODE_FOR_EMAIL).get(code);
     }
 
     /**
@@ -172,7 +172,7 @@ public class RedisKit {
      *
      * @param code active code
      */
-    public static void delActiveCodeForEmail(String code){
+    public static void delActiveCodeForEmail(String code) {
         Redis.use(ACTIVE_CODE_FOR_EMAIL).del(code);
     }
 

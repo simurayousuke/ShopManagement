@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
@@ -37,6 +37,7 @@ public class Ret extends HashMap {
     public static final String DATA = "data";
 
     private Ret() {
+        super();
     }
 
     /**
@@ -271,7 +272,7 @@ public class Ret extends HashMap {
      */
     public boolean isTrue(Object key) {
         Object value = get(key);
-        return (value instanceof Boolean && ((Boolean) value));
+        return value instanceof Boolean && ((Boolean) value);
     }
 
     /**
@@ -282,7 +283,7 @@ public class Ret extends HashMap {
      */
     public boolean isFalse(Object key) {
         Object value = get(key);
-        return (value instanceof Boolean && (!((Boolean) value)));
+        return value instanceof Boolean && (!((Boolean) value));
     }
 
     /**

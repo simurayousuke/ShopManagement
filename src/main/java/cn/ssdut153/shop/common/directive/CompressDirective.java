@@ -31,7 +31,8 @@ import java.util.regex.Pattern;
  * 模板压缩指令, 排除了pre、script、style标签
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class CompressDirective extends Directive {
@@ -39,19 +40,20 @@ public class CompressDirective extends Directive {
     /**
      * 排除pre/script/style标签
      */
-    private static final Pattern ignoredPattern = Pattern.compile("(<pre>(.|\n)*?</pre>)|(<script>(.|\n)*?</script>)|(<style>(.|\n)*?</style>)");
+    private static final Pattern IGNORED_PATTERN =
+            Pattern.compile("(<pre>(.|\n)*?</pre>)|(<script>(.|\n)*?</script>)|(<style>(.|\n)*?</style>)");
     /**
      * 匹配一段字符串中间的空白
      */
-    private static final Pattern matchedPattern = Pattern.compile("\\s+");
+    private static final Pattern MATCHED_PATTERN = Pattern.compile("\\s+");
     /**
      * 匹配一段字符串开头和结尾的空格
      */
-    private static final Pattern startEndPattern = Pattern.compile("(^\\s+)|(\\s+$)");
+    private static final Pattern START_END_PATTERN = Pattern.compile("(^\\s+)|(\\s+$)");
     /**
      * 匹配两个标签中间的空格
      */
-    private static final Pattern tagPattern = Pattern.compile("> <");
+    private static final Pattern TAG_PATTERN = Pattern.compile("> <");
 
     @Override
     public void exec(Env env, Scope scope, Writer writer) {
@@ -63,7 +65,7 @@ public class CompressDirective extends Directive {
 
             // 获取所有等待压缩的标签
             StringBuilder temp = fsw.getBuffer();
-            Matcher ignoredMatcher = ignoredPattern.matcher(temp);
+            Matcher ignoredMatcher = IGNORED_PATTERN.matcher(temp);
             StringBuilder outputString = new StringBuilder();
             int lastIndex = 0;
 
@@ -106,11 +108,11 @@ public class CompressDirective extends Directive {
      */
     private String subAndCompress(StringBuilder sb, int start, int end) {
         String temp = sb.substring(start, end);
-        Matcher startEndMatcher = startEndPattern.matcher(temp);
+        Matcher startEndMatcher = START_END_PATTERN.matcher(temp);
         temp = startEndMatcher.replaceAll("");
-        Matcher matchedMatcher = matchedPattern.matcher(temp);
+        Matcher matchedMatcher = MATCHED_PATTERN.matcher(temp);
         temp = matchedMatcher.replaceAll(" ");
-        Matcher tagMatcher = tagPattern.matcher(temp);
+        Matcher tagMatcher = TAG_PATTERN.matcher(temp);
         temp = tagMatcher.replaceAll("><");
         return temp;
     }

@@ -34,23 +34,26 @@ import java.util.List;
  * Object Storage Service.
  *
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @see com.aliyun.oss
  * @since 1.0.0
  */
 public class OssService {
 
     private static final String BUCKET_NAME = "shopmanagement";
+    private static final String ENDPOINT = PropKit.get("ossWriter.endpoint");
+    private static final String KEY = PropKit.get("ossWriter.key");
+    private static final String SECRET = PropKit.get("ossWriter.secret");
 
     /**
      * singleton
      */
     private static OssService instance = new OssService();
 
-    private OSSClient client = new OSSClient(PropKit.get("ossWriter.endpoint"), PropKit.get("ossWriter.key"), PropKit.get("ossWriter.secret"));
+    private OSSClient client;
 
     private OssService() {
-
+        client = new OSSClient(ENDPOINT, KEY, SECRET);
     }
 
     /**
@@ -78,8 +81,10 @@ public class OssService {
      */
     // todo 事务
     // todo 上传成功判断
-    public PutObjectResult upload(String key, String filename, int userId, String ip, String fileType, InputStream input, long size) {
-        cn.ssdut153.shop.common.model.File f = new cn.ssdut153.shop.common.model.File().setUrl(key).setFileName(filename).setSize(size).setType(fileType);
+    public PutObjectResult upload(String key, String filename, int userId,
+                                  String ip, String fileType, InputStream input, long size) {
+        cn.ssdut153.shop.common.model.File f = new cn.ssdut153.shop.common.model.File()
+                .setUrl(key).setFileName(filename).setSize(size).setType(fileType);
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
@@ -101,8 +106,10 @@ public class OssService {
      */
     // todo 事务
     // todo 上传成功判断
-    public PutObjectResult upload(String key, String filename, int userId, String ip, String fileType, File file) {
-        cn.ssdut153.shop.common.model.File f = new cn.ssdut153.shop.common.model.File().setUrl(key).setFileName(filename).setSize(file.length()).setType(fileType);
+    public PutObjectResult upload(String key, String filename, int userId,
+                                  String ip, String fileType, File file) {
+        cn.ssdut153.shop.common.model.File f = new cn.ssdut153.shop.common.model.File()
+                .setUrl(key).setFileName(filename).setSize(file.length()).setType(fileType);
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
@@ -125,7 +132,7 @@ public class OssService {
     /**
      * get first 100 files.
      *
-     * @return List<OSSObjectSummary>
+     * @return List&lt;OSSObjectSummary&gt;
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
@@ -161,7 +168,7 @@ public class OssService {
      * get file list with given key prefix.
      *
      * @param keyPrefix key prefix
-     * @return List<OSSObjectSummary>
+     * @return List&lt;OSSObjectSummary&gt;
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */

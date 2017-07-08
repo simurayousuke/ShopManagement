@@ -21,7 +21,7 @@ import cn.ssdut153.shop.common.handler.StaticHandler;
 import cn.ssdut153.shop.common.kit.DruidKit;
 import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.kit.ShortMessageKit;
-import cn.ssdut153.shop.common.model._MappingKit;
+import cn.ssdut153.shop.common.model.MappingKit;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallConfig;
@@ -45,7 +45,7 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.12
+ * @version 1.0.13
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -54,7 +54,7 @@ public class Config extends JFinalConfig {
     /**
      * Global config.
      */
-    private static final Prop p = loadConfig();
+    private static final Prop P = loadConfig();
 
     /**
      * Firewall for the database in case to avoid from sql injections.
@@ -81,10 +81,10 @@ public class Config extends JFinalConfig {
      * @return DruidPlugin for Postgres
      */
     public static DruidPlugin getDruidPlugin() {
-        String url = p.get("postgres.url");
-        String username = p.get("postgres.username");
-        String password = p.get("postgres.password");
-        String driverClass = p.get("postgres.driverClass");
+        String url = P.get("postgres.url");
+        String username = P.get("postgres.username");
+        String password = P.get("postgres.password");
+        String driverClass = P.get("postgres.driverClass");
         DruidPlugin dp = new DruidPlugin(url, username, password, driverClass);
         if (null == wallFilter) {
             wallFilter = new WallFilter();
@@ -131,7 +131,7 @@ public class Config extends JFinalConfig {
     private ActiveRecordPlugin getActiveRecordPlugin(DruidPlugin dp) {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
         arp.setDialect(new PostgreSqlDialect());
-        _MappingKit.mapping(arp);
+        MappingKit.mapping(arp);
         arp.setBaseSqlTemplatePath(PathKit.getRootClassPath() + "/sql");
         arp.addSqlTemplate("all.sql");
         return arp;
@@ -145,10 +145,10 @@ public class Config extends JFinalConfig {
      * @return RedisPlugin Object
      */
     private RedisPlugin getRedisPlugin(String cacheName, int database) {
-        String host = p.get("redis.host");
-        int port = p.getInt("redis.port");
-        int timeout = p.getInt("redis.timeout");
-        String password = p.get("redis.password");
+        String host = P.get("redis.host");
+        int port = P.getInt("redis.port");
+        int timeout = P.getInt("redis.timeout");
+        String password = P.get("redis.password");
         RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
         return configRedisPlugin(rp);
     }
@@ -158,7 +158,7 @@ public class Config extends JFinalConfig {
      */
     @Override
     public void configConstant(Constants me) {
-        me.setDevMode(p.getBoolean("devMode", false));
+        me.setDevMode(P.getBoolean("devMode", false));
         me.setJsonFactory(new MixedJsonFactory());
         me.setViewType(ViewType.JFINAL_TEMPLATE);
     }
@@ -188,10 +188,10 @@ public class Config extends JFinalConfig {
         DruidPlugin dp = getDruidPlugin();
         me.add(dp);
         me.add(getActiveRecordPlugin(dp));
-        me.add(getRedisPlugin(RedisKit.TOKEN, p.getInt("redis.database.token")));
-        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, p.getInt("redis.database.captcha")));
-        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, p.getInt("redis.database.activePhone")));
-        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, p.getInt("redis.database.activeEmail")));
+        me.add(getRedisPlugin(RedisKit.TOKEN, P.getInt("redis.database.token")));
+        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, P.getInt("redis.database.captcha")));
+        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, P.getInt("redis.database.activePhone")));
+        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, P.getInt("redis.database.activeEmail")));
     }
 
     /**
@@ -199,7 +199,7 @@ public class Config extends JFinalConfig {
      */
     @Override
     public void configInterceptor(Interceptors me) {
-
+        // config interceptor
     }
 
     /**
@@ -228,9 +228,9 @@ public class Config extends JFinalConfig {
     }
 
     private void initShortMessageKit() {
-        String url = p.get("aldy.url");
-        String appkey = p.get("aldy.appkey");
-        String secret = p.get("aldy.secret");
+        String url = P.get("aldy.url");
+        String appkey = P.get("aldy.appkey");
+        String secret = P.get("aldy.secret");
         ShortMessageKit.init(url, appkey, secret);
     }
 

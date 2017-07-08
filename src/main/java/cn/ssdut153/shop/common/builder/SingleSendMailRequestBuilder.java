@@ -21,12 +21,16 @@ import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class SingleSendMailRequestBuilder {
 
-    private SingleSendMailRequest req = new SingleSendMailRequest();
+    private SingleSendMailRequest req;
+
+    private SingleSendMailRequestBuilder() {
+        req = new SingleSendMailRequest();
+    }
 
     public SingleSendMailRequestBuilder(Email email, String tag) {
         req.setAccountName("no-reply@mail.yangzhizhuang.net");

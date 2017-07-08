@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class ShortMessageKit {
@@ -71,7 +71,8 @@ public class ShortMessageKit {
         if (null == client) {
             return "";
         }
-        AlibabaAliqinFcSmsNumSendRequestBuilder ab = new AlibabaAliqinFcSmsNumSendRequestBuilder(name, operation, code, number);
+        AlibabaAliqinFcSmsNumSendRequestBuilder ab =
+                new AlibabaAliqinFcSmsNumSendRequestBuilder(name, operation, code, number);
         AlibabaAliqinFcSmsNumSendRequest req = ab.build();
         AlibabaAliqinFcSmsNumSendResponse rsp = null;
         try {
