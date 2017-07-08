@@ -324,24 +324,4 @@ public class UserService {
         return validateThenActiveEmailAddressForUser(findUserByUsername(username), code);
     }
 
-    /**
-     * judge whether email is actived.
-     *
-     * @param user User Object
-     * @return boolean
-     */
-    public boolean isEmailActived(User user) {
-        return StrKit.notBlank(user.getEmail()) && user.getEmailStatus() == 1;
-    }
-
-    /**
-     * judge whether email is actived.
-     *
-     * @param username username
-     * @return boolean
-     */
-    public boolean isEmailActived(String username) {
-        return isEmailActived(findUserByUsername(username));
-    }
-
 }
