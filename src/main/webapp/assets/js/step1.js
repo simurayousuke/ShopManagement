@@ -48,6 +48,54 @@ $(document).ready(function () {
 
     });
 
+    $('#email-form').submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var data = form.serializeObject();
+        var email = data.email;
+        var captcha = data.captcha;
+        if (!$.validateEmailFormat(email)) {
+            $.msg('邮箱格式错误');
+            return;
+        }
+        if (captcha.length !== 4) {
+            $.msg('验证码长度应为4位');
+            return;
+        }
+        $.post('/register/email', data, function (data) {
+            if (data.status) {
+                $.msg('邮件已发送')
+            } else {
+                $.msg(data.msg);
+                updateCaptcha();
+            }
+        });
+    });
+
+    $('#phone-form').submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var data = form.serializeObject();
+        var phone = data.phone;
+        var phoneCaptcha = data.phone_captcha;
+        if (!$.validatePhoneFormat(phone)) {
+            $.msg('手机号格式错误');
+            return;
+        }
+        if (phoneCaptcha.trim() === '') {
+            $.msg('请输入验证码');
+            return;
+        }
+        $.post('/register/phone', data, function (data) {
+            if (data.status) {
+                location.href = 'step2/'+data.activeCode;
+            } else {
+                $.msg(data.msg);
+                updateCaptcha();
+            }
+        });
+    });
+
     captchaImg.click(function () {
         updateCaptcha();
     });
