@@ -1,10 +1,10 @@
-<div class="tab-pane fade input-gp" id="login-cellphone">
-    <form action="/login/phone" id="phone-form">
+<div class="tab-pane fade input-gp">
+    <form action="/login/phone">
         <div class="input-group">
             <span class="input-group-addon">
                 <em class="icon-phone"></em>
             </span>
-            <input class="form-control" placeholder="手机号" type="text" id="cellphone">
+            <input class="form-control" placeholder="手机号" type="text" name="phone">
         </div>
         <br>
         <div class="input-group full">
@@ -12,9 +12,9 @@
                 <span class="input-group-addon">
                     <em class="icon-wrench"></em>
                 </span>
-                <input class="form-control" placeholder="验证码" type="text" id="input-captcha-phone">
+                <input class="form-control" placeholder="验证码" type="text" id="captcha">
             </div>
-            <img alt="" src="/captcha/image" id="captcha-phone" class="captcha" title="点击刷新">
+            <img alt="" src="/captcha/image" class="captcha" title="点击刷新">
         </div>
         <br>
         <div class="input-group full">
@@ -22,9 +22,9 @@
                 <span class="input-group-addon">
                     <em class="icon-comment"></em>
                 </span>
-                <input class="form-control" placeholder="短信验证码" type="text" id="short-message">
+                <input class="form-control" placeholder="短信验证码" type="text" name="phone_captcha">
             </div>
-            <a href="/captcha/phone" class="btn captcha" type="button">重新发送</a>
+            <button class="btn captcha" type="button" id="send-button">重新发送</button>
         </div>
         <br>
         <button class="btn btn-primary btn-block" type="submit">登录</button>
