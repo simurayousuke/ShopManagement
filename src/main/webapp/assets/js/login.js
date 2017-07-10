@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
-        var that = this;
+        var that = $(this);
         that.prop('disabled', true);
         $.post('/captcha/phone', {captcha: captcha}, function (data) {
             if (data.status) {

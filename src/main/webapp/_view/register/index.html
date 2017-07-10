@@ -2,7 +2,7 @@
 #@layout()
 #define body()
 <div class="container-fixed-sm">
-    #include("progress.html")
+    #include("progress.html",step1Active="progress-active")
     <div id="regist-container" class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-tab data-target="#regist-phone" data-toggle="tab">手机（推荐）</a></li>
@@ -15,7 +15,7 @@
     </div>
 </div>
 #end
+
 #define css()
 <link rel="stylesheet" href="assets/css/register.css">
 #end
-

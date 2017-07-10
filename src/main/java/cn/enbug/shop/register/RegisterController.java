@@ -21,6 +21,7 @@ import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.IpKit;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
@@ -29,20 +30,22 @@ import com.jfinal.ext.interceptor.POST;
  * 注册
  *
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @author Yang Zhizhuang
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
 public class RegisterController extends BaseController {
 
     private static final RegisterService SRV = RegisterService.ME;
+    private static final String INDEX_HTML = "index.html";
 
     /**
      * 注册页面
      */
     @Before(GET.class)
     public void index() {
-        render("index.html");
+        render(INDEX_HTML);
     }
 
     /**
@@ -65,6 +68,27 @@ public class RegisterController extends BaseController {
         String ip = IpKit.getRealIp(getRequest());
         Ret ret = SRV.registerByPhone(phone, ip);
         renderJson(ret);
+    }
+
+    @Clear(NoUrlPara.class)
+    @Before(GET.class)
+    public void step2() {
+        String activeCode = getPara();
+        if (SRV.handleStep2(activeCode)) {
+            render("step2.html");
+        } else {
+            redirect(INDEX_HTML);
+        }
+    }
+
+    @Before(POST.class)
+    public void step2handler() {
+
+    }
+
+    @Before(GET.class)
+    public void success() {
+        render("success.html");
     }
 
 }

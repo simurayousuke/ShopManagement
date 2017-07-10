@@ -17,13 +17,16 @@
 package cn.enbug.shop.register;
 
 import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.service.EmailService;
+import cn.enbug.shop.common.service.ShortMessageCaptchaService;
 import cn.enbug.shop.common.service.UserService;
 
 /**
  * 注册服务
  *
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @author Yang Zhizhuang
+ * @version 1.0.3
  * @since 1.0.0
  */
 class RegisterService {
@@ -39,7 +42,7 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByEmail(String email, String ip) {
-        boolean b = SRV.initUserByEmail(email,ip);
+        boolean b = SRV.initUserByEmail(email, ip);
         return b ? Ret.succeed() : Ret.fail();
     }
 
@@ -51,8 +54,19 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        boolean b = SRV.initUserByPhoneNumber(phone,ip);
+        boolean b = SRV.initUserByPhoneNumber(phone, ip);
         return b ? Ret.succeed() : Ret.fail();
+    }
+
+    /**
+     * handle register step 2.
+     *
+     * @param code active code
+     * @return boolean
+     */
+    boolean handleStep2(String code) {
+        return ShortMessageCaptchaService.ME.validateActiveCodeForPhoneNumber(code) ||
+                EmailService.getInstance().validateActiveCodeForEmail(code);
     }
 
 }

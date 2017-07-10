@@ -1,0 +1,18 @@
+#set(title="信息补全")
+#@layout()
+#define body()
+<div class="container-fixed-sm">
+    #include("progress.html",step2Active="progress-active")
+    <div id="regist-container" class="container">
+        #include("step2Form.html")
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/register.css">
+#end
+
+#define js()
+<script src="assets/js/step2.js"></script>
+#end

@@ -1,0 +1,14 @@
+#set(title="注册完成")
+#@layout()
+#define body()
+<div class="container-fixed-sm">
+    #include("progress.html",step3Active="progress-active")
+    <!-- todo 修改提示方式 -->
+    <div id="regist-container" class="container">
+        注册成功！<a href="/login">前往登陆</a>
+    </div>
+</div>
+#end
+#define css()
+<link rel="stylesheet" href="assets/css/register.css">
+#end
