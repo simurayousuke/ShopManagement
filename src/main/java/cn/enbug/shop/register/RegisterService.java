@@ -39,7 +39,7 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByEmail(String email, String ip) {
-        boolean b = SRV.initUserByEmail(email);
+        boolean b = SRV.initUserByEmail(email,ip);
         return b ? Ret.succeed() : Ret.fail();
     }
 
@@ -51,7 +51,7 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        boolean b = SRV.initUserByPhoneNumber(phone);
+        boolean b = SRV.initUserByPhoneNumber(phone,ip);
         return b ? Ret.succeed() : Ret.fail();
     }
 

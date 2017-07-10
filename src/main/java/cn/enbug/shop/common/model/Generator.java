@@ -16,11 +16,19 @@
 
 package cn.enbug.shop.common.model;
 
+import cn.enbug.shop.common.Config;
+import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
+import com.jfinal.plugin.activerecord.generator.MetaBuilder;
+import com.jfinal.plugin.druid.DruidPlugin;
+
+import javax.sql.DataSource;
+
 /**
  * This can generate the ORM(Object Relational Mapping) of the database.
  *
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @author Hu Wenqiang
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class Generator {
@@ -28,7 +36,7 @@ public class Generator {
     private Generator() {
     }
 
-    /*public static void main(String... args) {
+    public static void main(String... args) {
         String baseModelPackageName = "cn.enbug.shop.common.model.base";
         String baseModelOutputDir = "src/main/java/cn/enbug/shop/common/model/base";
 
@@ -49,5 +57,5 @@ public class Generator {
         generator.setRemovedTableNamePrefixes("t_");
         generator.setMappingKitClassName("MappingKit");
         generator.generate();
-    }*/
+    }
 }
