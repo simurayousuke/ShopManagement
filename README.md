@@ -34,7 +34,6 @@
 * [fst](http://ruedigermoeller.github.io/fast-serialization) 序列化、反序列化
 * [fastjson](https://github.com/alibaba/fastjson) json序列化、反序列化
 * [druid](https://github.com/alibaba/druid) 数据库连接池
-* [commons-email](http://commons.apache.org/proper/commons-email) 邮件服务
 * [jsoup](https://jsoup.org) xss攻击过滤
 * [aliyun-java-sdk-core](http://www.aliyun.com) 阿里云sdk内核
 * [aliyun-java-sdk-dm](http://www.aliyun.com) 邮件推送
