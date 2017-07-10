@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.2
+ * @version 1.2.3
  * @since 1.0.0
  */
 public class UserService {
@@ -191,6 +191,40 @@ public class UserService {
      */
     public User validateToken(String token) {
         return RedisKit.getUserByToken(token);
+    }
+
+    /**
+     * init a user with uuid.
+     *
+     * @return User Object
+     */
+    private User initUser(){
+        // todo log，错误判断
+        User user=new User();
+        user.setUuid(StrKit.getRandomUUID()).save();
+        return user;
+    }
+
+    /**
+     * init user with phone number.
+     *
+     * @param number phone number
+     * @return boolean
+     */
+    public boolean initUserByPhoneNumber(String number){
+        // todo log，错误判断
+        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(initUser(),number);
+    }
+
+    /**
+     * init user with email.
+     *
+     * @param emailAddress email address
+     * @return boolean
+     */
+    public boolean initUserByEmail(String emailAddress){
+        // todo log，错误判断
+        return EmailService.getInstance().bindEmailAddressForUser(initUser(),emailAddress);
     }
 
 }

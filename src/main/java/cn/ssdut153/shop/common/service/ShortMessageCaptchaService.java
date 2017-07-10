@@ -18,6 +18,7 @@ package cn.ssdut153.shop.common.service;
 
 import cn.ssdut153.shop.common.kit.RedisKit;
 import cn.ssdut153.shop.common.kit.ShortMessageKit;
+import cn.ssdut153.shop.common.model.User;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ import java.util.Random;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.6
+ * @version 1.0.7
  * @since 1.0.0
  */
 public class ShortMessageCaptchaService {
@@ -144,6 +145,19 @@ public class ShortMessageCaptchaService {
      */
     public boolean validateActiveCodeForPhoneNumber(String code) {
         return RedisKit.getPhoneNumberByActiveCode(code) != null;
+    }
+
+    /**
+     * bind user with phone number.
+     *
+     * @param user User Object
+     * @param number phone number
+     * @return boolean
+     */
+    public boolean bindPhoneNumberForUser(User user, String number){
+        // todo log，错误判断
+        user.setPhone(number);
+        return user.update();
     }
 
 }
