@@ -25,6 +25,7 @@ import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectListing;
 import com.aliyun.oss.model.PutObjectResult;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 
 import java.io.File;
 import java.io.InputStream;
@@ -63,6 +64,18 @@ public class OssService {
      */
     public static OssService getInstance() {
         return instance;
+    }
+
+    /**
+     * generate key for oss.
+     *
+     * @param folder   target folder, eg: pictures (no slash)
+     * @param filename filename, eg: good.png
+     * @return key
+     */
+    public String generateKey(String folder, String filename) {
+        String type = filename.substring(filename.lastIndexOf('.'));
+        return folder + "/" + StrKit.getRandomUUID() + type;
     }
 
     /**
