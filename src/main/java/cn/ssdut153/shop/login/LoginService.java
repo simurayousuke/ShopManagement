@@ -28,12 +28,12 @@ import org.slf4j.LoggerFactory;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
-public class LoginService {
+class LoginService {
 
-    public static final LoginService ME = new LoginService();
+    static final LoginService ME = new LoginService();
     private static final Logger LOG = LoggerFactory.getLogger(LoginService.class);
     private static final UserService SRV = UserService.getInstance();
     private static final String INTERNAL_EXCEPTION = "internal exception";
@@ -46,7 +46,7 @@ public class LoginService {
      * @param ip       ip地址
      * @return 返回信息
      */
-    public Ret loginByUsername(String username, String password, String ip) {
+    Ret loginByUsername(String username, String password, String ip) {
         try {
             String token = SRV.login(username, password, ip);
             if (null == token) {
@@ -67,7 +67,7 @@ public class LoginService {
      * @param ip       ip地址
      * @return 返回信息
      */
-    public Ret loginByEmail(String email, String password, String ip) {
+    Ret loginByEmail(String email, String password, String ip) {
         try {
             String token = SRV.loginByEmail(email, password, ip);
             if (null == token) {
@@ -87,7 +87,7 @@ public class LoginService {
      * @param ip    ip地址
      * @return 返回信息
      */
-    public Ret loginByPhone(String phone, String ip) {
+    Ret loginByPhone(String phone, String ip) {
         try {
             String token = SRV.loginByPhone(phone, ip);
             if (null == token) {

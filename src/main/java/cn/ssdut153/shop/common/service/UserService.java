@@ -198,9 +198,9 @@ public class UserService {
      *
      * @return User Object
      */
-    private User initUser(){
+    private User initUser() {
         // todo log，错误判断
-        User user=new User();
+        User user = new User();
         user.setUuid(StrKit.getRandomUUID()).save();
         return user;
     }
@@ -211,9 +211,9 @@ public class UserService {
      * @param number phone number
      * @return boolean
      */
-    public boolean initUserByPhoneNumber(String number){
+    public boolean initUserByPhoneNumber(String number) {
         // todo log，错误判断
-        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(initUser(),number);
+        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(initUser(), number);
     }
 
     /**
@@ -222,9 +222,9 @@ public class UserService {
      * @param emailAddress email address
      * @return boolean
      */
-    public boolean initUserByEmail(String emailAddress){
+    public boolean initUserByEmail(String emailAddress) {
         // todo log，错误判断
-        return EmailService.getInstance().bindEmailAddressForUser(initUser(),emailAddress);
+        return EmailService.getInstance().bindEmailAddressForUser(initUser(), emailAddress);
     }
 
 }

@@ -17,40 +17,42 @@
 package cn.ssdut153.shop.register;
 
 import cn.ssdut153.shop.common.kit.Ret;
-import cn.ssdut153.shop.common.model.User;
+import cn.ssdut153.shop.common.service.UserService;
 
 /**
  * 注册服务
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
-public class RegisterService {
+class RegisterService {
 
-    public static final RegisterService ME = new RegisterService();
+    static final RegisterService ME = new RegisterService();
+    private static final UserService SRV = UserService.getInstance();
 
     /**
      * 邮箱注册
      *
-     * @param user  用户
      * @param email email
      * @param ip    ip地址
      * @return 结果
      */
-    public Ret registerByEmail(User user, String email, String ip) {
-        return Ret.fail();
+    Ret registerByEmail(String email, String ip) {
+        boolean b = SRV.initUserByEmail(email);
+        return b ? Ret.succeed() : Ret.fail();
     }
 
     /**
      * 手机号注册
      *
-     * @param user 用户
-     * @param ip   ip地址
+     * @param phone 手机号
+     * @param ip    ip地址
      * @return 结果
      */
-    public Ret registerByPhone(User user, String ip) {
-        return Ret.fail();
+    Ret registerByPhone(String phone, String ip) {
+        boolean b = SRV.initUserByPhoneNumber(phone);
+        return b ? Ret.succeed() : Ret.fail();
     }
 
 }

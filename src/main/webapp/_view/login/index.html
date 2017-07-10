@@ -3,20 +3,23 @@
 #define body()
 <div id="seize"></div>
 <div id="login-container">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-tab data-target="#login-username" data-toggle="tab">用户名</a></li>
-            <li><a data-tab data-target="#login-email" data-toggle="tab">邮箱</a></li>
-            <li><a data-tab data-target="#login-cellphone" data-toggle="tab">手机</a></li>
-        </ul>
-        <div class="tab-content">
-            #include("usernameLoginForm.html")
-            #include("emailLoginForm.html")
-            #include("phoneLoginForm.html")
-        </div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-tab data-target="#login-username" data-toggle="tab">用户名</a></li>
+        <li><a data-tab data-target="#login-email" data-toggle="tab">邮箱</a></li>
+        <li><a data-tab data-target="#login-cellphone" data-toggle="tab">手机</a></li>
+    </ul>
+    <div class="tab-content">
+        #include("usernameLoginForm.html")
+        #include("emailLoginForm.html")
+        #include("phoneLoginForm.html")
     </div>
-
+</div>
 #end
 
 #define css()
 <link rel="stylesheet" href="assets/css/login.css">
+#end
+
+#define js()
+<script src="assets/js/login.js"></script>
 #end
