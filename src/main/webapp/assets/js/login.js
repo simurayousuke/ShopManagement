@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     var captchaImg = $('.captcha');
+    var phoneForm=$('phone-form');
 
     var updateCaptcha = function () {
         captchaImg.prop('src', '/captcha/image?v=' + Math.random());
@@ -11,9 +12,10 @@ $(document).ready(function () {
 
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
+        var number=phoneForm.serializeObject().phone;
         var that = $(this);
         that.prop('disabled', true);
-        $.post('/captcha/phone', {captcha: captcha}, function (data) {
+        $.post('/captcha/phone', {captcha: captcha,phone:number}, function (data) {
             if (data.status) {
                 $.msg('发送成功');
                 var count = 59;
