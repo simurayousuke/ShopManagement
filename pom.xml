@@ -7,7 +7,7 @@
     <packaging>war</packaging>
 
     <name>shop-management</name>
-    <groupId>cn.ssdut153</groupId>
+    <groupId>cn.enbug</groupId>
     <artifactId>shop-management</artifactId>
     <version>1.0.0</version>
 
