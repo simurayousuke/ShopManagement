@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * The service for sending email.
  *
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.4
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
@@ -79,8 +79,9 @@ public class EmailService {
             client.getAcsResponse(request);
         } catch (ClientException e) {
             LOG.error(e.getErrMsg(), e);
+            return false;
         }
-        return false;
+        return true;
     }
 
     // todo 记录操作到数据库中
