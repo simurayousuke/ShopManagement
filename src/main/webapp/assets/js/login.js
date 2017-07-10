@@ -15,6 +15,7 @@ $(document).ready(function () {
                 $.msg('发送成功');
             } else {
                 $.msg('发送失败');
+                updateCaptcha();
             }
         });
     });
@@ -49,6 +50,7 @@ $(document).ready(function () {
                 location.href = '/';
             } else {
                 $.msg('用户名或密码错误');
+                updateCaptcha();
             }
         });
     });
