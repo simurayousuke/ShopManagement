@@ -46,6 +46,7 @@ public class AlibabaAliqinFcSmsNumSendRequestBuilder {
     }
 
     public AlibabaAliqinFcSmsNumSendRequestBuilder(String name, String operation, String code, String number) {
+        req = new AlibabaAliqinFcSmsNumSendRequest();
         req.setSmsType("normal");
         req.setSmsFreeSignName("庄云");
         Kv kv = Kv.by("name", name)

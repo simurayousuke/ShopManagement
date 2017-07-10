@@ -8,7 +8,7 @@ $(document).ready(function () {
     };
 
     var captchaInput = $('#captcha');
-
+    updateCaptcha();
 
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
