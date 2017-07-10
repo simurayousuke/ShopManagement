@@ -16,6 +16,7 @@
 
 package cn.enbug.shop.common;
 
+import cn.enbug.shop.admin.AdminRoutes;
 import cn.enbug.shop.common.directive.CompressDirective;
 import cn.enbug.shop.common.handler.StaticHandler;
 import cn.enbug.shop.common.kit.DruidKit;
@@ -168,6 +169,7 @@ public class Config extends JFinalConfig {
     @Override
     public void configRoute(Routes me) {
         me.add(new FrontRoutes());
+        me.add(new AdminRoutes());
     }
 
     /**
