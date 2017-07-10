@@ -31,7 +31,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -77,7 +77,7 @@ public class RegisterController extends BaseController {
         if (SRV.handleStep2(activeCode)) {
             render("step2.html");
         } else {
-            redirect(INDEX_HTML);
+            redirect("/register");
         }
     }
 
