@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.3
+ * @version 1.2.4
  * @since 1.0.0
  */
 public class UserService {
@@ -97,7 +97,9 @@ public class UserService {
      * @param user User object
      * @param ip   ip address
      * @return success or not
+     * @deprecated
      */
+    @Deprecated
     public boolean register(User user, String ip) {
         user.setSalt(StrKit.getRandomUUID());
         user.setPwd(hash(user.getPwd(), user.getSalt()));
@@ -198,9 +200,9 @@ public class UserService {
      *
      * @return User Object
      */
-    private User initUser(){
+    private User initUser() {
         // todo log，错误判断
-        User user=new User();
+        User user = new User();
         user.setUuid(StrKit.getRandomUUID()).save();
         return user;
     }
@@ -211,9 +213,9 @@ public class UserService {
      * @param number phone number
      * @return boolean
      */
-    public boolean initUserByPhoneNumber(String number){
+    public boolean initUserByPhoneNumber(String number) {
         // todo log，错误判断
-        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(initUser(),number);
+        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(initUser(), number);
     }
 
     /**
@@ -222,9 +224,9 @@ public class UserService {
      * @param emailAddress email address
      * @return boolean
      */
-    public boolean initUserByEmail(String emailAddress){
+    public boolean initUserByEmail(String emailAddress) {
         // todo log，错误判断
-        return EmailService.getInstance().bindEmailAddressForUser(initUser(),emailAddress);
+        return EmailService.getInstance().bindEmailAddressForUser(initUser(), emailAddress);
     }
 
 }
