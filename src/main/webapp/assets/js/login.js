@@ -7,13 +7,23 @@ $(document).ready(function () {
         captchaImg.prop('src', '/captcha/image?v=' + Math.random());
     };
 
-    var captchaInput = $('#captcha');
+    var captchaInput = $('#input-captcha-username');
     updateCaptcha();
+
+    $('[data-tab]').on('show.zui.tab', function(e) {
+        var target=$(this).attr("data-target");
+        if(target==='#login-email'){
+            captchaInput = $('#input-captcha-email');
+        }else if(target==='#login-phone'){
+            captchaInput = $('#input-captcha-phone');
+        }else if(target==='#login-username'){
+            captchaInput = $('#input-captcha-username');
+        }
+    });
 
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
         var number=phone.val();
-        console.log(number);
         var that = $(this);
         that.prop('disabled', true);
         $.post('/captcha/phone', {captcha: captcha,phone:number}, function (data) {
@@ -39,8 +49,6 @@ $(document).ready(function () {
         });
 
     });
-
-    updateCaptcha();
 
     captchaImg.click(function () {
         updateCaptcha();
