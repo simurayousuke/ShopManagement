@@ -1,13 +1,21 @@
 #set(title="用户注册")
 #@layout()
 #define body()
-<div style="text-align: center" class="container-fixed-md">
+<div style="text-align: center" class="container-fixed-sm">
     <div id="regist-container" class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-tab data-target="#regist-phone" data-toggle="tab">手机（推荐）</a></li>
             <li><a data-tab data-target="#regist-email" data-toggle="tab">邮箱</a></li>
         </ul>
         <div class="tab-content">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 33%">
+                    <span class="sr-only">33%</span>
+                </div>
+            </div>
+            <div  class="progress-value">
+            <strong>33%</strong>
+            </div>
             #include("emailRegistForm.html")
             #include("phoneRegistForm.html")
         </div>
