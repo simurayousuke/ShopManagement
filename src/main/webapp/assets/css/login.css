@@ -16,7 +16,7 @@
 
     #seize {
         display: inline-block;
-        width: 368px;
+        width: 328px;
     }
 
     #login-container {
@@ -31,7 +31,7 @@
 
     #seize {
         display: inline-block;
-        width: 592px;
+        width: 552px;
     }
 
 }
@@ -39,7 +39,7 @@
 @media (min-width: 1200px) {
     #seize {
         display: inline-block;
-        width: 800px;
+        width: 760px;
     }
 }
 
@@ -47,7 +47,7 @@
 
     #seize {
         display: inline-block;
-        width: 1200px;
+        width: 1160px;
     }
 
 }
