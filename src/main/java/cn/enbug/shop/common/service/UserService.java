@@ -68,7 +68,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByUsername(String username) {
-        if(username==null){
+        if (username == null) {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByUsername", username));
@@ -81,7 +81,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByPhoneNumber(String phoneNumber) {
-        if(phoneNumber==null){
+        if (phoneNumber == null) {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByPhoneNumber", phoneNumber));
@@ -94,7 +94,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByEmail(String email) {
-        if(email==null){
+        if (email == null) {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByEmail", email));
@@ -147,12 +147,15 @@ public class UserService {
      * @throws LogException if save to log fail
      */
     public String loginByPhone(String phoneNumber, String captcha, String ip) {
+        User user = findUserByPhoneNumber(phoneNumber);
+        if (null == user) {
+            return null;
+        }
         Boolean status = ShortMessageCaptchaService.ME.validate(phoneNumber, captcha);
-        if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
-                .getId()).setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
+        if (!new Log().setUserId(user.getId())
+                .setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
             throw new LogException("Can not log username phoneLogin action");
         }
-        User user = findUserByPhoneNumber(phoneNumber);
         return status ? RedisKit.setAndGetToken(user) : null;
     }
 
@@ -164,11 +167,14 @@ public class UserService {
      * @return token
      */
     public String loginByPhone(String phoneNumber, String ip) {
-        if (!new Log().setUserId(findUserByPhoneNumber(phoneNumber)
-                .getId()).setIp(ip).setOperation("phoneLogin").setDescription("true").save()) {
+        User user = findUserByPhoneNumber(phoneNumber);
+        if (null == user) {
+            return null;
+        }
+        if (!new Log().setUserId(user.getId())
+                .setIp(ip).setOperation("phoneLogin").setDescription("true").save()) {
             throw new LogException("Can not log username phoneLogin action");
         }
-        User user = findUserByPhoneNumber(phoneNumber);
         return RedisKit.setAndGetToken(user);
     }
 
@@ -245,7 +251,7 @@ public class UserService {
      * reg user.
      *
      * @param user User Object
-     * @param ip ip address
+     * @param ip   ip address
      * @return boolean
      */
     private boolean regUser(User user, String ip) {
@@ -258,10 +264,10 @@ public class UserService {
     /**
      * reg user.
      *
-     * @param ip ip address
+     * @param ip       ip address
      * @param username username
      * @param password password
-     * @param number phone number
+     * @param number   phone number
      * @return boolean
      */
     public boolean regUserByPhoneNumber(String ip, String username, String password, String number) {
@@ -272,9 +278,9 @@ public class UserService {
     /**
      * reg user.
      *
-     * @param ip ip address
-     * @param username username
-     * @param password password
+     * @param ip           ip address
+     * @param username     username
+     * @param password     password
      * @param emailAddress email address
      * @return boolean
      */

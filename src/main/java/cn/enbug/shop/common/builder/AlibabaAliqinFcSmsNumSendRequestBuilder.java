@@ -25,7 +25,7 @@ import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 public class AlibabaAliqinFcSmsNumSendRequestBuilder {
