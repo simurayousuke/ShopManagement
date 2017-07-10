@@ -13,6 +13,7 @@ $(document).ready(function () {
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
         var number=phoneForm.serializeObject().phone;
+        console.log(number);
         var that = $(this);
         that.prop('disabled', true);
         $.post('/captcha/phone', {captcha: captcha,phone:number}, function (data) {
