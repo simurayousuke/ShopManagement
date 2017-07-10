@@ -1,8 +1,14 @@
-CREATE TABLE t_log (
-  id          SERIAL PRIMARY KEY,
-  user_id     INTEGER                    NOT NULL,
-  operation   VARCHAR(30)                NOT NULL,
-  happen_time TIMESTAMP(3) DEFAULT now() NOT NULL,
-  ip          VARCHAR(39),
-  join_id     INTEGER
-);
+create table t_log
+(
+	id serial not null
+		constraint t_log_pkey
+			primary key,
+	user_id integer not null,
+	operation varchar(30) not null,
+	happen_time timestamp(3) default now() not null,
+	ip varchar(39),
+	join_id integer,
+	description text
+)
+;
+
