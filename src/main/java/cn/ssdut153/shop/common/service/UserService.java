@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.4
+ * @version 1.2.5
  * @since 1.0.0
  */
 public class UserService {
@@ -201,7 +201,6 @@ public class UserService {
      * @return User Object
      */
     private User initUser() {
-        // todo log，错误判断
         User user = new User();
         user.setUuid(StrKit.getRandomUUID()).save();
         return user;
@@ -211,22 +210,68 @@ public class UserService {
      * init user with phone number.
      *
      * @param number phone number
+     * @param ip     ip address
      * @return boolean
      */
-    public boolean initUserByPhoneNumber(String number) {
-        // todo log，错误判断
-        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(initUser(), number);
+    public boolean initUserByPhoneNumber(String number, String ip) {
+        User user = initUser();
+        new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
+        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(user, number);
     }
 
     /**
      * init user with email.
      *
      * @param emailAddress email address
+     * @param ip           ip address
      * @return boolean
      */
-    public boolean initUserByEmail(String emailAddress) {
-        // todo log，错误判断
-        return EmailService.getInstance().bindEmailAddressForUser(initUser(), emailAddress);
+    public boolean initUserByEmail(String emailAddress, String ip) {
+        User user = initUser();
+        new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
+        return EmailService.getInstance().bindEmailAddressForUser(user, emailAddress);
+    }
+
+    /**
+     * reg user.
+     *
+     * @param user User Object
+     * @param ip ip address
+     * @return boolean
+     */
+    private boolean regUser(User user, String ip) {
+        user.setSalt(StrKit.getRandomUUID());
+        user.setPwd(hash(user.getPwd(), user.getSalt()));
+        return Db.tx(4, () -> user.update() &&
+                new Log().setIp(ip).setOperation("regUser").setUserId(user.getId()).save());
+    }
+
+    /**
+     * reg user.
+     *
+     * @param ip ip address
+     * @param username username
+     * @param password password
+     * @param number phone number
+     * @return boolean
+     */
+    public boolean regUserByPhoneNumber(String ip, String username, String password, String number) {
+        User user = findUserByPhoneNumber(number).setUsername(username).setPwd(password);
+        return regUser(user, ip);
+    }
+
+    /**
+     * reg user.
+     *
+     * @param ip ip address
+     * @param username username
+     * @param password password
+     * @param emailAddress email address
+     * @return boolean
+     */
+    public boolean regUserByEmail(String ip, String username, String password, String emailAddress) {
+        User user = findUserByEmail(emailAddress).setUsername(username).setPwd(password);
+        return regUser(user, ip);
     }
 
 }
