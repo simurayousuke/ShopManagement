@@ -21,7 +21,7 @@ import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class SingleSendMailRequestBuilder {
@@ -33,6 +33,7 @@ public class SingleSendMailRequestBuilder {
     }
 
     public SingleSendMailRequestBuilder(Email email, String tag) {
+        req = new SingleSendMailRequest();
         req.setAccountName("no-reply@mail.yangzhizhuang.net");
         req.setFromAlias("庄云网");
         req.setAddressType(1);
