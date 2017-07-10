@@ -68,6 +68,9 @@ public class UserService {
      * @return User object
      */
     public User findUserByUsername(String username) {
+        if(username==null){
+            return null;
+        }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByUsername", username));
     }
 
@@ -78,6 +81,9 @@ public class UserService {
      * @return User object
      */
     public User findUserByPhoneNumber(String phoneNumber) {
+        if(phoneNumber==null){
+            return null;
+        }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByPhoneNumber", phoneNumber));
     }
 
@@ -88,6 +94,9 @@ public class UserService {
      * @return User object
      */
     public User findUserByEmail(String email) {
+        if(email==null){
+            return null;
+        }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByEmail", email));
     }
 

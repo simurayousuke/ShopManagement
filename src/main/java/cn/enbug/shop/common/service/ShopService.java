@@ -76,6 +76,9 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByToken(String token) {
+        if(token==null){
+            return null;
+        }
         User user = RedisKit.getUserByToken(token);
         return findShopByUser(user);
     }
@@ -87,6 +90,9 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByShopName(String shopName) {
+        if(shopName==null){
+            return null;
+        }
         return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByShopName", shopName));
     }
 
