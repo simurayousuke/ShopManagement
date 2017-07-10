@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.5
+ * @version 1.2.6
  * @since 1.0.0
  */
 public class UserService {

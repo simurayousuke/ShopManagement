@@ -16,6 +16,7 @@
 
 package cn.enbug.shop.register;
 
+import cn.enbug.shop.common.bean.Email;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
@@ -43,7 +44,16 @@ class RegisterService {
      */
     Ret registerByEmail(String email, String ip) {
         boolean b = SRV.initUserByEmail(email, ip);
-        return b ? Ret.succeed() : Ret.fail();
+        if (!b) {
+            return Ret.fail();
+        }
+        String activeCode=EmailService.getInstance().generateActiveCodeForEmail(email);
+        String title="激活你的账户";
+        String context="<a href=\"https:\\\\shop.yangzhizhuang.net\\register\\step2\\"+activeCode+"\">点击激活</a>";
+        if(EmailService.getInstance().send(new Email(email,title,context),"register")) {
+            return Ret.succeed();
+        }
+        return Ret.fail();
     }
 
     /**
@@ -54,8 +64,8 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        boolean b = SRV.initUserByPhoneNumber(phone, ip);
-        return b ? Ret.succeed() : Ret.fail();
+        String activeCode = ShortMessageCaptchaService.ME.generateActiveCodeForPhoneNumberAndGet(phone);
+        return Ret.succeed().set("activeCode", activeCode);
     }
 
     /**
