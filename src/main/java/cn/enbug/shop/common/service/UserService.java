@@ -29,7 +29,7 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.6
+ * @version 1.2.7
  * @since 1.0.0
  */
 public class UserService {
@@ -229,6 +229,9 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByPhoneNumber(String number, String ip) {
+        if(null==findUserByPhoneNumber(number)){
+            return false;
+        }
         User user = initUser();
         new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
         return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(user, number);
@@ -242,6 +245,14 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByEmail(String emailAddress, String ip) {
+        User select=findUserByEmail(emailAddress);
+        if(null != select){
+            if(0 == select.getEmailStatus()) {
+                return true;
+            }else{
+                return false;
+            }
+        }
         User user = initUser();
         new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
         return EmailService.getInstance().bindEmailAddressForUser(user, emailAddress);
