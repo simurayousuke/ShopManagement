@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var captchaImg = $('.captcha');
-    var phoneForm=$('phone-form');
+    var phone=$('#phone');
 
     var updateCaptcha = function () {
         captchaImg.prop('src', '/captcha/image?v=' + Math.random());
@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
-        var number=phoneForm.serializeObject().phone;
+        var number=phone.val();
         console.log(number);
         var that = $(this);
         that.prop('disabled', true);
