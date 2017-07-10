@@ -27,7 +27,7 @@ import cn.enbug.shop.common.service.UserService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 class RegisterService {
@@ -47,10 +47,11 @@ class RegisterService {
         if (!b) {
             return Ret.fail();
         }
-        String activeCode=EmailService.getInstance().generateActiveCodeForEmail(email);
-        String title="激活你的账户";
-        String context="<a href=\"https:\\\\shop.yangzhizhuang.net\\register\\step2\\"+activeCode+"\">点击激活</a>";
-        if(EmailService.getInstance().send(new Email(email,title,context),"register")) {
+        String activeCode = EmailService.getInstance().generateActiveCodeForEmail(email);
+        String title = "激活你的账户";
+        String context = "<a href=\"https:\\\\shop.yangzhizhuang.net\\register\\step2\\" + activeCode +
+                "\">点击激活</a><br>+https:\\\\shop.yangzhizhuang.net\\register\\step2\\" + activeCode;
+        if (EmailService.getInstance().send(new Email(email, title, context), "register")) {
             return Ret.succeed();
         }
         return Ret.fail();
