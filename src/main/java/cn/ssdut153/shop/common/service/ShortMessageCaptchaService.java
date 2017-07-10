@@ -150,11 +150,11 @@ public class ShortMessageCaptchaService {
     /**
      * bind user with phone number.
      *
-     * @param user User Object
+     * @param user   User Object
      * @param number phone number
      * @return boolean
      */
-    public boolean bindPhoneNumberForUser(User user, String number){
+    public boolean bindPhoneNumberForUser(User user, String number) {
         // todo log，错误判断
         user.setPhone(number);
         return user.update();

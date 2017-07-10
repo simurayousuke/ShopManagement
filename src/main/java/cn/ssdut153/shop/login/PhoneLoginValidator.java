@@ -24,7 +24,7 @@ import com.jfinal.core.Controller;
  * 手机号登录验证器
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class PhoneLoginValidator extends BaseValidator {
@@ -32,6 +32,7 @@ public class PhoneLoginValidator extends BaseValidator {
     @Override
     protected void validate(Controller c) {
         validatePhone("phone", Ret.MSG, "wrong format phone");
+        validatePhoneCaptcha("phone", "phone_captcha", Ret.MSG, "wrong phone captcha");
     }
 
     @Override

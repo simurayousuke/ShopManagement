@@ -29,7 +29,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -46,7 +46,7 @@ public class CaptchaController extends BaseController {
     /**
      * 短信验证码
      */
-    @Before(POST.class)
+    @Before({ImageCaptchaValidator.class, POST.class})
     public void phone() {
         String phone = getPara("phone");
         ShortMessageCaptchaService.ME.generateCaptchaAndSend(phone);

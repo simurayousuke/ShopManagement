@@ -17,7 +17,6 @@
 package cn.ssdut153.shop.login;
 
 import cn.ssdut153.shop.captcha.ImageCaptchaValidator;
-import cn.ssdut153.shop.captcha.PhoneCaptchaValidator;
 import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.IpKit;
 import cn.ssdut153.shop.common.kit.RedisKit;
@@ -32,7 +31,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -67,7 +66,7 @@ public class LoginController extends BaseController {
     /**
      * 手机号登录
      */
-    @Before({POST.class, PhoneCaptchaValidator.class, PhoneLoginValidator.class})
+    @Before({POST.class, PhoneLoginValidator.class})
     public void phone() {
         String phone = getPara("phone");
         String ip = IpKit.getRealIp(getRequest());

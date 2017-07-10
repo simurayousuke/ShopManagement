@@ -16,10 +16,10 @@
 
 package cn.ssdut153.shop.register;
 
+import cn.ssdut153.shop.captcha.ImageCaptchaValidator;
 import cn.ssdut153.shop.common.controller.BaseController;
 import cn.ssdut153.shop.common.kit.IpKit;
 import cn.ssdut153.shop.common.kit.Ret;
-import cn.ssdut153.shop.common.model.User;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
@@ -29,7 +29,7 @@ import com.jfinal.ext.interceptor.POST;
  * 注册
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -48,12 +48,11 @@ public class RegisterController extends BaseController {
     /**
      * 邮箱注册
      */
-    @Before({POST.class, EmailRegisterValidator.class})
+    @Before({POST.class, ImageCaptchaValidator.class, EmailRegisterValidator.class})
     public void email() {
-        User user = getModel(User.class, "");
         String email = getPara("email");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = SRV.registerByEmail(user, email, ip);
+        Ret ret = SRV.registerByEmail(email, ip);
         renderJson(ret);
     }
 
@@ -62,9 +61,9 @@ public class RegisterController extends BaseController {
      */
     @Before({POST.class, PhoneRegisterValidator.class})
     public void phone() {
-        User user = getModel(User.class, "");
+        String phone = getPara("phone");
         String ip = IpKit.getRealIp(getRequest());
-        Ret ret = SRV.registerByPhone(user, ip);
+        Ret ret = SRV.registerByPhone(phone, ip);
         renderJson(ret);
     }
 

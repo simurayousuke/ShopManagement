@@ -16,6 +16,7 @@
 
 package cn.ssdut153.shop.register;
 
+import cn.ssdut153.shop.common.kit.Ret;
 import cn.ssdut153.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -23,19 +24,21 @@ import com.jfinal.core.Controller;
  * 手机号注册验证器
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class PhoneRegisterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        // todo 完成功能
+        validatePhone("phone", Ret.MSG, "wrong format phone");
+        validatePhoneCaptcha("phone", "phone_captcha", Ret.MSG, "wrong phone captcha");
     }
 
     @Override
     protected void handleError(Controller c) {
-        // todo 完成功能
+        c.setAttr(Ret.STATUS, false);
+        c.renderJson();
     }
 
 }
