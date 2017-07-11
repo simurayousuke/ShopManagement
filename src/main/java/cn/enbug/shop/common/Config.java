@@ -21,7 +21,6 @@ import cn.enbug.shop.common.directive.CompressDirective;
 import cn.enbug.shop.common.handler.StaticHandler;
 import cn.enbug.shop.common.interceptor.LogInterceptor;
 import cn.enbug.shop.common.kit.DruidKit;
-import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.ShortMessageKit;
 import cn.enbug.shop.common.model.MappingKit;
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -188,13 +187,13 @@ public class Config extends JFinalConfig {
      */
     @Override
     public void configPlugin(Plugins me) {
-        DruidPlugin dp = getDruidPlugin();
-        me.add(dp);
-        me.add(getActiveRecordPlugin(dp));
-        me.add(getRedisPlugin(RedisKit.TOKEN, P.getInt("redis.database.token")));
-        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, P.getInt("redis.database.captcha")));
-        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, P.getInt("redis.database.activePhone")));
-        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, P.getInt("redis.database.activeEmail")));
+//        DruidPlugin dp = getDruidPlugin();
+//        me.add(dp);
+//        me.add(getActiveRecordPlugin(dp));
+//        me.add(getRedisPlugin(RedisKit.TOKEN, P.getInt("redis.database.token")));
+//        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, P.getInt("redis.database.captcha")));
+//        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, P.getInt("redis.database.activePhone")));
+//        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, P.getInt("redis.database.activeEmail")));
     }
 
     /**
