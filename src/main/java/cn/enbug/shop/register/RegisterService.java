@@ -52,7 +52,8 @@ class RegisterService {
         String activeCode = EMAIL_SRV.generateActiveCodeForEmail(email);
         String title = "激活你的账户";
         String context = "<a href=\"https://shop.yangzhizhuang.net/register/step2/" + activeCode +
-                "\">点击激活</a><br>https://shop.yangzhizhuang.net/register/step2/" + activeCode;
+                "\">点击激活</a><br>若上方链接不可用，您也可以复制地址到浏览器地址栏访问<br>" +
+                "https://shop.yangzhizhuang.net/register/step2/" + activeCode;
         if (EMAIL_SRV.send(new Email(email, title, context), "register")) {
             return Ret.succeed();
         }
