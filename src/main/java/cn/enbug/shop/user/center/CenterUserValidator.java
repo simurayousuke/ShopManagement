@@ -16,22 +16,33 @@
 
 package cn.enbug.shop.user.center;
 
-import cn.enbug.shop.common.controller.BaseController;
-import cn.enbug.shop.common.interceptor.UserInterceptor;
-import com.jfinal.aop.Before;
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.UserService;
+import cn.enbug.shop.common.validator.BaseValidator;
+import com.jfinal.core.Controller;
 
 /**
  * 用户中心
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.0
  * @since 1.0.0
  */
-public class CenterUserController extends BaseController {
+public class CenterUserValidator extends BaseValidator {
 
-    @Before({UserInterceptor.class, CenterUserValidator.class})
-    public void index() {
-        render("index.html");
+    @Override
+    protected void validate(Controller c) {
+        User user = UserService.ME.validateToken(c.getCookie(RedisKit.TOKEN));
+        if (null == user) {
+            addError(Ret.MSG, "need login");
+        }
+    }
+
+    @Override
+    protected void handleError(Controller c) {
+        c.redirect("/login");
     }
 
 }
