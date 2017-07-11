@@ -16,12 +16,9 @@
 
 package cn.enbug.shop.login;
 
-import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 登录服务
@@ -34,9 +31,7 @@ import org.slf4j.LoggerFactory;
 class LoginService {
 
     static final LoginService ME = new LoginService();
-    private static final Logger LOG = LoggerFactory.getLogger(LoginService.class);
     private static final UserService SRV = UserService.ME;
-    private static final String INTERNAL_EXCEPTION = "internal exception";
 
     /**
      * 用户名登录
@@ -47,16 +42,11 @@ class LoginService {
      * @return 返回信息
      */
     Ret loginByUsername(String username, String password, String ip) {
-        try {
-            String token = SRV.login(username, password, ip);
-            if (null == token) {
-                return Ret.fail("username or password wrong");
-            }
-            return Ret.succeed().set(RedisKit.COOKIE_ID, token);
-        } catch (LogException e) {
-            LOG.error(e.getMessage(), e);
-            return Ret.fail(INTERNAL_EXCEPTION);
+        String token = SRV.login(username, password, ip);
+        if (null == token) {
+            return Ret.fail("username or password wrong");
         }
+        return Ret.succeed().set(RedisKit.COOKIE_ID, token);
     }
 
     /**
@@ -68,16 +58,11 @@ class LoginService {
      * @return 返回信息
      */
     Ret loginByEmail(String email, String password, String ip) {
-        try {
-            String token = SRV.loginByEmail(email, password, ip);
-            if (null == token) {
-                return Ret.fail("email or password wrong");
-            }
-            return Ret.succeed().set(RedisKit.COOKIE_ID, token);
-        } catch (LogException e) {
-            LOG.error(e.getMessage(), e);
-            return Ret.fail(INTERNAL_EXCEPTION);
+        String token = SRV.loginByEmail(email, password, ip);
+        if (null == token) {
+            return Ret.fail("email or password wrong");
         }
+        return Ret.succeed().set(RedisKit.COOKIE_ID, token);
     }
 
     /**
@@ -88,16 +73,11 @@ class LoginService {
      * @return 返回信息
      */
     Ret loginByPhone(String phone, String ip) {
-        try {
-            String token = SRV.loginByPhone(phone, ip);
-            if (null == token) {
-                return Ret.fail("phone or captcha wrong");
-            }
-            return Ret.succeed().set(RedisKit.COOKIE_ID, token);
-        } catch (LogException e) {
-            LOG.error(e.getMessage(), e);
-            return Ret.fail(INTERNAL_EXCEPTION);
+        String token = SRV.loginByPhone(phone, ip);
+        if (null == token) {
+            return Ret.fail("phone or captcha wrong");
         }
+        return Ret.succeed().set(RedisKit.COOKIE_ID, token);
     }
 
 }

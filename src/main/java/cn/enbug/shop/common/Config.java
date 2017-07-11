@@ -19,6 +19,7 @@ package cn.enbug.shop.common;
 import cn.enbug.shop.admin.AdminRoutes;
 import cn.enbug.shop.common.directive.CompressDirective;
 import cn.enbug.shop.common.handler.StaticHandler;
+import cn.enbug.shop.common.interceptor.LogInterceptor;
 import cn.enbug.shop.common.kit.DruidKit;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.ShortMessageKit;
@@ -201,7 +202,7 @@ public class Config extends JFinalConfig {
      */
     @Override
     public void configInterceptor(Interceptors me) {
-        // config interceptor
+        me.add(new LogInterceptor());
     }
 
     /**
