@@ -4,21 +4,58 @@
 }
 
 .boards {
-    margin: 40px;
+    margin-top: 40px;
 }
 
 .panel-heading {
     font-size: 17px;
 }
 
+.none-font {
+    position: relative;
+    top: 30px;
+}
+
 .panel-body {
     background: #fcfcfb !important;
 }
 
+#none-shop {
+    height: 76px;
+    width: 81px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+@media (min-height: 640px) {
+    .panel-body {
+        height: 320px;
+        background: #fcfcfb !important;
+    }
+
+    #none-shop {
+        margin-top: 60px;
+    }
+}
+
 @media (min-height: 800px) {
     .panel-body {
-        height: 360px;
-        background: #fcfcfb !important;
+        height: 400px;
+    }
+}
+
+@media (min-width: 361px) {
+    #none-shop {
+        height: 152px;
+        width: 163px;
+    }
+}
+
+@media (min-width: 768px) {
+    #none-shop {
+        height: 152px;
+        width: 163px;
+        margin-left: 100px;
     }
 }
 
