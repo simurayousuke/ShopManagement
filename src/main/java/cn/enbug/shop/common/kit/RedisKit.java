@@ -25,7 +25,7 @@ import com.jfinal.plugin.redis.Redis;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.9
+ * @version 1.0.10
  * @since 1.0.0
  */
 public class RedisKit {
@@ -174,6 +174,12 @@ public class RedisKit {
      */
     public static void delActiveCodeForEmail(String code) {
         Redis.use(ACTIVE_CODE_FOR_EMAIL).del(code);
+    }
+
+    public static void delToken(String token) {
+        if (null != token) {
+            Redis.use(TOKEN).del(token);
+        }
     }
 
 }

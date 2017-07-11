@@ -14,24 +14,30 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.user.center;
+package cn.enbug.shop.common.interceptor;
 
-import cn.enbug.shop.common.controller.BaseController;
-import cn.enbug.shop.common.interceptor.UserInterceptor;
-import com.jfinal.aop.Before;
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.UserService;
+import com.jfinal.aop.Interceptor;
+import com.jfinal.aop.Invocation;
+import com.jfinal.core.Controller;
 
 /**
- * 用户中心
+ * 导航栏用户数据
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.0
  * @since 1.0.0
  */
-public class CenterUserController extends BaseController {
+public class UserInterceptor implements Interceptor {
 
-    @Before(UserInterceptor.class)
-    public void index() {
-        render("index.html");
+    @Override
+    public void intercept(Invocation inv) {
+        Controller c = inv.getController();
+        User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
+        c.setAttr("user", user);
+        inv.invoke();
     }
 
 }

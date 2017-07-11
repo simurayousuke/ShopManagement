@@ -21,6 +21,7 @@ import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Before;
+import com.jfinal.core.ActionKey;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
@@ -30,7 +31,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.6
+ * @version 1.0.7
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -91,6 +92,14 @@ public class LoginController extends BaseController {
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
         }
         renderJson(ret);
+    }
+
+    @ActionKey("/logout")
+    @Before(GET.class)
+    public void logout() {
+        RedisKit.delToken(getCookie(RedisKit.TOKEN));
+        removeCookie(RedisKit.COOKIE_ID);
+        redirect("/");
     }
 
 }
