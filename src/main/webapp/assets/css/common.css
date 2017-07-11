@@ -9,9 +9,14 @@
 .footer {
     text-align: center;
     height: 100px;
+    background: #eee;
 }
 
 .main {
     min-height: calc(100vh - 172px);
     max-width: 100%;
+}
+
+.nav-enbug {
+    background: #0a67fb;
 }
