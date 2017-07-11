@@ -7,9 +7,24 @@
 }
 
 .footer {
-    text-align: center;
     height: 100px;
-    background: #eee;
+    padding: 15px 0;
+    line-height: 26px;
+    text-align: center;
+    background-color: #eee;
+    color: #666;
+    font-weight: 300;
+
+}
+
+.footer a {
+    padding: 0 5px;
+}
+
+.footer p {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
 }
 
 .main {
