@@ -37,7 +37,7 @@ public class ShopService {
     private static final UserService USER_SRV = UserService.ME;
 
     private ShopService() {
-
+        // singleton
     }
 
     private boolean hasShop(User user) {

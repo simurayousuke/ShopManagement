@@ -24,4 +24,11 @@ package cn.enbug.shop.common.service;
  * @since 1.0.0
  */
 public class GoodService {
+
+    public static final GoodService ME = new GoodService();
+
+    private GoodService() {
+        // singleton
+    }
+
 }

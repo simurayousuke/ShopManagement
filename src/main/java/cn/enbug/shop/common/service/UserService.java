@@ -38,6 +38,10 @@ public class UserService {
     public static final UserService ME = Duang.duang(UserService.class);
     private static final User USER_DAO = new User().dao();
 
+    private UserService(){
+        // singleton
+    }
+
     /**
      * get hashed password.
      *

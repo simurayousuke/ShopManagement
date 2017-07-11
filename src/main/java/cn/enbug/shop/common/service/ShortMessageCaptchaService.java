@@ -39,7 +39,7 @@ public class ShortMessageCaptchaService {
     private static String base = "0123456789";
 
     private ShortMessageCaptchaService() {
-
+        // singleton
     }
 
     /**

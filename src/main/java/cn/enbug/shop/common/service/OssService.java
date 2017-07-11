@@ -42,7 +42,7 @@ public class OssService {
     public static OssService ME;
 
     private OssService() {
-
+        // singleton
     }
 
     /**

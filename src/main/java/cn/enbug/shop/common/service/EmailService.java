@@ -51,7 +51,7 @@ public class EmailService {
     private static final UserService USER_SRV = UserService.ME;
 
     private EmailService() {
-
+        // singleton
     }
 
     /**
