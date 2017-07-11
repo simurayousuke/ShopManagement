@@ -17,6 +17,7 @@
 package cn.enbug.shop.index;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.UserInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.NoUrlPara;
 
@@ -25,7 +26,7 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -34,6 +35,7 @@ public class IndexController extends BaseController {
     /**
      * The entry point of index
      */
+    @Before(UserInterceptor.class)
     public void index() {
         render("index.html");
     }

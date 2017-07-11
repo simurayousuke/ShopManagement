@@ -18,9 +18,11 @@ package cn.enbug.shop.login;
 
 import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.LoginInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
@@ -31,10 +33,10 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.7
+ * @version 1.0.8
  * @since 1.0.0
  */
-@Before(NoUrlPara.class)
+@Before({NoUrlPara.class, LoginInterceptor.class})
 public class LoginController extends BaseController {
 
     private static final LoginService SRV = LoginService.ME;
@@ -95,6 +97,7 @@ public class LoginController extends BaseController {
     }
 
     @ActionKey("/logout")
+    @Clear(LoginInterceptor.class)
     @Before(GET.class)
     public void logout() {
         RedisKit.delToken(getCookie(RedisKit.TOKEN));

@@ -18,6 +18,7 @@ package cn.enbug.shop.register;
 
 import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.LoginInterceptor;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
@@ -30,10 +31,10 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
-@Before(NoUrlPara.class)
+@Before({NoUrlPara.class, LoginInterceptor.class})
 public class RegisterController extends BaseController {
 
     private static final RegisterService SRV = RegisterService.ME;
@@ -82,11 +83,11 @@ public class RegisterController extends BaseController {
 
     @Before(POST.class)
     public void step2handler() {
-        String username=getPara("username");
-        String password=getPara("pwd");
-        String activeCode=getPara("activeCode");
+        String username = getPara("username");
+        String password = getPara("pwd");
+        String activeCode = getPara("activeCode");
         String ip = getIp();
-        renderJson(SRV.handleStep2(activeCode,username,password,ip));
+        renderJson(SRV.handleStep2(activeCode, username, password, ip));
     }
 
     @Before(GET.class)
