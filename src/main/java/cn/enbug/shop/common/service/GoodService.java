@@ -16,9 +16,7 @@
 
 package cn.enbug.shop.common.service;
 
-import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.model.Good;
-import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.StrKit;
@@ -35,10 +33,17 @@ public class GoodService {
     public static final GoodService ME = Duang.duang(GoodService.class);
     private static final Good GOOD_DAO = new Good().dao();
 
-    private GoodService() {
-        // singleton
-    }
-
+    /**
+     * insert.
+     *
+     * @param token       shop owner token
+     * @param ip          ip address
+     * @param goodName    good name
+     * @param description good description
+     * @param price       good price
+     * @param avator      good avator
+     * @return boolean
+     */
     public boolean insert(String token, String ip, String goodName, String description, double price, String avator) {
         // name, shop id,uuid, description, price, avator
         Shop shop = ShopService.ME.findShopByToken(token);
@@ -51,12 +56,48 @@ public class GoodService {
         return good.save();
     }
 
-    public void del(int id){
-
+    /**
+     * find good by id.
+     *
+     * @param id good id
+     * @return Good Object
+     */
+    public Good findGoodById(int id) {
+        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("shop.findById", id));
     }
 
-    public void del(String uuid){
+    /**
+     * find good by uuid.
+     *
+     * @param uuid good uuid
+     * @return Good Object
+     */
+    public Good findGoodByUuid(String uuid) {
+        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("shop.findByUuid", uuid));
+    }
 
+    /**
+     * delete.
+     *
+     * @param id good id
+     */
+    public void del(int id) {
+        Good good = findGoodById(id);
+        if (null != good) {
+            good.setStatus(0);
+        }
+    }
+
+    /**
+     * delete.
+     *
+     * @param uuid good uuid
+     */
+    public void del(String uuid) {
+        Good good = findGoodByUuid(uuid);
+        if (null != good) {
+            good.setStatus(0);
+        }
     }
 
 }

@@ -4,3 +4,6 @@
 #namespace("shop")
 #include("shop.sql")
 #end
+#namespace("good")
+#include("good.sql")
+#end
