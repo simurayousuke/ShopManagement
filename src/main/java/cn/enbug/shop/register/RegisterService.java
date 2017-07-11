@@ -92,6 +92,9 @@ class RegisterService {
      * @return boolean
      */
     Ret handleStep2(String code, String username, String password, String ip) {
+        if(null != UserService.ME.findUserByUsername(username)){
+            return Ret.fail("User already exists.");
+        }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
         if (null != number) {
             UserService.ME.regUserByPhoneNumber(ip, username, password, number);
@@ -102,7 +105,7 @@ class RegisterService {
             UserService.ME.regUserByEmail(ip, username, password, email);
             return Ret.succeed();
         }
-        return Ret.fail();
+        return Ret.fail("invalidated active code.");
     }
 
 }
