@@ -23,6 +23,8 @@ import cn.enbug.shop.common.model.User;
 import com.jfinal.plugin.activerecord.Db;
 
 /**
+ * Shop service.
+ *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
  * @version 1.0.1
