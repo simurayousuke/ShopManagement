@@ -28,7 +28,7 @@ import cn.enbug.shop.common.service.UserService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.7
+ * @version 1.0.8
  * @since 1.0.0
  */
 class RegisterService {
@@ -100,16 +100,16 @@ class RegisterService {
         }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
         if (null != number) {
-            return handlePhone(code,ip,username,password,number);
+            return handlePhone(code, ip, username, password, number);
         }
         String email = RedisKit.getEmailAddressByActiveCode(code);
         if (null != email) {
-            return handleEmail(code,ip,username,password,number);
+            return handleEmail(code, ip, username, password, number);
         }
         return Ret.fail("invalidated active code.");
     }
 
-    private Ret handleEmail(String code,String ip,String username,String password,String email){
+    private Ret handleEmail(String code, String ip, String username, String password, String email) {
         if (USER_SRV.regUserByEmail(ip, username, password, email)) {
             RedisKit.delActiveCodeForEmail(code);
             return Ret.succeed();
@@ -117,7 +117,7 @@ class RegisterService {
         return Ret.fail("unknown error.");
     }
 
-    private Ret handlePhone(String code,String ip,String username,String password,String number){
+    private Ret handlePhone(String code, String ip, String username, String password, String number) {
         if (USER_SRV.regUserByPhoneNumber(ip, username, password, number)) {
             RedisKit.delActiveCodeForPhoneNumber(code);
             return Ret.succeed();
