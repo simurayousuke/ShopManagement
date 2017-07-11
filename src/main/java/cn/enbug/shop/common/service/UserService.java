@@ -30,7 +30,7 @@ import com.jfinal.plugin.activerecord.Db;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.8
+ * @version 1.2.9
  * @since 1.0.0
  */
 public class UserService {
@@ -295,7 +295,7 @@ public class UserService {
      * @return boolean
      */
     public boolean regUserByEmail(String ip, String username, String password, String emailAddress) {
-        User user = findUserByEmail(emailAddress).setUsername(username).setPwd(password);
+        User user = findUserByEmail(emailAddress).setUsername(username).setPwd(password).setEmailStatus(1);
         return regUser(user, ip);
     }
 

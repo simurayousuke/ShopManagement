@@ -28,7 +28,7 @@ import cn.enbug.shop.common.service.UserService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.6
+ * @version 1.0.7
  * @since 1.0.0
  */
 class RegisterService {
@@ -45,9 +45,8 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByEmail(String email, String ip) {
-        boolean b = USER_SRV.initUserByEmail(email, ip);
-        if (!b) {
-            return Ret.fail();
+        if (!USER_SRV.initUserByEmail(email, ip)) {
+            return Ret.fail("email already used");
         }
         String activeCode = EMAIL_SRV.generateActiveCodeForEmail(email);
         String title = "激活你的账户";
@@ -68,6 +67,9 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
+        if(null != USER_SRV.findUserByPhoneNumber(phone)){
+            return Ret.fail("phone already used.");
+        }
         String activeCode = ShortMessageCaptchaService.ME.generateActiveCodeForPhoneNumberAndGet(phone);
         return Ret.succeed().set("activeCode", activeCode);
     }
@@ -93,12 +95,12 @@ class RegisterService {
      * @return boolean
      */
     Ret handleStep2(String code, String username, String password, String ip) {
-        if(null != UserService.ME.findUserByUsername(username)){
+        if(null != USER_SRV.findUserByUsername(username)){
             return Ret.fail("User already exists.");
         }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
         if (null != number) {
-            if(UserService.ME.regUserByPhoneNumber(ip, username, password, number)){
+            if(USER_SRV.regUserByPhoneNumber(ip, username, password, number)){
                 RedisKit.delActiveCodeForPhoneNumber(code);
                 return Ret.succeed();
             }
@@ -106,7 +108,7 @@ class RegisterService {
         }
         String email = RedisKit.getEmailAddressByActiveCode(code);
         if (null != email) {
-            if(UserService.ME.regUserByEmail(ip, username, password, email)){
+            if(USER_SRV.regUserByEmail(ip, username, password, email)){
                 RedisKit.delActiveCodeForEmail(code);
                 return Ret.succeed();
             }
