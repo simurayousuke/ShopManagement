@@ -7,5 +7,5 @@ import cn.enbug.shop.common.model.base.BaseComment;
  */
 @SuppressWarnings("serial")
 public class Comment extends BaseComment<Comment> {
-	
+
 }

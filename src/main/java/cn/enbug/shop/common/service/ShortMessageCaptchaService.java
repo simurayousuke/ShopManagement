@@ -144,7 +144,7 @@ public class ShortMessageCaptchaService {
      * @return boolean
      */
     public boolean validateActiveCodeForPhoneNumber(String code) {
-        return RedisKit.getPhoneNumberByActiveCode(code) != null;
+        return null != RedisKit.getPhoneNumberByActiveCode(code);
     }
 
     /**

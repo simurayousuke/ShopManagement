@@ -31,37 +31,27 @@ import com.jfinal.kit.StrKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * The service for sending email.
  *
  * @author Yang Zhizhuang
- * @version 1.0.4
+ * @author Hu Wenqiang
+ * @version 1.0.5
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public class EmailService {
 
+    public static final EmailService ME = new EmailService();
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
     private static final String REGION = PropKit.get("mailSender.region");
     private static final String KEY = PropKit.get("mailSender.key");
     private static final String SECRET = PropKit.get("mailSender.secret");
-    /**
-     * singleton
-     */
-    private static EmailService instance = new EmailService();
+    private static final UserService USER_SRV = UserService.ME;
 
     private EmailService() {
-    }
 
-    /**
-     * get EmailService instance
-     *
-     * @return singleton
-     */
-    public static EmailService getInstance() {
-        return instance;
     }
 
     /**
@@ -114,7 +104,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean validateActiveCodeForEmail(String code) {
-        return RedisKit.getEmailAddressByActiveCode(code) != null;
+        return null != RedisKit.getEmailAddressByActiveCode(code);
     }
 
     /**
@@ -128,6 +118,10 @@ public class EmailService {
         return user.setEmail(emailAddress).setEmailStatus(0).update();
     }
 
+    public void bindEmailAddressForUserWithoutUpdate(User user, String emailAddress) {
+        user.setEmail(emailAddress).setEmailStatus(0);
+    }
+
     /**
      * bind email address for username.
      *
@@ -136,7 +130,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean bindEmailAddressForUsername(String username, String emailAddress) {
-        return bindEmailAddressForUser(UserService.getInstance().findUserByUsername(username), emailAddress);
+        return bindEmailAddressForUser(USER_SRV.findUserByUsername(username), emailAddress);
     }
 
     /**
@@ -160,10 +154,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean validateThenActiveEmailAddressForUser(User user, String code) {
-        if (!validateActiveCodeForEmail(code)) {
-            return false;
-        }
-        return activeEmailAddressForUser(user);
+        return validateActiveCodeForEmail(code) && activeEmailAddressForUser(user);
     }
 
     /**
@@ -173,7 +164,7 @@ public class EmailService {
      * @return boolean
      */
     private boolean activeEmailAddressForUsername(String username) {
-        return activeEmailAddressForUser(UserService.getInstance().findUserByUsername(username));
+        return activeEmailAddressForUser(USER_SRV.findUserByUsername(username));
     }
 
     /**
@@ -184,7 +175,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean validateThenActiveEmailAddressForUsername(String username, String code) {
-        return validateThenActiveEmailAddressForUser(UserService.getInstance().findUserByUsername(username), code);
+        return validateThenActiveEmailAddressForUser(USER_SRV.findUserByUsername(username), code);
     }
 
 }

@@ -27,13 +27,14 @@ import cn.enbug.shop.common.service.UserService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 class RegisterService {
 
     static final RegisterService ME = new RegisterService();
-    private static final UserService SRV = UserService.getInstance();
+    private static final UserService USER_SRV = UserService.ME;
+    private static final EmailService EMAIL_SRV = EmailService.ME;
 
     /**
      * 邮箱注册
@@ -43,15 +44,15 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByEmail(String email, String ip) {
-        boolean b = SRV.initUserByEmail(email, ip);
+        boolean b = USER_SRV.initUserByEmail(email, ip);
         if (!b) {
             return Ret.fail();
         }
-        String activeCode = EmailService.getInstance().generateActiveCodeForEmail(email);
+        String activeCode = EMAIL_SRV.generateActiveCodeForEmail(email);
         String title = "激活你的账户";
-        String context = "<a href=\"https:\\\\shop.yangzhizhuang.net\\register\\step2\\" + activeCode +
-                "\">点击激活</a><br>+https:\\\\shop.yangzhizhuang.net\\register\\step2\\" + activeCode;
-        if (EmailService.getInstance().send(new Email(email, title, context), "register")) {
+        String context = "<a href=\"https://shop.yangzhizhuang.net/register/step2/" + activeCode +
+                "\">点击激活</a><br>https://shop.yangzhizhuang.net/register/step2/" + activeCode;
+        if (EMAIL_SRV.send(new Email(email, title, context), "register")) {
             return Ret.succeed();
         }
         return Ret.fail();
@@ -77,7 +78,7 @@ class RegisterService {
      */
     boolean handleStep2(String code) {
         return ShortMessageCaptchaService.ME.validateActiveCodeForPhoneNumber(code) ||
-                EmailService.getInstance().validateActiveCodeForEmail(code);
+                EMAIL_SRV.validateActiveCodeForEmail(code);
     }
 
 }

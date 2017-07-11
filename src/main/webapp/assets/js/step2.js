@@ -5,7 +5,7 @@ $(document).ready(function () {
         var data = form.serializeObject();
         var username = data.username;
         var pwd = data.pwd;
-        var check=$("#check").val();
+        var check = $("#check").val();
         if (username.length < 1 || username.length > 20) {
             $.msg('用户名长度应为1-20位');
             return;
@@ -14,7 +14,7 @@ $(document).ready(function () {
             $.msg('密码长度应为6-32位');
             return;
         }
-        if (pwd!==check) {
+        if (pwd !== check) {
             $.msg('两次输入密码不一致');
             return;
         }

@@ -24,36 +24,27 @@ import com.jfinal.plugin.activerecord.Db;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class ShopService {
 
+    public static final ShopService ME = new ShopService();
     private static final Shop SHOP_DAO = new Shop().dao();
-    /**
-     * singleton
-     */
-    private static ShopService instance = new ShopService();
+    private static final UserService USER_SRV = UserService.ME;
 
     private ShopService() {
-    }
 
-    /**
-     * get instance.
-     *
-     * @return singleton
-     */
-    public static ShopService getInstance() {
-        return instance;
     }
 
     private boolean hasShop(User user) {
         Shop shop = findShopByUser(user);
-        return shop != null;
+        return null != shop;
     }
 
     private boolean isExist(String shopName) {
-        return findShopByShopName(shopName) != null;
+        return null != findShopByShopName(shopName);
     }
 
     /**
@@ -63,7 +54,7 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByUser(User user) {
-        if (user == null) {
+        if (null == user) {
             return null;
         }
         return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByOwnerUserId", user.getId()));
@@ -76,7 +67,7 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByToken(String token) {
-        if(token==null){
+        if (null == token) {
             return null;
         }
         User user = RedisKit.getUserByToken(token);
@@ -90,7 +81,7 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByShopName(String shopName) {
-        if(shopName==null){
+        if (null == shopName) {
             return null;
         }
         return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByShopName", shopName));
@@ -108,7 +99,7 @@ public class ShopService {
     public boolean createShop(String name, String description, String token, String ip) {
         Shop shop = new Shop(name, description, token);
         User user = RedisKit.getUserByToken(token);
-        if (user == null) {
+        if (null == user) {
             return false;
         }
         return Db.tx(4, () -> shop.save() &&
@@ -119,8 +110,8 @@ public class ShopService {
      * modify shop name.
      *
      * @param token owner token
-     * @param name shop name
-     * @param ip ip address
+     * @param name  shop name
+     * @param ip    ip address
      * @return boolean
      */
     public boolean modifyName(String token, String name, String ip) {
@@ -128,11 +119,11 @@ public class ShopService {
             return false;
         }
         User user = RedisKit.getUserByToken(token);
-        if (user == null) {
+        if (null == user) {
             return false;
         }
         Shop shop = findShopByUser(user);
-        if (shop == null) {
+        if (null == shop) {
             return false;
         }
         shop.setShopName(name);
@@ -143,18 +134,18 @@ public class ShopService {
     /**
      * modify shop description.
      *
-     * @param token owner token
+     * @param token       owner token
      * @param description shop description
-     * @param ip ip address
+     * @param ip          ip address
      * @return boolean
      */
     public boolean modifyDescription(String token, String description, String ip) {
         User user = RedisKit.getUserByToken(token);
-        if (user == null) {
+        if (null == user) {
             return false;
         }
         Shop shop = findShopByUser(user);
-        if (shop == null) {
+        if (null == shop) {
             return false;
         }
         shop.setDescription(description);
@@ -165,22 +156,22 @@ public class ShopService {
     /**
      * transfer shop to other user.
      *
-     * @param token owner token
+     * @param token    owner token
      * @param username new owner username
-     * @param ip ip address
+     * @param ip       ip address
      * @return boolean
      */
     public boolean transfer(String token, String username, String ip) {
-        User to = UserService.getInstance().findUserByUsername(username);
-        if (to == null) {
+        User to = USER_SRV.findUserByUsername(username);
+        if (null == to) {
             return false;
         }
         User user = RedisKit.getUserByToken(token);
-        if (user == null) {
+        if (null == user) {
             return false;
         }
         Shop shop = findShopByUser(user);
-        if (shop == null) {
+        if (null == shop) {
             return false;
         }
         shop.setOwnerUserId(to.getId());

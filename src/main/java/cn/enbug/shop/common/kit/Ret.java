@@ -145,7 +145,7 @@ public class Ret extends HashMap {
      */
     public boolean isSucceed() {
         Boolean isOk = (Boolean) get(STATUS);
-        return isOk != null && isOk;
+        return null != isOk && isOk;
     }
 
     /**
@@ -251,7 +251,7 @@ public class Ret extends HashMap {
      * @return boolean
      */
     public boolean notNull(Object key) {
-        return get(key) != null;
+        return null != get(key);
     }
 
     /**
@@ -261,7 +261,7 @@ public class Ret extends HashMap {
      * @return boolean
      */
     public boolean isNull(Object key) {
-        return get(key) == null;
+        return null == get(key);
     }
 
     /**

@@ -35,7 +35,7 @@ public class User extends BaseUser<User> {
      * @return boolean
      */
     public boolean isEmailActived() {
-        return StrKit.notBlank(getEmail()) && getEmailStatus() == 1;
+        return StrKit.notBlank(getEmail()) && 1 == getEmailStatus();
     }
 
 }

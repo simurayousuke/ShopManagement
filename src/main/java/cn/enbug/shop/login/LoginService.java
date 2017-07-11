@@ -28,14 +28,14 @@ import org.slf4j.LoggerFactory;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 class LoginService {
 
     static final LoginService ME = new LoginService();
     private static final Logger LOG = LoggerFactory.getLogger(LoginService.class);
-    private static final UserService SRV = UserService.getInstance();
+    private static final UserService SRV = UserService.ME;
     private static final String INTERNAL_EXCEPTION = "internal exception";
 
     /**

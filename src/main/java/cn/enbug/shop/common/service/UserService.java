@@ -29,22 +29,14 @@ import com.jfinal.plugin.activerecord.Db;
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
- * @version 1.2.7
+ * @author Hu Wenqiang
+ * @version 1.2.8
  * @since 1.0.0
  */
 public class UserService {
 
+    public static final UserService ME = Duang.duang(UserService.class);
     private static final User USER_DAO = new User().dao();
-    private static UserService instance = Duang.duang(UserService.class);
-
-    /**
-     * get UserService instance
-     *
-     * @return singleton
-     */
-    public static UserService getInstance() {
-        return instance;
-    }
 
     /**
      * get hashed password.
@@ -68,7 +60,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByUsername(String username) {
-        if (username == null) {
+        if (null == username) {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByUsername", username));
@@ -81,7 +73,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByPhoneNumber(String phoneNumber) {
-        if (phoneNumber == null) {
+        if (null == phoneNumber) {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByPhoneNumber", phoneNumber));
@@ -94,7 +86,7 @@ public class UserService {
      * @return User object
      */
     public User findUserByEmail(String email) {
-        if (email == null) {
+        if (null == email) {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByEmail", email));
@@ -221,6 +213,12 @@ public class UserService {
         return user;
     }
 
+    private User initUserWithoutSave() {
+        User user = new User();
+        user.setUuid(StrKit.getRandomUUID());
+        return user;
+    }
+
     /**
      * init user with phone number.
      *
@@ -229,7 +227,7 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByPhoneNumber(String number, String ip) {
-        if(null==findUserByPhoneNumber(number)){
+        if (null == findUserByPhoneNumber(number)) {
             return false;
         }
         User user = initUser();
@@ -245,17 +243,15 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByEmail(String emailAddress, String ip) {
-        User select=findUserByEmail(emailAddress);
-        if(null != select){
-            if(0 == select.getEmailStatus()) {
-                return true;
-            }else{
-                return false;
-            }
+        User select = findUserByEmail(emailAddress);
+        if (null != select) {
+            return 0 == select.getEmailStatus();
         }
-        User user = initUser();
-        new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
-        return EmailService.getInstance().bindEmailAddressForUser(user, emailAddress);
+        User user = new User();
+        user.setUuid(StrKit.getRandomUUID());
+        user.setEmail(emailAddress);
+        user.setEmailStatus(0);
+        return Db.tx(() -> user.save() && new Log().setIp(ip).setOperation("initEmail").setUserId(user.getId()).save());
     }
 
     /**

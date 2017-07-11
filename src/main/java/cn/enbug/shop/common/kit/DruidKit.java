@@ -58,7 +58,7 @@ public class DruidKit {
      */
     private static String getCookie(HttpServletRequest request, String name) {
         Cookie cookie = getCookieObject(request, name);
-        return cookie != null ? cookie.getValue() : null;
+        return null != cookie ? cookie.getValue() : null;
     }
 
     /**
@@ -70,7 +70,7 @@ public class DruidKit {
      */
     private static Cookie getCookieObject(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
+        if (null != cookies) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals(name)) {
                     return cookie;

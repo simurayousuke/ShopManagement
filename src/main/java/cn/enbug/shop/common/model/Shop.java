@@ -12,7 +12,7 @@ import com.jfinal.kit.StrKit;
 @SuppressWarnings("serial")
 public class Shop extends BaseShop<Shop> {
 
-    public Shop(){
+    public Shop() {
         // empty constructor
     }
 
@@ -68,7 +68,7 @@ public class Shop extends BaseShop<Shop> {
      * @param userId      user id
      * @param avator      avator id
      */
-    public Shop(String name, String description, int userId,int avator) {
+    public Shop(String name, String description, int userId, int avator) {
         setShopName(name);
         setDescription(description);
         setUuid(StrKit.getRandomUUID());

@@ -35,35 +35,23 @@ import java.util.List;
  * Object Storage Service.
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @author Hu Wenqiang
+ * @version 1.0.3
  * @see com.aliyun.oss
  * @since 1.0.0
  */
 public class OssService {
 
+    public static final OssService ME = new OssService();
     private static final String BUCKET_NAME = "shopmanagement";
     private static final String ENDPOINT = PropKit.get("ossWriter.endpoint");
     private static final String KEY = PropKit.get("ossWriter.key");
     private static final String SECRET = PropKit.get("ossWriter.secret");
 
-    /**
-     * singleton
-     */
-    private static OssService instance = new OssService();
-
     private OSSClient client;
 
     private OssService() {
         client = new OSSClient(ENDPOINT, KEY, SECRET);
-    }
-
-    /**
-     * get OssService instance.
-     *
-     * @return singleton
-     */
-    public static OssService getInstance() {
-        return instance;
     }
 
     /**

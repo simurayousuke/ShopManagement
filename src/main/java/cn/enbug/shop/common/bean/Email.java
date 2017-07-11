@@ -41,8 +41,8 @@ public class Email {
     /**
      * constructor
      *
-     * @param to email address
-     * @param title title
+     * @param to      email address
+     * @param title   title
      * @param context context
      */
     public Email(String to, String title, String context) {

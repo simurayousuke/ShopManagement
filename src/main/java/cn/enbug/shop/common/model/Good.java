@@ -7,5 +7,5 @@ import cn.enbug.shop.common.model.base.BaseGood;
  */
 @SuppressWarnings("serial")
 public class Good extends BaseGood<Good> {
-	
+
 }
