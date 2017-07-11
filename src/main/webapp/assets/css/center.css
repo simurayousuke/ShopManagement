@@ -1,0 +1,25 @@
+.full {
+    display: block;
+    width: 100%;
+}
+
+.boards {
+    margin: 40px;
+}
+
+.panel-heading {
+    font-size: 17px;
+}
+
+.panel-body {
+    background: #fcfcfb !important;
+}
+
+@media (min-height: 800px) {
+    .panel-body {
+        height: 360px;
+        background: #fcfcfb !important;
+    }
+}
+
+
