@@ -20,6 +20,7 @@ import cn.enbug.shop.captcha.CaptchaController;
 import cn.enbug.shop.index.IndexController;
 import cn.enbug.shop.login.LoginController;
 import cn.enbug.shop.register.RegisterController;
+import cn.enbug.shop.user.center.CenterUserController;
 import com.jfinal.config.Routes;
 
 /**
@@ -41,6 +42,7 @@ public class FrontRoutes extends Routes {
         add("/login", LoginController.class);
         add("/register", RegisterController.class);
         add("/captcha", CaptchaController.class);
+        add("/user/center", CenterUserController.class);
     }
 
 }
