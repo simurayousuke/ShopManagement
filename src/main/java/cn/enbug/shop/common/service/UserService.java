@@ -30,17 +30,13 @@ import com.jfinal.plugin.activerecord.Db;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.9
+ * @version 1.2.10
  * @since 1.0.0
  */
 public class UserService {
 
     public static final UserService ME = Duang.duang(UserService.class);
     private static final User USER_DAO = new User().dao();
-
-    private UserService(){
-        // singleton
-    }
 
     /**
      * get hashed password.

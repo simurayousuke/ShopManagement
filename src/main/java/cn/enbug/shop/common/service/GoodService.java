@@ -16,6 +16,13 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.exception.LogException;
+import cn.enbug.shop.common.model.Good;
+import cn.enbug.shop.common.model.Log;
+import cn.enbug.shop.common.model.Shop;
+import com.jfinal.aop.Duang;
+import com.jfinal.kit.StrKit;
+
 /**
  * Good service.
  *
@@ -25,10 +32,31 @@ package cn.enbug.shop.common.service;
  */
 public class GoodService {
 
-    public static final GoodService ME = new GoodService();
+    public static final GoodService ME = Duang.duang(GoodService.class);
+    private static final Good GOOD_DAO = new Good().dao();
 
     private GoodService() {
         // singleton
+    }
+
+    public boolean insert(String token, String ip, String goodName, String description, double price, String avator) {
+        // name, shop id,uuid, description, price, avator
+        Shop shop = ShopService.ME.findShopByToken(token);
+        if (null == shop) {
+            return false;
+        }
+        int shopId = shop.getId();
+        Good good = new Good().setGoodName(goodName).setShopId(shopId).setUuid(StrKit.getRandomUUID())
+                .setDescription(description).setPrice(price).setAvator(avator);
+        return good.save();
+    }
+
+    public void del(int id){
+
+    }
+
+    public void del(String uuid){
+
     }
 
 }
