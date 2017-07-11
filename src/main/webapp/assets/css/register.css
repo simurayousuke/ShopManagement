@@ -1,6 +1,7 @@
 
 #regist-container {
     border: 1px solid #dddddd;
+    text-align: center;
     padding-left: 0;
     padding-right: 0;
 }
@@ -92,3 +93,11 @@
 div.progress-line.progress-active {
     background: #0a67fb;
 }
+
+.success-font {
+    margin-left: 20px;
+    font-size: 20px;
+    position: relative;
+    top: 5px;
+}
+
