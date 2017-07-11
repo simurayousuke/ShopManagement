@@ -16,9 +16,7 @@
 
 package cn.enbug.shop.common.service;
 
-import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.model.Good;
-import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.StrKit;
@@ -51,11 +49,11 @@ public class GoodService {
         return good.save();
     }
 
-    public void del(int id){
+    public void del(int id) {
 
     }
 
-    public void del(String uuid){
+    public void del(String uuid) {
 
     }
 

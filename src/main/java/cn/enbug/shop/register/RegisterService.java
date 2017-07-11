@@ -67,7 +67,7 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        if(null != USER_SRV.findUserByPhoneNumber(phone)){
+        if (null != USER_SRV.findUserByPhoneNumber(phone)) {
             return Ret.fail("phone already used.");
         }
         String activeCode = ShortMessageCaptchaService.ME.generateActiveCodeForPhoneNumberAndGet(phone);
@@ -95,12 +95,12 @@ class RegisterService {
      * @return boolean
      */
     Ret handleStep2(String code, String username, String password, String ip) {
-        if(null != USER_SRV.findUserByUsername(username)){
+        if (null != USER_SRV.findUserByUsername(username)) {
             return Ret.fail("User already exists.");
         }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
         if (null != number) {
-            if(USER_SRV.regUserByPhoneNumber(ip, username, password, number)){
+            if (USER_SRV.regUserByPhoneNumber(ip, username, password, number)) {
                 RedisKit.delActiveCodeForPhoneNumber(code);
                 return Ret.succeed();
             }
@@ -108,7 +108,7 @@ class RegisterService {
         }
         String email = RedisKit.getEmailAddressByActiveCode(code);
         if (null != email) {
-            if(USER_SRV.regUserByEmail(ip, username, password, email)){
+            if (USER_SRV.regUserByEmail(ip, username, password, email)) {
                 RedisKit.delActiveCodeForEmail(code);
                 return Ret.succeed();
             }
