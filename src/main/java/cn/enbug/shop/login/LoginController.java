@@ -18,7 +18,6 @@ package cn.enbug.shop.login;
 
 import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
-import cn.enbug.shop.common.kit.IpKit;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Before;
@@ -54,7 +53,7 @@ public class LoginController extends BaseController {
     public void username() {
         String username = getPara("username");
         String password = getPara("pwd");
-        String ip = IpKit.getRealIp(getRequest());
+        String ip = getIp();
         Ret ret = SRV.loginByUsername(username, password, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
@@ -69,7 +68,7 @@ public class LoginController extends BaseController {
     @Before({POST.class, PhoneLoginValidator.class})
     public void phone() {
         String phone = getPara("phone");
-        String ip = IpKit.getRealIp(getRequest());
+        String ip = getIp();
         Ret ret = SRV.loginByPhone(phone, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
@@ -85,7 +84,7 @@ public class LoginController extends BaseController {
     public void email() {
         String email = getPara("email");
         String password = getPara("pwd");
-        String ip = IpKit.getRealIp(getRequest());
+        String ip = getIp();
         Ret ret = SRV.loginByEmail(email, password, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);

@@ -18,7 +18,6 @@ package cn.enbug.shop.register;
 
 import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
-import cn.enbug.shop.common.kit.IpKit;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
@@ -54,7 +53,7 @@ public class RegisterController extends BaseController {
     @Before({POST.class, ImageCaptchaValidator.class, EmailRegisterValidator.class})
     public void email() {
         String email = getPara("email");
-        String ip = IpKit.getRealIp(getRequest());
+        String ip = getIp();
         Ret ret = SRV.registerByEmail(email, ip);
         renderJson(ret);
     }
@@ -65,7 +64,7 @@ public class RegisterController extends BaseController {
     @Before({POST.class, PhoneRegisterValidator.class})
     public void phone() {
         String phone = getPara("phone");
-        String ip = IpKit.getRealIp(getRequest());
+        String ip = getIp();
         Ret ret = SRV.registerByPhone(phone, ip);
         renderJson(ret);
     }

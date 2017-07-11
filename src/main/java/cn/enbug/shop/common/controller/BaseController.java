@@ -16,6 +16,7 @@
 
 package cn.enbug.shop.common.controller;
 
+import cn.enbug.shop.common.kit.IpKit;
 import com.jfinal.core.ActionException;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;
@@ -123,6 +124,10 @@ public abstract class BaseController extends Controller {
 
     public BigDecimal getParaToBigDecimal(String name) {
         return toBigDecimal(getPara(name), null);
+    }
+
+    public String getIp() {
+        return IpKit.getRealIp(getRequest());
     }
 
 }
