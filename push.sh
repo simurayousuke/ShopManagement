@@ -17,6 +17,7 @@ git commit -m "$2"
 echo ----------------------------------
 git push
 echo ----------------------------------
+echo -n "Push huawei & github?y/[n]"
 case $1 in
     a|A|all|ALL)
         ;;
