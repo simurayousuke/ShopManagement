@@ -1,0 +1,39 @@
+#set(title="上传")
+#@layout()
+
+#define body()
+<div id="upload" class="uploader">
+    <div class="uploader-message text-center">
+        <div class="content"></div>
+        <button type="button" class="close">×</button>
+    </div>
+    <div class="uploader-files file-list file-list-grid"></div>
+    <div>
+        <hr class="divider">
+        <div class="uploader-status pull-right text-muted"></div>
+        <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
+        <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> 开始上传
+        </button>
+    </div>
+</div>
+#end
+
+#define css()
+<link href="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+#end
+
+#define js()
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+<script>
+    $('#upload').uploader({
+        autoUpload: true,
+        url: '/upload',
+        responseHandler: function (responseObject) {
+            var data = JSON.parse(responseObject.response);
+            if (!data.status) {
+                return data.msg;
+            }
+        }
+    });
+</script>
+#end

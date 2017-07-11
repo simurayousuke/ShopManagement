@@ -17,14 +17,11 @@
 package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.model.Log;
+import cn.enbug.shop.common.plugin.oss.Oss;
 import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
-import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.OSSObjectSummary;
-import com.aliyun.oss.model.ObjectListing;
 import com.aliyun.oss.model.PutObjectResult;
-import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 
 import java.io.File;
@@ -36,22 +33,16 @@ import java.util.List;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @see com.aliyun.oss
  * @since 1.0.0
  */
 public class OssService {
 
-    public static final OssService ME = new OssService();
-    private static final String BUCKET_NAME = "shopmanagement";
-    private static final String ENDPOINT = PropKit.get("ossWriter.endpoint");
-    private static final String KEY = PropKit.get("ossWriter.key");
-    private static final String SECRET = PropKit.get("ossWriter.secret");
-
-    private OSSClient client;
+    public static OssService ME;
 
     private OssService() {
-        client = new OSSClient(ENDPOINT, KEY, SECRET);
+
     }
 
     /**
@@ -89,7 +80,7 @@ public class OssService {
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
-        return client.putObject(BUCKET_NAME, key, input);
+        return Oss.upload(key, input);
     }
 
     /**
@@ -114,7 +105,7 @@ public class OssService {
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
-        return client.putObject(BUCKET_NAME, key, file);
+        return Oss.upload(key, file);
     }
 
     /**
@@ -126,8 +117,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public InputStream download(String key) {
-        OSSObject ossObject = client.getObject(BUCKET_NAME, key);
-        return ossObject.getObjectContent();
+        return Oss.download(key);
     }
 
     /**
@@ -138,8 +128,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public List<OSSObjectSummary> getList() {
-        ObjectListing objectListing = client.listObjects(BUCKET_NAME);
-        return objectListing.getObjectSummaries();
+        return Oss.getList();
     }
 
     /**
@@ -150,7 +139,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public void del(String key) {
-        client.deleteObject(BUCKET_NAME, key);
+        Oss.download(key);
     }
 
     /**
@@ -162,7 +151,7 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public boolean isExist(String key) {
-        return client.doesObjectExist(BUCKET_NAME, key);
+        return Oss.isExist(key);
     }
 
     /**
@@ -174,15 +163,19 @@ public class OssService {
      * @throws ClientException ClientException
      */
     public List<OSSObjectSummary> getFileList(String keyPrefix) {
-        ObjectListing objectListing = client.listObjects(BUCKET_NAME, keyPrefix);
-        return objectListing.getObjectSummaries();
+        return Oss.getFileList(keyPrefix);
     }
 
-    /**
-     * close oss client, should not be invoked until the program exit.
-     */
-    public void close() {
-        client.shutdown();
+    public String getFileType(String fileName) {
+        int index = fileName.lastIndexOf('.');
+        if (-1 == index) {
+            return "";
+        }
+        return fileName.substring(index);
+    }
+
+    public String getFileType(File file) {
+        return getFileType(file.getName());
     }
 
 }

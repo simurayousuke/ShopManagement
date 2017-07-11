@@ -24,6 +24,7 @@ import cn.enbug.shop.common.kit.DruidKit;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.ShortMessageKit;
 import cn.enbug.shop.common.model.MappingKit;
+import cn.enbug.shop.common.plugin.oss.OssPlugin;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallConfig;
@@ -139,6 +140,14 @@ public class Config extends JFinalConfig {
         return arp;
     }
 
+    private OssPlugin getOssPlugin() {
+        String bucketName = "shopmanagement";
+        String endpoint = PropKit.get("ossWriter.endpoint");
+        String key = PropKit.get("ossWriter.key");
+        String secret = PropKit.get("ossWriter.secret");
+        return new OssPlugin(bucketName, endpoint, key, secret);
+    }
+
     /**
      * Get RedisPlugin.
      *
@@ -163,6 +172,8 @@ public class Config extends JFinalConfig {
         me.setDevMode(P.getBoolean("devMode", false));
         me.setJsonFactory(new MixedJsonFactory());
         me.setViewType(ViewType.JFINAL_TEMPLATE);
+        me.setBaseUploadPath(P.get("baseUploadFile"));
+        me.setBaseDownloadPath(P.get("baseDownloadFile"));
     }
 
     /**
@@ -195,6 +206,7 @@ public class Config extends JFinalConfig {
         me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, P.getInt("redis.database.captcha")));
         me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, P.getInt("redis.database.activePhone")));
         me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, P.getInt("redis.database.activeEmail")));
+        me.add(getOssPlugin());
     }
 
     /**
