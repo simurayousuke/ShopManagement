@@ -97,13 +97,19 @@ class RegisterService {
         }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
         if (null != number) {
-            UserService.ME.regUserByPhoneNumber(ip, username, password, number);
-            return Ret.succeed();
+            if(UserService.ME.regUserByPhoneNumber(ip, username, password, number)){
+                RedisKit.delActiveCodeForPhoneNumber(code);
+                return Ret.succeed();
+            }
+            return Ret.fail("unknown error.");
         }
         String email = RedisKit.getEmailAddressByActiveCode(code);
         if (null != email) {
-            UserService.ME.regUserByEmail(ip, username, password, email);
-            return Ret.succeed();
+            if(UserService.ME.regUserByEmail(ip, username, password, email)){
+                RedisKit.delActiveCodeForEmail(code);
+                return Ret.succeed();
+            }
+            return Ret.fail("unknown error.");
         }
         return Ret.fail("invalidated active code.");
     }

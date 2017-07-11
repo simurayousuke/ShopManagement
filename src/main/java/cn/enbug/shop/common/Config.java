@@ -48,7 +48,7 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.13
+ * @version 1.0.14
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -173,7 +173,6 @@ public class Config extends JFinalConfig {
         me.setJsonFactory(new MixedJsonFactory());
         me.setViewType(ViewType.JFINAL_TEMPLATE);
         me.setBaseUploadPath(P.get("baseUploadFile"));
-        me.setBaseDownloadPath(P.get("baseDownloadFile"));
     }
 
     /**

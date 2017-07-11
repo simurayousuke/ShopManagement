@@ -227,7 +227,7 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByPhoneNumber(String number, String ip) {
-        if (null == findUserByPhoneNumber(number)) {
+        if (null != findUserByPhoneNumber(number)) {
             return false;
         }
         User user = initUser();
@@ -278,6 +278,9 @@ public class UserService {
      * @return boolean
      */
     public boolean regUserByPhoneNumber(String ip, String username, String password, String number) {
+        if(!initUserByPhoneNumber(number,ip)){
+            return false;
+        }
         User user = findUserByPhoneNumber(number).setUsername(username).setPwd(password);
         return regUser(user, ip);
     }
