@@ -88,7 +88,7 @@ $(document).ready(function () {
         }
         $.post('/register/phone', data, function (data) {
             if (data.status) {
-                location.href = 'register/step2/' + data.activeCode;
+                location.href = '/register/step2/' + data.activeCode;
             } else {
                 $.msg(data.msg);
                 updateCaptcha();

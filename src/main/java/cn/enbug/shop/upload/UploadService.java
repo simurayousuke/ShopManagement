@@ -27,7 +27,8 @@ import java.io.File;
  * 上传文件Service
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 class UploadService {
@@ -39,7 +40,7 @@ class UploadService {
         System.out.println(file.getParent());
         System.out.println(file.getName());
         String filename = file.getName();
-        String folder = file.getParent();
+        String folder = "test";
         String key = SRV.generateKey(folder, filename);
         String fileType = SRV.getFileType(filename);
         SRV.upload(key, filename, user.getId(), ip, fileType, file);

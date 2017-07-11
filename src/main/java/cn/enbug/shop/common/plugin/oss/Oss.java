@@ -30,7 +30,7 @@ import java.util.List;
  * Object Storage Service Plugin
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class Oss {
@@ -40,11 +40,7 @@ public class Oss {
 
     static void init(String bucketName, String endpoint, String key, String secret) {
         Oss.bucketName = bucketName;
-        try {
-            client = new OSSClient(endpoint, key, secret);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
+        client = new OSSClient(endpoint, key, secret);
     }
 
     public static PutObjectResult upload(String key, File file) {

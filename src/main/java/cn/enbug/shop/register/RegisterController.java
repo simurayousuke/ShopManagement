@@ -30,7 +30,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -73,7 +73,7 @@ public class RegisterController extends BaseController {
     @Before(GET.class)
     public void step2() {
         String activeCode = getPara();
-        if (SRV.handleStep2(activeCode)) {
+        if (SRV.validateStep2(activeCode)) {
             render("step2.html");
         } else {
             redirect("/register");
@@ -82,7 +82,11 @@ public class RegisterController extends BaseController {
 
     @Before(POST.class)
     public void step2handler() {
-
+        String username=getPara("username");
+        String password=getPara("pwd");
+        String activeCode=getPara("activeCode");
+        String ip = getIp();
+        renderJson(SRV.handleStep2(activeCode,username,password,ip));
     }
 
     @Before(GET.class)

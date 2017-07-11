@@ -17,6 +17,7 @@
 package cn.enbug.shop.register;
 
 import cn.enbug.shop.common.bean.Email;
+import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
@@ -27,7 +28,7 @@ import cn.enbug.shop.common.service.UserService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 class RegisterService {
@@ -71,14 +72,37 @@ class RegisterService {
     }
 
     /**
-     * handle register step 2.
+     * validate register step 2.
      *
      * @param code active code
      * @return boolean
      */
-    boolean handleStep2(String code) {
+    boolean validateStep2(String code) {
         return ShortMessageCaptchaService.ME.validateActiveCodeForPhoneNumber(code) ||
                 EMAIL_SRV.validateActiveCodeForEmail(code);
+    }
+
+    /**
+     * handle register step 2.
+     *
+     * @param code     active code
+     * @param username username
+     * @param password password
+     * @param ip       ip address
+     * @return boolean
+     */
+    Ret handleStep2(String code, String username, String password, String ip) {
+        String number = RedisKit.getPhoneNumberByActiveCode(code);
+        if (null != number) {
+            UserService.ME.regUserByPhoneNumber(ip, username, password, number);
+            return Ret.succeed();
+        }
+        String email = RedisKit.getEmailAddressByActiveCode(code);
+        if (null != email) {
+            UserService.ME.regUserByEmail(ip, username, password, email);
+            return Ret.succeed();
+        }
+        return Ret.fail();
     }
 
 }
