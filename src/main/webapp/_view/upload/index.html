@@ -24,16 +24,5 @@
 
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
-<script>
-    $('#upload').uploader({
-        autoUpload: true,
-        url: '/upload',
-        responseHandler: function (responseObject) {
-            var data = JSON.parse(responseObject.response);
-            if (!data.status) {
-                return data.msg;
-            }
-        }
-    });
-</script>
+<script src="/assets/js/upload.js"></script>
 #end
