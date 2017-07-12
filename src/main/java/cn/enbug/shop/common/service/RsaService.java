@@ -28,19 +28,18 @@ import java.security.spec.InvalidKeySpecException;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class RsaService {
 
-    public static final RsaService ME = new RsaService();
     private static final Logger LOG = LoggerFactory.getLogger(RsaService.class);
     private static RSAPrivateKey privateKey;
 
     /**
      * load private key
      */
-    private RsaService() {
+    public RsaService() {
         try {
             privateKey = RsaKit.getPrivateKeyFromFile(PropKit.get("rsa.privateKey"));
         } catch (IOException | InvalidKeySpecException | NoSuchAlgorithmException e) {

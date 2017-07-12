@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.6
+ * @version 1.0.7
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
@@ -47,8 +47,8 @@ public class EmailService {
     public static final EmailService ME = new EmailService();
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
     private static final String REGION = PropKit.get("mailSender.region");
-    private static final String KEY = RsaService.ME.decrypt(PropKit.get("mailSender.key"));
-    private static final String SECRET = RsaService.ME.decrypt(PropKit.get("mailSender.secret"));
+    private static final String KEY = Config.RSA_SERVICE.decrypt(PropKit.get("mailSender.key"));
+    private static final String SECRET = Config.RSA_SERVICE.decrypt(PropKit.get("mailSender.secret"));
     private static final UserService USER_SRV = UserService.ME;
 
     private EmailService() {
