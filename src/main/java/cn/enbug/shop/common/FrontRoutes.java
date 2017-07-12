@@ -22,8 +22,9 @@ import cn.enbug.shop.index.IndexController;
 import cn.enbug.shop.login.LoginController;
 import cn.enbug.shop.register.RegisterController;
 import cn.enbug.shop.search.SearchController;
+import cn.enbug.shop.shop.center.ShopCenterController;
+import cn.enbug.shop.shop.good.GoodAdminController;
 import cn.enbug.shop.upload.UploadController;
-import cn.enbug.shop.user.center.CenterUserController;
 import com.jfinal.config.Routes;
 
 /**
@@ -46,9 +47,10 @@ public class FrontRoutes extends Routes {
         add("/register", RegisterController.class);
         add("/captcha", CaptchaController.class);
         add("/upload", UploadController.class);
-        add("/user/center", CenterUserController.class);
+        add("/shop/center", ShopCenterController.class);
         add("/good", GoodController.class);
         add("/search", SearchController.class);
+        add("/shop/good", GoodAdminController.class);
     }
 
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.user.center;
+package cn.enbug.shop.shop.center;
 
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
@@ -30,7 +30,7 @@ import com.jfinal.core.Controller;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class CenterUserValidator extends BaseValidator {
+public class ShopCenterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {

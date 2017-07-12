@@ -14,36 +14,19 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.user.center;
+package cn.enbug.shop.shop.good;
 
 import cn.enbug.shop.common.controller.BaseController;
-import cn.enbug.shop.common.interceptor.UserInterceptor;
-import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.model.Shop;
-import cn.enbug.shop.common.service.ShopService;
-import com.jfinal.aop.Before;
-import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
- * 用户中心
- *
- * @author Hu Wenqiang
- * @version 1.0.1
+ * @author Yang Zhizhuang
+ * @version 1.0.0
  * @since 1.0.0
  */
-@Before({NoUrlPara.class, CenterUserValidator.class, UserInterceptor.class})
-public class CenterUserController extends BaseController {
-
-    private static final ShopService SHOP_SRV = ShopService.ME;
+public class GoodAdminController extends BaseController {
 
     public void index() {
-        Shop shop = SHOP_SRV.findShopByToken(getCookie(RedisKit.TOKEN));
-        setAttr("shop", shop);
         render("index.html");
-    }
-
-    public void newShop() {
-        render("newShop.html");
     }
 
 }
