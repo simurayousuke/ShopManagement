@@ -17,7 +17,6 @@
 package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.kit.RsaKit;
-import cn.enbug.shop.common.kit.ShortMessageKit;
 import com.jfinal.kit.PropKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,11 +39,11 @@ public class RsaService {
     /**
      * load private key
      */
-    public RsaService(){
+    public RsaService() {
         try {
             privateKey = RsaKit.getPrivateKeyFromFile(PropKit.get("rsa.privateKey"));
         } catch (IOException | InvalidKeySpecException | NoSuchAlgorithmException e) {
-            LOG.error(e.toString(),e);
+            LOG.error(e.toString(), e);
         }
     }
 
@@ -54,8 +53,8 @@ public class RsaService {
      * @param base64 String
      * @return String
      */
-    public String decrypt(String base64){
-        return RsaKit.decrypt(privateKey,base64);
+    public String decrypt(String base64) {
+        return RsaKit.decrypt(privateKey, base64);
     }
 
 }

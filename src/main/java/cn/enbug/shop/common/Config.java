@@ -42,7 +42,6 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-import org.omg.PortableInterceptor.Interceptor;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
@@ -56,12 +55,11 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 public class Config extends JFinalConfig {
 
+    public static final RsaService RSA_SERVICE = new RsaService();
     /**
      * Global config.
      */
     private static final Prop P = loadConfig();
-    public static final RsaService RSA_SERVICE = new RsaService();
-
     /**
      * Firewall for the database in case to avoid from sql injections.
      */
