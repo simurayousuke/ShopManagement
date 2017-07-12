@@ -32,4 +32,8 @@ public class GoodAdminController extends BaseController {
         render("index.html");
     }
 
+    public void newGood() {
+        render("newGood.html");
+    }
+
 }
