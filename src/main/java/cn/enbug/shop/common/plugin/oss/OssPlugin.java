@@ -22,7 +22,8 @@ import com.jfinal.plugin.IPlugin;
  * Object Storage Service Plugin
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
+ * @see com.jfinal.plugin.IPlugin
  * @since 1.0.0
  */
 public class OssPlugin implements IPlugin {
@@ -32,6 +33,12 @@ public class OssPlugin implements IPlugin {
     private String key;
     private String secret;
 
+    /**
+     * @param bucketName bucketName
+     * @param endpoint   end point
+     * @param key        key
+     * @param secret     secret
+     */
     public OssPlugin(String bucketName, String endpoint, String key, String secret) {
         this.bucketName = bucketName;
         this.endpoint = endpoint;
@@ -39,12 +46,20 @@ public class OssPlugin implements IPlugin {
         this.secret = secret;
     }
 
+    /**
+     * @return true if success
+     * @see com.jfinal.plugin.IPlugin#start()
+     */
     @Override
     public boolean start() {
         Oss.init(bucketName, endpoint, key, secret);
         return true;
     }
 
+    /**
+     * @return true if success
+     * @see com.jfinal.plugin.IPlugin#stop()
+     */
     @Override
     public boolean stop() {
         Oss.destroy();
