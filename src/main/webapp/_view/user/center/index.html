@@ -10,8 +10,11 @@
                 <strong>我的店铺</strong>
             </div>
             <div class="panel-body">
-                #include("noShop.html")
+                #if(shop)
                 #include("shop.html")
+                #else
+                #include("noShop.html")
+                #end
             </div>
         </div>
     </div>

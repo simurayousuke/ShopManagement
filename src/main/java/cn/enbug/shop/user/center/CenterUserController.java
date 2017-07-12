@@ -18,6 +18,9 @@ package cn.enbug.shop.user.center;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.UserInterceptor;
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.model.Shop;
+import cn.enbug.shop.common.service.ShopService;
 import com.jfinal.aop.Before;
 
 /**
@@ -29,8 +32,12 @@ import com.jfinal.aop.Before;
  */
 public class CenterUserController extends BaseController {
 
+    private static final ShopService SHOP_SRV = ShopService.ME;
+
     @Before({UserInterceptor.class, CenterUserValidator.class})
     public void index() {
+        Shop shop = SHOP_SRV.findShopByToken(getCookie(RedisKit.TOKEN));
+        setAttr("shop", shop);
         render("index.html");
     }
 
