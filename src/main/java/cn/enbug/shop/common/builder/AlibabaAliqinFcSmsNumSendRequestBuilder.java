@@ -50,7 +50,7 @@ public class AlibabaAliqinFcSmsNumSendRequestBuilder {
         req.setSmsType("normal");
         req.setSmsFreeSignName("庄云");
         Kv kv = Kv.by("name", name)
-                .set("platform", "庄云网")
+                .set("platform", "EnBug购物网")
                 .set("operation", operation)
                 .set("code", code);
         req.setSmsParamString(JsonKit.toJson(kv));
