@@ -21,16 +21,12 @@ import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class SingleSendMailRequestBuilder {
 
     private SingleSendMailRequest req;
-
-    private SingleSendMailRequestBuilder() {
-        req = new SingleSendMailRequest();
-    }
 
     public SingleSendMailRequestBuilder(Email email, String tag) {
         req = new SingleSendMailRequest();
