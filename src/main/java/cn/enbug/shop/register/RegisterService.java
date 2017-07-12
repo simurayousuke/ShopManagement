@@ -28,7 +28,7 @@ import cn.enbug.shop.common.service.UserService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.8
+ * @version 1.0.9
  * @since 1.0.0
  */
 class RegisterService {
@@ -104,7 +104,7 @@ class RegisterService {
         }
         String email = RedisKit.getEmailAddressByActiveCode(code);
         if (null != email) {
-            return handleEmail(code, ip, username, password, number);
+            return handleEmail(code, ip, username, password, email);
         }
         return Ret.fail("invalidated active code.");
     }
