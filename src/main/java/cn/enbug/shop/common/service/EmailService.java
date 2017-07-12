@@ -16,6 +16,7 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.Config;
 import cn.enbug.shop.common.bean.Email;
 import cn.enbug.shop.common.builder.SingleSendMailRequestBuilder;
 import cn.enbug.shop.common.kit.RedisKit;
@@ -36,7 +37,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
@@ -46,8 +47,8 @@ public class EmailService {
     public static final EmailService ME = new EmailService();
     private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
     private static final String REGION = PropKit.get("mailSender.region");
-    private static final String KEY = PropKit.get("mailSender.key");
-    private static final String SECRET = PropKit.get("mailSender.secret");
+    private static final String KEY = Config.RSA_SERVICE.decrypt(PropKit.get("mailSender.key"));
+    private static final String SECRET = Config.RSA_SERVICE.decrypt(PropKit.get("mailSender.secret"));
     private static final UserService USER_SRV = UserService.ME;
 
     private EmailService() {

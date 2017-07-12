@@ -25,6 +25,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.ShortMessageKit;
 import cn.enbug.shop.common.model.MappingKit;
 import cn.enbug.shop.common.plugin.oss.OssPlugin;
+import cn.enbug.shop.common.service.RsaService;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.util.JdbcConstants;
 import com.alibaba.druid.wall.WallConfig;
@@ -41,6 +42,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import org.omg.PortableInterceptor.Interceptor;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
@@ -48,7 +50,7 @@ import redis.clients.jedis.JedisPoolConfig;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.14
+ * @version 1.0.15
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -58,6 +60,7 @@ public class Config extends JFinalConfig {
      * Global config.
      */
     private static final Prop P = loadConfig();
+    public static final RsaService RSA_SERVICE = new RsaService();
 
     /**
      * Firewall for the database in case to avoid from sql injections.
@@ -84,9 +87,9 @@ public class Config extends JFinalConfig {
      * @return DruidPlugin for Postgres
      */
     public static DruidPlugin getDruidPlugin() {
-        String url = P.get("postgres.url");
-        String username = P.get("postgres.username");
-        String password = P.get("postgres.password");
+        String url = RSA_SERVICE.decrypt(P.get("postgres.url"));
+        String username = RSA_SERVICE.decrypt(P.get("postgres.username"));
+        String password = RSA_SERVICE.decrypt(P.get("postgres.password"));
         String driverClass = P.get("postgres.driverClass");
         DruidPlugin dp = new DruidPlugin(url, username, password, driverClass);
         if (null == wallFilter) {
@@ -143,8 +146,8 @@ public class Config extends JFinalConfig {
     private OssPlugin getOssPlugin() {
         String bucketName = "shopmanagement";
         String endpoint = PropKit.get("ossWriter.endpoint");
-        String key = PropKit.get("ossWriter.key");
-        String secret = PropKit.get("ossWriter.secret");
+        String key = RSA_SERVICE.decrypt(PropKit.get("ossWriter.key"));
+        String secret = RSA_SERVICE.decrypt(PropKit.get("ossWriter.secret"));
         return new OssPlugin(bucketName, endpoint, key, secret);
     }
 
@@ -156,10 +159,10 @@ public class Config extends JFinalConfig {
      * @return RedisPlugin Object
      */
     private RedisPlugin getRedisPlugin(String cacheName, int database) {
-        String host = P.get("redis.host");
-        int port = P.getInt("redis.port");
+        String host = RSA_SERVICE.decrypt(P.get("redis.host"));
+        int port = Integer.parseInt(RSA_SERVICE.decrypt(P.get("redis.port")));
         int timeout = P.getInt("redis.timeout");
-        String password = P.get("redis.password");
+        String password = RSA_SERVICE.decrypt(P.get("redis.password"));
         RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
         return configRedisPlugin(rp);
     }
@@ -243,8 +246,8 @@ public class Config extends JFinalConfig {
 
     private void initShortMessageKit() {
         String url = P.get("aldy.url");
-        String appkey = P.get("aldy.appkey");
-        String secret = P.get("aldy.secret");
+        String appkey = RSA_SERVICE.decrypt(P.get("aldy.appkey"));
+        String secret = RSA_SERVICE.decrypt(P.get("aldy.secret"));
         ShortMessageKit.init(url, appkey, secret);
     }
 
