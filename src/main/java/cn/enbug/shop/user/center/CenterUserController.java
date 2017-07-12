@@ -22,6 +22,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.service.ShopService;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * 用户中心
@@ -30,15 +31,19 @@ import com.jfinal.aop.Before;
  * @version 1.0.1
  * @since 1.0.0
  */
+@Before({NoUrlPara.class, CenterUserValidator.class, UserInterceptor.class})
 public class CenterUserController extends BaseController {
 
     private static final ShopService SHOP_SRV = ShopService.ME;
 
-    @Before({UserInterceptor.class, CenterUserValidator.class})
     public void index() {
         Shop shop = SHOP_SRV.findShopByToken(getCookie(RedisKit.TOKEN));
         setAttr("shop", shop);
         render("index.html");
+    }
+
+    public void newShop() {
+        render("newShop.html");
     }
 
 }
