@@ -1,4 +1,4 @@
-#set(title="个人中心")
+#set(title="商品管理")
 
 #@layout()
 
@@ -10,7 +10,58 @@
                 <strong>我的商品</strong>
             </div>
             <div class="panel-body">
-
+                <table class="table datatable table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>商品名称</th>
+                        <th>单价</th>
+                        <th>上架时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>曹迈肉</td>
+                        <td>¥1</td>
+                        <td>2017-7-12</td>
+                        <td>
+                            <a href=""><i class="icon-edit"></i> </a>
+                            <a href="" class="text-danger"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>马天荟肉</td>
+                        <td> ¥2</td>
+                        <td>2017-7-12</td>
+                        <td>
+                            <a href=""><i class="icon-edit"></i> </a>
+                            <a href="" class="text-danger"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>乌夫芸肉</td>
+                        <td> ¥5</td>
+                        <td>2017-7-12</td>
+                        <td>
+                            <a href=""><i class="icon-edit"></i> </a>
+                            <a href="" class="text-danger"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>惊蛰舞王肉</td>
+                        <td> 免费</td>
+                        <td>2017-7-12</td>
+                        <td>
+                            <a href=""><i class="icon-edit"></i> </a>
+                            <a href="" class="text-danger"><i class="icon-trash"></i></a>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -19,10 +70,12 @@
 
 #define css()
 <link href="//cdn.bootcss.com/zui/1.7.0/lib/board/zui.board.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/center.css">
+<link href="//cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/shopgood.css">
 #end
 
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/board/zui.board.min.js"></script>
-<script src="/assets/js/center.js"></script>
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.min.js"></script>
+<script src="/assets/js/shopgood.js"></script>
 #end

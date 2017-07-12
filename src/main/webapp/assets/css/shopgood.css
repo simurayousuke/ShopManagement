@@ -1,0 +1,12 @@
+.full {
+    display: block;
+    width: 100%;
+}
+
+.boards {
+    margin-top: 40px;
+}
+
+.panel-heading {
+    font-size: 17px;
+}
