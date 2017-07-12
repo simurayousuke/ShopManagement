@@ -22,14 +22,14 @@ $(document).ready(function () {
     $('#send-button').click(function () {
         var captcha = captchaInput.val();
         var number = phone.val();
-        var that = $(this);
+        var that = $('#send-button');
         that.prop('disabled', true);
         $.post('/captcha/phone', {captcha: captcha, phone: number}, function (data) {
             if (data.status) {
                 $.msg('发送成功');
                 var count = 59;
                 var timer = setInterval(function () {
-                    that.prop('value', count-- + 's');
+                    that[0].innerText = count-- + 's';
                     if (count === 0) {
                         that.prop('value', '重新获取');
                         that.removeProp('disabled');
