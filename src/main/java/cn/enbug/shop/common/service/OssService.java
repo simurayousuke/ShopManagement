@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @see com.aliyun.oss
  * @since 1.0.0
  */
@@ -76,7 +76,7 @@ public class OssService {
     public PutObjectResult upload(String key, String filename, int userId,
                                   String ip, String fileType, InputStream input, long size) {
         cn.enbug.shop.common.model.File f = new cn.enbug.shop.common.model.File()
-                .setUrl(key).setFileName(filename).setSize(size).setType(fileType);
+                .setUrl(key).setFileName(filename).setSize(size).setFileType(fileType);
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
@@ -101,7 +101,7 @@ public class OssService {
     public PutObjectResult upload(String key, String filename, int userId,
                                   String ip, String fileType, File file) {
         cn.enbug.shop.common.model.File f = new cn.enbug.shop.common.model.File()
-                .setUrl(key).setFileName(filename).setSize(file.length()).setType(fileType);
+                .setUrl(key).setFileName(filename).setSize(file.length()).setFileType(fileType);
         f.save();
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
         log.setJoinId(f.getId()).save();
