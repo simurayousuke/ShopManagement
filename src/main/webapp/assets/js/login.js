@@ -33,7 +33,7 @@ $(document).ready(function () {
                 var timer = setInterval(function () {
                     that[0].innerText = count-- + 's';
                     if (count === 0) {
-                        that.prop('value', '重新获取');
+                        that[0].innerText = '重新获取';
                         that.removeProp('disabled');
                         clearInterval(timer);
                     }
