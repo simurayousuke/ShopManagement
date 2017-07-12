@@ -33,13 +33,13 @@ import java.util.List;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @see com.aliyun.oss
  * @since 1.0.0
  */
 public class OssService {
 
-    public static OssService ME;
+    public static final OssService ME = new OssService();
 
     private OssService() {
         // singleton
