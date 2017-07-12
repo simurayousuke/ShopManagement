@@ -17,12 +17,15 @@
 package cn.enbug.shop.good;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.UserInterceptor;
+import com.jfinal.aop.Before;
 
 /**
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
  */
+@Before(UserInterceptor.class)
 public class GoodController extends BaseController {
 
     public void index() {

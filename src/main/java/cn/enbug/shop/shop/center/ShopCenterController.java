@@ -17,6 +17,7 @@
 package cn.enbug.shop.shop.center;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Shop;
@@ -28,10 +29,10 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  * 用户中心
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
-@Before({NoUrlPara.class, ShopCenterValidator.class, UserInterceptor.class})
+@Before({NoUrlPara.class, NeedLogInInterceptor.class})
 public class ShopCenterController extends BaseController {
 
     private static final ShopService SHOP_SRV = ShopService.ME;

@@ -17,12 +17,15 @@
 package cn.enbug.shop.shop.good;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
+import com.jfinal.aop.Before;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
+@Before(NeedLogInInterceptor.class)
 public class GoodAdminController extends BaseController {
 
     public void index() {
