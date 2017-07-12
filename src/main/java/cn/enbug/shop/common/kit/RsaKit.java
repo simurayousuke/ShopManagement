@@ -27,7 +27,8 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class RsaKit {
@@ -35,11 +36,11 @@ public class RsaKit {
     private static final String KEY_ALGORITHM = "RSA";
 
     private static String bytesToString(byte[] encrytpByte) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Byte bytes : encrytpByte) {
-            result += (char) bytes.intValue();
+            result.append((char) bytes.intValue());
         }
-        return result;
+        return result.toString();
     }
 
     /**
