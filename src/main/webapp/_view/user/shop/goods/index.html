@@ -1,0 +1,32 @@
+#set(title="个人中心")
+
+#@layout()
+
+#define body()
+<div class="container">
+    <div class="boards">
+        <div class="board panel panel-primary full">
+            <div class="panel-heading">
+                <strong>我的商品</strong>
+            </div>
+            <div class="panel-body">
+                #if(shop)
+                #include("shop.html")
+                #else
+                #include("noShop.html")
+                #end
+            </div>
+        </div>
+    </div>
+</div>
+#end
+
+#define css()
+<link href="//cdn.bootcss.com/zui/1.7.0/lib/board/zui.board.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/center.css">
+#end
+
+#define js()
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/board/zui.board.min.js"></script>
+<script src="/assets/js/center.js"></script>
+#end
