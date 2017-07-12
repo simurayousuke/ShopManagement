@@ -33,6 +33,7 @@ import java.security.spec.InvalidKeySpecException;
  */
 public class RsaService {
 
+    public static final RsaService ME = new RsaService();
     private static final Logger LOG = LoggerFactory.getLogger(RsaService.class);
     private static RSAPrivateKey privateKey;
 

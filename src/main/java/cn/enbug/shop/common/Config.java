@@ -59,7 +59,7 @@ public class Config extends JFinalConfig {
      * Global config.
      */
     private static final Prop P = loadConfig();
-    public static final RsaService RSA_SERVICE=new RsaService();
+    private static final RsaService RSA_SERVICE = RsaService.ME;
     /**
      * Firewall for the database in case to avoid from sql injections.
      */
