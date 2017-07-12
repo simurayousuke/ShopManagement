@@ -17,6 +17,7 @@
 package cn.enbug.shop.common;
 
 import cn.enbug.shop.captcha.CaptchaController;
+import cn.enbug.shop.good.GoodController;
 import cn.enbug.shop.index.IndexController;
 import cn.enbug.shop.login.LoginController;
 import cn.enbug.shop.register.RegisterController;
@@ -45,6 +46,7 @@ public class FrontRoutes extends Routes {
         add("/captcha", CaptchaController.class);
         add("/upload", UploadController.class);
         add("/user/center", CenterUserController.class);
+        add("/good", GoodController.class);
     }
 
 }
