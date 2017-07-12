@@ -31,9 +31,9 @@ $(document).ready(function () {
                 $.msg('发送成功');
                 var count = 59;
                 var timer = setInterval(function () {
-                    that.prop('value', count-- + 's');
+                    that.text(count-- + 's');
                     if (count === 0) {
-                        that.prop('value', '重新获取');
+                        that.text('重新获取');
                         that.removeProp('disabled');
                         clearInterval(timer);
                     }
