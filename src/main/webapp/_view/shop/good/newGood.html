@@ -52,17 +52,27 @@
         <textarea id="good-content" placeholder="描述一下您的商品吧！" class="form-control kindeditor"
                   style="height:150px;"></textarea>
     </div>
+    <div class="form-horizontal" style="margin-left: 80px;margin-top: 10px">
+        <div class="form-group" style="margin-bottom: 10px">
+            <label for="good-captcha" class="form-label" style="margin-left: 10px">验证码：</label>
+            <div class="col-sm-6" style="display: inline">
+                <input class="form-control" placeholder="验证码" type="text" id="good-captcha">
+            </div>
+            <img alt="" src="" class="captcha" style="height: 32px;width: 86.4px" title="点击刷新">
+        </div>
+        <button class="btn btn-primary">确认上架</button>
+    </div>
 </div>
 #end
 
 #define css()
 <link href="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
-<link href="/assets/css/newgood.css" rel="stylesheet">
+<link href="/assets/css/newGood.css" rel="stylesheet">
 #end
 
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
 <script src="/assets/js/upload.js"></script>
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/kindeditor.min.js"></script>
-<script src="/assets/js/newgood.js"></script>
+<script src="/assets/js/newGood.js"></script>
 #end
