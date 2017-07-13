@@ -49,7 +49,7 @@ $(document).ready(function () {
             if (!data.status) {
                 return data.msg;
             } else {
-                $('#create-shop-avator').val(url);
+                $('#create-shop-avator').val(data.url);
             }
         },
         filters: {
