@@ -54,12 +54,12 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return get("uuid");
 	}
 
-	public M setAvator(java.lang.Integer avator) {
+	public M setAvator(java.lang.String avator) {
 		set("avator", avator);
 		return (M)this;
 	}
 
-	public java.lang.Integer getAvator() {
+	public java.lang.String getAvator() {
 		return get("avator");
 	}
 
