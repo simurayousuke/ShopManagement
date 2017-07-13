@@ -20,7 +20,6 @@ import cn.enbug.shop.common.bean.Email;
 import cn.enbug.shop.common.builder.SingleSendMailRequestBuilder;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.login.LoginService;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
@@ -131,7 +130,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean bindEmailAddressForUsername(String username, String emailAddress) {
-        User user =USER_SRV.findUserByUsername(username);
+        User user = USER_SRV.findUserByUsername(username);
         return bindEmailAddressForUser(user, emailAddress);
     }
 
