@@ -16,22 +16,25 @@
 
 package cn.enbug.shop.login;
 
+import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
-import cn.enbug.shop.common.service.UserService;
+import cn.enbug.shop.common.model.Log;
+import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.register.RegisterService;
 
 /**
  * 登录服务
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.6
+ * @version 1.1.0
  * @since 1.0.0
  */
-class LoginService {
+public class LoginService {
 
-    static final LoginService ME = new LoginService();
-    private static final UserService SRV = UserService.ME;
+    public static final LoginService me = new LoginService();
+    private static final User userDao = new User().dao();
 
     /**
      * 用户名登录
@@ -42,10 +45,19 @@ class LoginService {
      * @return 返回信息
      */
     Ret loginByUsername(String username, String password, String ip) {
-        String token = SRV.login(username, password, ip);
-        if (null == token) {
+        User user = findUserByUsername(username);
+        if (null == user) {
             return Ret.fail("username or password wrong");
         }
+        String pwd = RegisterService.me.hash(password, user.getSalt());
+        if (!pwd.equals(user.getPwd())) {
+            return Ret.fail("username or password wrong");
+        }
+        Log log = new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription("true");
+        if (!log.save()) {
+            throw new LogException("Can not log login action");
+        }
+        String token = RedisKit.setAndGetToken(user);
         return Ret.succeed().set(RedisKit.COOKIE_ID, token);
     }
 
@@ -58,10 +70,19 @@ class LoginService {
      * @return 返回信息
      */
     Ret loginByEmail(String email, String password, String ip) {
-        String token = SRV.loginByEmail(email, password, ip);
-        if (null == token) {
-            return Ret.fail("email or password wrong");
+        User user = findUserByEmail(email);
+        if (null == user) {
+            return Ret.fail("wrong email or password");
         }
+        String pwd = RegisterService.me.hash(password, user.getSalt());
+        if (!pwd.equals(user.getPwd())) {
+            return Ret.fail("wrong email or password");
+        }
+        Log log = new Log().setIp(ip).setOperation("login").setUserId(user.getId()).setDescription("true");
+        if (!log.save()) {
+            throw new LogException("Can not log email login action");
+        }
+        String token = RedisKit.setAndGetToken(user);
         return Ret.succeed().set(RedisKit.COOKIE_ID, token);
     }
 
@@ -73,11 +94,40 @@ class LoginService {
      * @return 返回信息
      */
     Ret loginByPhone(String phone, String ip) {
-        String token = SRV.loginByPhone(phone, ip);
-        if (null == token) {
-            return Ret.fail("phone or captcha wrong");
+        User user = findUserByPhone(phone);
+        if (null == user) {
+            return Ret.fail("wrong phone or captcha");
         }
+        Log log = new Log().setUserId(user.getId()).setIp(ip).setOperation("phoneLogin").setDescription("true");
+        if (!log.save()) {
+            throw new LogException("Can not log username phoneLogin action");
+        }
+        String token = RedisKit.setAndGetToken(user);
         return Ret.succeed().set(RedisKit.COOKIE_ID, token);
+    }
+
+    /**
+     * find user by phone number
+     *
+     * @param phoneNumber phone number
+     * @return User object
+     */
+    public User findUserByPhone(String phoneNumber) {
+        return null == phoneNumber ? null : userDao.findFirst(userDao.getSqlPara("user.findByPhone", phoneNumber));
+    }
+
+    public User findUserByUsername(String username) {
+        return null == username ? null : userDao.findFirst(userDao.getSqlPara("user.findByUsername", username));
+    }
+
+    /**
+     * find user by email
+     *
+     * @param email email
+     * @return User object
+     */
+    public User findUserByEmail(String email) {
+        return null == email ? null : userDao.findFirst(userDao.getSqlPara("user.findByEmail", email));
     }
 
 }

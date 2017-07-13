@@ -22,6 +22,8 @@ import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
 import cn.enbug.shop.common.service.UserService;
+import cn.enbug.shop.login.LoginService;
+import com.jfinal.kit.HashKit;
 
 /**
  * 注册服务
@@ -31,9 +33,10 @@ import cn.enbug.shop.common.service.UserService;
  * @version 1.0.9
  * @since 1.0.0
  */
-class RegisterService {
+public class RegisterService {
 
-    static final RegisterService ME = new RegisterService();
+    public static final RegisterService me = new RegisterService();
+    public static final RegisterService ME = new RegisterService();
     private static final UserService USER_SRV = UserService.ME;
     private static final EmailService EMAIL_SRV = EmailService.ME;
 
@@ -60,6 +63,21 @@ class RegisterService {
     }
 
     /**
+     * get hashed password.
+     *
+     * @param password password
+     * @param salt     salt
+     * @return hashed password
+     */
+    public String hash(String password, String salt) {
+        String ret = HashKit.sha256(password + salt);
+        for (int i = 0; i < 2; i++) {
+            ret = HashKit.sha256(ret + salt);
+        }
+        return ret;
+    }
+
+    /**
      * 手机号注册
      *
      * @param phone 手机号
@@ -67,7 +85,7 @@ class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        if (null != USER_SRV.findUserByPhoneNumber(phone)) {
+        if (null != LoginService.me.findUserByPhone(phone)) {
             return Ret.fail("phone already used.");
         }
         String activeCode = ShortMessageCaptchaService.ME.generateActiveCodeForPhoneNumberAndGet(phone);
@@ -95,7 +113,7 @@ class RegisterService {
      * @return boolean
      */
     Ret handleStep2(String code, String username, String password, String ip) {
-        if (null != USER_SRV.findUserByUsername(username)) {
+        if (null != LoginService.me.findUserByUsername(username)) {
             return Ret.fail("User already exists.");
         }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
