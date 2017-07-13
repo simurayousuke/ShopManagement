@@ -17,12 +17,9 @@
 package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.HashKit;
-import com.jfinal.kit.StrKit;
-import com.jfinal.plugin.activerecord.Db;
 
 /**
  * The service for user-oriented actions.
@@ -92,22 +89,6 @@ public class UserService {
     }
 
     /**
-     * register a user and log the action.
-     *
-     * @param user User object
-     * @param ip   ip address
-     * @return success or not
-     * @deprecated
-     */
-    @Deprecated
-    public boolean register(User user, String ip) {
-        user.setSalt(StrKit.getRandomUUID());
-        user.setPwd(hash(user.getPwd(), user.getSalt()));
-        return Db.tx(4, () -> user.save() &&
-                new Log().setIp(ip).setOperation("register").setUserId(user.getId()).save());
-    }
-
-    /**
      * validate token.
      *
      * @param token token
@@ -115,103 +96,6 @@ public class UserService {
      */
     public User validateToken(String token) {
         return RedisKit.getUserByToken(token);
-    }
-
-    /**
-     * init a user with uuid.
-     *
-     * @return User Object
-     */
-    private User initUser() {
-        User user = new User();
-        user.setUuid(StrKit.getRandomUUID()).save();
-        return user;
-    }
-
-    private User initUserWithoutSave() {
-        User user = new User();
-        user.setUuid(StrKit.getRandomUUID());
-        return user;
-    }
-
-    /**
-     * init user with phone number.
-     *
-     * @param phone phone number
-     * @param ip    ip address
-     * @return boolean
-     */
-    public boolean initUserByPhoneNumber(String phone, String ip) {
-        if (null != findUserByPhoneNumber(phone)) {
-            return false;
-        }
-        User user = initUser();
-        new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
-        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(user, phone);
-    }
-
-    /**
-     * init user with email.
-     *
-     * @param email email address
-     * @param ip    ip address
-     * @return boolean
-     */
-    public boolean initUserByEmail(String email, String ip) {
-        User select = findUserByEmail(email);
-        if (null != select) {
-            return 0 == select.getEmailStatus();
-        }
-        User user = new User();
-        user.setUuid(StrKit.getRandomUUID());
-        user.setEmail(email);
-        user.setEmailStatus(0);
-        return Db.tx(() -> user.save() && new Log().setIp(ip).setOperation("initEmail").setUserId(user.getId()).save());
-    }
-
-    /**
-     * reg user.
-     *
-     * @param user User Object
-     * @param ip   ip address
-     * @return boolean
-     */
-    private boolean regUser(User user, String ip) {
-        user.setSalt(StrKit.getRandomUUID());
-        user.setPwd(hash(user.getPwd(), user.getSalt()));
-        return Db.tx(4, () -> user.update() &&
-                new Log().setIp(ip).setOperation("regUser").setUserId(user.getId()).save());
-    }
-
-    /**
-     * reg user.
-     *
-     * @param ip       ip address
-     * @param username username
-     * @param password password
-     * @param phone    phone number
-     * @return boolean
-     */
-    public boolean regUserByPhoneNumber(String ip, String username, String password, String phone) {
-        if (!initUserByPhoneNumber(phone, ip)) {
-            return false;
-        }
-        User user = findUserByPhoneNumber(phone).setUsername(username).setPwd(password);
-        return regUser(user, ip);
-    }
-
-    /**
-     * reg user.
-     *
-     * @param ip       ip address
-     * @param username username
-     * @param password password
-     * @param email    email address
-     * @return boolean
-     */
-    public boolean regUserByEmail(String ip, String username, String password, String email) {
-        User user = findUserByEmail(email).setUsername(username).setPwd(password).setEmailStatus(1);
-        return regUser(user, ip);
     }
 
 }
