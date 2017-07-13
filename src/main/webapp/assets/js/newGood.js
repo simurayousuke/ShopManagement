@@ -33,6 +33,7 @@ $(document).ready(function () {
         var number = data.number;
         data.description = description;
         var captcha = $('#good-captcha').val();
+        data.captcha = captcha;
         if (name.length < 1) {
             $.msg('请输入商品名');
             return;
