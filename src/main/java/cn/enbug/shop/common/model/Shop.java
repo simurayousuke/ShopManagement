@@ -24,7 +24,7 @@ public class Shop extends BaseShop<Shop> {
      * @param token       owner token
      * @param avator      avator id
      */
-    public Shop(String name, String description, String token, int avator) {
+    public Shop(String name, String description, String token, String avator) {
         setShopName(name);
         setDescription(description);
         setUuid(StrKit.getRandomUUID());
@@ -68,7 +68,7 @@ public class Shop extends BaseShop<Shop> {
      * @param userId      user id
      * @param avator      avator id
      */
-    public Shop(String name, String description, int userId, int avator) {
+    public Shop(String name, String description, int userId, String avator) {
         setShopName(name);
         setDescription(description);
         setUuid(StrKit.getRandomUUID());
