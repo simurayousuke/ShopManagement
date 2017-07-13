@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Good service.
@@ -38,9 +39,22 @@ import java.io.IOException;
 public class GoodService {
 
     public static final GoodService ME = Duang.duang(GoodService.class);
-    public static final OpenSearchService OPEN_SEARCH_SERVICE = OpenSearchService.ME;
+    private static final OpenSearchService OPEN_SEARCH_SERVICE = OpenSearchService.ME;
     private static final Logger LOG = LoggerFactory.getLogger(GoodService.class);
     private static final Good GOOD_DAO = new Good().dao();
+
+    public List<Good> getGoodListByShopId(int id) {
+        return GOOD_DAO.find(GOOD_DAO.getSqlPara("good.findByShopId", id));
+    }
+
+    public List<Good> getGoodListByToken(String token) {
+        Shop shop = ShopService.ME.findShopByToken(token);
+        if (null == shop) {
+            return null;
+        }
+        return getGoodListByShopId(shop.getId());
+    }
+
 
     /**
      * insert.
@@ -68,7 +82,7 @@ public class GoodService {
             return false;
         }
         //String id, String name, String description, int shopId, String avator, int saleCount, double price, int status
-        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number,uuid);
+        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number, uuid);
         try {
             OPEN_SEARCH_SERVICE.add(builder.build());
         } catch (IOException e) {

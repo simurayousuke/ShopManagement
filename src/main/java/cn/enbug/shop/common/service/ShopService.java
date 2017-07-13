@@ -17,10 +17,13 @@
 package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.plugin.activerecord.Db;
+
+import java.util.ArrayList;
 
 /**
  * Shop service.

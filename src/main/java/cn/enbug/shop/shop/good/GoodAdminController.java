@@ -19,11 +19,15 @@ package cn.enbug.shop.shop.good;
 import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.model.Good;
+import cn.enbug.shop.common.service.GoodService;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.POST;
+
+import java.util.List;
 
 /**
  * @author Yang Zhizhuang
@@ -35,6 +39,10 @@ public class GoodAdminController extends BaseController {
 
     @Before(GET.class)
     public void index() {
+        List<Good> list = GoodService.ME.getGoodListByToken(getCookie(RedisKit.TOKEN));
+        if (null != list) {
+            setAttr("list", list);
+        }
         render("index.html");
     }
 
