@@ -33,7 +33,7 @@ import java.util.List;
  * Good service.
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class GoodService {
@@ -75,6 +75,9 @@ public class GoodService {
             return false;
         }
         int shopId = shop.getId();
+        String shopName = shop.getShopName();
+        int ownerId = shop.getOwnerUserId();
+        String ownerName=UserService.ME.findUserById(ownerId).getUsername();
         String uuid = StrKit.getRandomUUID();
         Good good = new Good().setGoodName(goodName).setShopId(shopId).setUuid(uuid)
                 .setDescription(description).setPrice(price).setAvator(avator).setNumber(number);
@@ -82,7 +85,7 @@ public class GoodService {
             return false;
         }
         //String id, String name, String description, int shopId, String avator, int saleCount, double price, int status
-        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number, uuid);
+        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number, uuid,shopName,ownerId,ownerName);
         try {
             OPEN_SEARCH_SERVICE.add(builder.build());
         } catch (IOException e) {

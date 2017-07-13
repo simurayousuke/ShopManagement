@@ -26,7 +26,7 @@ import com.jfinal.kit.HashKit;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.11
+ * @version 1.2.12
  * @since 1.0.0
  */
 public class UserService {
@@ -60,6 +60,16 @@ public class UserService {
             return null;
         }
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByUsername", username));
+    }
+
+    /**
+     * find user by id
+     *
+     * @param id id
+     * @return User object
+     */
+    public User findUserById(int id){
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findById", id));
     }
 
     /**
