@@ -13,29 +13,9 @@
     </div>
     #if(word)
     #if(list)
-    <div class="cards" style="border: 1px solid #0a67fb">
-        #for(x:list)
-        <div class="col-md-4 col-sm-6 col-lg-3">
-            <a class="card" href="/good/#(x.uuid)">
-                <img src="https://smcdn.yangzhizhuang.net/#(x.avator)">
-                <div class="caption">去看看！</div>
-                <div class="card-heading"><strong>#(x.name)</strong></div>
-                <div class="card-content text-muted">售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件</div>
-            </a>
-        </div>
-        #end
-    </div>
+    #include("searchResult.html")
     #else
-    <div style="height: 270px;padding-top: 50px;text-align: center; ">
-        <div id="size-div">
-            <img src="/assets/img/nores.png" id="none-shop">
-        </div>
-        <div id="size-both" style="display: inline-block">
-            <div id="size-word" style=" text-align: center">
-                <span class="none-font">没有找到您要的商品哦<br id="change-line"> 去看看热搜？</span>
-            </div>
-        </div>
-    </div>
+    #include("noResult.html")
     #end
     #else
     <div>
