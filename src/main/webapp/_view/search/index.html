@@ -16,7 +16,7 @@
     #for(x:list)
     <div>
         <img src="https://smcdn.yangzhizhuang.net/#(x.avator)">
-        商品名：#(x.name)&nbsp;&nbsp;售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件<br>
+        商品名：<a href="/good/#(x.uuid)">#(x.name)</a>&nbsp;&nbsp;售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件<br>
     </div>
     #end
     #else
