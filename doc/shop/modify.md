@@ -30,6 +30,17 @@
 * pwd 密码 6-32位
 
 </li>
+<li>新开店铺
+
+请求地址：/shop/modify/add
+
+参数:
+
+* name 店铺名
+* description 店铺描述
+* captcha 图形验证码
+
+</li>
 </ol>
 
 * 返回值:

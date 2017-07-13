@@ -20,7 +20,7 @@ class ShopModifyService {
         }
     }
 
-    Ret modifyDescription(String token,String description,String ip){
+    Ret modifyDescription(String token, String description, String ip) {
         if (ShopService.ME.modifyDescription(token, description, ip)) {
             return Ret.succeed();
         } else {
@@ -28,10 +28,18 @@ class ShopModifyService {
         }
     }
 
-    Ret transfer(String token,String username,String password,String ip){
-        if(ShopService.ME.transfer(token,password,username,ip)){
+    Ret transfer(String token, String username, String password, String ip) {
+        if (ShopService.ME.transfer(token, password, username, ip)) {
             return Ret.succeed();
-        }else{
+        } else {
+            return Ret.fail("Fail");
+        }
+    }
+
+    Ret addShop(String token, String name, String description, String ip) {
+        if (ShopService.ME.createShop(name, description, token, ip)) {
+            return Ret.succeed();
+        } else {
             return Ret.fail("Fail");
         }
     }

@@ -3,18 +3,18 @@
 #define body()
 <div class="container-fixed-sm">
     <div class="container">
-        <form action="" class="form-horizontal">
+        <form action="" class="form-horizontal" id="create-shop-form">
             <legend>新增店铺</legend>
             <div class="form-group">
                 <label for="shop-name">店铺名称</label>
                 <div class="col-sm-10">
-                    <input class="form-control" placeholder="一个亮眼的名字能提高20%的销售量哦！" type="text" id="shop-name">
+                    <input class="form-control" placeholder="一个亮眼的名字能提高20%的销售量哦！" type="text" id="shop-name" name="name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="shop-discribe">店铺名称</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" rows="3" id="shop-discribe">描述一下您的店。</textarea>
+                    <textarea class="form-control" rows="3" id="shop-discribe" name="description">描述一下您的店。</textarea>
                 </div>
             </div>
             <div>
@@ -29,12 +29,12 @@
                         <input class="form-control" placeholder="验证码" type="text" id="captcha" name="captcha">
                     </div>
                 </div>
-                <img alt="" src="/captcha/image" id="captcha-phone" class="captcha" title="点击刷新">
+                <img alt="" src=""  class="captcha" title="点击刷新">
             </div>
             <br>
 
             <br>
-            <button class="btn btn-primary btn-block" type="submit">新增店铺</button>
+            <button class="btn btn-primary btn-block" type="submit" id="create-shop">新增店铺</button>
         </form>
     </div>
 </div>
