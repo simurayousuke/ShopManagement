@@ -49,7 +49,7 @@ public class OpenSearchPushRequestBuilder {
         fields.put("sale_count", saleCount);
         fields.put("price", price);
         fields.put("status", status);
-        fields.put("numer", number);
+        fields.put("number", number);
     }
 
     public HashMap<String, Object> build() {

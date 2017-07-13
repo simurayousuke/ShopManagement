@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,9 +61,21 @@ public class OpenSearchService {
         }
     }
 
-    private boolean isSuccess(String json){
-        HashMap map= JsonKit.parse(json,HashMap.class);
+    private boolean isSuccess(String json) {
+        HashMap map = JsonKit.parse(json, HashMap.class);
         return map.get("status").toString().equalsIgnoreCase("ok");
+    }
+
+    private ArrayList handleSearch(String json) {
+        HashMap jMap = JsonKit.parse(json, HashMap.class);
+        if (!jMap.get("status").toString().equalsIgnoreCase("OK")) {
+            return null;
+        }
+        HashMap result = JsonKit.parse(jMap.get("result").toString(), HashMap.class);
+        if (Integer.parseInt(result.get("num").toString()) == 0) {
+            return null;
+        }
+        return JsonKit.parse(result.get("items").toString(), ArrayList.class);
     }
 
     /**
@@ -84,7 +97,7 @@ public class OpenSearchService {
      * @return String
      * @throws IOException IOException
      */
-    public boolean add(HashMap<String,Object> fields) throws IOException {
+    public boolean add(HashMap<String, Object> fields) throws IOException {
         CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
         doc.add(fields);
         return isSuccess(doc.push(TABLE_NAME));
@@ -97,7 +110,7 @@ public class OpenSearchService {
      * @return String
      * @throws IOException IOException
      */
-    public boolean update(HashMap<String,Object> fields) throws IOException {
+    public boolean update(HashMap<String, Object> fields) throws IOException {
         CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
         doc.update(fields);
         return isSuccess(doc.push(TABLE_NAME));
@@ -111,10 +124,10 @@ public class OpenSearchService {
      * @param filter           filter
      * @param sortKey          sort key
      * @param positiveSequence positive sequence
-     * @return String json
+     * @return ArrayList
      * @throws IOException IOException
      */
-    public String search(String index, String keyWord, String filter, String sortKey, boolean positiveSequence) throws IOException {
+    public ArrayList search(String index, String keyWord, String filter, String sortKey, boolean positiveSequence) throws IOException {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(INDEX_NAME);
@@ -122,7 +135,7 @@ public class OpenSearchService {
         if (StrKit.isBlank(index)) {
             search.setQueryString("'" + keyWord + "'");
         } else {
-            search.setQueryString(index + ":+'" + keyWord + "'");
+            search.setQueryString(index + ":'" + keyWord + "'");
         }
         // 指定搜索返回的格式。
         search.setFormat("json");
@@ -131,7 +144,7 @@ public class OpenSearchService {
         // 设定排序方式 + 表示正序 - 表示降序
         search.addSort(sortKey, positiveSequence ? "+" : "-");
         // 返回搜索结果
-        return search.search();
+        return handleSearch(search.search());
     }
 
     /**
@@ -141,10 +154,10 @@ public class OpenSearchService {
      * @param keyWord          key word
      * @param sortKey          sort key
      * @param positiveSequence positive sequence
-     * @return String json
+     * @return ArrayList
      * @throws IOException IOException
      */
-    public String search(String index, String keyWord, String sortKey, boolean positiveSequence) throws IOException {
+    public ArrayList search(String index, String keyWord, String sortKey, boolean positiveSequence) throws IOException {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(INDEX_NAME);
@@ -152,14 +165,14 @@ public class OpenSearchService {
         if (StrKit.isBlank(index)) {
             search.setQueryString("'" + keyWord + "'");
         } else {
-            search.setQueryString(index + ":+'" + keyWord + "'");
+            search.setQueryString(index + ":'" + keyWord + "'");
         }
         // 指定搜索返回的格式。
         search.setFormat("json");
         // 设定排序方式 + 表示正序 - 表示降序
         search.addSort(sortKey, positiveSequence ? "+" : "-");
         // 返回搜索结果
-        return search.search();
+        return handleSearch(search.search());
     }
 
     /**
@@ -168,10 +181,10 @@ public class OpenSearchService {
      * @param index   index type
      * @param keyWord key word
      * @param filter  filter
-     * @return String json
+     * @return ArrayList
      * @throws IOException IOException
      */
-    public String search(String index, String keyWord, String filter) throws IOException {
+    public ArrayList search(String index, String keyWord, String filter) throws IOException {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(INDEX_NAME);
@@ -179,14 +192,14 @@ public class OpenSearchService {
         if (StrKit.isBlank(index)) {
             search.setQueryString("'" + keyWord + "'");
         } else {
-            search.setQueryString(index + ":+'" + keyWord + "'");
+            search.setQueryString(index + ":'" + keyWord + "'");
         }
         // 指定搜索返回的格式。
         search.setFormat("json");
         // 设定过滤条件
         search.addFilter(filter);
         // 返回搜索结果
-        return search.search();
+        return handleSearch(search.search());
     }
 
     /**
@@ -194,10 +207,10 @@ public class OpenSearchService {
      *
      * @param index   index type
      * @param keyWord key word
-     * @return String json
+     * @return ArrayList
      * @throws IOException IOException
      */
-    public String search(String index, String keyWord) throws IOException {
+    public ArrayList search(String index, String keyWord) throws IOException {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(INDEX_NAME);
@@ -205,12 +218,12 @@ public class OpenSearchService {
         if (StrKit.isBlank(index)) {
             search.setQueryString("'" + keyWord + "'");
         } else {
-            search.setQueryString(index + ":+'" + keyWord + "'");
+            search.setQueryString(index + ":'" + keyWord + "'");
         }
         // 指定搜索返回的格式。
         search.setFormat("json");
         // 返回搜索结果
-        return search.search();
+        return handleSearch(search.search());
     }
 
 }

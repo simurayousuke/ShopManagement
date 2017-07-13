@@ -62,7 +62,7 @@ public class GoodService {
         }
         int shopId = shop.getId();
         Good good = new Good().setGoodName(goodName).setShopId(shopId).setUuid(StrKit.getRandomUUID())
-                .setDescription(description).setPrice(price).setAvator(avator);
+                .setDescription(description).setPrice(price).setAvator(avator).setNumber(number);
         if (!good.save()) {
             return false;
         }
