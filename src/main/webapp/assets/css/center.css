@@ -40,14 +40,28 @@
     text-align: center;
 }
 
+.shop-name {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
 .shop-head {
-    height: 100%;
-    width: 22%;
+
+    width: 300px;
     float: left;
 }
 
+.shop-operate {
+    float: right;
+    padding-right: 30px;
+    margin-top: 20px;
+}
+
 .shop-content {
-    width: 77%;
+    margin-top: 20px;
+    padding-right: 30px;
+    width: 800px;
     float: right;
 }
 
