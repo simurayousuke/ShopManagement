@@ -18,6 +18,7 @@ public class ShopModifyController extends BaseController {
 
     private static final ShopModifyService SRV = ShopModifyService.ME;
 
+    @Before(NameModifyShopValidator.class)
     public void name() {
         String token = getCookie(RedisKit.TOKEN);
         String name = getPara("name");
