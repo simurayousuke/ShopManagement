@@ -31,7 +31,7 @@ import java.util.List;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before(HasShopInterceptor.class)
