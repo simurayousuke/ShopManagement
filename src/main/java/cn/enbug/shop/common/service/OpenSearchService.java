@@ -32,7 +32,7 @@ import java.util.Map;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class OpenSearchService {
@@ -43,6 +43,7 @@ public class OpenSearchService {
     public static final OpenSearchService ME = new OpenSearchService();
     private static final Logger LOG = LoggerFactory.getLogger(OpenSearchService.class);
     private static final String INDEX_NAME = PropKit.get("openSearcher.appName");
+    private static final String TABLE_NAME = "main";
     private static CloudsearchClient client;
     Map<String, Object> opts = new HashMap<String, Object>();
 
@@ -67,8 +68,33 @@ public class OpenSearchService {
      */
     public String push(String data) throws IOException {
         CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
-        String table_name = "main";
-        return doc.push(data, table_name);
+        return doc.push(data, TABLE_NAME);
+    }
+
+    /**
+     * add
+     *
+     * @param fields hash map
+     * @return String
+     * @throws IOException IOException
+     */
+    public String add(HashMap<String,Object> fields) throws IOException {
+        CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
+        doc.add(fields);
+        return doc.push(TABLE_NAME);
+    }
+
+    /**
+     * update
+     *
+     * @param fields hash map
+     * @return String
+     * @throws IOException IOException
+     */
+    public String update(HashMap<String,Object> fields) throws IOException {
+        CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
+        doc.update(fields);
+        return doc.push(TABLE_NAME);
     }
 
     /**

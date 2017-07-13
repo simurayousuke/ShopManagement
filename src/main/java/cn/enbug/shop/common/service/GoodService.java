@@ -32,7 +32,7 @@ import java.io.IOException;
  * Good service.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class GoodService {
@@ -69,7 +69,7 @@ public class GoodService {
         //String id, String name, String description, int shopId, String avator, int saleCount, double price, int status
         OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number);
         try {
-            OPEN_SEARCH_SERVICE.push(builder.build());
+            OPEN_SEARCH_SERVICE.add(builder.build());
         } catch (IOException e) {
             LOG.error(e.toString(), e);
             throw e;
