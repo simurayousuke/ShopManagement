@@ -56,7 +56,7 @@ $(document).ready(function () {
         }
         $.post('/shop/good/add', data, function (data) {
             if (data.status) {
-                //location.href = '/shop/good';
+                location.href = '/shop/good';
             } else {
                 $.msg(data.msg);
                 updateCaptcha();
