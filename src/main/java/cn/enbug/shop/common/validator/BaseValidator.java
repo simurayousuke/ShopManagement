@@ -16,7 +16,11 @@
 
 package cn.enbug.shop.common.validator;
 
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
+import cn.enbug.shop.common.service.UserService;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
@@ -28,7 +32,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.7
+ * @version 1.0.8
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -84,6 +88,13 @@ public abstract class BaseValidator extends Validator {
         String captcha = controller.getPara(field2);
         if (!ShortMessageCaptchaService.ME.validate(phone, captcha)) {
             addError(errorKey, errorMessage);
+        }
+    }
+
+    protected void validateLogin() {
+        User user = UserService.ME.validateToken(controller.getCookie(RedisKit.COOKIE_ID));
+        if (null == user) {
+            addError(Ret.MSG, "need login");
         }
     }
 

@@ -74,10 +74,10 @@ public class OpenSearchService {
     /**
      * search
      *
-     * @param index index type
-     * @param keyWord key word
-     * @param filter filter
-     * @param sortKey sort key
+     * @param index            index type
+     * @param keyWord          key word
+     * @param filter           filter
+     * @param sortKey          sort key
      * @param positiveSequence positive sequence
      * @return String json
      * @throws IOException IOException
@@ -105,9 +105,9 @@ public class OpenSearchService {
     /**
      * search
      *
-     * @param index index type
-     * @param keyWord key word
-     * @param sortKey sort key
+     * @param index            index type
+     * @param keyWord          key word
+     * @param sortKey          sort key
      * @param positiveSequence positive sequence
      * @return String json
      * @throws IOException IOException
@@ -133,9 +133,9 @@ public class OpenSearchService {
     /**
      * search
      *
-     * @param index index type
+     * @param index   index type
      * @param keyWord key word
-     * @param filter filter
+     * @param filter  filter
      * @return String json
      * @throws IOException IOException
      */
@@ -160,7 +160,7 @@ public class OpenSearchService {
     /**
      * search
      *
-     * @param index index type
+     * @param index   index type
      * @param keyWord key word
      * @return String json
      * @throws IOException IOException

@@ -16,10 +16,6 @@
 
 package cn.enbug.shop.shop.center;
 
-import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.kit.Ret;
-import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.common.service.UserService;
 import cn.enbug.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -27,17 +23,14 @@ import com.jfinal.core.Controller;
  * 用户中心
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class ShopCenterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        User user = UserService.ME.validateToken(c.getCookie(RedisKit.TOKEN));
-        if (null == user) {
-            addError(Ret.MSG, "need login");
-        }
+        validateLogin();
     }
 
     @Override

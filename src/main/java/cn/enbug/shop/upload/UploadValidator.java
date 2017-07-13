@@ -16,10 +16,6 @@
 
 package cn.enbug.shop.upload;
 
-import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.kit.Ret;
-import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.common.service.UserService;
 import cn.enbug.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -27,17 +23,14 @@ import com.jfinal.core.Controller;
  * 上传文件验证器
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class UploadValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
-        if (null == user) {
-            addError(Ret.MSG, "need login");
-        }
+        validateLogin();
     }
 
     @Override

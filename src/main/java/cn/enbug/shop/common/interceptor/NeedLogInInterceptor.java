@@ -1,7 +1,6 @@
 package cn.enbug.shop.common.interceptor;
 
 import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.UserService;
 import com.jfinal.aop.Interceptor;
@@ -13,7 +12,7 @@ import com.jfinal.core.Controller;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class NeedLogInInterceptor implements Interceptor{
+public class NeedLogInInterceptor implements Interceptor {
 
     @Override
     public void intercept(Invocation inv) {
@@ -21,7 +20,7 @@ public class NeedLogInInterceptor implements Interceptor{
         User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
         if (null == user) {
             c.redirect("/login");
-        }else {
+        } else {
             c.setAttr("user", user);
             inv.invoke();
         }

@@ -40,14 +40,14 @@ public class OpenSearchPushRequestBuilder {
     /**
      * constructor
      *
-     * @param id id
-     * @param name good name
+     * @param id          id
+     * @param name        good name
      * @param description good description
-     * @param shopId shop id
-     * @param avator avator url
-     * @param saleCount sale count
-     * @param price price
-     * @param status status
+     * @param shopId      shop id
+     * @param avator      avator url
+     * @param saleCount   sale count
+     * @param price       price
+     * @param status      status
      */
     public OpenSearchPushRequestBuilder(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status) {
         list = new ArrayList<>();
@@ -57,14 +57,14 @@ public class OpenSearchPushRequestBuilder {
     /**
      * add
      *
-     * @param id id
-     * @param name good name
+     * @param id          id
+     * @param name        good name
      * @param description good description
-     * @param shopId shop id
-     * @param avator avator url
-     * @param saleCount sale count
-     * @param price price
-     * @param status status
+     * @param shopId      shop id
+     * @param avator      avator url
+     * @param saleCount   sale count
+     * @param price       price
+     * @param status      status
      */
     public void add(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status) {
         HashMap<String, Object> fields = new HashMap<>();
@@ -85,14 +85,14 @@ public class OpenSearchPushRequestBuilder {
     /**
      * update
      *
-     * @param id id
-     * @param name good name
+     * @param id          id
+     * @param name        good name
      * @param description good description
-     * @param shopId shop id
-     * @param avator avator url
-     * @param saleCount sale count
-     * @param price price
-     * @param status status
+     * @param shopId      shop id
+     * @param avator      avator url
+     * @param saleCount   sale count
+     * @param price       price
+     * @param status      status
      */
     public void update(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status) {
         HashMap<String, Object> fields = new HashMap<>();
@@ -113,14 +113,14 @@ public class OpenSearchPushRequestBuilder {
     /**
      * delete
      *
-     * @param id id
-     * @param name good name
+     * @param id          id
+     * @param name        good name
      * @param description good description
-     * @param shopId shop id
-     * @param avator avator url
-     * @param saleCount sale count
-     * @param price price
-     * @param status status
+     * @param shopId      shop id
+     * @param avator      avator url
+     * @param saleCount   sale count
+     * @param price       price
+     * @param status      status
      */
     public void del(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status) {
         HashMap<String, Object> fields = new HashMap<>();
@@ -138,7 +138,7 @@ public class OpenSearchPushRequestBuilder {
         list.add(unit);
     }
 
-    public String build(){
+    public String build() {
         return JsonKit.toJson(list);
     }
 

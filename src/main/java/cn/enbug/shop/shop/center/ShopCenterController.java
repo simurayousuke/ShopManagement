@@ -18,7 +18,6 @@ package cn.enbug.shop.shop.center;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
-import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.service.ShopService;
