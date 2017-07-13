@@ -2,9 +2,9 @@
 #@layout()
 #define body()
 <div class="container-fixed">
-    <div style="height:500px" id="top">
-        <div style="width: 500px;display: inline;float:left">
-            <h1>商品图片：</h1>
+    <div style="height:350px" id="top">
+        <div class="good-photo-container">
+            <h2>商品图片：</h2>
             <img src="https://smcdn.yangzhizhuang.net/good/caomai.jpg" id="shop-photo">
             <div id="upload" class="uploader">
                 <div class="uploader-message text-center">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div style="display: inline;float:left;margin-left:50px;">
-            <h1>商品信息：</h1>
+            <h2>商品信息：</h2>
             <form action="" class="form-horizontal">
                 <div class="form-group">
                     <label for="good-name" class="form-label">商品名称：</label>
@@ -33,16 +33,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="good-name" class="form-label">商品价格：</label>
+                    <label for="good-prize" class="form-label">商品价格：</label>
                     <div class="col-sm-10">
                         <input class="form-control" placeholder="商品价格" type="text" id="good-prize">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="good-stock" class="form-label">商品库存：</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" placeholder="商品库存" type="text" id="good-stock">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div style="margin-top:50px" id="description">
-        富文本编辑器，明天再说！
+    <div class="good-description" id="description">
+        <h2 style="margin-bottom: 25px;">商品描述：</h2>
+        <textarea id="good-content" placeholder="描述一下您的商品吧！" class="form-control kindeditor"
+                  style="height:150px;"></textarea>
     </div>
 </div>
 #end
@@ -55,4 +63,6 @@
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
 <script src="/assets/js/upload.js"></script>
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/kindeditor.min.js"></script>
+<script src="/assets/js/newgood.js"></script>
 #end
