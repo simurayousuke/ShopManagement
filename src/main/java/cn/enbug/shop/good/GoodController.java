@@ -18,17 +18,33 @@ package cn.enbug.shop.good;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.UserInterceptor;
+import cn.enbug.shop.common.model.Good;
+import cn.enbug.shop.common.service.GoodService;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
+import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
  */
-@Before(UserInterceptor.class)
+@Before({GET.class, UserInterceptor.class})
 public class GoodController extends BaseController {
 
     public void index() {
+        redirect("/search");
+    }
+
+    @Clear(NoUrlPara.class)
+    public void view() {
+        String uuid = getPara();
+        Good good = GoodService.ME.findGoodByUuid(uuid);
+        if (null == good) {
+            redirect("/good/none");
+        }
+        setAttr("good",good);
         render("index.html");
     }
 }

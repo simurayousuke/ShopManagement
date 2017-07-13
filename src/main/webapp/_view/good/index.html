@@ -4,23 +4,18 @@
 <div class="container-fixed">
     <div style="height:500px" id="top">
         <div style="width: 500px;display: inline;float:left">
-            <img src="https://smcdn.yangzhizhuang.net/good/caomai.jpg" height="500px" width="500px">
+            <img src="https://smcdn.yangzhizhuang.net/#(good.avator)" height="500px" width="500px">
         </div>
         <div style="display: inline;float:left;margin-left:50px;">
-            <h1>新鲜曹迈肉</h1>
-            <span>售价：</span><span style="color:#ff0000">10.00元</span><br>
-            <span>累计销售量：</span><span style="color:#ff0000">1件</span><br>
+            <h1>#(good.goodName)</h1>
+            <span>售价：</span><span style="color:#ff0000">#(good.price)元</span><br>
+            <span>累计销售量：</span><span style="color:#ff0000">#(good.saleCount)件</span><br>
+            <span>库存：</span><span style="color:#ff0000">#(good.number)件</span><br>
             <button>立即购买</button>&nbsp;<button>加入购物车</button>
         </div>
     </div>
     <div style="margin-top:50px" id="description">
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
-        详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、详细描述、
+        #(good.description)
     </div>
     #include("comment.html")
     #include("fix.html")
