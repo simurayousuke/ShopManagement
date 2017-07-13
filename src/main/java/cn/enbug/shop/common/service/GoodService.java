@@ -54,7 +54,7 @@ public class GoodService {
      * @return boolean
      */
     @Before(Tx.class)
-    public boolean insert(String token, String ip, String goodName, String description, double price, String avator,int number) throws IOException {
+    public boolean insert(String token, String ip, String goodName, String description, double price, String avator, int number) throws IOException {
         // name, shop id,uuid, description, price, avator
         Shop shop = ShopService.ME.findShopByToken(token);
         if (null == shop) {
@@ -67,7 +67,7 @@ public class GoodService {
             return false;
         }
         //String id, String name, String description, int shopId, String avator, int saleCount, double price, int status
-        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1,number);
+        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number);
         try {
             OPEN_SEARCH_SERVICE.push(builder.build());
         } catch (IOException e) {
@@ -84,7 +84,7 @@ public class GoodService {
      * @return Good Object
      */
     public Good findGoodById(int id) {
-        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("shop.findById", id));
+        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("good.findById", id));
     }
 
     /**
@@ -94,7 +94,10 @@ public class GoodService {
      * @return Good Object
      */
     public Good findGoodByUuid(String uuid) {
-        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("shop.findByUuid", uuid));
+        if (null == uuid) {
+            return null;
+        }
+        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("good.findByUuid", uuid));
     }
 
     /**
