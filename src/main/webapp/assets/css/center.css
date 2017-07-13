@@ -16,20 +16,29 @@
 }
 
 .none-font {
-    position: relative;
-    top: 30px;
+    font-size: 15px;
 }
 
+.no-shop {
+    padding-top: 50px;
+}
+
+.panel-body {
+    background: #fcfcfb !important;
+}
 
 #none-shop {
     height: 76px;
     width: 81px;
-    margin-top: 20px;
-    margin-left: 20px;
 }
 
 .shop {
     width: 100%;
+    display: none;
+}
+
+.no-shop {
+    text-align: center;
 }
 
 .shop-head {
@@ -48,36 +57,102 @@
     border-radius: 5px;
     border: 2px solid #0a67fb;
 }
-@media (min-height: 640px) {
-    .panel-body {
-        height: 320px;
-        background: #fcfcfb !important;
-    }
 
+#size-div {
+    width: 80px;
+    height: 90px;
+    display: block;
+    margin: 0 auto;
+}
+
+#size-word {
+    width: 200px;
+    height: 60px;
+}
+
+#size-but {
+    width: 200px;
+    height: 50px;
+}
+
+@media (min-width: 540px) {
     #none-shop {
-        margin-top: 60px;
+        height: 76px;
+        width: 81px;
+        margin-top: 30px;
     }
+
+    #size-div {
+        width: 170px;
+        height: 160px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    #size-div, #size-both {
+        vertical-align: middle;
+    }
+
+    .none-font {
+        font-size: 16px;
+    }
+
 }
 
-@media (min-height: 800px) {
-    .panel-body {
-        height: 400px;
-    }
-}
-
-@media (min-width: 361px) {
+@media (min-width: 789px) {
     #none-shop {
         height: 152px;
         width: 163px;
     }
-}
 
-@media (min-width: 768px) {
-    #none-shop {
-        height: 152px;
-        width: 163px;
-        margin-left: 100px;
+    #size-div {
+        width: 170px;
+        height: 160px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    #size-both {
+        margin-top: 50px;
+    }
+
+    #size-div, #size-both {
+        vertical-align: middle;
+    }
+
+    .none-font {
+        font-size: 16px;
+    }
+
+    #size-but {
+        margin-top: 20px;
     }
 }
 
+@media (min-width: 992px) {
+    #none-shop {
+        height: 152px;
+        width: 163px;
+    }
 
+    .none-font {
+        font-size: 19px;
+    }
+
+    #change-line {
+        display: none;
+    }
+
+    #size-div {
+        width: 160px;
+    }
+
+    #size-word {
+        width: 350px;
+    }
+
+    #size-but {
+        width: 350px;
+    }
+
+}
