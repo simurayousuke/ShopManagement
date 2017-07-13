@@ -24,9 +24,8 @@ $(document).ready(function () {
         updateCaptcha();
     });
 
-    $("#create-good-form").submit(function (e) {
-        e.preventDefault();
-        var form = $(this);
+    $('#create-good-button').click(function (e) {
+        var form = $('#create-good-form');
         var data = form.serializeObject();
         var description = data.description = $("iframe").contents().find("body").html();
         var name = data.name;
