@@ -33,18 +33,20 @@ import com.jfinal.ext.interceptor.NoUrlPara;
 @Before({GET.class, UserInterceptor.class})
 public class GoodController extends BaseController {
 
-    public void index() {
-        redirect("/search");
-    }
-
     @Clear(NoUrlPara.class)
-    public void view() {
+    public void index() {
         String uuid = getPara();
+        if (null == uuid) {
+            redirect("/search");
+            return;
+        }
         Good good = GoodService.ME.findGoodByUuid(uuid);
         if (null == good) {
-            redirect("/good/none");
+            redirect("/search");
+            return;
         }
-        setAttr("good",good);
+        setAttr("good", good);
         render("index.html");
     }
+
 }
