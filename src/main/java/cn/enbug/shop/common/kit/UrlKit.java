@@ -30,17 +30,17 @@ public class UrlKit {
 
     private static final Logger log = LoggerFactory.getLogger(UrlKit.class);
 
-    public static String encode(String text,String enc){
+    public static String encode(String text, String enc) {
         try {
-            return java.net.URLEncoder.encode(text,enc);
+            return java.net.URLEncoder.encode(text, enc);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static String decode(String text,String enc){
+    public static String decode(String text, String enc) {
         try {
-            return java.net.URLDecoder.decode(text,enc);
+            return java.net.URLDecoder.decode(text, enc);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }

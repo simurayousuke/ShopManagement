@@ -19,8 +19,6 @@ package cn.enbug.shop.common.service;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.login.LoginService;
-import cn.enbug.shop.register.RegisterService;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.HashKit;
 import com.jfinal.kit.StrKit;
@@ -212,7 +210,7 @@ public class UserService {
      * @return boolean
      */
     public boolean regUserByEmail(String ip, String username, String password, String email) {
-        User user =findUserByEmail(email).setUsername(username).setPwd(password).setEmailStatus(1);
+        User user = findUserByEmail(email).setUsername(username).setPwd(password).setEmailStatus(1);
         return regUser(user, ip);
     }
 

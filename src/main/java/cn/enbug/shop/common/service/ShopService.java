@@ -16,14 +16,14 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.User;
-import com.jfinal.plugin.activerecord.Db;
-
-import java.util.ArrayList;
+import com.jfinal.aop.Before;
+import com.jfinal.aop.Duang;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 /**
  * Shop service.
@@ -35,13 +35,9 @@ import java.util.ArrayList;
  */
 public class ShopService {
 
-    public static final ShopService ME = new ShopService();
+    public static final ShopService ME = Duang.duang(ShopService.class);
     private static final UserService USER_SRV = UserService.ME;
     private static final Shop SHOP_DAO = new Shop().dao();
-
-    private ShopService() {
-        // singleton
-    }
 
     private boolean hasShop(User user) {
         Shop shop = findShopByUser(user);
@@ -104,11 +100,14 @@ public class ShopService {
     public boolean createShop(String name, String description, String token, String ip) {
         Shop shop = new Shop(name, description, token);
         User user = RedisKit.getUserByToken(token);
-        if (null == user) {
+        if (null == user || !shop.save()) {
             return false;
         }
-        return Db.tx(4, () -> shop.save() &&
-                new Log().setIp(ip).setOperation("createShop").setUserId(user.getId()).save());
+        Log log = new Log().setIp(ip).setOperation("createShop").setUserId(user.getId());
+        if (!log.save()) {
+            throw new LogException();
+        }
+        return true;
     }
 
     /**
@@ -132,8 +131,7 @@ public class ShopService {
             return false;
         }
         shop.setShopName(name);
-        return Db.tx(4, () -> shop.update() &&
-                new Log().setIp(ip).setOperation("modifyShopName").setUserId(user.getId()).save());
+        return updateShop(shop, "modifyShopName", ip, user);
     }
 
     /**
@@ -154,8 +152,7 @@ public class ShopService {
             return false;
         }
         shop.setDescription(description);
-        return Db.tx(4, () -> shop.update() &&
-                new Log().setIp(ip).setOperation("modifyShopDescription").setUserId(user.getId()).save());
+        return updateShop(shop, "modifyShopDescription", ip, user);
     }
 
     /**
@@ -184,8 +181,19 @@ public class ShopService {
             return false;
         }
         shop.setOwnerUserId(to.getId());
-        return Db.tx(4, () -> shop.update() &&
-                new Log().setIp(ip).setOperation("transferShop").setUserId(user.getId()).save());
+        return updateShop(shop, "modifyShopDetransferShopscription", ip, user);
+    }
+
+    @Before(Tx.class)
+    private boolean updateShop(Shop shop, String operation, String ip, User user) {
+        if (!shop.update()) {
+            return false;
+        }
+        Log log = new Log().setIp(ip).setOperation("modifyShopName").setUserId(user.getId());
+        if (!log.save()) {
+            throw new LogException();
+        }
+        return true;
     }
 
 }

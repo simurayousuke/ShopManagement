@@ -47,7 +47,7 @@ public class ShopModifyController extends BaseController {
         String name = getPara("name");
         String description = getPara("description");
         String ip = getIp();
-        renderJson(SRV.addShop(token,name,description,ip));
+        renderJson(SRV.addShop(token, name, description, ip));
     }
 
 }

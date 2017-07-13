@@ -22,7 +22,7 @@ public class SearchController extends BaseController {
 
     @Clear(NoUrlPara.class)
     public void index() throws IOException {
-        String word=getPara();
+        String word = getPara();
         if (!StrKit.isBlank(word)) {
             word = UrlKit.decode(word, "utf-8");
             ArrayList arrayList = OpenSearchService.ME.search("name", UrlKit.decode(getPara(), "utf-8"));
