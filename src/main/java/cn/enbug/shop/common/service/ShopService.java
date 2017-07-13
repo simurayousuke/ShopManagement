@@ -44,7 +44,7 @@ public class ShopService {
         return null != shop;
     }
 
-    private boolean isExist(String shopName) {
+    public boolean isExist(String shopName) {
         return null != findShopByShopName(shopName);
     }
 
@@ -119,9 +119,6 @@ public class ShopService {
      * @return boolean
      */
     public boolean modifyName(String token, String name, String ip) {
-        if (isExist(name)) {
-            return false;
-        }
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return false;
