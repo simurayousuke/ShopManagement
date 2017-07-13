@@ -45,7 +45,7 @@ public class UserService {
      * @param salt     salt
      * @return hashed password
      */
-    private String hash(String password, String salt) {
+    public String hash(String password, String salt) {
         String ret = HashKit.sha256(password + salt);
         for (int i = 0; i < 2; i++) {
             ret = HashKit.sha256(ret + salt);

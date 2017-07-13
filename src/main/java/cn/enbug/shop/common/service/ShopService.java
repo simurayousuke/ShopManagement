@@ -159,17 +159,21 @@ public class ShopService {
      * transfer shop to other user.
      *
      * @param token    owner token
+     * @param password password
      * @param username new owner username
      * @param ip       ip address
      * @return boolean
      */
-    public boolean transfer(String token, String username, String ip) {
+    public boolean transfer(String token, String password, String username, String ip) {
         User to = USER_SRV.findUserByUsername(username);
         if (null == to) {
             return false;
         }
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
+            return false;
+        }
+        if(!UserService.ME.hash(password, user.getSalt()).equals(user.getPwd())){
             return false;
         }
         Shop shop = findShopByUser(user);
