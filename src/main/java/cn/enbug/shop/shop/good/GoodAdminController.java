@@ -21,6 +21,7 @@ import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.POST;
 
@@ -42,6 +43,7 @@ public class GoodAdminController extends BaseController {
         render("newGood.html");
     }
 
+    @Clear(HasShopInterceptor.class)
     @Before({POST.class, ImageCaptchaValidator.class})
     public void add() {
         String token = getCookie(RedisKit.TOKEN);
