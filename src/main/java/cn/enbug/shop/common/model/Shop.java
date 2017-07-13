@@ -2,6 +2,7 @@ package cn.enbug.shop.common.model;
 
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.base.BaseShop;
+import cn.enbug.shop.common.safe.JsoupFilter;
 import com.jfinal.kit.StrKit;
 
 /**
@@ -74,6 +75,11 @@ public class Shop extends BaseShop<Shop> {
         setUuid(StrKit.getRandomUUID());
         setOwnerUserId(userId);
         setAvator(avator);
+    }
+
+    @Override
+    protected void filter(int filterBy) {
+        JsoupFilter.filterShop(this);
     }
 
 }

@@ -16,19 +16,19 @@
 
 package cn.enbug.shop.common.safe;
 
-import com.jfinal.plugin.activerecord.Model;
+import cn.enbug.shop.common.model.Comment;
+import cn.enbug.shop.common.model.Good;
+import cn.enbug.shop.common.model.Shop;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Whitelist;
 
-import java.util.List;
-
 /**
  * 使用 Jsoup 对 html 进行过滤
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @SuppressWarnings("rawtypes")
@@ -66,61 +66,30 @@ public class JsoupFilter {
                 .addAttributes("embed", "src", "quality", "width", "height", "allowFullScreen", "allowScriptAccess", "flashvars", "name", "type", "pluginspage");
     }
 
-    /**
-     * 过滤 model 中的 title 与 content 字段，其中 title 过滤为纯 text
-     * content 使用 contentWhitelist 过滤
-     */
-    public static void filterTitleAndContent(Model m) {
-        String title = m.getStr("title");
-        if (title != null) {
-            m.set("title", getText(title));
-        }
-        String content = m.getStr("content");
-        if (content != null) {
-            m.set("content", filterArticleContent(content));
-        }
+    public static void filterShop(Shop m) {
+        String description = m.getDescription();
+        m.setDescription(getText(description));
+        String shopName = m.getShopName();
+        m.setShopName(getText(shopName));
     }
 
-    /**
-     * 对要显示在列表中的 article list 进行过滤，将其中的 title content 转成纯文本
-     */
-    public static void filterArticleList(List<? extends Model> modelList, int titleLen, int contentLen) {
-        for (Model m : modelList) {
-            String title = getText(m.getStr("title"));
-            if (title.length() > titleLen) {
-                title = title.substring(0, titleLen - 1);
-            }
-
-            String content = getText(m.getStr("content")).replaceAll("&nbsp;", " ");
-            if (content.length() > contentLen) {
-                content = content.substring(0, contentLen - 1);
-            }
-            m.set("title", title);
-            m.set("content", content);
-        }
+    public static void filterGood(Good m) {
+        String goodName = m.getGoodName();
+        m.setGoodName(getText(goodName));
+        String description = m.getDescription();
+        m.setDescription(getBasicWithImages(description));
     }
 
-    /**
-     * 对文章 content 字段过滤
-     */
-    public static String filterArticleContent(String content) {
-        // return content != null ? Jsoup.clean(content, contentWhitelist) : null;
-        // 添加 notPrettyPrint 参数，避免重新格式化，主要是 at me 时候不会在超链前面添加 "\n"
-        return content != null ? Jsoup.clean(content, "", contentWhitelist, notPrettyPrint) : null;
-    }
-
-    /**
-     * 对文章 title 过滤过滤
-     */
-    public static String filterArticleTitle(String title) {
-        return getText(title);
+    public static void filterComment(Comment m) {
+        String description = m.getDescription();
+        m.setDescription(getText(description));
     }
 
     /**
      * 过滤 content，但保留换行回车符
      */
     public static String filterContentKeepNewline(String content) {
-        return content != null ? Jsoup.clean(content, "", contentWhitelist, notPrettyPrint) : null;
+        return null == content ? null : Jsoup.clean(content, "", contentWhitelist, notPrettyPrint);
     }
 
     /**
@@ -130,14 +99,14 @@ public class JsoupFilter {
      * mac os 换行为：\r
      */
     public static String filterNewlineToBrTag(String content) {
-        return content != null ? content.replaceAll("\r\n", "<br>").replaceAll("\r", "<br>").replaceAll("\n", "<br>") : null;
+        return null == content ? null : content.replaceAll("\r\n", "<br>").replaceAll("\r", "<br>").replaceAll("\n", "<br>");
     }
 
     /**
      * 获取 html 中的纯文本信息，过滤所有 tag
      */
     public static String getText(String html) {
-        return html != null ? Jsoup.clean(html, Whitelist.none()) : null;
+        return null == html ? null : Jsoup.clean(html, Whitelist.none());
     }
 
     /**
@@ -145,7 +114,7 @@ public class JsoupFilter {
      * 允许的 tag："b", "em", "i", "strong", "u"
      */
     public static String getSimpleHtml(String html) {
-        return html != null ? Jsoup.clean(html, Whitelist.simpleText()) : null;
+        return null == html ? null : Jsoup.clean(html, Whitelist.simpleText());
     }
 
     /**
@@ -155,14 +124,14 @@ public class JsoupFilter {
      * "sup", "u", "ul"
      */
     public static String getBasic(String html) {
-        return html != null ? Jsoup.clean(html, Whitelist.basic()) : null;
+        return null == html ? null : Jsoup.clean(html, Whitelist.basic());
     }
 
     /**
      * 使用Whitelist.basicWithImages() 白名单，获取的 basic with images 内容
      */
     public static String getBasicWithImages(String html) {
-        return html != null ? Jsoup.clean(html, Whitelist.basicWithImages()) : null;
+        return null == html ? null : Jsoup.clean(html, Whitelist.basicWithImages());
     }
 
     /**
@@ -173,21 +142,21 @@ public class JsoupFilter {
      * "sub", "sup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "u", "ul"
      */
     public static String getRelaxed(String html) {
-        return html != null ? Jsoup.clean(html, Whitelist.relaxed()) : null;
+        return null == html ? null : Jsoup.clean(html, Whitelist.relaxed());
     }
 
     /**
      * 使用指定的 Whitelist 进行过滤
      */
     public static String getWithWhitelist(String html, Whitelist whitelist) {
-        return html != null ? Jsoup.clean(html, whitelist) : null;
+        return null == html ? null : Jsoup.clean(html, whitelist);
     }
 
     /**
      * 使用指定的 tags 进行过滤
      */
     public static String getWithTags(String html, String... tags) {
-        return html != null ? Jsoup.clean(html, Whitelist.none().addTags(tags)) : null;
+        return null == html ? null : Jsoup.clean(html, Whitelist.none().addTags(tags));
     }
 
     /**
@@ -199,7 +168,7 @@ public class JsoupFilter {
         }
         Document doc = Jsoup.parseBodyFragment(html);
         Element image = doc.select("img").first();
-        return image != null ? image.attr("src") : null;
+        return null == image ? null : image.attr("src");
     }
 
 }
