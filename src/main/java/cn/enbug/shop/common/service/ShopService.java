@@ -27,14 +27,14 @@ import com.jfinal.plugin.activerecord.Db;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class ShopService {
 
     public static final ShopService ME = new ShopService();
-    private static final Shop SHOP_DAO = new Shop().dao();
     private static final UserService USER_SRV = UserService.ME;
+    private static final Shop SHOP_DAO = new Shop().dao();
 
     private ShopService() {
         // singleton
@@ -173,7 +173,7 @@ public class ShopService {
         if (null == user) {
             return false;
         }
-        if(!UserService.ME.hash(password, user.getSalt()).equals(user.getPwd())){
+        if (!UserService.ME.hash(password, user.getSalt()).equals(user.getPwd())) {
             return false;
         }
         Shop shop = findShopByUser(user);

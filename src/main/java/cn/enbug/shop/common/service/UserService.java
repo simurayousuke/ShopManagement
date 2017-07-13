@@ -16,10 +16,11 @@
 
 package cn.enbug.shop.common.service;
 
-import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.login.LoginService;
+import cn.enbug.shop.register.RegisterService;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.HashKit;
 import com.jfinal.kit.StrKit;
@@ -30,7 +31,7 @@ import com.jfinal.plugin.activerecord.Db;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.10
+ * @version 1.2.11
  * @since 1.0.0
  */
 public class UserService {
@@ -109,90 +110,6 @@ public class UserService {
     }
 
     /**
-     * Validate user with username&password.
-     *
-     * @param username username
-     * @param password password
-     * @param ip       ip address
-     * @return token or null
-     */
-    public String login(String username, String password, String ip) {
-        User user = findUserByUsername(username);
-        if (null == user) {
-            return null;
-        }
-        Boolean status = hash(password, user.getSalt()).equals(user.getPwd());
-        if (!new Log().setIp(ip).setOperation("login")
-                .setUserId(user.getId()).setDescription(status.toString()).save()) {
-            throw new LogException("Can not log login action");
-        }
-        return status ? RedisKit.setAndGetToken(user) : null;
-    }
-
-    /**
-     * validate user with phone number&captcha.
-     *
-     * @param phoneNumber phone number
-     * @param captcha     captcha code
-     * @param ip          ip address
-     * @return token or null
-     * @throws LogException if save to log fail
-     */
-    public String loginByPhone(String phoneNumber, String captcha, String ip) {
-        User user = findUserByPhoneNumber(phoneNumber);
-        if (null == user) {
-            return null;
-        }
-        Boolean status = ShortMessageCaptchaService.ME.validate(phoneNumber, captcha);
-        if (!new Log().setUserId(user.getId())
-                .setIp(ip).setOperation("phoneLogin").setDescription(status.toString()).save()) {
-            throw new LogException("Can not log username phoneLogin action");
-        }
-        return status ? RedisKit.setAndGetToken(user) : null;
-    }
-
-    /**
-     * should not be invoked unless the user is validated by the validator.
-     *
-     * @param phoneNumber phone number
-     * @param ip          ip address
-     * @return token
-     */
-    public String loginByPhone(String phoneNumber, String ip) {
-        User user = findUserByPhoneNumber(phoneNumber);
-        if (null == user) {
-            return null;
-        }
-        if (!new Log().setUserId(user.getId())
-                .setIp(ip).setOperation("phoneLogin").setDescription("true").save()) {
-            throw new LogException("Can not log username phoneLogin action");
-        }
-        return RedisKit.setAndGetToken(user);
-    }
-
-    /**
-     * validate user with email&password
-     *
-     * @param email    email
-     * @param password password
-     * @param ip       ip address
-     * @return token or null
-     * @throws LogException if save to log fail
-     */
-    public String loginByEmail(String email, String password, String ip) {
-        User user = findUserByEmail(email);
-        if (null == user) {
-            return null;
-        }
-        Boolean status = hash(password, user.getSalt()).equals(user.getPwd());
-        if (!new Log().setIp(ip).setOperation("login")
-                .setUserId(user.getId()).setDescription(status.toString()).save()) {
-            throw new LogException("Can not log email login action");
-        }
-        return status ? RedisKit.setAndGetToken(user) : null;
-    }
-
-    /**
      * validate token.
      *
      * @param token token
@@ -222,34 +139,34 @@ public class UserService {
     /**
      * init user with phone number.
      *
-     * @param number phone number
-     * @param ip     ip address
+     * @param phone phone number
+     * @param ip    ip address
      * @return boolean
      */
-    public boolean initUserByPhoneNumber(String number, String ip) {
-        if (null != findUserByPhoneNumber(number)) {
+    public boolean initUserByPhoneNumber(String phone, String ip) {
+        if (null != findUserByPhoneNumber(phone)) {
             return false;
         }
         User user = initUser();
         new Log().setIp(ip).setOperation("initPhone").setUserId(user.getId()).save();
-        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(user, number);
+        return ShortMessageCaptchaService.ME.bindPhoneNumberForUser(user, phone);
     }
 
     /**
      * init user with email.
      *
-     * @param emailAddress email address
-     * @param ip           ip address
+     * @param email email address
+     * @param ip    ip address
      * @return boolean
      */
-    public boolean initUserByEmail(String emailAddress, String ip) {
-        User select = findUserByEmail(emailAddress);
+    public boolean initUserByEmail(String email, String ip) {
+        User select = findUserByEmail(email);
         if (null != select) {
             return 0 == select.getEmailStatus();
         }
         User user = new User();
         user.setUuid(StrKit.getRandomUUID());
-        user.setEmail(emailAddress);
+        user.setEmail(email);
         user.setEmailStatus(0);
         return Db.tx(() -> user.save() && new Log().setIp(ip).setOperation("initEmail").setUserId(user.getId()).save());
     }
@@ -274,28 +191,28 @@ public class UserService {
      * @param ip       ip address
      * @param username username
      * @param password password
-     * @param number   phone number
+     * @param phone    phone number
      * @return boolean
      */
-    public boolean regUserByPhoneNumber(String ip, String username, String password, String number) {
-        if (!initUserByPhoneNumber(number, ip)) {
+    public boolean regUserByPhoneNumber(String ip, String username, String password, String phone) {
+        if (!initUserByPhoneNumber(phone, ip)) {
             return false;
         }
-        User user = findUserByPhoneNumber(number).setUsername(username).setPwd(password);
+        User user = findUserByPhoneNumber(phone).setUsername(username).setPwd(password);
         return regUser(user, ip);
     }
 
     /**
      * reg user.
      *
-     * @param ip           ip address
-     * @param username     username
-     * @param password     password
-     * @param emailAddress email address
+     * @param ip       ip address
+     * @param username username
+     * @param password password
+     * @param email    email address
      * @return boolean
      */
-    public boolean regUserByEmail(String ip, String username, String password, String emailAddress) {
-        User user = findUserByEmail(emailAddress).setUsername(username).setPwd(password).setEmailStatus(1);
+    public boolean regUserByEmail(String ip, String username, String password, String email) {
+        User user =findUserByEmail(email).setUsername(username).setPwd(password).setEmailStatus(1);
         return regUser(user, ip);
     }
 

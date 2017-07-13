@@ -30,7 +30,7 @@ import com.jfinal.kit.HashKit;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.9
+ * @version 1.0.10
  * @since 1.0.0
  */
 public class RegisterService {
@@ -63,21 +63,6 @@ public class RegisterService {
     }
 
     /**
-     * get hashed password.
-     *
-     * @param password password
-     * @param salt     salt
-     * @return hashed password
-     */
-    public String hash(String password, String salt) {
-        String ret = HashKit.sha256(password + salt);
-        for (int i = 0; i < 2; i++) {
-            ret = HashKit.sha256(ret + salt);
-        }
-        return ret;
-    }
-
-    /**
      * 手机号注册
      *
      * @param phone 手机号
@@ -85,7 +70,7 @@ public class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        if (null != LoginService.me.findUserByPhone(phone)) {
+        if (null != USER_SRV.findUserByPhoneNumber(phone)) {
             return Ret.fail("phone already used.");
         }
         String activeCode = ShortMessageCaptchaService.ME.generateActiveCodeForPhoneNumberAndGet(phone);
@@ -113,7 +98,7 @@ public class RegisterService {
      * @return boolean
      */
     Ret handleStep2(String code, String username, String password, String ip) {
-        if (null != LoginService.me.findUserByUsername(username)) {
+        if (null != USER_SRV.findUserByUsername(username)) {
             return Ret.fail("User already exists.");
         }
         String number = RedisKit.getPhoneNumberByActiveCode(code);

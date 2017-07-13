@@ -21,6 +21,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.UserService;
 import cn.enbug.shop.register.RegisterService;
 
 /**
@@ -28,12 +29,13 @@ import cn.enbug.shop.register.RegisterService;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.1.0
+ * @version 1.1.1
  * @since 1.0.0
  */
 public class LoginService {
 
     public static final LoginService me = new LoginService();
+    private static final UserService USER_SRV = UserService.ME;
     private static final User userDao = new User().dao();
 
     /**
@@ -45,11 +47,11 @@ public class LoginService {
      * @return 返回信息
      */
     Ret loginByUsername(String username, String password, String ip) {
-        User user = findUserByUsername(username);
+        User user = USER_SRV.findUserByUsername(username);
         if (null == user) {
             return Ret.fail("username or password wrong");
         }
-        String pwd = RegisterService.me.hash(password, user.getSalt());
+        String pwd = USER_SRV.hash(password, user.getSalt());
         if (!pwd.equals(user.getPwd())) {
             return Ret.fail("username or password wrong");
         }
@@ -70,11 +72,11 @@ public class LoginService {
      * @return 返回信息
      */
     Ret loginByEmail(String email, String password, String ip) {
-        User user = findUserByEmail(email);
+        User user = USER_SRV.findUserByEmail(email);
         if (null == user) {
             return Ret.fail("wrong email or password");
         }
-        String pwd = RegisterService.me.hash(password, user.getSalt());
+        String pwd = USER_SRV.hash(password, user.getSalt());
         if (!pwd.equals(user.getPwd())) {
             return Ret.fail("wrong email or password");
         }
@@ -94,7 +96,7 @@ public class LoginService {
      * @return 返回信息
      */
     Ret loginByPhone(String phone, String ip) {
-        User user = findUserByPhone(phone);
+        User user = USER_SRV.findUserByPhoneNumber(phone);
         if (null == user) {
             return Ret.fail("wrong phone or captcha");
         }
@@ -104,30 +106,6 @@ public class LoginService {
         }
         String token = RedisKit.setAndGetToken(user);
         return Ret.succeed().set(RedisKit.COOKIE_ID, token);
-    }
-
-    /**
-     * find user by phone number
-     *
-     * @param phoneNumber phone number
-     * @return User object
-     */
-    public User findUserByPhone(String phoneNumber) {
-        return null == phoneNumber ? null : userDao.findFirst(userDao.getSqlPara("user.findByPhone", phoneNumber));
-    }
-
-    public User findUserByUsername(String username) {
-        return null == username ? null : userDao.findFirst(userDao.getSqlPara("user.findByUsername", username));
-    }
-
-    /**
-     * find user by email
-     *
-     * @param email email
-     * @return User object
-     */
-    public User findUserByEmail(String email) {
-        return null == email ? null : userDao.findFirst(userDao.getSqlPara("user.findByEmail", email));
     }
 
 }

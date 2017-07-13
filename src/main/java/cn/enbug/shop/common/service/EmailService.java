@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.7
+ * @version 1.0.8
  * @see com.aliyuncs.dm
  * @since 1.0.0
  */
@@ -131,7 +131,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean bindEmailAddressForUsername(String username, String emailAddress) {
-        User user = LoginService.me.findUserByUsername(username);
+        User user =USER_SRV.findUserByUsername(username);
         return bindEmailAddressForUser(user, emailAddress);
     }
 
@@ -166,7 +166,7 @@ public class EmailService {
      * @return boolean
      */
     private boolean activeEmailAddressForUsername(String username) {
-        return activeEmailAddressForUser(LoginService.me.findUserByUsername(username));
+        return activeEmailAddressForUser(USER_SRV.findUserByUsername(username));
     }
 
     /**
@@ -177,7 +177,7 @@ public class EmailService {
      * @return boolean
      */
     public boolean validateThenActiveEmailAddressForUsername(String username, String code) {
-        User user = LoginService.me.findUserByUsername(username);
+        User user = USER_SRV.findUserByUsername(username);
         return validateThenActiveEmailAddressForUser(user, code);
     }
 

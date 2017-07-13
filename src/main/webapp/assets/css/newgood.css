@@ -1,7 +1,7 @@
 #shop-photo {
-    margin: 20px 10px 10px 75px;
-    width: 300px;
-    height: 300px;
+    margin: 30px 10px 0 75px;
+    width: 199px;
+    height: 200px;
 }
 
 .form-horizontal {
@@ -16,4 +16,16 @@
 
 .form-label {
     float: left;
+}
+
+.good-photo-container {
+    width: 500px;
+    display: inline;
+    float: left;
+    padding-left: 80px;
+}
+
+.good-description {
+    margin-top: 50px;
+    margin-left: 80px;
 }
