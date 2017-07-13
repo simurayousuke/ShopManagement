@@ -20,7 +20,6 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.login.LoginService;
 import com.jfinal.plugin.activerecord.Db;
 
 /**
@@ -28,12 +27,13 @@ import com.jfinal.plugin.activerecord.Db;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class ShopService {
 
     public static final ShopService ME = new ShopService();
+    private static final UserService USER_SRV = UserService.ME;
     private static final Shop SHOP_DAO = new Shop().dao();
 
     private ShopService() {
@@ -159,17 +159,21 @@ public class ShopService {
      * transfer shop to other user.
      *
      * @param token    owner token
+     * @param password password
      * @param username new owner username
      * @param ip       ip address
      * @return boolean
      */
-    public boolean transfer(String token, String username, String ip) {
-        User to = LoginService.me.findUserByUsername(username);
+    public boolean transfer(String token, String password, String username, String ip) {
+        User to = USER_SRV.findUserByUsername(username);
         if (null == to) {
             return false;
         }
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
+            return false;
+        }
+        if (!UserService.ME.hash(password, user.getSalt()).equals(user.getPwd())) {
             return false;
         }
         Shop shop = findShopByUser(user);

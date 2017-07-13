@@ -7,12 +7,12 @@
     <div class="shop-content">
         <div>
             <span>#(shop.shopName)</span>
-            <a href="#(shop.id)" class="btn btn-primary">修改</a>
+            <button class="btn btn-primary" id="modify-shop-name">修改</button>
         </div>
         <hr>
         <p>#(shop.description)</p>
-        <a href="#(shop.id)" class="btn btn-primary" style="float: right">修改</a>
+        <button class="btn btn-primary" style="float: right" id="modify-shop-description">修改</button>
     </div>
-    <a href="" class="btn btn-primary" style="float: right">管理商品</a>
-    <a href="#(shop.id)" class="btn btn-danger" style="float: right">转让店铺</a>
+    <a href="/shop/good" class="btn btn-primary" style="float: right">管理商品</a>
+    <button class="btn btn-danger" style="float: right" id="transfer-shop">转让店铺</button>
 </div>

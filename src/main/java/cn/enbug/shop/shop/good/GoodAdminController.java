@@ -18,6 +18,7 @@ package cn.enbug.shop.shop.good;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
+import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 
 /**
@@ -25,7 +26,7 @@ import com.jfinal.aop.Before;
  * @version 1.0.1
  * @since 1.0.0
  */
-@Before(NeedLogInInterceptor.class)
+@Before(HasShopInterceptor.class)
 public class GoodAdminController extends BaseController {
 
     public void index() {

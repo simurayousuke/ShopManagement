@@ -22,6 +22,7 @@ import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.login.LoginService;
 import cn.enbug.shop.register.RegisterService;
 import com.jfinal.aop.Duang;
+import com.jfinal.kit.HashKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 
@@ -30,12 +31,67 @@ import com.jfinal.plugin.activerecord.Db;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.10
+ * @version 1.2.11
  * @since 1.0.0
  */
 public class UserService {
 
     public static final UserService ME = Duang.duang(UserService.class);
+    private static final User USER_DAO = new User().dao();
+
+    /**
+     * get hashed password.
+     *
+     * @param password password
+     * @param salt     salt
+     * @return hashed password
+     */
+    public String hash(String password, String salt) {
+        String ret = HashKit.sha256(password + salt);
+        for (int i = 0; i < 2; i++) {
+            ret = HashKit.sha256(ret + salt);
+        }
+        return ret;
+    }
+
+    /**
+     * find user by username
+     *
+     * @param username username
+     * @return User object
+     */
+    public User findUserByUsername(String username) {
+        if (null == username) {
+            return null;
+        }
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByUsername", username));
+    }
+
+    /**
+     * find user by phone number
+     *
+     * @param phoneNumber phone number
+     * @return User object
+     */
+    public User findUserByPhoneNumber(String phoneNumber) {
+        if (null == phoneNumber) {
+            return null;
+        }
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByPhoneNumber", phoneNumber));
+    }
+
+    /**
+     * find user by email
+     *
+     * @param email email
+     * @return User object
+     */
+    public User findUserByEmail(String email) {
+        if (null == email) {
+            return null;
+        }
+        return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findByEmail", email));
+    }
 
     /**
      * register a user and log the action.
@@ -48,7 +104,7 @@ public class UserService {
     @Deprecated
     public boolean register(User user, String ip) {
         user.setSalt(StrKit.getRandomUUID());
-        user.setPwd(RegisterService.me.hash(user.getPwd(), user.getSalt()));
+        user.setPwd(hash(user.getPwd(), user.getSalt()));
         return Db.tx(4, () -> user.save() &&
                 new Log().setIp(ip).setOperation("register").setUserId(user.getId()).save());
     }
@@ -88,7 +144,7 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByPhoneNumber(String phone, String ip) {
-        if (null != LoginService.me.findUserByPhone(phone)) {
+        if (null != findUserByPhoneNumber(phone)) {
             return false;
         }
         User user = initUser();
@@ -104,7 +160,7 @@ public class UserService {
      * @return boolean
      */
     public boolean initUserByEmail(String email, String ip) {
-        User select = LoginService.me.findUserByEmail(email);
+        User select = findUserByEmail(email);
         if (null != select) {
             return 0 == select.getEmailStatus();
         }
@@ -124,7 +180,7 @@ public class UserService {
      */
     private boolean regUser(User user, String ip) {
         user.setSalt(StrKit.getRandomUUID());
-        user.setPwd(RegisterService.me.hash(user.getPwd(), user.getSalt()));
+        user.setPwd(hash(user.getPwd(), user.getSalt()));
         return Db.tx(4, () -> user.update() &&
                 new Log().setIp(ip).setOperation("regUser").setUserId(user.getId()).save());
     }
@@ -142,7 +198,7 @@ public class UserService {
         if (!initUserByPhoneNumber(phone, ip)) {
             return false;
         }
-        User user = LoginService.me.findUserByPhone(phone).setUsername(username).setPwd(password);
+        User user = findUserByPhoneNumber(phone).setUsername(username).setPwd(password);
         return regUser(user, ip);
     }
 
@@ -156,7 +212,7 @@ public class UserService {
      * @return boolean
      */
     public boolean regUserByEmail(String ip, String username, String password, String email) {
-        User user = LoginService.me.findUserByEmail(email).setUsername(username).setPwd(password).setEmailStatus(1);
+        User user =findUserByEmail(email).setUsername(username).setPwd(password).setEmailStatus(1);
         return regUser(user, ip);
     }
 
