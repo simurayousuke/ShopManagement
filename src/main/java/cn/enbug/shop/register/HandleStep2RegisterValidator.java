@@ -1,0 +1,37 @@
+package cn.enbug.shop.register;
+
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.validator.BaseValidator;
+import cn.enbug.shop.login.LoginService;
+import com.jfinal.core.Controller;
+
+/**
+ * 注册第二步数据验证
+ *
+ * @author Hu Wenqiang
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+public class HandleStep2RegisterValidator extends BaseValidator {
+
+    @Override
+    protected void validate(Controller c) {
+        String code = c.getPara("activeCode");
+        String username = c.getPara("username");
+        if (null != LoginService.me.findUserByUsername(username)) {
+            addError(Ret.MSG, "User already exists.");
+        }
+        String phone = RedisKit.getPhoneNumberByActiveCode(code);
+        if (null != LoginService.me.findUserByPhone(phone)) {
+            addError(Ret.MSG, "");
+        }
+    }
+
+    @Override
+    protected void handleError(Controller c) {
+        c.setAttr(Ret.STATUS, false);
+        c.renderJson();
+    }
+
+}

@@ -22,7 +22,6 @@ import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.UserService;
-import cn.enbug.shop.register.RegisterService;
 
 /**
  * 登录服务
@@ -106,6 +105,36 @@ public class LoginService {
         }
         String token = RedisKit.setAndGetToken(user);
         return Ret.succeed().set(RedisKit.COOKIE_ID, token);
+    }
+
+    /**
+     * find user by username
+     *
+     * @param username username
+     * @return User object
+     */
+    public User findUserByUsername(String username) {
+        return null == username ? null : userDao.findFirst(userDao.getSqlPara("user.findByUsername", username));
+    }
+
+    /**
+     * find user by phone number
+     *
+     * @param phone phone number
+     * @return User object
+     */
+    public User findUserByPhone(String phone) {
+        return null == phone ? null : userDao.findFirst(userDao.getSqlPara("user.findByPhoneNumber", phone));
+    }
+
+    /**
+     * find user by email
+     *
+     * @param email email
+     * @return User object
+     */
+    public User findUserByEmail(String email) {
+        return null == email ? null : userDao.findFirst(userDao.getSqlPara("user.findByEmail", email));
     }
 
 }

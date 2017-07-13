@@ -17,28 +17,47 @@
 package cn.enbug.shop.register;
 
 import cn.enbug.shop.common.bean.Email;
+import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.model.Log;
+import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
-import cn.enbug.shop.common.service.UserService;
 import cn.enbug.shop.login.LoginService;
+import com.jfinal.aop.Before;
+import com.jfinal.aop.Duang;
 import com.jfinal.kit.HashKit;
+import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 /**
  * 注册服务
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.10
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class RegisterService {
 
-    public static final RegisterService me = new RegisterService();
-    public static final RegisterService ME = new RegisterService();
-    private static final UserService USER_SRV = UserService.ME;
+    public static final RegisterService me = Duang.duang(RegisterService.class);
     private static final EmailService EMAIL_SRV = EmailService.ME;
+
+    /**
+     * get hashed password.
+     *
+     * @param password password
+     * @param salt     salt
+     * @return hashed password
+     */
+    public String hash(String password, String salt) {
+        String ret = HashKit.sha256(password + salt);
+        for (int i = 0; i < 2; i++) {
+            ret = HashKit.sha256(ret + salt);
+        }
+        return ret;
+    }
 
     /**
      * 邮箱注册
@@ -47,19 +66,30 @@ public class RegisterService {
      * @param ip    ip地址
      * @return 结果
      */
+    @Before(Tx.class)
     Ret registerByEmail(String email, String ip) {
-        if (!USER_SRV.initUserByEmail(email, ip)) {
-            return Ret.fail("email already used");
+        User user = new User().setUuid(StrKit.getRandomUUID()).setEmail(email).setEmailStatus(0);
+        Log log = new Log().setIp(ip).setOperation("initEmail");
+        if (!user.save()) {
+            return Ret.fail("unable to save into the database");
         }
-        String activeCode = EMAIL_SRV.generateActiveCodeForEmail(email);
+        if (!log.setUserId(user.getId()).save()) {
+            throw new LogException();
+        }
+        if (!sendRegisterEmail(email)) {
+            return Ret.fail("fail to send email");
+        }
+        return Ret.succeed();
+    }
+
+    public boolean sendRegisterEmail(String email) {
+        String activeCode = RedisKit.setActiveCodeForEmailAndGet(email);
         String title = "激活你的账户";
-        String context = "<a href=\"https://shop.yangzhizhuang.net/register/step2/" + activeCode +
-                "\">点击激活</a><br>若上方链接不可用，您也可以复制地址到浏览器地址栏访问<br>" +
-                "https://shop.yangzhizhuang.net/register/step2/" + activeCode;
-        if (EMAIL_SRV.send(new Email(email, title, context), "register")) {
-            return Ret.succeed();
-        }
-        return Ret.fail();
+        String url = "https://shop.yangzhizhuang.net/register/step2/" + activeCode;
+        String context = "<a href=\"" + url + "\">点击激活</a>" +
+                "<br>若上方链接不可用，您也可以复制地址到浏览器地址栏访问" +
+                "<br>" + url;
+        return EMAIL_SRV.send(new Email(email, title, context), "register");
     }
 
     /**
@@ -70,22 +100,8 @@ public class RegisterService {
      * @return 结果
      */
     Ret registerByPhone(String phone, String ip) {
-        if (null != USER_SRV.findUserByPhoneNumber(phone)) {
-            return Ret.fail("phone already used.");
-        }
         String activeCode = ShortMessageCaptchaService.ME.generateActiveCodeForPhoneNumberAndGet(phone);
         return Ret.succeed().set("activeCode", activeCode);
-    }
-
-    /**
-     * validate register step 2.
-     *
-     * @param code active code
-     * @return boolean
-     */
-    boolean validateStep2(String code) {
-        return ShortMessageCaptchaService.ME.validateActiveCodeForPhoneNumber(code) ||
-                EMAIL_SRV.validateActiveCodeForEmail(code);
     }
 
     /**
@@ -97,10 +113,8 @@ public class RegisterService {
      * @param ip       ip address
      * @return boolean
      */
+    @Before(Tx.class)
     Ret handleStep2(String code, String username, String password, String ip) {
-        if (null != USER_SRV.findUserByUsername(username)) {
-            return Ret.fail("User already exists.");
-        }
         String number = RedisKit.getPhoneNumberByActiveCode(code);
         if (null != number) {
             return handlePhone(code, ip, username, password, number);
@@ -113,19 +127,64 @@ public class RegisterService {
     }
 
     private Ret handleEmail(String code, String ip, String username, String password, String email) {
-        if (USER_SRV.regUserByEmail(ip, username, password, email)) {
-            RedisKit.delActiveCodeForEmail(code);
-            return Ret.succeed();
+        User user = LoginService.me.findUserByEmail(email);
+        user.setUsername(username).setPwd(password).setEmailStatus(1);
+        if (!regUserByEmail(user, ip)) {
+            return Ret.fail("unknown error.");
         }
-        return Ret.fail("unknown error.");
+        RedisKit.delActiveCodeForEmail(code);
+        return Ret.succeed();
     }
 
     private Ret handlePhone(String code, String ip, String username, String password, String number) {
-        if (USER_SRV.regUserByPhoneNumber(ip, username, password, number)) {
-            RedisKit.delActiveCodeForPhoneNumber(code);
-            return Ret.succeed();
+        if (!regUserByPhone(ip, username, password, number)) {
+            return Ret.fail("unknown error.");
         }
-        return Ret.fail("unknown error.");
+        RedisKit.delActiveCodeForPhoneNumber(code);
+        return Ret.succeed();
+    }
+
+    /**
+     * reg user.
+     *
+     * @param ip       ip address
+     * @param username username
+     * @param password password
+     * @param phone    phone number
+     * @return boolean
+     */
+    public boolean regUserByPhone(String ip, String username, String password, String phone) {
+        User user = new User();
+        user.setUuid(StrKit.getRandomUUID());
+        user.setUsername(username).setPwd(password);
+        user.setPhone(phone);
+        return regUserByPhone(user, ip);
+    }
+
+    private boolean regUserByEmail(User user, String ip) {
+        user.setSalt(StrKit.getRandomUUID());
+        user.setPwd(hash(user.getPwd(), user.getSalt()));
+        return user.update() && regUser(user, ip);
+    }
+
+    private boolean regUserByPhone(User user, String ip) {
+        user.setPwd(hash(user.getPwd(), user.getSalt()));
+        return user.save() && regUser(user, ip);
+    }
+
+    /**
+     * reg user.
+     *
+     * @param user User Object
+     * @param ip   ip address
+     * @return boolean
+     */
+    private boolean regUser(User user, String ip) {
+        Log log = new Log().setIp(ip).setOperation("regUser");
+        if (!log.setUserId(user.getId()).save()) {
+            throw new LogException();
+        }
+        return true;
     }
 
 }

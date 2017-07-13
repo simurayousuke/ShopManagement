@@ -17,32 +17,32 @@
 package cn.enbug.shop.register;
 
 import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.service.EmailService;
+import cn.enbug.shop.common.service.ShortMessageCaptchaService;
 import cn.enbug.shop.common.validator.BaseValidator;
-import cn.enbug.shop.login.LoginService;
 import com.jfinal.core.Controller;
 
 /**
- * 手机号注册验证器
+ * 注册第二步检测
  *
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.0
  * @since 1.0.0
  */
-public class PhoneRegisterValidator extends BaseValidator {
+public class Step2RegisterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validatePhone("phone", Ret.MSG, "wrong format phone");
-        validatePhoneCaptcha("phone", "phone_captcha", Ret.MSG, "wrong phone captcha");
-        if (null != LoginService.me.findUserByPhone(c.getPara("phone"))) {
-            addError(Ret.MSG, "phone already used.");
+        String code = c.getPara();
+        if (!ShortMessageCaptchaService.ME.validateActiveCodeForPhoneNumber(code)
+                && !EmailService.ME.validateActiveCodeForEmail(code)) {
+            addError(Ret.MSG, "wrong code");
         }
     }
 
     @Override
     protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
+        c.redirect("/register");
     }
 
 }

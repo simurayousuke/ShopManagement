@@ -31,13 +31,13 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.6
+ * @version 1.0.7
  * @since 1.0.0
  */
 @Before({NoUrlPara.class, LoginInterceptor.class})
 public class RegisterController extends BaseController {
 
-    private static final RegisterService SRV = RegisterService.ME;
+    private static final RegisterService SRV = RegisterService.me;
     private static final String INDEX_HTML = "index.html";
 
     /**
@@ -71,17 +71,12 @@ public class RegisterController extends BaseController {
     }
 
     @Clear(NoUrlPara.class)
-    @Before(GET.class)
+    @Before({GET.class, Step2RegisterValidator.class})
     public void step2() {
-        String activeCode = getPara();
-        if (SRV.validateStep2(activeCode)) {
-            render("step2.html");
-        } else {
-            redirect("/register");
-        }
+        render("step2.html");
     }
 
-    @Before(POST.class)
+    @Before({POST.class, HandleStep2RegisterValidator.class})
     public void step2handler() {
         String username = getPara("username");
         String password = getPara("pwd");
