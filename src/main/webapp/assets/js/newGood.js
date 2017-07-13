@@ -1,7 +1,3 @@
-/**
- * Created by forre on 2017/7/13.
- */
-
 KindEditor.create('textarea.kindeditor', {
     basePath: '//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/',
     bodyClass: 'article-content',
@@ -23,5 +19,51 @@ $(document).ready(function () {
     };
 
     updateCaptcha();
+
+    captchaImg.click(function () {
+        updateCaptcha();
+    });
+
+    $("#create-good-form").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var data = form.serializeObject();
+        var description = data.description = $("iframe").contents().find("body").html();
+        var name = data.name;
+        var price = data.price;
+        var number = data.number;
+        data.description = description;
+        var captcha = data.captcha;
+        if (name.length < 1) {
+            $.msg('请输入商品名');
+            return;
+        }
+        if (description.length < 1) {
+            $.msg('请输入商品描述');
+            return;
+        }
+        if ($.validatePriceFormat(price)) {
+            $.msg('价格不正确');
+            return;
+        }
+        if ($.validatePositiveIntFormat(number)) {
+            $.msg('库存不正确');
+            return;
+        }
+        if (captcha.length !== 4) {
+            $.msg('验证码长度应为4位');
+            return;
+        }
+        $.post('/shop/good/add', data, function (data) {
+            if (data.status) {
+                location.href = '/shop/good';
+            } else {
+                $.msg(data.msg);
+                updateCaptcha();
+            }
+        });
+    });
+
 });
+
 

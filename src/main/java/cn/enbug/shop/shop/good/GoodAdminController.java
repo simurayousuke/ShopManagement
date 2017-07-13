@@ -16,10 +16,13 @@
 
 package cn.enbug.shop.shop.good;
 
+import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
-import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
+import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
@@ -29,12 +32,26 @@ import com.jfinal.aop.Before;
 @Before(HasShopInterceptor.class)
 public class GoodAdminController extends BaseController {
 
+    @Before(GET.class)
     public void index() {
         render("index.html");
     }
 
+    @Before(GET.class)
     public void newGood() {
         render("newGood.html");
+    }
+
+    @Before({POST.class, ImageCaptchaValidator.class})
+    public void add() {
+        String token = getCookie(RedisKit.TOKEN);
+        String name = getPara("name");
+        String description = getPara("description");
+        String ip = getIp();
+        double price = getParaToDouble("price", 0.0);
+        int number = getParaToInt("number", 0);
+        String avator = getPara("avator", "good/default.jpg");
+        renderJson(GoodAdminService.ME.add(token, ip, name, description, price, avator, number));
     }
 
 }

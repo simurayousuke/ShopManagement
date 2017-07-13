@@ -25,23 +25,23 @@
         </div>
         <div style="display: inline;float:left;margin-left:50px;">
             <h2>商品信息：</h2>
-            <form action="" class="form-horizontal">
+            <form action="" class="form-horizontal" id="create-good-form">
                 <div class="form-group">
                     <label for="good-name" class="form-label">商品名称：</label>
                     <div class="col-sm-10">
-                        <input class="form-control" placeholder="商品名称" type="text" id="good-name">
+                        <input class="form-control" placeholder="商品名称" type="text" id="good-name" name="name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="good-prize" class="form-label">商品价格：</label>
                     <div class="col-sm-10">
-                        <input class="form-control" placeholder="商品价格" type="text" id="good-prize">
+                        <input class="form-control" placeholder="商品价格" type="text" id="good-prize" name="price">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="good-stock" class="form-label">商品库存：</label>
                     <div class="col-sm-10">
-                        <input class="form-control" placeholder="商品库存" type="text" id="good-stock">
+                        <input class="form-control" placeholder="商品库存" type="text" id="good-stock" name="number">
                     </div>
                 </div>
             </form>
@@ -50,13 +50,13 @@
     <div class="good-description" id="description">
         <h2 style="margin-bottom: 25px;">商品描述：</h2>
         <textarea id="good-content" placeholder="描述一下您的商品吧！" class="form-control kindeditor"
-                  style="height:150px;"></textarea>
+                  style="height:150px;" ></textarea>
     </div>
     <div class="form-horizontal" style="margin-left: 80px;margin-top: 10px">
         <div class="form-group" style="margin-bottom: 10px">
             <label for="good-captcha" class="form-label" style="margin-left: 10px">验证码：</label>
             <div class="col-sm-6" style="display: inline">
-                <input class="form-control" placeholder="验证码" type="text" id="good-captcha">
+                <input class="form-control" placeholder="验证码" type="text" id="good-captcha" name="captcha">
             </div>
             <img alt="" src="" class="captcha" style="height: 32px;width: 86.4px" title="点击刷新">
         </div>

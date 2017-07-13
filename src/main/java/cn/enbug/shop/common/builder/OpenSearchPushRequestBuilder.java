@@ -49,9 +49,9 @@ public class OpenSearchPushRequestBuilder {
      * @param price       price
      * @param status      status
      */
-    public OpenSearchPushRequestBuilder(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status) {
+    public OpenSearchPushRequestBuilder(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status,int number) {
         list = new ArrayList<>();
-
+        add(id, name, description, shopId, avator, saleCount, price, status, number);
     }
 
     /**
@@ -66,7 +66,7 @@ public class OpenSearchPushRequestBuilder {
      * @param price       price
      * @param status      status
      */
-    public void add(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status) {
+    public void add(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status,int number) {
         HashMap<String, Object> fields = new HashMap<>();
         fields.put("id", id);
         fields.put("name", name);

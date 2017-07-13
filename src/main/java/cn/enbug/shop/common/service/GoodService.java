@@ -16,10 +16,17 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.builder.OpenSearchPushRequestBuilder;
 import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Shop;
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.tx.Tx;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
  * Good service.
@@ -31,6 +38,8 @@ import com.jfinal.kit.StrKit;
 public class GoodService {
 
     public static final GoodService ME = Duang.duang(GoodService.class);
+    public static final OpenSearchService OPEN_SEARCH_SERVICE = OpenSearchService.ME;
+    private static final Logger LOG = LoggerFactory.getLogger(GoodService.class);
     private static final Good GOOD_DAO = new Good().dao();
 
     /**
@@ -44,7 +53,8 @@ public class GoodService {
      * @param avator      good avator
      * @return boolean
      */
-    public boolean insert(String token, String ip, String goodName, String description, double price, String avator) {
+    @Before(Tx.class)
+    public boolean insert(String token, String ip, String goodName, String description, double price, String avator,int number) throws IOException {
         // name, shop id,uuid, description, price, avator
         Shop shop = ShopService.ME.findShopByToken(token);
         if (null == shop) {
@@ -53,7 +63,18 @@ public class GoodService {
         int shopId = shop.getId();
         Good good = new Good().setGoodName(goodName).setShopId(shopId).setUuid(StrKit.getRandomUUID())
                 .setDescription(description).setPrice(price).setAvator(avator);
-        return good.save();
+        if (!good.save()) {
+            return false;
+        }
+        //String id, String name, String description, int shopId, String avator, int saleCount, double price, int status
+        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1,number);
+        try {
+            OPEN_SEARCH_SERVICE.push(builder.build());
+        } catch (IOException e) {
+            LOG.error(e.toString(), e);
+            throw e;
+        }
+        return true;
     }
 
     /**
