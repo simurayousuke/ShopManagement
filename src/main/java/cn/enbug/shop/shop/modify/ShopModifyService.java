@@ -36,8 +36,8 @@ class ShopModifyService {
         }
     }
 
-    Ret addShop(String token, String name, String description, String ip) {
-        if (ShopService.ME.createShop(name, description, token, ip)) {
+    Ret addShop(String token, String name, String description, String ip, String avator) {
+        if (ShopService.ME.createShop(name, description, token, ip, avator)) {
             return Ret.succeed();
         } else {
             return Ret.fail("Fail");

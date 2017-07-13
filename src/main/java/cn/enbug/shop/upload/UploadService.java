@@ -28,7 +28,7 @@ import java.io.File;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 class UploadService {
@@ -36,16 +36,15 @@ class UploadService {
     static final UploadService ME = new UploadService();
     private static final OssService SRV = OssService.ME;
 
-    Ret upload(File file, User user, String ip) {
+    Ret upload(File file, User user, String ip, String folder) {
         System.out.println(file.getParent());
         System.out.println(file.getName());
         String filename = file.getName();
-        String folder = "test";
         String key = SRV.generateKey(folder, filename);
         String fileType = SRV.getFileType(filename);
         SRV.upload(key, filename, user.getId(), ip, fileType, file);
         FileKit.delete(file);
-        return Ret.succeed();
+        return Ret.succeed().set("url", key);
     }
 
 }

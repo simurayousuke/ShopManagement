@@ -18,9 +18,20 @@
                 </div>
             </div>
             <div>
-                <label for="shop-photo">店铺头像</label>
+                <label for="upload">店铺头像</label>
                 <i class="icon icon-upload icon-4x"></i>
-                <input type="file" id="shop-photo"/>
+                <div id="upload" class="uploader">
+                    <div class="uploader-message text-center">
+                        <div class="content"></div>
+                        <button type="button" class="close">×</button>
+                    </div>
+                    <div class="uploader-files file-list file-list-grid"></div>
+                    <div>
+                        <hr class="divider">
+                        <div class="uploader-status pull-right text-muted"></div>
+                        <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
+                    </div>
+                </div>
             </div>
             <div class="form-group ">
                 <div class="input-group captcha-div">
@@ -35,6 +46,7 @@
 
             <br>
             <button class="btn btn-primary btn-block" type="submit" id="create-shop">新增店铺</button>
+            <input type="hidden" name="avator" id="create-shop-avator" value="">
         </form>
     </div>
 </div>
@@ -42,8 +54,10 @@
 
 #define css()
 <link rel="stylesheet" href="/assets/css/newShop.css">
+<link href="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
 #end
 
 #define js()
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
 <script src="/assets/js/newShop.js"></script>
 #end

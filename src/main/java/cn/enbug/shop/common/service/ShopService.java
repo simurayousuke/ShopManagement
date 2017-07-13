@@ -17,13 +17,10 @@
 package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.plugin.activerecord.Db;
-
-import java.util.ArrayList;
 
 /**
  * Shop service.
@@ -101,8 +98,8 @@ public class ShopService {
      * @param ip          ip address
      * @return boolean
      */
-    public boolean createShop(String name, String description, String token, String ip) {
-        Shop shop = new Shop(name, description, token);
+    public boolean createShop(String name, String description, String token, String ip, String avator) {
+        Shop shop = new Shop(name, description, token, avator);
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return false;

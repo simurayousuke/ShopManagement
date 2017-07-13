@@ -21,7 +21,6 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
-import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.upload.UploadFile;
 
@@ -31,10 +30,10 @@ import java.io.File;
  * 上传文件Controller
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
-@Before({NoUrlPara.class, UploadValidator.class})
+@Before(UploadValidator.class)
 public class UploadController extends BaseController {
 
     private static final UploadService UPLOAD_SRV = UploadService.ME;
@@ -46,11 +45,13 @@ public class UploadController extends BaseController {
 
     @Before(POST.class)
     public void doUpload() {
+        String folder = getPara();
         UploadFile uploadFile = getFile();
         File file = uploadFile.getFile();
         User user = RedisKit.getUserByToken(getCookie(RedisKit.COOKIE_ID));
         String ip = getIp();
-        renderJson(UPLOAD_SRV.upload(file, user, ip));
+        renderJson(UPLOAD_SRV.upload(file, user, ip, folder));
     }
+
 
 }

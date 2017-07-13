@@ -19,7 +19,7 @@ $(document).ready(function () {
         var name = data.name;
         var description = data.description;
         var captcha = data.captcha;
-        if (name.length < 1 ) {
+        if (name.length < 1) {
             $.msg('请输入店铺名');
             return;
         }
@@ -40,4 +40,27 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#upload').uploader({
+        autoUpload: true,
+        url: '/upload/shop',
+        responseHandler: function (responseObject) {
+            var data = JSON.parse(responseObject.response);
+            if (!data.status) {
+                return data.msg;
+            } else {
+                $('#create-shop-avator').val(url);
+            }
+        },
+        filters: {
+            mime_types: [
+                {
+                    title: '图片',
+                    extensions: 'jpg,gif,png'
+                }
+            ],
+            max_file_size: '5mb'
+        }
+    });
+
 });

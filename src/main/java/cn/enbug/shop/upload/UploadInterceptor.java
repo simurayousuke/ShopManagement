@@ -39,7 +39,7 @@ public class UploadInterceptor implements Interceptor {
         String method = request.getMethod();
 
         if ("POST".equalsIgnoreCase(method)) {
-            c.forwardAction("/upload/doUpload");
+            c.forwardAction("/upload/doUpload/"+c.getPara());
         } else {
             inv.invoke();
         }
