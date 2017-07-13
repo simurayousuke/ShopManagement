@@ -20,6 +20,7 @@ import com.aliyun.opensearch.CloudsearchClient;
 import com.aliyun.opensearch.CloudsearchDoc;
 import com.aliyun.opensearch.CloudsearchSearch;
 import com.aliyun.opensearch.object.KeyTypeEnum;
+import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import org.slf4j.Logger;
@@ -59,6 +60,11 @@ public class OpenSearchService {
         }
     }
 
+    private boolean isSuccess(String json){
+        HashMap map= JsonKit.parse(json,HashMap.class);
+        return map.get("status").toString().equalsIgnoreCase("ok");
+    }
+
     /**
      * push
      *
@@ -66,9 +72,9 @@ public class OpenSearchService {
      * @return String
      * @throws IOException IOException
      */
-    public String push(String data) throws IOException {
+    public boolean push(String data) throws IOException {
         CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
-        return doc.push(data, TABLE_NAME);
+        return isSuccess(doc.push(data, TABLE_NAME));
     }
 
     /**
@@ -78,10 +84,10 @@ public class OpenSearchService {
      * @return String
      * @throws IOException IOException
      */
-    public String add(HashMap<String,Object> fields) throws IOException {
+    public boolean add(HashMap<String,Object> fields) throws IOException {
         CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
         doc.add(fields);
-        return doc.push(TABLE_NAME);
+        return isSuccess(doc.push(TABLE_NAME));
     }
 
     /**
@@ -91,10 +97,10 @@ public class OpenSearchService {
      * @return String
      * @throws IOException IOException
      */
-    public String update(HashMap<String,Object> fields) throws IOException {
+    public boolean update(HashMap<String,Object> fields) throws IOException {
         CloudsearchDoc doc = new CloudsearchDoc(INDEX_NAME, client);
         doc.update(fields);
-        return doc.push(TABLE_NAME);
+        return isSuccess(doc.push(TABLE_NAME));
     }
 
     /**
