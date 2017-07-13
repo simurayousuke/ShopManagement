@@ -32,7 +32,7 @@ $(document).ready(function () {
         var price = data.price;
         var number = data.number;
         data.description = description;
-        var captcha = data.captcha;
+        var captcha = $('#good-captcha').val();
         if (name.length < 1) {
             $.msg('请输入商品名');
             return;
