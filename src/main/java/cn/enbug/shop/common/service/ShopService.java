@@ -20,6 +20,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.login.LoginService;
 import com.jfinal.plugin.activerecord.Db;
 
 /**
@@ -34,7 +35,6 @@ public class ShopService {
 
     public static final ShopService ME = new ShopService();
     private static final Shop SHOP_DAO = new Shop().dao();
-    private static final UserService USER_SRV = UserService.ME;
 
     private ShopService() {
         // singleton
@@ -164,7 +164,7 @@ public class ShopService {
      * @return boolean
      */
     public boolean transfer(String token, String username, String ip) {
-        User to = USER_SRV.findUserByUsername(username);
+        User to = LoginService.me.findUserByUsername(username);
         if (null == to) {
             return false;
         }

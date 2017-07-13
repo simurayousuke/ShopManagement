@@ -39,7 +39,7 @@ import com.jfinal.ext.interceptor.POST;
 @Before({NoUrlPara.class, LoginInterceptor.class})
 public class LoginController extends BaseController {
 
-    private static final LoginService SRV = LoginService.ME;
+    private static final LoginService srv = LoginService.me;
 
     /**
      * 登录页面
@@ -57,7 +57,7 @@ public class LoginController extends BaseController {
         String username = getPara("username");
         String password = getPara("pwd");
         String ip = getIp();
-        Ret ret = SRV.loginByUsername(username, password, ip);
+        Ret ret = srv.loginByUsername(username, password, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
@@ -72,7 +72,7 @@ public class LoginController extends BaseController {
     public void phone() {
         String phone = getPara("phone");
         String ip = getIp();
-        Ret ret = SRV.loginByPhone(phone, ip);
+        Ret ret = srv.loginByPhone(phone, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
@@ -88,7 +88,7 @@ public class LoginController extends BaseController {
         String email = getPara("email");
         String password = getPara("pwd");
         String ip = getIp();
-        Ret ret = SRV.loginByEmail(email, password, ip);
+        Ret ret = srv.loginByEmail(email, password, ip);
         if (ret.isSucceed()) {
             String token = ret.getAs(RedisKit.COOKIE_ID);
             setCookie(RedisKit.COOKIE_ID, token, 60 * 60);
