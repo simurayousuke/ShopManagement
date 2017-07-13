@@ -2,8 +2,8 @@
 #@layout()
 #define body()
 <div class="container-fixed">
-    <div style="height:100px;"></div>
-    <div class="container-fixed-sm">
+    <div style="height:50px;"></div>
+    <div class="container-fixed-sm" style="margin-bottom: 30px">
         <input type="text" class="form-control" placeholder="大家都在搜..." style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
         #if(word)
                value="#(word)"
@@ -11,11 +11,9 @@
         >
         <button class="btn btn-primary" type="button" style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下</button>
     </div>
-
     #if(word)
     #if(list)
-
-    <div class="cards">
+    <div class="cards" style="border: 1px solid #0a67fb">
         #for(x:list)
         <div class="col-md-4 col-sm-6 col-lg-3">
             <a class="card" href="/good/#(x.uuid)">
@@ -28,7 +26,16 @@
         #end
     </div>
     #else
-    没有搜索到
+    <div style="height: 270px;padding-top: 50px;text-align: center; ">
+        <div id="size-div">
+            <img src="/assets/img/nores.png" id="none-shop">
+        </div>
+        <div id="size-both" style="display: inline-block">
+            <div id="size-word" style=" text-align: center">
+                <span class="none-font">没有找到您要的商品哦<br id="change-line"> 去看看热搜？</span>
+            </div>
+        </div>
+    </div>
     #end
     #else
     <div>

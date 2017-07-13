@@ -21,6 +21,7 @@
 
 .no-shop {
     padding-top: 50px;
+    text-align: center;
 }
 
 .panel-body {
@@ -34,10 +35,6 @@
 
 .shop {
     width: 100%;
-}
-
-.no-shop {
-    text-align: center;
 }
 
 .shop-name {
