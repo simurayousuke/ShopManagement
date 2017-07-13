@@ -11,17 +11,29 @@
         >
         <button class="btn btn-primary" type="button" style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下</button>
     </div>
+
     #if(word)
     #if(list)
-    #for(x:list)
-    <div>
-        <img src="https://smcdn.yangzhizhuang.net/#(x.avator)">
-        商品名：<a href="/good/#(x.uuid)">#(x.name)</a>&nbsp;&nbsp;售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件<br>
+
+    <div class="cards">
+        #for(x:list)
+        <div class="col-md-4 col-sm-6 col-lg-3">
+            <a class="card" href="/good/#(x.uuid)">
+                <img src="https://smcdn.yangzhizhuang.net/#(x.avator)">
+                <div class="caption">去看看！</div>
+                <div class="card-heading"><strong>#(x.name)</strong></div>
+                <div class="card-content text-muted">售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件</div>
+            </a>
+        </div>
+        #end
     </div>
-    #end
     #else
     没有搜索到
     #end
+    #else
+    <div>
+
+    </div>
     #end
 </div>
 #end
