@@ -5,39 +5,32 @@ import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.kit.UrlKit;
 import cn.enbug.shop.common.service.OpenSearchService;
 import com.jfinal.aop.Before;
-import com.jfinal.kit.JsonKit;
+import com.jfinal.aop.Clear;
+import com.jfinal.ext.interceptor.NoUrlPara;
+import com.jfinal.kit.StrKit;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.3
  * @since 1.0.
  */
 @Before(UserInterceptor.class)
 public class SearchController extends BaseController {
 
-    public void index() {
-        render("index.html");
-    }
-
-    public void s() throws IOException {
-        StringBuilder sb = new StringBuilder();
-        ArrayList arrayList = OpenSearchService.ME.search("name", UrlKit.decode(getPara(),"utf-8"));
-        if (arrayList == null) {
-            renderText("none");
-            return;
+    @Clear(NoUrlPara.class)
+    public void index() throws IOException {
+        String word = UrlKit.decode(getPara(), "utf-8");
+        if (!StrKit.isBlank(word)) {
+            ArrayList arrayList = OpenSearchService.ME.search("name", UrlKit.decode(getPara(), "utf-8"));
+            if (arrayList != null) {
+                setAttr("list", arrayList);
+            }
+            setAttr("word", word);
         }
-       /* for (Object o : arrayList) {
-            HashMap map = JsonKit.parse(o.toString(), HashMap.class);
-            sb.append(map.get("name")+"\t");
-            sb.append(map.get("description")+"\t");
-            sb.append(map.get("price")+"\n");
-        }*/
-       setAttr("list",arrayList);
-        render("result.html");
+        render("index.html");
     }
 
 }

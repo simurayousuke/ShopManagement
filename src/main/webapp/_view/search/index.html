@@ -4,8 +4,28 @@
 <div class="container-fixed">
     <div style="height:100px;"></div>
     <div class="container-fixed-sm">
-        <input type="text" class="form-control" placeholder="大家都在搜..." style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px">
-        <button class="btn btn-primary" type="button" style="display: inline-block;width:100px;height: 40px;font-size: 16px">搜一下</button>
+        <input type="text" class="form-control" placeholder="大家都在搜..." style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
+        #if(word)
+               value="#(word)"
+               #end
+        >
+        <button class="btn btn-primary" type="button" style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下</button>
     </div>
+    #if(word)
+    #if(list)
+    #for(x:list)
+    <div>
+        <img src="https://smcdn.yangzhizhuang.net/#(x.avator)">
+        商品名：#(x.name)&nbsp;&nbsp;售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件<br>
+    </div>
+    #end
+    #else
+    没有搜索到
+    #end
+    #end
 </div>
+#end
+
+#define js()
+<script src="/assets/js/search.js"></script>
 #end
