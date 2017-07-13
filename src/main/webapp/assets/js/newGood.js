@@ -41,11 +41,11 @@ $(document).ready(function () {
             $.msg('请输入商品描述');
             return;
         }
-        if ($.validatePriceFormat(price)) {
+        if (!$.validatePriceFormat(price)) {
             $.msg('价格不正确');
             return;
         }
-        if ($.validatePositiveIntFormat(number)) {
+        if (!$.validatePositiveIntFormat(number)) {
             $.msg('库存不正确');
             return;
         }
