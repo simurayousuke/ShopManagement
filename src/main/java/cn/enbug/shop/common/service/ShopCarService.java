@@ -95,12 +95,18 @@ public class ShopCarService {
         if (null == user) {
             return false;
         }
-        ShopCar shopCar = new ShopCar();
-        shopCar.setShopId(good.getShopId());
-        shopCar.setGoodId(good.getId());
-        shopCar.setUserId(user.getId());
-        shopCar.setCount(count);
-        return shopCar.save();
+        ShopCar shopCar = getShopCarByUserAndGood(user, good);
+        if (null == shopCar) {
+            shopCar = new ShopCar();
+            shopCar.setShopId(good.getShopId());
+            shopCar.setGoodId(good.getId());
+            shopCar.setUserId(user.getId());
+            shopCar.setCount(count);
+            return shopCar.save();
+        } else {
+            shopCar.setCount(shopCar.getCount() + count);
+            return shopCar.update();
+        }
     }
 
     /**
