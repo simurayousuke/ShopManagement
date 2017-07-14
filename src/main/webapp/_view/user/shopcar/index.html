@@ -1,54 +1,52 @@
 #set(title="购物车")
 #@layout()
-#define css()
-<link rel="stylesheet" href="assets/css/shopCar.css">
-#end
+
 #define body()
 
 <div class="container-fixed">
     <div class="table-head">
-        <div class="checkbox col-md-2">
+        <div class="checkbox col-md-2 col-sm-2">
             <label>
                 <input type="checkbox"> 全选
             </label>
         </div>
         <div class="td-inner">
-            <div class="col-md-3" style="height: 50px">商品信息</div>
-            <div class="col-md-2"></div>
-            <div class="col-md-1" style="height: 50px">单价</div>
-            <div class="col-md-1" style="height: 50px">数量</div>
-            <div class="col-md-1" style="height: 50px">金额</div>
-            <div class="col-md-1" style="height: 50px">操作</div>
+            <div class="col-md-3 col-sm-3" style="height: 50px">商品信息</div>
+            <div class="col-md-3 col-sm-3">店铺</div>
+            <div class="col-md-1 col-sm-1" style="height: 50px">单价</div>
+            <div class="col-md-1 col-sm-1" style="height: 50px">数量</div>
+            <div class="col-md-1 col-sm-1" style="height: 50px">金额</div>
+            <div class="col-md-1 col-sm-1" style="height: 50px">操作</div>
         </div>
     </div>
 
-    <div class="choose-good">
-        <div class="choose-shop">
-            <div class="checkbox col-md-9">
+
+    <div class=" one-of-goods col-md-12 col-sm-12">
+        <div class="col-md-2 col-sm-2">
+            <div class="checkbox">
                 <label>
-                    <input type="checkbox"> 店铺：马天荟的店铺
+                    <input type="checkbox">
                 </label>
             </div>
-            <div style="height:300px;border: 1px solid #cccccc;" class=" one-of-shops col-md-11">
-                <div class="one-of-goods">
-                    <div class="col-md-2">
-                        <div style="float: left; margin-right: 10px">
-                            <label>
-                                <input type="checkbox">
-                            </label>
-                        </div>
-                        <img src="/assets/img/good.jpg" id="good-photo"
-                             style="height: 80px;width: auto;border: 1px solid #dddddd;">
-                    </div>
-                    <div class="col-md-3">2017新款凉鞋女夏松糕厚底鱼嘴女凉鞋罗马高跟坡跟防水台凉鞋女鞋</div>
-                    <div class="col-md-2 font-inform" style="color:#9c9c9c;">颜色分类：蓝色<br>尺码：36</div>
-                    <div class="col-md-1"><b>¥76.00</b></div>
-                </div>
-            </div>
+            <img src="/assets/img/good.jpg" id="good-photo">
         </div>
-
-
+        <div class="col-md-3 col-sm-3">
+            <a href="" class="no-decoration">2017新款凉鞋女夏松糕厚底鱼嘴女凉鞋罗马高跟坡跟防水台凉鞋女鞋</a></div>
+        <div class="col-md-3 col-sm-3"><a href="" class="no-decoration"><b>店铺：马天荟的店铺</b></a></div>
+        <div class="col-md-1 col-sm-1"><b>¥76.00</b></div>
+        <div class="col-md-1 col-sm-1"><em class="icon icon-check-plus"></em>&nbsp;<b id="good-number">1</b>&nbsp;<em
+                class="icon icon-check-minus"></em></div>
+        <div class="col-md-1 col-sm-1"><b>¥76.00</b></div>
+        <div class="col-md-1 col-sm-1"><a class="no-decoration">删除</a></div>
     </div>
+    <hr class="col-md-12 col-sm-12 hr-shopcar">
 
-</div>
+    <div class="col-md-1 col-sm-1" style="float: right">
+        <button class="btn btn-primary" id="pay">结算</button>
+    </div>
+    <div class="col-md-1 col-sm-1" style="float: right;margin-top: 5px">总计：&nbsp;0 元</div>
+        </div>
+#end
+#define css()
+<link rel="stylesheet" href="assets/css/shopCar.css">
 #end

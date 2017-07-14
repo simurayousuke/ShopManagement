@@ -1,6 +1,19 @@
 .checkbox {
-
     margin-top: 2px;
+    float: left;
+}
+
+.no-decoration {
+    text-decoration: none
+}
+
+.table-head {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+em:hover {
+    background: #FFF6CB;
 }
 
 .td-inner {
@@ -8,11 +21,30 @@
     margin-bottom: 10px;
 }
 
+.hr-shopcar {
+    border: 1px solid #3280fc;
+    min-height: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
 .one-of-goods {
+    padding-top: 20px;
     margin-top: 10px;
+    height: 118px;
+    background: #FCFCFC;
+    border: 1px solid #cccccc;
 }
 
-.one-of-shops {
-    padding-left: 14px;
-    padding-top: 10px;
+.one-of-goods:hover {
+    background: #ebf2f9;
 }
+
+#good-photo {
+    height: 80px;
+    width: 80px;
+    border: 1px solid #dddddd;
+    position: relative;
+    left: 20px;
+}
+
+
