@@ -5,7 +5,7 @@
     <div style="height:350px" id="top">
         <div class="good-photo-container">
             <h2>商品图片：</h2>
-            <img src="https://smcdn.yangzhizhuang.net/good/caomai.jpg" id="shop-photo">
+            <img src="https://smcdn.yangzhizhuang.net/good/caomai.jpg" id="good-photo">
             <div id="upload" class="uploader">
                 <div class="uploader-message text-center">
                     <div class="content"></div>
@@ -41,6 +41,7 @@
                         <input class="form-control" placeholder="商品库存" type="text" id="good-stock" name="number">
                     </div>
                 </div>
+                <input type="hidden" name="avator" id="create-good-avator" value="">
             </form>
         </div>
     </div>
@@ -64,12 +65,11 @@
 
 #define css()
 <link href="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
-<link href="assets/css/newGood.css" rel="stylesheet">
+<link href="/assets/css/newGood.css" rel="stylesheet">
 #end
 
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
-<script src="assets/js/upload.js"></script>
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/kindeditor.min.js"></script>
-<script src="assets/js/newGood.js"></script>
+<script src="/assets/js/newGood.js"></script>
 #end

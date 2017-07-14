@@ -8,7 +8,7 @@
                 <h2>新增店铺</h2>
                 <br>
                 <div id="upload-avatar" class="uploader col-md-2">
-                    <img src="assets/img/nores.png">
+                    <img src="/assets/img/nores.png" id="shop-photo">
                     <div class="uploader-message text-center">
                         <div class="content"></div>
                         <button type="button" class="close">×</button>
@@ -51,7 +51,7 @@
                     <button class="btn btn-primary col-sm-2" type="submit" id="create-shop"
                             style="margin-bottom: 20px;margin-left:60px">新增店铺
                     </button>
-
+                    <input type="hidden" name="avator" id="create-shop-avator" value="">
                 </div>
             </form>
         </div>
@@ -60,10 +60,11 @@
 #end
 
 #define css()
-<link rel="stylesheet" href="assets/css/newShop.css">
+<link rel="stylesheet" href="/assets/css/newShop.css">
+<link href="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
 #end
 
 #define js()
-<script src="assets/js/newShop.js"></script>
-<script src="assets/js/upload.js"></script>
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+<script src="/assets/js/newShop.js"></script>
 #end

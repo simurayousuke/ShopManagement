@@ -27,6 +27,7 @@ import cn.enbug.shop.shop.good.GoodAdminController;
 import cn.enbug.shop.shop.modify.ShopModifyController;
 import cn.enbug.shop.suggest.SuggestController;
 import cn.enbug.shop.upload.UploadController;
+import cn.enbug.shop.user.shopcar.ShopcarController;
 import com.jfinal.config.Routes;
 
 /**
@@ -55,6 +56,7 @@ public class FrontRoutes extends Routes {
         add("/shop/good", GoodAdminController.class);
         add("/shop/modify", ShopModifyController.class);
         add("/suggest", SuggestController.class);
+        add("/user/shopcar", ShopcarController.class);
     }
 
 }

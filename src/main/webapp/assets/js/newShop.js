@@ -50,6 +50,11 @@ $(document).ready(function () {
                 return data.msg;
             } else {
                 $('#create-shop-avator').val(data.url);
+                $('#good-photo').prop('src', 'https://smcdn.yangzhizhuang.net/' + data.url);
+                var files = $('.file');
+                for (var i = 0; i < files.length; ++i) {
+                    files[i].style.display = 'none';
+                }
             }
         },
         filters: {
