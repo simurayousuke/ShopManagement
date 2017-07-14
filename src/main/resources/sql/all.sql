@@ -7,3 +7,9 @@
 #namespace("good")
 #include("good.sql")
 #end
+#namespace("order")
+#include("order.sql")
+#end
+#namespace("shopcar")
+#include("shopcar.sql")
+#end
