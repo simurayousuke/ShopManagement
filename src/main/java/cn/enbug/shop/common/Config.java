@@ -192,6 +192,12 @@ public class Config extends JFinalConfig {
     public void configEngine(Engine me) {
         me.addSharedFunction("_view/_common/_layout.html");
         me.addDirective("compress", new CompressDirective());
+        String scheme = P.get("server.scheme");
+        String host = P.get("server.host");
+        String port = P.get("server.port");
+        String path = P.get("server.path");
+        String basePath = scheme + "://" + host + ("".equals(port) ? "" : ":" + port) + path;
+        me.addSharedObject("basePath", basePath);
     }
 
     /**

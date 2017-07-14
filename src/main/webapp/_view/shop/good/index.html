@@ -25,19 +25,19 @@
                     #for(x:list)
                     <tr>
                         <td>#(for.count)</td>
-                        <td><a href="/good/#(x.uuid)">#(x.goodName)</a></td>
+                        <td><a href="good/#(x.uuid)">#(x.goodName)</a></td>
                         <td>#(x.price)元</td>
                         <td>#(x.number)件</td>
                         <td>
-                            <a href="/shop/good/edit/#(x.uuid)"><i class="icon-edit"></i> </a>
-                            <a href="/shop/good/remove/#(x.uuid)" class="text-danger"><i class="icon-trash"></i></a>
+                            <a href="shop/good/edit/#(x.uuid)"><i class="icon-edit"></i> </a>
+                            <a href="shop/good/remove/#(x.uuid)" class="text-danger"><i class="icon-trash"></i></a>
                         </td>
                     </tr>
                     #end
                     #end
                     </tbody>
                 </table>
-                <a href="/shop/good/newGood" class="btn btn-primary new-good">商品上架</a>
+                <a href="shop/good/newGood" class="btn btn-primary new-good">商品上架</a>
             </div>
         </div>
     </div>
@@ -47,11 +47,11 @@
 #define css()
 <link href="//cdn.bootcss.com/zui/1.7.0/lib/board/zui.board.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/shopGood.css">
+<link rel="stylesheet" href="assets/css/shopGood.css">
 #end
 
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/board/zui.board.min.js"></script>
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.min.js"></script>
-<script src="/assets/js/shopGood.js"></script>
+<script src="assets/js/shopGood.js"></script>
 #end

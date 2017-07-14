@@ -4,12 +4,12 @@
 <div class="container-fixed">
     <div style="height:50px;"></div>
     <div class="container-fixed-sm" style="margin-bottom: 30px">
-        <input type="text" class="form-control" placeholder="大家都在搜..." style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
-        #if(word)
-               value="#(word)"
-               #end
-        >
-        <button class="btn btn-primary" type="button" style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下</button>
+        <input type="text" class="form-control" placeholder="大家都在搜..."
+               style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
+               value="#(word??'')">
+        <button class="btn btn-primary" type="button"
+                style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下
+        </button>
     </div>
     #if(word)
     #if(list)
@@ -25,9 +25,9 @@
 #end
 
 #define css()
-<link rel="stylesheet" href="/assets/css/search.css">
+<link rel="stylesheet" href="assets/css/search.css">
 #end
 
 #define js()
-<script src="/assets/js/search.js"></script>
+<script src="assets/js/search.js"></script>
 #end
