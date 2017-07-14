@@ -16,40 +16,87 @@
 
 package cn.enbug.shop.common.kit;
 
-import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Base64;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class Base64Kit {
 
-    /**
-     * base64 encode.
-     *
-     * @param str String
-     * @return String
-     */
-    public static String encode(byte[] str) {
-        return new sun.misc.BASE64Encoder().encode(str);
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
+
+    private Base64Kit() {
+
     }
 
     /**
-     * base64 decode
+     * 编码
      *
-     * @param str String
-     * @return String
+     * @param value byte数组
+     * @return {String}
      */
-    public static byte[] decode(String str) {
-        byte[] bt = null;
-        try {
-            sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();
-            bt = decoder.decodeBuffer(str);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return bt;
+    public static String encode(byte[] value) {
+        return Base64.getEncoder().encodeToString(value);
     }
+
+    /**
+     * 编码
+     *
+     * @param value 字符串
+     * @return {String}
+     */
+    public static String encode(String value) {
+        byte[] val = value.getBytes(UTF_8);
+        return Base64.getEncoder().encodeToString(val);
+    }
+
+    /**
+     * 编码
+     *
+     * @param value       字符串
+     * @param charsetName charSet
+     * @return {String}
+     */
+    public static String encode(String value, String charsetName) {
+        byte[] val = value.getBytes(Charset.forName(charsetName));
+        return Base64.getEncoder().encodeToString(val);
+    }
+
+    /**
+     * 解码
+     *
+     * @param value 字符串
+     * @return {byte[]}
+     */
+    public static byte[] decode(String value) {
+        return Base64.getDecoder().decode(value);
+    }
+
+    /**
+     * 解码
+     *
+     * @param value 字符串
+     * @return {String}
+     */
+    public static String decodeToStr(String value) {
+        byte[] decodedValue = Base64.getDecoder().decode(value);
+        return new String(decodedValue, UTF_8);
+    }
+
+    /**
+     * 解码
+     *
+     * @param value       字符串
+     * @param charsetName 字符集
+     * @return {String}
+     */
+    public static String decodeToStr(String value, String charsetName) {
+        byte[] decodedValue = Base64.getDecoder().decode(value);
+        return new String(decodedValue, Charset.forName(charsetName));
+    }
+
 }
