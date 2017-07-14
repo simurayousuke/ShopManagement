@@ -72,11 +72,11 @@ public abstract class BaseGood<M extends BaseGood<M>> extends Model<M> implement
         return (M) this;
     }
 
-    public java.lang.Double getPrice() {
+    public java.math.BigDecimal getPrice() {
         return get("price");
     }
 
-    public M setPrice(java.lang.Double price) {
+    public M setPrice(java.math.BigDecimal price) {
         set("price", price);
         return (M) this;
     }

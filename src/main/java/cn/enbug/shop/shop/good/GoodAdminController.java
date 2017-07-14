@@ -27,6 +27,7 @@ import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.POST;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -58,7 +59,7 @@ public class GoodAdminController extends BaseController {
         String name = getPara("name");
         String description = getPara("description");
         String ip = getIp();
-        double price = getParaToDouble("price", 0.0);
+        BigDecimal price = getParaToBigDecimal("price", new BigDecimal("0"));
         int number = getParaToInt("number", 0);
         String avator = getPara("avator", "good/default.jpg");
         renderJson(GoodAdminService.ME.add(token, ip, name, description, price, avator, number));

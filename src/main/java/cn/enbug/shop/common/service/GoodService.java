@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -68,7 +69,7 @@ public class GoodService {
      * @return boolean
      */
     @Before(Tx.class)
-    public boolean insert(String token, String ip, String goodName, String description, double price, String avator, int number) throws IOException {
+    public boolean insert(String token, String ip, String goodName, String description, BigDecimal price, String avator, int number) throws IOException {
         // name, shop id,uuid, description, price, avator
         Shop shop = ShopService.ME.findShopByToken(token);
         if (null == shop) {
@@ -84,7 +85,7 @@ public class GoodService {
         if (!good.save()) {
             return false;
         }
-        //String id, String name, String description, int shopId, String avator, int saleCount, double price, int status
+        //String id, String name, String description, int shopId, String avator, int saleCount, BigDecimal price, int status
         OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number, uuid, shopName, ownerId, ownerName);
         try {
             OPEN_SEARCH_SERVICE.add(builder.build());

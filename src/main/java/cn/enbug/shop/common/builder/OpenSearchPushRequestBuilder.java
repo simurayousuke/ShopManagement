@@ -16,6 +16,7 @@
 
 package cn.enbug.shop.common.builder;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 /**
@@ -39,7 +40,7 @@ public class OpenSearchPushRequestBuilder {
      * @param price       price
      * @param status      status
      */
-    public OpenSearchPushRequestBuilder(String id, String name, String description, int shopId, String avator, int saleCount, double price, int status, int number, String uuid,String shopName,int ownerId,String ownerName) {
+    public OpenSearchPushRequestBuilder(String id, String name, String description, int shopId, String avator, int saleCount, BigDecimal price, int status, int number, String uuid, String shopName, int ownerId, String ownerName) {
         fields = new HashMap<>();
         fields.put("id", id);
         fields.put("name", name);
