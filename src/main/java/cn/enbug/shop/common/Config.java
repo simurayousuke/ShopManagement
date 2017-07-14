@@ -38,6 +38,7 @@ import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.PostgreSqlDialect;
+import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
@@ -163,6 +164,10 @@ public class Config extends JFinalConfig {
         String password = RSA_SERVICE.decrypt(P.get("redis.password"));
         RedisPlugin rp = new RedisPlugin(cacheName, host, port, timeout, password, database);
         return configRedisPlugin(rp);
+    }
+
+    private Cron4jPlugin getCron4jPlugin() {
+        return new Cron4jPlugin(P);
     }
 
     /**

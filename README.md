@@ -40,6 +40,7 @@
 * [aliyun-sdk-oss](http://www.aliyun.com/product/oss) 对象存储
 * com.taobao.api(阿里大于API) 短信发送
 * [aliyun-sdk-opensearch](http://www.aliyun.com) 开放搜索
+* [cron4j](http://www.sauronsoftware.it/projects/cron4j/) 定时任务
 
 # 三方服务
  本部分介绍了本项目所使用的第三方服务。
