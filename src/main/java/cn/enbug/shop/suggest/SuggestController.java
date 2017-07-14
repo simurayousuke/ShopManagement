@@ -27,7 +27,7 @@ public class SuggestController extends BaseController {
             return;
         }
         key = UrlKit.decode(key, "utf-8");
-        String result = OpenSearchService.ME.suggest("default", key);
+        String result = OpenSearchService.ME.suggest("name", key);
         if (null == result) {
             renderJson(Ret.fail("Fail"));
         } else {
