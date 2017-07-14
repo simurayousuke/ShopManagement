@@ -19,10 +19,13 @@ package cn.enbug.shop.common.service;
 import com.aliyun.opensearch.CloudsearchClient;
 import com.aliyun.opensearch.CloudsearchDoc;
 import com.aliyun.opensearch.CloudsearchSearch;
+import com.aliyun.opensearch.CloudsearchSuggest;
 import com.aliyun.opensearch.object.KeyTypeEnum;
 import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +33,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -224,6 +228,29 @@ public class OpenSearchService {
         search.setFormat("json");
         // 返回搜索结果
         return handleSearch(search.search());
+    }
+
+    /**
+     * search suggestions
+     *
+     * @param suggestName suggest name
+     * @param keyWord key word
+     * @return ArrayList&lt;Map&lt;"suggestions",value&gt;
+     * @throws IOException IOException
+     */
+    public String suggest(String suggestName, String keyWord) throws IOException {
+        CloudsearchSuggest suggest = new CloudsearchSuggest(INDEX_NAME,
+                suggestName, client);
+
+        suggest.setHit(5);
+        suggest.setQuery(keyWord);
+        String result = suggest.search();
+        HashMap jsonResult = JsonKit.parse(result, HashMap.class);
+        if (jsonResult.containsKey("errors")) {
+            return null;
+        }
+        return jsonResult.get("suggestions").toString();
+        // arrayList<String,Map> --> Map<"suggestions",value>
     }
 
 }
