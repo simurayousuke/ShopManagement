@@ -1,7 +1,6 @@
 .search_suggest {
     position: absolute;
     z-index: 999;
-    left: 592px;
     width: 615px;
     border: 1px solid #999999;
     display: none;
@@ -18,5 +17,5 @@
 }
 
 .search_suggest li.hover {
-    background: #DDDDDD;
+    background: #ebf2f9;
 }

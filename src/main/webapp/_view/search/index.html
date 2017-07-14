@@ -4,16 +4,20 @@
 <div class="container-fixed">
     <div style="height:50px;"></div>
     <div class="container-fixed-sm" style="margin-bottom: 30px">
-        <input type="text" class="form-control" placeholder="大家都在搜..."
-               style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
-               value="#(word??'')">
+        <div style="display: inline">
+            <input type="text" class="form-control" placeholder="大家都在搜..."
+                   style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
+                   value="#(word??'')">
+            <div class="search_suggest" id="gov_search_suggest">
+                <ul style="margin: 0;padding-left: 8px" id="search-suggestion">
+                </ul>
+            </div>
+        </div>
+
         <button class="btn btn-primary" type="button"
                 style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下
         </button>
-        <div class="search_suggest" id="gov_search_suggest">
-            <ul style="margin: 0;padding-left: 8px" id="search-suggestion">
-            </ul>
-        </div>
+
     </div>
     #if(word)
     #if(list)
