@@ -1,7 +1,54 @@
 #set(title="购物车")
 #@layout()
+#define css()
+<link rel="stylesheet" href="assets/css/shopCar.css">
+#end
 #define body()
+
 <div class="container-fixed">
+    <div class="table-head">
+        <div class="checkbox col-md-2">
+            <label>
+                <input type="checkbox"> 全选
+            </label>
+        </div>
+        <div class="td-inner">
+            <div class="col-md-3" style="height: 50px">商品信息</div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1" style="height: 50px">单价</div>
+            <div class="col-md-1" style="height: 50px">数量</div>
+            <div class="col-md-1" style="height: 50px">金额</div>
+            <div class="col-md-1" style="height: 50px">操作</div>
+        </div>
+    </div>
+
+    <div class="choose-good">
+        <div class="choose-shop">
+            <div class="checkbox col-md-9">
+                <label>
+                    <input type="checkbox"> 店铺：马天荟的店铺
+                </label>
+            </div>
+            <div style="height:300px;border: 1px solid #cccccc;" class=" one-of-shops col-md-11">
+                <div class="one-of-goods">
+                    <div class="col-md-2">
+                        <div style="float: left; margin-right: 10px">
+                            <label>
+                                <input type="checkbox">
+                            </label>
+                        </div>
+                        <img src="/assets/img/good.jpg" id="good-photo"
+                             style="height: 80px;width: auto;border: 1px solid #dddddd;">
+                    </div>
+                    <div class="col-md-3">2017新款凉鞋女夏松糕厚底鱼嘴女凉鞋罗马高跟坡跟防水台凉鞋女鞋</div>
+                    <div class="col-md-2 font-inform" style="color:#9c9c9c;">颜色分类：蓝色<br>尺码：36</div>
+                    <div class="col-md-1"><b>¥76.00</b></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 
 </div>
 #end
