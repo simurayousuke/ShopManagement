@@ -56,12 +56,34 @@ $(document).ready(function () {
         }
         $.post('/shop/good/add', data, function (data) {
             if (data.status) {
-                //location.href = '/shop/good';
+                location.href = '/shop/good';
             } else {
                 $.msg(data.msg);
                 updateCaptcha();
             }
         });
+    });
+
+    $('#upload').uploader({
+        autoUpload: true,
+        url: '/upload/good',
+        responseHandler: function (responseObject) {
+            var data = JSON.parse(responseObject.response);
+            if (!data.status) {
+                return data.msg;
+            } else {
+                $('#create-good-avator').val(data.url);
+            }
+        },
+        filters: {
+            mime_types: [
+                {
+                    title: '图片',
+                    extensions: 'jpg,gif,png'
+                }
+            ],
+            max_file_size: '5mb'
+        }
     });
 
 });
