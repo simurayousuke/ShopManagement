@@ -16,8 +16,7 @@
 
 package cn.enbug.shop.common.interceptor;
 
-import cn.enbug.shop.common.exception.LogException;
-import cn.enbug.shop.common.exception.OpenSearchException;
+import cn.enbug.shop.common.exception.*;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -41,14 +40,11 @@ public class ExceptionInterceptor implements Interceptor {
 
         try {
             inv.invoke();
-        } catch (LogException e) {
+        } catch (LogException | OpenSearchException | MoneyTransferException |
+                ModifyOrderStatusException | CreateOrderException | NoEnoughMoneyException e) {
             LOG.error(e.getMessage(), e);
             Controller c = inv.getController();
-            c.renderJson(Ret.fail("cannot log into the database"));
-        } catch (OpenSearchException e) {
-            LOG.error(e.getMessage(), e);
-            Controller c = inv.getController();
-            c.renderJson(Ret.fail("Error"));
+            c.renderJson(Ret.fail(e.getMessage()));
         }
 
     }

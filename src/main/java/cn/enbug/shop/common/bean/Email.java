@@ -16,27 +16,23 @@
 
 package cn.enbug.shop.common.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Email to send.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class Email {
 
-    /**
-     * mail address
-     */
-    private String to;
-    /**
-     * title
-     */
-    private String title;
-    /**
-     * context
-     */
-    private String context;
+    private static final String TO = "to";
+    private static final String TITLE = "title";
+    private static final String CONTEXT = "text";
+    private Map<String, String> map = new HashMap<>();
 
     /**
      * constructor
@@ -46,32 +42,33 @@ public class Email {
      * @param context context
      */
     public Email(String to, String title, String context) {
-        this.to = to;
-        this.title = title;
-        this.context = context;
+        map.put(TO, to);
+        map.put(TITLE, title);
+        map.put(CONTEXT, context);
     }
 
     public String getTo() {
-        return to;
+        return map.get(TO);
     }
 
     public void setTo(String to) {
-        this.to = to;
+        map.put(TO, to);
     }
 
     public String getTitle() {
-        return title;
+        return map.get(TITLE);
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        map.put(TITLE, title);
     }
 
     public String getContext() {
-        return context;
+        return map.get(CONTEXT);
     }
 
     public void setContext(String context) {
-        this.context = context;
+        map.put(CONTEXT, context);
     }
+
 }

@@ -74,7 +74,7 @@ public class RegisterService {
             return Ret.fail("unable to save into the database");
         }
         if (!log.setUserId(user.getId()).save()) {
-            throw new LogException();
+            throw new LogException("cannot log email register action");
         }
         if (!sendRegisterEmail(email)) {
             return Ret.fail("fail to send email");
@@ -182,7 +182,7 @@ public class RegisterService {
     private boolean regUser(User user, String ip) {
         Log log = new Log().setIp(ip).setOperation("regUser");
         if (!log.setUserId(user.getId()).save()) {
-            throw new LogException();
+            throw new LogException("cannot log register exception");
         }
         return true;
     }
