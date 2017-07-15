@@ -73,7 +73,7 @@ $(document).ready(function () {
                 return data.msg;
             } else {
                 $('#create-good-avator').val(data.url);
-                $('#good-photo').prop('src', 'https://smcdn.yangzhizhuang.net/' + data.url);
+                $('#good-photo').prop('src', '//smcdn.yangzhizhuang.net/' + data.url);
                 var files = $('.file');
                 for (var i = 0; i < files.length; ++i) {
                     files[i].style.display = 'none';
