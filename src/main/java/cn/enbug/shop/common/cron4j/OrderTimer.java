@@ -16,6 +16,8 @@
 
 package cn.enbug.shop.common.cron4j;
 
+import cn.enbug.shop.common.service.OrderService;
+
 /**
  * 订单定时处理
  *
@@ -27,7 +29,7 @@ public class OrderTimer implements Runnable {
 
     @Override
     public void run() {
-
+        OrderService.ME.reset();
     }
 
 }

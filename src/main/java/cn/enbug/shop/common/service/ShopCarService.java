@@ -26,12 +26,12 @@ import java.util.ArrayList;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class ShopCarService {
 
-    private static final ShopCarService ME = Duang.duang(ShopCarService.class);
+    public static final ShopCarService ME = Duang.duang(ShopCarService.class);
     private static final ShopCar SHOP_CAR_DAO = new ShopCar().dao();
 
     /**
@@ -131,10 +131,7 @@ public class ShopCarService {
      */
     public boolean del(String token, String goodUuid) {
         ShopCar shopCar = getShopCarByTokenAndGoodUuid(token, goodUuid);
-        if (null == shopCar) {
-            return true;
-        }
-        return shopCar.delete();
+        return null == shopCar || shopCar.delete();
     }
 
     /**
@@ -147,10 +144,7 @@ public class ShopCarService {
      */
     public boolean modifyCount(String token, String goodUuid, int count) {
         ShopCar shopCar = getShopCarByTokenAndGoodUuid(token, goodUuid);
-        if (null == shopCar) {
-            return false;
-        }
-        return shopCar.setCount(count).update();
+        return null != shopCar && shopCar.setCount(count).update();
     }
 
 

@@ -30,7 +30,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class ShopService {
@@ -46,6 +46,10 @@ public class ShopService {
 
     public boolean isExist(String shopName) {
         return null != findShopByShopName(shopName);
+    }
+
+    public Shop findShopById(int id) {
+        return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findById", id));
     }
 
     /**
