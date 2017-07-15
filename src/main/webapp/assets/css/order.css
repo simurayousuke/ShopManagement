@@ -2,6 +2,11 @@
     text-decoration: none
 }
 
+.ul-order li {
+    width: 12.5%;
+    text-align: center;
+}
+
 .panel {
     margin-top: 20px;
     border: 0;

@@ -3,15 +3,7 @@
 #define body()
 
 <div class="container-fixed">
-    <ul class="nav nav-secondary">
-        <li><a href="user/order/">所有订单</a></li>
-        <li class="ative"><a>待付款</a></li>
-        <li><a href="user/order/nosend">待发货</a></li>
-        <li><a href="user/order/norec">待收货</a></li>
-        <li><a href="user/order/done">已完成</a></li>
-        <li><a href="user/order/refund">退款中</a></li>
-        <li><a href="user/order/close">已关闭</a></li>
-    </ul>
+    #include("orderHeader.html",nopayTab='class="active" onclick="return false;"')
     <div class="tab-content">
         #if(normalOrders)
         #for(o : normalOrders.close)

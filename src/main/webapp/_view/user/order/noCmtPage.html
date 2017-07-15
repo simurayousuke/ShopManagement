@@ -3,11 +3,11 @@
 #define body()
 
 <div class="container-fixed">
-    #include("orderHeader.html",norecTab='class="active" onclick="return false;"')
+    #include("orderHeader.html", nocmtTab='class="active" onclick="return false;"')
     <div class="tab-content">
-        #if(checkedOrders)
-        #for(o : checkedOrders.close)
-        <div class="tab-pane fade" id="noRec">#include("orderPanel/noRec.html",orderNumber=o.orderNumber,list=o.list)
+        #if(nocmtOrders)
+        #for(o : nocmtOrders.close)
+        <div class="tab-pane fade" id="close">#include("orderPanel/noCmt.html",orderNumber=o.orderNumber,list=o.list)
         </div>
         #end
         #end

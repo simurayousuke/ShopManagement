@@ -41,6 +41,10 @@ public class UserOrderController extends BaseController {
         render("noRecPage.html");
     }
 
+    public void nocmt() {
+        render("noCmtPage.html");
+    }
+
     public void done() {
         render("donePage.html");
     }

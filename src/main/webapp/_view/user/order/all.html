@@ -3,15 +3,7 @@
 #define body()
 
 <div class="container-fixed">
-    <ul class="nav nav-secondary">
-        <li class="active"><a>所有订单</a></li>
-        <li><a href="user/order/nopay">待付款</a></li>
-        <li><a href="user/order/nosend">待发货</a></li>
-        <li><a href="user/order/norec">待收货</a></li>
-        <li><a href="user/order/done">已完成</a></li>
-        <li><a href="user/order/refund">退款中</a></li>
-        <li><a href="user/order/close">已关闭</a></li>
-    </ul>
+    #include("orderHeader.html",allTab='class="active" onclick="return false;"')
     <div class="tab-content">
         #if(normalOrders)
         #for(o : normalOrders.close)
@@ -29,6 +21,12 @@
         #if(checkedOrders)
         #for(o : checkedOrders.close)
         <div class="tab-pane fade" id="noRec">#include("orderPanel/noRec.html",orderNumber=o.orderNumber,list=o.list)
+        </div>
+        #end
+        #end
+        #if(nocmtOrders)
+        #for(o : nocmtOrders.close)
+        <div class="tab-pane fade" id="noCmt">#include("orderPanel/noCmt.html",orderNumber=o.orderNumber,list=o.list)
         </div>
         #end
         #end
