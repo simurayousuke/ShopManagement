@@ -1,5 +1,112 @@
-#set(title="曹迈")
+#set(title="EnBug购物网")
 #@layout()
 #define body()
-<div>傻</div>
+<div class="container-fixed">
+    <div style="height:50px;"></div>
+    <div class="container-fixed-sm" style="margin-bottom: 30px">
+        <div style="display: inline">
+            <input type="text" class="form-control" placeholder="大家都在搜..."
+                   style="display: inline-block;width:calc(100% - 105px);height: 40px;font-size: 16px" id="search-word"
+                   value="#(word??'')">
+            <div class="search_suggest" id="gov_search_suggest">
+                <ul style="margin: 0;padding-left: 8px" id="search-suggestion">
+                </ul>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="button"
+                style="display: inline-block;width:100px;height: 40px;font-size: 16px" id="search-button">搜一下
+        </button>
+    </div>
+
+
+    <div class="col-md-12 hot-block">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="font-size: 19px">
+                热销商品
+            </div>
+            <div class="panel-body hot-body">
+                <div class="hot-good col-md-3">
+                    <img src="/assets/img/good.jpg" class="hot-photo">
+                    <div class="good-name">
+                        <div class="hot-font"><b>小鞋子</b></div>
+                    </div>
+                    <div class="information">
+                        售价：¥76 售货量：3件 库存：231件
+                        <br>
+                        店铺：小A君的店铺
+                    </div>
+                </div>
+                <div class="hot-good col-md-3">
+                    <img src="/assets/img/good.jpg" class="hot-photo">
+                    <div class="good-name">
+                        <div class="hot-font"><b>小鞋子</b></div>
+                    </div>
+                    <div class="information">
+                        售价：¥76 售货量：3件 库存：231件
+                        <br>
+                        店铺：小A君的店铺
+                    </div>
+                </div>
+                <div class="hot-good col-md-3">
+                    <img src="/assets/img/good.jpg" class="hot-photo">
+                    <div class="good-name">
+                        <div class="hot-font"><b>小鞋子</b></div>
+                    </div>
+                    <div class="information">
+                        售价：¥76 售货量：3件 库存：231件
+                        <br>
+                        店铺：小A君的店铺
+                    </div>
+                </div>
+                <div class="hot-good col-md-3">
+                    <img src="/assets/img/good.jpg" class="hot-photo">
+                    <div class="good-name">
+                        <div class="hot-font"><b>小鞋子</b></div>
+                    </div>
+                    <div class="information">
+                        售价：¥76 售货量：3件 库存：231件
+                        <br>
+                        店铺：小A君的店铺
+                    </div>
+                </div>
+                <div class="hot-good col-md-3">
+                    <img src="/assets/img/good.jpg" class="hot-photo">
+                    <div class="good-name">
+                        <div class="hot-font"><b>小鞋子</b></div>
+                    </div>
+                    <div class="information">
+                        售价：¥76 售货量：3件 库存：231件
+                        <br>
+                        店铺：小A君的店铺
+                    </div>
+                </div>
+                <div class="hot-good col-md-3">
+                    <img src="/assets/img/good.jpg" class="hot-photo">
+                    <div class="good-name">
+                        <div class="hot-font"><b>小鞋子</b></div>
+                    </div>
+                    <div class="information">
+                        售价：¥76 售货量：3件 库存：231件
+                        <br>
+                        店铺：小A君的店铺
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+#end
+
+
+#define css()
+<link rel="stylesheet" href="assets/css/search.css">
+<link rel="stylesheet" href="assets/css/searchSuggestion.css">
+<link rel="stylesheet" href="assets/css/hotGood.css">
+#end
+
+#define js()
+<script src="assets/js/search.js"></script>
+<script src="assets/js/suggest.js"></script>
 #end

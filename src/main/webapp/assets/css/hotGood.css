@@ -1,0 +1,38 @@
+.hot-block {
+    padding: 5px;
+}
+
+.hot-body {
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+.hot-good {
+    border: 1px solid #cccccc;
+    width: 250px;
+    height: 300px;
+    margin-bottom: 16px;
+    margin-right: 16px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.hot-photo {
+    width: 250px;
+    height: 225px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.hot-font {
+    color: #145ccd;
+
+}
+
+.good-name {
+    margin: 5px;
+}
+
+.information {
+    color: #808080;
+    margin: 5px;
+}
