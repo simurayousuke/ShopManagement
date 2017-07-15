@@ -26,7 +26,6 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -34,7 +33,8 @@ import java.util.List;
  * Good service.
  *
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @author Hu Wenqiang
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class GoodService {
@@ -69,7 +69,7 @@ public class GoodService {
      * @return boolean
      */
     @Before(Tx.class)
-    public boolean insert(String token, String ip, String goodName, String description, BigDecimal price, String avator, int number) throws IOException {
+    public boolean insert(String token, String ip, String goodName, String description, BigDecimal price, String avator, int number) {
         // name, shop id,uuid, description, price, avator
         Shop shop = ShopService.ME.findShopByToken(token);
         if (null == shop) {
@@ -87,12 +87,7 @@ public class GoodService {
         }
         //String id, String name, String description, int shopId, String avator, int saleCount, BigDecimal price, int status
         OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number, uuid, shopName, ownerId, ownerName);
-        try {
-            OPEN_SEARCH_SERVICE.add(builder.build());
-        } catch (IOException e) {
-            LOG.error(e.toString(), e);
-            throw e;
-        }
+        OPEN_SEARCH_SERVICE.add(builder.build());
         return true;
     }
 

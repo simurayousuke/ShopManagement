@@ -17,6 +17,7 @@
 package cn.enbug.shop.common.interceptor;
 
 import cn.enbug.shop.common.exception.LogException;
+import cn.enbug.shop.common.exception.OpenSearchException;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -31,9 +32,9 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class LogInterceptor implements Interceptor {
+public class ExceptionInterceptor implements Interceptor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LogInterceptor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ExceptionInterceptor.class);
 
     @Override
     public void intercept(Invocation inv) {
@@ -44,6 +45,10 @@ public class LogInterceptor implements Interceptor {
             LOG.error(e.getMessage(), e);
             Controller c = inv.getController();
             c.renderJson(Ret.fail("cannot log into the database"));
+        } catch (OpenSearchException e) {
+            LOG.error(e.getMessage(), e);
+            Controller c = inv.getController();
+            c.renderJson(Ret.fail("Error"));
         }
 
     }

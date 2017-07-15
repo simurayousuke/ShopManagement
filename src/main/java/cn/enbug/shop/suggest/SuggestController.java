@@ -9,18 +9,17 @@ import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
-import java.io.IOException;
-
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class SuggestController extends BaseController {
 
     @Clear(NoUrlPara.class)
     @Before(POST.class)
-    public void index() throws IOException {
+    public void index() {
         String key = getPara();
         if (null == key) {
             renderJson(Ret.fail("Fail"));
