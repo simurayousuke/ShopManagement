@@ -10,18 +10,18 @@
         修复标题bug-->
         <div style="float:left;width: 500px">
             <h3 class="good-name">#(good.goodName)</h3>
-            <ul>
+            <ul class="good-ul">
                 <li>
-                    <span class="good-property">价格</span>
+                    <span class="good-property" style="position: relative;top:7px ;">价格</span>
                     <span style="font-size: 26px;font-weight: 700;color: #F40;font-style: normal">#(good.price)元</span>
                 </li>
                 <li>
-                    <span class="good-property">累计销售量</span>
-                    <span style="color:#ff0000">#(good.saleCount)件</span>
+                    <span class="good-property">累计销售</span>
+                    <span style="font-size: 15px">#(good.saleCount)件</span>
                 </li>
                 <li>
                     <span class="good-property">库存</span>
-                    <span style="color:#ff0000">#(good.number)件</span>
+                    <span style="font-size: 15px">#(good.number)件</span>
                 </li>
             </ul>
             <button>立即购买</button>&nbsp;<button>加入购物车</button>

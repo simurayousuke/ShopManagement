@@ -3,6 +3,15 @@
     width: 400px;
 }
 
+.good-ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.good-ul li {
+    margin-bottom: 8px;
+}
+
 .good-pic-container {
     width: 500px;
     display: inline;
@@ -21,6 +30,7 @@
 .good-property {
     display: inline;
     float: left;
-    width: 60px;
+    font-size: 15px;
+    width: 80px;
     color: #6c6c6c;
 }
