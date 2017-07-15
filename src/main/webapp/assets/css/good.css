@@ -9,7 +9,7 @@
 }
 
 .good-ul li {
-    margin-bottom: 8px;
+    margin-bottom: 15px;
 }
 
 .good-pic-container {
@@ -19,6 +19,7 @@
 }
 
 .good-name {
+    margin-bottom: 20px;
     min-height: 21px;
     _height: 21px;
     font-size: 19px;
@@ -36,7 +37,7 @@
 }
 
 .btn-area {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .btn-buy {
