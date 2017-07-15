@@ -1,14 +1,9 @@
-create table t_good
-(
-	id serial not null
-		constraint t_good_pkey
-			primary key,
-	good_name text not null,
-	uuid varchar(32) not null,
-	shop_id integer not null,
-	description text default ''::text not null,
-	avator integer default 0 not null,
-	sale_count integer default 0 not null
-)
-;
-
+CREATE TABLE t_good (
+  id          SERIAL PRIMARY KEY,
+  good_name   TEXT              NOT NULL,
+  uuid        VARCHAR(32)       NOT NULL,
+  shop_id     INTEGER           NOT NULL,
+  description TEXT DEFAULT ''   NOT NULL,
+  avator      INTEGER DEFAULT 0 NOT NULL,
+  sale_count  INTEGER DEFAULT 0 NOT NULL
+);
