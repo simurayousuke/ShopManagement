@@ -6,8 +6,6 @@
         <div class="good-pic-container">
             <img src="https://smcdn.yangzhizhuang.net/#(good.avator)" class="good-pic">
         </div>
-        <!--todo
-        修复标题bug-->
         <div style="float:left;width: 500px">
             <h3 class="good-name">#(good.goodName)</h3>
             <ul class="good-ul">
@@ -16,12 +14,25 @@
                     <span style="font-size: 26px;font-weight: 700;color: #F40;font-style: normal">#(good.price)元</span>
                 </li>
                 <li style="margin-bottom: 20px;">
-                    <span class="good-property" style="margin-bottom: 20px;">累计销售</span>
+                    <span class="good-property">累计销售</span>
                     <span style="font-size: 15px">#(good.saleCount)件</span>
                 </li>
-                <li>
+                <li style="margin-bottom: 20px;">
                     <span class="good-property">库存</span>
                     <span style="font-size: 15px">#(good.number)件</span>
+                </li>
+                <li>
+                    <span class="good-property">数量</span>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                             <em class="icon icon-minus"></em>
+                        </span>
+                        <input id="good-number" type="text" value="1">
+                        <span class="input-group-addon">
+                            <em class="icon icon-plus"></em>
+                        </span>
+                    </div>
+
                 </li>
             </ul>
             <div class="btn-area">
@@ -34,6 +45,8 @@
             </div>
         </div>
     </div>
+    <!--todo
+    商品描述完善-->
     <div style="margin-top:50px" id="description">
         #(good.description)
     </div>

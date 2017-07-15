@@ -94,3 +94,19 @@
     border-color: #F22D00;
     background: #F22D00;
 }
+
+#good-number {
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}
+
+.input-group-addon {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+.input-group-addon:hover {
+    background: #dddddd;
+}
