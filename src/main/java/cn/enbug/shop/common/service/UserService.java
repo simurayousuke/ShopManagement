@@ -68,7 +68,7 @@ public class UserService {
      * @param id id
      * @return User object
      */
-    public User findUserById(int id){
+    public User findUserById(int id) {
         return USER_DAO.findFirst(USER_DAO.getSqlPara("user.findById", id));
     }
 

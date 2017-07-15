@@ -24,8 +24,6 @@ import com.aliyun.opensearch.object.KeyTypeEnum;
 import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +31,6 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -234,7 +231,7 @@ public class OpenSearchService {
      * search suggestions
      *
      * @param suggestName suggest name
-     * @param keyWord key word
+     * @param keyWord     key word
      * @return ArrayList&lt;Map&lt;"suggestions",value&gt;
      * @throws IOException IOException
      */

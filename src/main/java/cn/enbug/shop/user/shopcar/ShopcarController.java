@@ -25,7 +25,7 @@ import cn.enbug.shop.common.controller.BaseController;
  */
 public class ShopcarController extends BaseController {
 
-    public void index(){
+    public void index() {
         render("index.html");
     }
 }

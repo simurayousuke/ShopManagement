@@ -15,16 +15,16 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
  */
 public class MappingKit {
 
-	public static void mapping(ActiveRecordPlugin arp) {
-		arp.addMapping("t_comment", "id", Comment.class);
-		arp.addMapping("t_config", "id", Config.class);
-		arp.addMapping("t_file", "id", File.class);
-		arp.addMapping("t_good", "id", Good.class);
-		arp.addMapping("t_log", "id", Log.class);
-		arp.addMapping("t_order", "id", Order.class);
-		arp.addMapping("t_shop", "id", Shop.class);
-		arp.addMapping("t_shop_car", "id", ShopCar.class);
-		arp.addMapping("t_user", "id", User.class);
-	}
+    public static void mapping(ActiveRecordPlugin arp) {
+        arp.addMapping("t_comment", "id", Comment.class);
+        arp.addMapping("t_config", "id", Config.class);
+        arp.addMapping("t_file", "id", File.class);
+        arp.addMapping("t_good", "id", Good.class);
+        arp.addMapping("t_log", "id", Log.class);
+        arp.addMapping("t_order", "id", Order.class);
+        arp.addMapping("t_shop", "id", Shop.class);
+        arp.addMapping("t_shop_car", "id", ShopCar.class);
+        arp.addMapping("t_user", "id", User.class);
+    }
 }
 

@@ -7,5 +7,5 @@ import cn.enbug.shop.common.model.base.BaseConfig;
  */
 @SuppressWarnings("serial")
 public class Config extends BaseConfig<Config> {
-	
+
 }
