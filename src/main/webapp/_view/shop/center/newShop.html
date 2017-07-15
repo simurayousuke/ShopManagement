@@ -4,56 +4,60 @@
 <div class="container">
     <div>
         <div class="container">
-            <form action="" class="form-horizontal" id="create-shop-form">
-                <h2>新增店铺</h2>
-                <br>
-                <div id="upload" class="uploader col-md-2">
-                    <img src="/assets/img/nores.png" id="shop-photo">
-                    <div class="uploader-message text-center">
-                        <div class="content"></div>
-                        <button type="button" class="close">×</button>
-                    </div>
-                    <div class="uploader-files file-list file-list-grid"></div>
-                    <div>
-                        <hr class="divider">
-                        <div class="uploader-status pull-right text-muted"></div>
-                        <button type="button" id="pos-but" class="btn btn-link uploader-btn-browse"><i
-                                class="icon icon-plus"></i>
-                            选择文件
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <div class="form-group col-sm-10">
-                        <label for="shop-name" style="float:left">店铺名称</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" placeholder="一个亮眼的名字能提高20%的销售量哦！" type="text" id="shop-name"
-                                   name="name">
+            <div class="col-md-2"></div>
+            <div class="col-md-9">
+                <form action="" class="form-horizontal" id="create-shop-form">
+                    <h2>新增店铺</h2>
+                    <br>
+                    <div id="upload" class="uploader col-md-2">
+                        <img src="/assets/img/nores.png" id="shop-photo">
+                        <div class="uploader-message text-center">
+                            <div class="content"></div>
+                            <button type="button" class="close">×</button>
+                        </div>
+                        <div class="uploader-files file-list file-list-grid"></div>
+                        <div>
+                            <hr class="divider">
+                            <div class="uploader-status pull-right text-muted"></div>
+                            <button type="button" id="pos-but" class="btn btn-link uploader-btn-browse"><i
+                                    class="icon icon-plus"></i>
+                                选择文件
+                            </button>
                         </div>
                     </div>
-                    <div class="form-group col-sm-10">
-                        <label for="shop-discribe" style="float:left">店铺描述</label>
-                        <div class="col-sm-8">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-9">
+                        <div class="form-group col-sm-9">
+                            <label for="shop-name" style="float:left">店铺名称</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" placeholder="一个亮眼的名字能提高20%的销售量哦！" type="text" id="shop-name"
+                                       name="name">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="shop-discribe" style="float:left">店铺描述</label>
+                            <div class="col-sm-10">
                         <textarea placeholder="描述一下您的店。" class="form-control" rows="3" id="shop-discribe"
                                   name="description"></textarea>
+                            </div>
                         </div>
+                        <div class="input-group captcha-div form-group col-md-8" style="margin-left: 3px">
+                            <label for="captcha" style="float:left">验证码</label>
+                            <div class="col-sm-4" style="margin-left: 11px">
+                                <input class="form-control " placeholder="验证码" type="text" id="captcha" name="captcha">
+                            </div>
+                            <div class="col-sm-4">
+                                <img alt="" src="" class="captcha" title="点击刷新" style="width: 106px;height: 32px">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary col-sm-2" type="submit" id="create-shop"
+                                style="margin-bottom: 20px;margin-left:60px">新增店铺
+                        </button>
+                        <input type="hidden" name="avator" id="create-shop-avator" value="">
                     </div>
-                    <div class="input-group captcha-div form-group">
-                        <label for="captcha" style="float:left">验证码</label>
-                        <div class="col-sm-4" style="margin-left: 11px">
-                            <input class="form-control " placeholder="验证码" type="text" id="captcha" name="captcha">
-                        </div>
-                        <div class="col-sm-4">
-                            <img alt="" src="" class="captcha" title="点击刷新" style="width: 106px;height: 32px">
-                        </div>
-                    </div>
-                    <div class="col-sm-2"></div>
-                    <button class="btn btn-primary col-sm-2" type="submit" id="create-shop"
-                            style="margin-bottom: 20px;margin-left:60px">新增店铺
-                    </button>
-                    <input type="hidden" name="avator" id="create-shop-avator" value="">
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
