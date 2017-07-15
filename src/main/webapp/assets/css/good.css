@@ -1,0 +1,26 @@
+.good-pic {
+    height: 400px;
+    width: 400px;
+}
+
+.good-pic-container {
+    width: 500px;
+    display: inline;
+    float: left
+}
+
+.good-name {
+    min-height: 21px;
+    _height: 21px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #3C3C3C;
+}
+
+.good-property {
+    display: inline;
+    float: left;
+    width: 60px;
+    color: #6c6c6c;
+}
