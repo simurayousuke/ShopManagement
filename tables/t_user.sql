@@ -1,28 +1,11 @@
-create table t_user
-(
-	id serial not null
-		constraint t_user_pkey
-			primary key,
-	username varchar(20),
-	salt varchar(32),
-	pwd varchar(64),
-	uuid varchar(32) not null,
-	avator integer default 0 not null,
-	phone varchar(11),
-	email_status integer default 0 not null,
-	email text default ''::text
-)
-;
-
-create unique index t_user_username_uindex
-	on t_user (username)
-;
-
-create unique index t_user_phone_uindex
-	on t_user (phone)
-;
-
-create unique index t_user_email_uindex
-	on t_user (email)
-;
-
+CREATE TABLE t_user (
+  id           SERIAL PRIMARY KEY,
+  username     VARCHAR(20) UNIQUE,
+  salt         VARCHAR(32),
+  pwd          VARCHAR(64),
+  uuid         VARCHAR(32)       NOT NULL,
+  avator       INTEGER DEFAULT 0 NOT NULL,
+  phone        VARCHAR(11) UNIQUE,
+  email_status INTEGER DEFAULT 0 NOT NULL,
+  email        TEXT DEFAULT '' :: TEXT UNIQUE
+);
