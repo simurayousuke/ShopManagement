@@ -30,7 +30,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class ShopService {
@@ -164,6 +164,9 @@ public class ShopService {
     public boolean transfer(String token, String password, String username, String ip) {
         User to = USER_SRV.findUserByUsername(username);
         if (null == to) {
+            return false;
+        }
+        if (null != ShopService.ME.findShopByUser(to)) {
             return false;
         }
         User user = RedisKit.getUserByToken(token);
