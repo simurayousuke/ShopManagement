@@ -18,6 +18,7 @@ package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.exception.CreateOrderException;
 import cn.enbug.shop.common.exception.ModifyOrderStatusException;
+import cn.enbug.shop.common.exception.NoEnoughMoneyException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.*;
 import com.jfinal.aop.Before;
@@ -43,7 +44,7 @@ import java.util.Objects;
  * -2 or 3/4 means finished
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
@@ -234,8 +235,9 @@ public class OrderService {
         if (!Objects.equals(user.getId(), order.getOwnerId())) {
             return false;
         }
-        // todo refund
-
+        if (!UserService.ME.transfer(user, order.getUserId(), order.getPrice())) {
+            return false;
+        }
         if (order.getOrderStatus() != -1) {
             return false;
         }
@@ -286,12 +288,22 @@ public class OrderService {
      */
     @Before(Tx.class)
     public boolean payOrder(String token, String orderNum) {
-        ArrayList<Order> orders = verifyBuyer(token, orderNum);
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return false;
+        }
+        ArrayList<Order> orders = (ArrayList<Order>) getOrderListByOrderNumber(orderNum);
         if (null == orders) {
             return false;
         }
-        // todo pay
+        Order first = orders.get(0);
+        if (!Objects.equals(first.getUserId(), user.getId())) {
+            return false;
+        }
         for (Order o : orders) {
+            if (!UserService.ME.transfer(user, o.getOwnerId(), o.getPrice())) {
+                throw new NoEnoughMoneyException("Fail to pay order.");
+            }
             o.setOrderStatus(1);
             if (!o.update()) {
                 throw new ModifyOrderStatusException("Fail to pay order.");

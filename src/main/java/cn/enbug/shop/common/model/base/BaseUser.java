@@ -99,4 +99,13 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
         return (M) this;
     }
 
+    public java.math.BigDecimal getMoney() {
+        return get("money");
+    }
+
+    public M setMoney(java.math.BigDecimal money) {
+        set("money", money);
+        return (M) this;
+    }
+
 }

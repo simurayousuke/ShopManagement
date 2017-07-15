@@ -16,17 +16,22 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.exception.MoneyTransferException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.User;
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
 import com.jfinal.kit.HashKit;
+import com.jfinal.plugin.activerecord.tx.Tx;
+
+import java.math.BigDecimal;
 
 /**
  * The service for user-oriented actions.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.12
+ * @version 1.2.14
  * @since 1.0.0
  */
 public class UserService {
@@ -106,6 +111,103 @@ public class UserService {
      */
     public User validateToken(String token) {
         return RedisKit.getUserByToken(token);
+    }
+
+    /**
+     * charge money
+     *
+     * @param token token
+     * @param value value
+     * @return boolean
+     */
+    public boolean charge(String token, BigDecimal value) {
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return false;
+        }
+        user.setMoney(user.getMoney().add(value));
+        return user.update();
+    }
+
+    /**
+     * transfer money
+     *
+     * @param token  token
+     * @param userId target user id
+     * @param value  value
+     * @return boolean
+     */
+    @Before(Tx.class)
+    public boolean transfer(String token, int userId, BigDecimal value) {
+        User to = findUserById(userId);
+        if (to == null) {
+            return false;
+        }
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return false;
+        }
+        BigDecimal money = user.getMoney();
+        if (money.compareTo(value) == -1) {
+            return false;
+        }
+        user.setMoney(user.getMoney().subtract(value));
+        to.setMoney(to.getMoney().add(value));
+        if (!user.update() || to.update()) {
+            throw new MoneyTransferException("Fail to transfer money.");
+        }
+        return true;
+    }
+
+    /**
+     * transfer money
+     *
+     * @param user  user
+     * @param user  target user
+     * @param value value
+     * @return boolean
+     */
+    @Before(Tx.class)
+    public boolean transfer(User user, User to, BigDecimal value) {
+        BigDecimal money = user.getMoney();
+        if (money.compareTo(value) == -1) {
+            return false;
+        }
+        user.setMoney(user.getMoney().subtract(value));
+        to.setMoney(to.getMoney().add(value));
+        if (!user.update() || to.update()) {
+            throw new MoneyTransferException("Fail to transfer money.");
+        }
+        return true;
+    }
+
+    @Before(Tx.class)
+    public boolean transfer(User user, int userId, BigDecimal value) {
+        User to = findUserById(userId);
+        if (null == to) {
+            return false;
+        }
+        BigDecimal money = user.getMoney();
+        if (money.compareTo(value) == -1) {
+            return false;
+        }
+        user.setMoney(money.subtract(value));
+        to.setMoney(to.getMoney().add(value));
+        if (!user.update() || to.update()) {
+            throw new MoneyTransferException("Fail to transfer money.");
+        }
+        return true;
+    }
+
+    /**
+     * get money
+     *
+     * @param token token
+     * @return BigDecimal
+     */
+    public BigDecimal getMoney(String token) {
+        User user = RedisKit.getUserByToken(token);
+        return null == token ? new BigDecimal(0) : user.getMoney();
     }
 
 }
