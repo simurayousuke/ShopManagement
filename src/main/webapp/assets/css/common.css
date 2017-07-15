@@ -17,6 +17,10 @@
 
 }
 
+a:focus{
+    outline: none;
+}
+
 .footer a {
     padding: 0 5px;
 }
