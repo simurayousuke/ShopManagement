@@ -1,0 +1,32 @@
+#set(title="我的订单")
+#@layout()
+#define body()
+
+<div class="container-fixed">
+    <ul class="nav nav-secondary">
+        <li><a href="/user/order/">所有订单</a></li>
+        <li><a href="/user/order/nopay">待付款</a></li>
+        <li><a href="/user/order/nosend">待发货</a></li>
+        <li class="active"><a>待收货</a></li>
+        <li><a href="/user/order/done">已完成</a></li>
+        <li><a href="/user/order/refund">退款中</a></li>
+        <li><a href="/user/order/close">已关闭</a></li>
+    </ul>
+    <div class="tab-content">
+        #if(checkedOrders)
+        #for(o : checkedOrders.close)
+        <div class="tab-pane fade" id="noRec">#include("orderPanel/noRec.html",orderNumber=o.orderNumber,list=o.list)
+        </div>
+        #end
+        #end
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/order.css">
+#end
+
+#define js()
+<script src="assets/js/order.js"></script>
+#end

@@ -16,11 +16,40 @@
 
 package cn.enbug.shop.user.order;
 
+import cn.enbug.shop.common.controller.BaseController;
+
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Forrest Yang
+ * @version 1.0.1
  * @since 1.0.0
  */
-public class UserOrderController {
+public class UserOrderController extends BaseController {
+    public void index() {
+        render("all.html");
+    }
     // todo 完成功能
+    public void nopay() {
+        render("noPayPage.html");
+    }
+
+    public void nosend() {
+        render("noSendPage.html");
+    }
+
+    public void norec() {
+        render("noRecPage.html");
+    }
+
+    public void done() {
+        render("donePage.html");
+    }
+
+    public void refund() {
+        render("refundPage.html");
+    }
+
+    public void close() {
+        render("closePage.html");
+    }
 }

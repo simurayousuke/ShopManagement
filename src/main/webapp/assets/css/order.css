@@ -1,0 +1,46 @@
+.no-decoration {
+    text-decoration: none
+}
+
+.panel {
+    margin-top: 20px;
+    border: 0;
+}
+
+.panel-heading {
+    border: 1px solid #dddddd;
+}
+
+.panel-body {
+    padding: 0;
+}
+
+em:hover {
+    background: #FFF6CB;
+}
+
+.one-of-orders {
+    padding-top: 20px;
+    height: 118px;
+    background: #FCFCFC;
+    border: 1px solid #dddddd;
+    border-top: 0;
+}
+
+.one-of-goods:hover {
+    background: #ebf2f9;
+}
+
+.good-photo {
+    height: 80px;
+    width: 80px;
+    border: 1px solid #dddddd;
+    position: relative;
+    left: 20px;
+}
+
+.input-group-addon {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
