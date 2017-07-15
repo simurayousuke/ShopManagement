@@ -44,9 +44,10 @@ import java.util.Objects;
  * -2 or 3/4 means finished
  *
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
+// todo 记录发货、签收时间
 @SuppressWarnings("unchecked")
 public class OrderService {
 
@@ -269,7 +270,7 @@ public class OrderService {
             return false;
         }
         // not payed good can not be refunded
-        if (order.getOrderStatus() == 0) {
+        if (order.getOrderStatus() <= 0) {
             return false;
         }
         order.setOrderStatus(-1);
