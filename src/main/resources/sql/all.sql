@@ -13,3 +13,6 @@
 #namespace("shopcar")
 #include("shopcar.sql")
 #end
+#namespace("comment")
+#include("comment.sql")
+#end

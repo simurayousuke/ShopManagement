@@ -16,11 +16,137 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.model.Comment;
+import cn.enbug.shop.common.model.User;
+import com.jfinal.aop.Duang;
+
+import java.util.List;
+
 /**
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
  */
 public class CommentService {
-    // todo 完成功能
+
+    public static final CommentService ME = Duang.duang(CommentService.class);
+    private static final Comment COMMENT_DAO = new Comment().dao();
+
+    /**
+     * @param id id
+     * @return Comment
+     */
+    public Comment getCommentById(int id) {
+        return COMMENT_DAO.findFirst(COMMENT_DAO.getSqlPara("comment.findById", id));
+    }
+
+    /**
+     * @param goodId good id
+     * @return List
+     */
+    public List getListByGoodId(int goodId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodId", goodId));
+    }
+
+    /**
+     * @param shopId shop id
+     * @return List
+     */
+    public List getListByShopId(int shopId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByShopId", shopId));
+    }
+
+    /**
+     * @param userId user id
+     * @return List
+     */
+    public List getListByUserId(int userId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByUserId", userId));
+    }
+
+    /**
+     * @param goodId good id
+     * @return List
+     */
+    public List getGoodListByGoodId(int goodId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodIdAndGood", goodId));
+    }
+
+    /**
+     * @param shopId shop id
+     * @return List
+     */
+    public List getGoodListByShopId(int shopId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByShopIdAndGood", shopId));
+    }
+
+    /**
+     * @param goodId good id
+     * @return List
+     */
+    public List getBadListByGoodId(int goodId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodIdAndBad", goodId));
+    }
+
+    /**
+     * @param shopId shop id
+     * @return List
+     */
+    public List getBadListByShopId(int shopId) {
+        return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByShopIdAndBad", shopId));
+    }
+
+    /**
+     * @param goodId good id
+     * @return int
+     */
+    public int getGoodNumByGoodId(int goodId) {
+        return getGoodListByGoodId(goodId).size();
+    }
+
+    /**
+     * @param shopId shop id
+     * @return int
+     */
+    public int getGoodNumByShopId(int shopId) {
+        return getGoodListByShopId(shopId).size();
+    }
+
+    /**
+     * @param goodId good id
+     * @return int
+     */
+    public int getBadNumByGoodId(int goodId) {
+        return getBadListByGoodId(goodId).size();
+    }
+
+    /**
+     * @param shopId shop id
+     * @return int
+     */
+    public int getBadNumByShopId(int shopId) {
+        return getBadListByShopId(shopId).size();
+    }
+
+    /**
+     * please invoke OrderService.ME.commentGood instead of this function.
+     *
+     * @param user        User Object (buyer)
+     * @param goodId      good id
+     * @param shopId      shop id
+     * @param description description
+     * @param isGood      is good?
+     * @return boolean
+     * @see cn.enbug.shop.common.service.OrderService#commentGood(String, String, int, String, boolean)
+     */
+    public boolean comment(User user, int goodId, int shopId, String description, boolean isGood) {
+        Comment comment = new Comment();
+        comment.setGoodId(goodId);
+        comment.setBuyerId(user.getId());
+        comment.setIsGood(isGood ? 1 : 0);
+        comment.setDescription(description);
+        comment.setShopId(shopId);
+        return comment.save();
+    }
+
 }

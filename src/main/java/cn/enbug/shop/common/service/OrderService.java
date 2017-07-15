@@ -26,6 +26,7 @@ import com.jfinal.aop.Duang;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,7 +48,6 @@ import java.util.Objects;
  * @version 1.0.4
  * @since 1.0.0
  */
-// todo 记录发货、签收时间
 @SuppressWarnings("unchecked")
 public class OrderService {
 
@@ -243,6 +243,7 @@ public class OrderService {
             return false;
         }
         order.setOrderStatus(-2);
+        order.setFinishTime(new Timestamp(System.currentTimeMillis()));
         if (!order.update()) {
             throw new ModifyOrderStatusException("Fail to close good.");
         }
@@ -274,6 +275,7 @@ public class OrderService {
             return false;
         }
         order.setOrderStatus(-1);
+        order.setDealTime(new Timestamp(System.currentTimeMillis()));
         if (!order.update()) {
             throw new ModifyOrderStatusException("Fail to refund good.");
         }
@@ -301,11 +303,13 @@ public class OrderService {
         if (!Objects.equals(first.getUserId(), user.getId())) {
             return false;
         }
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         for (Order o : orders) {
             if (!UserService.ME.transfer(user, o.getOwnerId(), o.getPrice())) {
                 throw new NoEnoughMoneyException("Fail to pay order.");
             }
             o.setOrderStatus(1);
+            o.setDealTime(date);
             if (!o.update()) {
                 throw new ModifyOrderStatusException("Fail to pay order.");
             }
@@ -337,6 +341,7 @@ public class OrderService {
             return false;
         }
         order.setOrderStatus(2);
+        order.setDealTime(new Timestamp(System.currentTimeMillis()));
         if (!order.update()) {
             throw new ModifyOrderStatusException("Fail to send good.");
         }
@@ -367,6 +372,7 @@ public class OrderService {
             return false;
         }
         order.setOrderStatus(3);
+        order.setFinishTime(new Timestamp(System.currentTimeMillis()));
         if (!order.update()) {
             throw new ModifyOrderStatusException("Fail to check good.");
         }
@@ -380,10 +386,11 @@ public class OrderService {
      * @param orderNum order number
      * @param goodId   good id
      * @param comment  comment
+     * @param isGood   is good?
      * @return boolean
      */
     @Before(Tx.class)
-    public boolean commentGood(String token, String orderNum, int goodId, String comment) {
+    public boolean commentGood(String token, String orderNum, int goodId, String comment, boolean isGood) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return false;
@@ -395,8 +402,9 @@ public class OrderService {
         if (!Objects.equals(user.getId(), order.getUserId())) {
             return false;
         }
-        // todo comment
-
+        if (!CommentService.ME.comment(user, order.getGoodId(), order.getShopId(), comment, isGood)) {
+            return false;
+        }
         order.setOrderStatus(4);
         if (!order.update()) {
             throw new ModifyOrderStatusException("Fail to comment order.");
