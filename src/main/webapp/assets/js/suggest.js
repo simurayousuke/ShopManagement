@@ -100,7 +100,7 @@ $(document).ready(function () {
                         var $this = $(this);
                         var val = $this.text();
                         input.val(val);
-                        console.log(val);
+                        defaultValue = val;
                         hideSuggest();
                         input.focus();
                     });
