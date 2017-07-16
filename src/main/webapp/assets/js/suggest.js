@@ -96,10 +96,8 @@ $(document).ready(function () {
                     }, function () {
                         $(this).removeClass('hover');
                     })
-                    .click(function () {
-                        var $this = $(this);
-                        var val = $this.text();
-                        input.val(val);
+                    .bind('click', function () {
+                        input.val(this.innerHTML);
                         hideSuggest();
                         input.focus();
                     });
