@@ -7,6 +7,8 @@ $(document).ready(function () {
         setTimeout(hideSuggest, 100);
     });
 
+    var defaultValue = '';
+
     input.keyup(function (event) {
 
         var x = event.keyCode || event.which;
@@ -24,6 +26,10 @@ $(document).ready(function () {
 
             var current = suggestion.find('li.hover');
 
+            if (current.length === 0) {
+                defaultValue = input.val();
+            }
+
             if (38 === x) {
 
                 if (current.length > 0) {
@@ -31,6 +37,8 @@ $(document).ready(function () {
                     if (prevLi.length > 0) {
                         prevLi.addClass('hover');
                         input.val(prevLi.html());
+                    } else {
+                        input.val(defaultValue);
                     }
                 } else {
                     var last = suggestion.find('li:last');
@@ -45,6 +53,8 @@ $(document).ready(function () {
                     if (nextLi.length > 0) {
                         nextLi.addClass('hover');
                         input.val(nextLi.html());
+                    } else {
+                        input.val(defaultValue);
                     }
                 } else {
                     var first = suggestion.find('li:first');
@@ -87,10 +97,12 @@ $(document).ready(function () {
                         $(this).removeClass('hover');
                     })
                     .bind('click', function () {
+                        var $this = $(this);
+                        console.log($this.html());
                         input.val(this.innerHTML);
                         hideSuggest();
                         input.focus();
-                        location.href = '/search/' + this.innerHTML;
+                        var href = '/search/' + this.innerHTML;
                     });
 
             });
