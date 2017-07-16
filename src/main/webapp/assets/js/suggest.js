@@ -6,16 +6,22 @@ $(document).ready(function () {
     input.blur(function () {
         setTimeout(hideSuggest, 100);
     });
+
     input.keyup(function (event) {
+
         var x = event.keyCode || event.which;
-        console.log(x);
+
         if (13 === x) {
             $('#search-button').click();
+            return;
         }
 
-        if ('block' === suggestion.css('display') && 38 === x || 40 === x) {
+        if ('block' === suggestion.css('display') && (38 === x || 40 === x)) {
+
             var current = suggestion.find('li.hover');
+
             if (38 === x) {
+
                 if (current.length > 0) {
                     var prevLi = current.removeClass('hover').prev();
                     if (prevLi.length > 0) {
@@ -29,6 +35,7 @@ $(document).ready(function () {
                 }
 
             } else if (40 === x) {
+
                 if (current.length > 0) {
                     var nextLi = current.removeClass('hover').next();
                     if (nextLi.length > 0) {
@@ -40,47 +47,55 @@ $(document).ready(function () {
                     first.addClass('hover');
                     input.val(first.html());
                 }
+
             }
+
         } else {
+
             $.post('/suggest/' + $('#search-word').val(), {}, function (data) {
-                if (data.status) {
-                    var json = JSON.parse(data.suggestions);
-                    if (json.length <= 0) {
-                        hideSuggest();
-                    } else {
-                        suggestion.empty();
-                        for (var i = 0; i < json.length; ++i) {
-                            suggestion.append('<li>' + json[i].suggestion + '</li>');
-                            console.log(json[i].suggestion);
-                        }
-                        $('#gov_search_suggest').css('display', 'block');
-                        suggestion.find('li').hover(function () {
-                            suggestion.find('li').removeClass('hover');
-                            $(this).addClass('hover');
 
-                        }, function () {
-                            $(this).removeClass('hover');
-                        }).bind('click', function () {
-                            input.val(this.innerHTML);
-                            hideSuggest();
-                            input.focus();
-                        });
-
-                    }
-                } else {
+                if (!data.status) {
                     hideSuggest();
-                    console.log('发送失败');
+                    $.msg('服务器错误');
+                    return;
                 }
-            }, function () {
-                console.log('网络异常');
-            })
+
+                var json = JSON.parse(data.suggestions);
+
+                if (json.length <= 0) {
+                    hideSuggest();
+                    return;
+                }
+
+                suggestion.empty();
+
+                for (var i = 0; i < json.length; ++i) {
+                    suggestion.append('<li>' + json[i].suggestion + '</li>');
+                }
+
+                $('#gov_search_suggest').css('display', 'block');
+                suggestion.find('li')
+                    .hover(function () {
+                        suggestion.find('li').removeClass('hover');
+                        $(this).addClass('hover');
+                    }, function () {
+                        $(this).removeClass('hover');
+                    })
+                    .bind('click', function () {
+                        input.val(this.innerHTML);
+                        hideSuggest();
+                        input.focus();
+                        $('#search-button').click();
+                    });
+
+            });
+
         }
 
-
     });
+
     function hideSuggest() {
         $('#gov_search_suggest').css('display', 'none');
     }
-
 
 });
