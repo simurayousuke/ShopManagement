@@ -18,15 +18,17 @@ package cn.enbug.shop.common.builder;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @author Hu Wenqiang
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class OpenSearchPushRequestBuilder {
 
-    private HashMap<String, Object> fields;
+    private Map<String, Object> fields;
 
     /**
      * constructor
@@ -62,7 +64,7 @@ public class OpenSearchPushRequestBuilder {
         fields.put("owner_name", ownerName);
     }
 
-    public HashMap<String, Object> build() {
+    public Map<String, Object> build() {
         return fields;
     }
 

@@ -28,7 +28,6 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -45,10 +44,10 @@ import java.util.Objects;
  * -2 or 3/4 means finished
  *
  * @author Yang Zhizhuang
- * @version 1.0.6
+ * @author Hu Wenqiang
+ * @version 1.0.7
  * @since 1.0.0
  */
-@SuppressWarnings("unchecked")
 public class OrderService {
 
     public static final OrderService ME = Duang.duang(OrderService.class);
@@ -85,7 +84,7 @@ public class OrderService {
      * @param number order number
      * @return List
      */
-    public List getOrderListByOrderNumber(String number) {
+    public List<Order> getOrderListByOrderNumber(String number) {
         if (null == number) {
             return null;
         }
@@ -99,7 +98,7 @@ public class OrderService {
      * @param status order status
      * @return List
      */
-    public List getOrderListByTokenAndStatusForBuyer(String token, int status) {
+    public List<Order> getOrderListByTokenAndStatusForBuyer(String token, int status) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
@@ -114,7 +113,7 @@ public class OrderService {
      * @param status order status
      * @return List
      */
-    public List getOrderListByTokenAndStatusForSeller(String token, int status) {
+    public List<Order> getOrderListByTokenAndStatusForSeller(String token, int status) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
@@ -146,7 +145,7 @@ public class OrderService {
     @Before(Tx.class)
     public boolean createOrderFromShopCar(String token, int addressId) {
         User user = RedisKit.getUserByToken(token);
-        ArrayList<ShopCar> arrayList = ShopCarService.ME.getShopCarListByUser(user);
+        List<ShopCar> arrayList = ShopCarService.ME.getShopCarListByUser(user);
         if (null == arrayList) {
             return false;
         }
@@ -184,12 +183,12 @@ public class OrderService {
         return true;
     }
 
-    private ArrayList<Order> verify(String token, String orderNum) {
+    private List<Order> verify(String token, String orderNum) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
         }
-        ArrayList<Order> orders = (ArrayList<Order>) getOrderListByOrderNumber(orderNum);
+        List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
             return null;
         }
@@ -200,12 +199,12 @@ public class OrderService {
         return orders;
     }
 
-    private ArrayList<Order> verifyBuyer(String token, String orderNum) {
+    private List<Order> verifyBuyer(String token, String orderNum) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
         }
-        ArrayList<Order> orders = (ArrayList<Order>) getOrderListByOrderNumber(orderNum);
+        List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
             return null;
         }
@@ -216,12 +215,12 @@ public class OrderService {
         return orders;
     }
 
-    private ArrayList<Order> verifySeller(String token, String orderNum) {
+    private List<Order> verifySeller(String token, String orderNum) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
         }
-        ArrayList<Order> orders = (ArrayList<Order>) getOrderListByOrderNumber(orderNum);
+        List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
             return null;
         }
@@ -236,11 +235,11 @@ public class OrderService {
         return null == number ? null : ORDER_NUMBER_DAO.findFirst((ORDER_NUMBER_DAO.getSqlPara("orderNumber.findByOrderNumber", number)));
     }
 
-    private List getOrderNumberListByUserId(int id) {
+    private List<OrderNumber> getOrderNumberListByUserId(int id) {
         return ORDER_NUMBER_DAO.find(ORDER_NUMBER_DAO.getSqlPara("orderNumber.findByUserId", id));
     }
 
-    private List getUnpayedOrderNumberListByUserId(int id) {
+    private List<OrderNumber> getUnpayedOrderNumberListByUserId(int id) {
         return ORDER_NUMBER_DAO.find(ORDER_NUMBER_DAO.getSqlPara("orderNumber.findByUserIdAndStatus", id, 0));
     }
 
@@ -323,7 +322,7 @@ public class OrderService {
         if (null == user) {
             return false;
         }
-        ArrayList<Order> orders = (ArrayList<Order>) getOrderListByOrderNumber(orderNum);
+        List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
             return false;
         }
@@ -447,7 +446,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getRefundingListByTokenForBuyer(String token) {
+    public List<Order> getRefundingListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, -1);
     }
 
@@ -455,7 +454,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getClosedListByTokenForBuyer(String token) {
+    public List<Order> getClosedListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, -2);
     }
 
@@ -463,7 +462,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getUnPayedListByTokenForBuyer(String token) {
+    public List<Order> getUnPayedListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, 0);
     }
 
@@ -471,7 +470,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getUnSentListByTokenForBuyer(String token) {
+    public List<Order> getUnSentListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, 1);
     }
 
@@ -479,7 +478,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getSendingListByTokenForBuyer(String token) {
+    public List<Order> getSendingListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, 2);
     }
 
@@ -487,7 +486,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getCheckedListByTokenForBuyer(String token) {
+    public List<Order> getCheckedListByTokenForBuyer(String token) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
@@ -499,7 +498,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getCheckedNotCommentedListByTokenForBuyer(String token) {
+    public List<Order> getCheckedNotCommentedListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, 3);
     }
 
@@ -507,7 +506,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getCommentedListByTokenForBuyer(String token) {
+    public List<Order> getCommentedListByTokenForBuyer(String token) {
         return getOrderListByTokenAndStatusForBuyer(token, 4);
     }
 
@@ -515,7 +514,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getRefundingListByTokenForSeller(String token) {
+    public List<Order> getRefundingListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, -1);
     }
 
@@ -523,7 +522,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getClosedListByTokenForSeller(String token) {
+    public List<Order> getClosedListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, -2);
     }
 
@@ -531,7 +530,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getUnPayedListByTokenForSeller(String token) {
+    public List<Order> getUnPayedListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, 0);
     }
 
@@ -539,7 +538,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getUnSentListByTokenForSeller(String token) {
+    public List<Order> getUnSentListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, 1);
     }
 
@@ -547,7 +546,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getSendingListByTokenForSeller(String token) {
+    public List<Order> getSendingListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, 2);
     }
 
@@ -555,7 +554,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getCheckedListByTokenForSeller(String token) {
+    public List<Order> getCheckedListByTokenForSeller(String token) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
@@ -567,7 +566,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getCheckedNotCommentedListByTokenForSeller(String token) {
+    public List<Order> getCheckedNotCommentedListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, 3);
     }
 
@@ -575,7 +574,7 @@ public class OrderService {
      * @param token seller token
      * @return List
      */
-    public List getCommentedListByTokenForSeller(String token) {
+    public List<Order> getCommentedListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, 4);
     }
 
@@ -583,7 +582,7 @@ public class OrderService {
      * @param token buyer token
      * @return List
      */
-    public List getUnpayedOrderNumberList(String token) {
+    public List<OrderNumber> getUnpayedOrderNumberList(String token) {
         User user = RedisKit.getUserByToken(token);
         return null == user ? null : getUnpayedOrderNumberListByUserId(user.getId());
     }
