@@ -22,23 +22,25 @@ import cn.enbug.shop.common.service.OrderService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class UserOrderService {
 
     public static final UserOrderService ME = new UserOrderService();
 
-    public ArrayList<Object> getUnpayedList(List<OrderNumber> orderNumbers) {
+    public List<Object> getUnpayedList(List<OrderNumber> orderNumbers) {
         if (null == orderNumbers) {
             return null;
         }
-        ArrayList<Object> list = new ArrayList<>();
+        List<Object> list = new ArrayList<>();
         for (OrderNumber o : orderNumbers) {
-            HashMap<String, Object> order = new HashMap<>();
+            Map<String, Object> order = new HashMap<>();
             order.put("orderNumber", o.getOrderNumber());
             order.put("list", OrderService.ME.getOrderListByOrderNumber(o.getOrderNumber()));
             list.add(order);

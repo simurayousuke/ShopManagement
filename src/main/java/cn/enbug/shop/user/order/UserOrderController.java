@@ -26,7 +26,8 @@ import java.util.ArrayList;
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.4
+ * @author Hu Wenqiang
+ * @version 1.0.5
  * @since 1.0.0
  */
 public class UserOrderController extends BaseController {
