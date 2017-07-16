@@ -109,7 +109,7 @@ public class OpenSearch {
      * @param fields    hash map
      * @return String
      */
-    public static boolean add(String indexName, String tableName, HashMap<String, Object> fields) {
+    public static boolean add(String indexName, String tableName, Map<String, Object> fields) {
         CloudsearchDoc doc = new CloudsearchDoc(indexName, client);
         doc.add(fields);
         try {

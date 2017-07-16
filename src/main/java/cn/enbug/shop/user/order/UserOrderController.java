@@ -17,9 +17,12 @@
 package cn.enbug.shop.user.order;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.OrderNumber;
 import cn.enbug.shop.common.service.OrderService;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
 
 import java.util.List;
 
@@ -30,6 +33,7 @@ import java.util.List;
  * @version 1.0.5
  * @since 1.0.0
  */
+@Before({GET.class, NeedLogInInterceptor.class})
 public class UserOrderController extends BaseController {
 
     public void index() {

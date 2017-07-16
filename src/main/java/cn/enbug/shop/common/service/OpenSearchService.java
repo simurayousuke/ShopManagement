@@ -21,6 +21,7 @@ import com.jfinal.kit.PropKit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Yang Zhizhuang
@@ -57,7 +58,7 @@ public class OpenSearchService {
      * @param fields hash map
      * @return String
      */
-    public boolean add(HashMap<String, Object> fields) {
+    public boolean add(Map<String, Object> fields) {
         return OpenSearch.add(INDEX_NAME, TABLE_NAME, fields);
     }
 
