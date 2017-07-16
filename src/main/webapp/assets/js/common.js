@@ -53,7 +53,7 @@
 
     $.validatePriceFormat = function (price) {
         return pricePattern.test(price);
-    }
+    };
 
     $.validatePositiveIntFormat = function (number) {
         return positiveIntPattern.test(number);
