@@ -100,6 +100,7 @@ $(document).ready(function () {
                         input.val(this.innerHTML);
                         hideSuggest();
                         input.focus();
+                        defaultValue = this.innerHTML;
                     });
 
             });
