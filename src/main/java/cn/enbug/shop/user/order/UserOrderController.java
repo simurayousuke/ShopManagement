@@ -21,7 +21,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.OrderNumber;
 import cn.enbug.shop.common.service.OrderService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Yang Zhizhuang
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class UserOrderController extends BaseController {
 
     public void index() {
-        ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
+        List<OrderNumber> orderNumbers = OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
         if (null != orderNumbers) {
             setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
         }
