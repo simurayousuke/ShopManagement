@@ -36,7 +36,7 @@ public class UserOrderService {
 
     public List<Object> getUnpayedList(List<OrderNumber> orderNumbers) {
         if (null == orderNumbers) {
-            return null;
+            return new ArrayList<>();
         }
         List<Object> list = new ArrayList<>();
         for (OrderNumber o : orderNumbers) {

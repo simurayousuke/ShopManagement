@@ -96,11 +96,11 @@ public class OpenSearch {
     private static List handleSearch(String json) {
         HashMap jMap = JsonKit.parse(json, HashMap.class);
         if (!OK.equalsIgnoreCase(jMap.get(STATUS).toString())) {
-            return null;
+            return new ArrayList();
         }
         HashMap result = JsonKit.parse(jMap.get("result").toString(), HashMap.class);
         if (Integer.parseInt(result.get("num").toString()) == 0) {
-            return null;
+            return new ArrayList();
         }
         return JsonKit.parse(result.get("items").toString(), ArrayList.class);
     }

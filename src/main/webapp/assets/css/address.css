@@ -1,5 +1,5 @@
 .admit-address {
-    border: 1px solid #FF4400;
+    border: 1px solid #ff4400;
 }
 
 .admit-address div {
@@ -8,7 +8,6 @@
 
 .one-of-address {
     display: block;
-
 }
 
 .font-phonenum {
@@ -16,13 +15,13 @@
     font-size: 16px;
     font-weight: 700;
     margin-top: 2px;
-    margin-bottom: 2px
+    margin-bottom: 2px;
 }
 
 .font-address {
     font-size: 13px;
     margin-top: 3px;
-    margin-bottom: 3px
+    margin-bottom: 3px;
 }
 
 .hide {

@@ -26,6 +26,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -70,7 +71,7 @@ public class OrderService {
      * @return List
      */
     public List<Order> getOrderListByOrderNumber(String number) {
-        return null == number ? null : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOrderNumber", number));
+        return null == number ? new ArrayList<>() : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOrderNumber", number));
     }
 
     /**
@@ -82,7 +83,7 @@ public class OrderService {
      */
     public List<Order> getOrderListByTokenAndStatusForBuyer(String token, int status) {
         User user = RedisKit.getUserByToken(token);
-        return null == user ? null : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByUserIdAndStatus", user.getId(), status));
+        return null == user ? new ArrayList<>() : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByUserIdAndStatus", user.getId(), status));
     }
 
     /**
@@ -94,7 +95,7 @@ public class OrderService {
      */
     public List<Order> getOrderListByTokenAndStatusForSeller(String token, int status) {
         User user = RedisKit.getUserByToken(token);
-        return null == user ? null : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOwnerIdAndStatus", user.getId(), status));
+        return null == user ? new ArrayList<>() : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOwnerIdAndStatus", user.getId(), status));
     }
 
     /**
@@ -169,15 +170,15 @@ public class OrderService {
     private List<Order> verify(String token, String orderNum) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
-            return null;
+            return new ArrayList<>();
         }
         List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
-            return null;
+            return new ArrayList<>();
         }
         Order first = orders.get(0);
         if (!Objects.equals(first.getUserId(), user.getId()) && !Objects.equals(first.getOwnerId(), user.getId())) {
-            return null;
+            return new ArrayList<>();
         }
         return orders;
     }
@@ -185,15 +186,15 @@ public class OrderService {
     private List<Order> verifyBuyer(String token, String orderNum) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
-            return null;
+            return new ArrayList<>();
         }
         List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
-            return null;
+            return new ArrayList<>();
         }
         Order first = orders.get(0);
         if (!Objects.equals(first.getUserId(), user.getId())) {
-            return null;
+            return new ArrayList<>();
         }
         return orders;
     }
@@ -201,15 +202,15 @@ public class OrderService {
     private List<Order> verifySeller(String token, String orderNum) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
-            return null;
+            return new ArrayList<>();
         }
         List<Order> orders = getOrderListByOrderNumber(orderNum);
         if (null == orders) {
-            return null;
+            return new ArrayList<>();
         }
         Order first = orders.get(0);
         if (!Objects.equals(first.getOwnerId(), user.getId())) {
-            return null;
+            return new ArrayList<>();
         }
         return orders;
     }
@@ -475,10 +476,7 @@ public class OrderService {
      */
     public List<Order> getCheckedListByTokenForBuyer(String token) {
         User user = RedisKit.getUserByToken(token);
-        if (null == user) {
-            return null;
-        }
-        return ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findCheckedByUserId", user.getId()));
+        return null == user ? new ArrayList<>() : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findCheckedByUserId", user.getId()));
     }
 
     /**
@@ -543,10 +541,7 @@ public class OrderService {
      */
     public List<Order> getCheckedListByTokenForSeller(String token) {
         User user = RedisKit.getUserByToken(token);
-        if (null == user) {
-            return null;
-        }
-        return ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findCheckedByOwnerId", user.getId()));
+        return null == user ? new ArrayList<>() : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findCheckedByOwnerId", user.getId()));
     }
 
     /**
@@ -571,7 +566,7 @@ public class OrderService {
      */
     public List<OrderNumber> getUnpayedOrderNumberList(String token) {
         User user = RedisKit.getUserByToken(token);
-        return null == user ? null : getUnpayedOrderNumberListByUserId(user.getId());
+        return null == user ? new ArrayList<>() : getUnpayedOrderNumberListByUserId(user.getId());
     }
 
 }
