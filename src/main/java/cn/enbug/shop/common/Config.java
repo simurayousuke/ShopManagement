@@ -17,13 +17,16 @@
 package cn.enbug.shop.common;
 
 import cn.enbug.shop.admin.AdminRoutes;
+import cn.enbug.shop.captcha.RedisCaptchaCache;
 import cn.enbug.shop.common.directive.CompressDirective;
 import cn.enbug.shop.common.handler.StaticHandler;
 import cn.enbug.shop.common.interceptor.ExceptionInterceptor;
 import cn.enbug.shop.common.kit.DruidKit;
 import cn.enbug.shop.common.kit.PluginKit;
 import cn.enbug.shop.common.kit.ShortMessageKit;
+import cn.enbug.shop.common.render.ShopRenderFactory;
 import cn.enbug.shop.common.service.RsaService;
+import com.jfinal.captcha.CaptchaManager;
 import com.jfinal.config.*;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.LogKit;
@@ -38,7 +41,7 @@ import com.jfinal.template.Engine;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.0
+ * @version 1.1.1
  * @see com.jfinal.config.JFinalConfig
  * @since 1.0.0
  */
@@ -82,6 +85,8 @@ public class Config extends JFinalConfig {
         me.setJsonFactory(new MixedJsonFactory());
         me.setViewType(ViewType.JFINAL_TEMPLATE);
         me.setBaseUploadPath(P.get("baseUploadFile"));
+        me.setRenderFactory(new ShopRenderFactory());
+        me.setCaptchaCache(new RedisCaptchaCache());
     }
 
     /**
@@ -137,6 +142,7 @@ public class Config extends JFinalConfig {
     public void afterJFinalStart() {
         PluginKit.afterPluginStart();
         initShortMessageKit();
+        CaptchaManager.me().setCaptchaCache(new RedisCaptchaCache());
     }
 
     private void initShortMessageKit() {
