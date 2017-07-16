@@ -48,7 +48,6 @@ import java.util.Objects;
  * @version 1.0.7
  * @since 1.0.0
  */
-@SuppressWarnings("unchecked")
 public class OrderService {
 
     public static final OrderService ME = Duang.duang(OrderService.class);
@@ -99,7 +98,7 @@ public class OrderService {
      * @param status order status
      * @return List
      */
-    public List getOrderListByTokenAndStatusForBuyer(String token, int status) {
+    public List<Order> getOrderListByTokenAndStatusForBuyer(String token, int status) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return null;
