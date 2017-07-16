@@ -100,9 +100,9 @@ $(document).ready(function () {
                         var $this = $(this);
                         var val = $this.text();
                         input.val(val);
-                        defaultValue = val;
                         hideSuggest();
                         input.focus();
+                        $('#search-button').click();
                     });
 
             });
