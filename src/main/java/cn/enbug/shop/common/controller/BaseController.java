@@ -17,6 +17,7 @@
 package cn.enbug.shop.common.controller;
 
 import cn.enbug.shop.common.kit.IpKit;
+import cn.enbug.shop.common.render.ShopCaptchaRender;
 import com.jfinal.core.ActionException;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;
@@ -30,7 +31,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @see com.jfinal.core.Controller
  * @since 1.0.0
  */
@@ -128,6 +129,11 @@ public abstract class BaseController extends Controller {
 
     public String getIp() {
         return IpKit.getRealIp(getRequest());
+    }
+
+    @Override
+    public boolean validateCaptcha(String paraName) {
+        return ShopCaptchaRender.validate(this, getPara(paraName));
     }
 
 }

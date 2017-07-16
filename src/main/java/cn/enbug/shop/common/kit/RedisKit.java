@@ -20,12 +20,15 @@ import cn.enbug.shop.common.model.User;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.redis.Redis;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The help kit for Redis.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.10
+ * @version 1.0.11
  * @since 1.0.0
  */
 public class RedisKit {
@@ -36,8 +39,10 @@ public class RedisKit {
     public static final String COOKIE_ID = "token";
     public static final String TOKEN = "token";
     public static final String SHORT_MESSAGE_CAPTCHA = "shortMessageCaptcha";
-    public static final String ACTIVE_CODE_FOR_PHONE_NUMER = "activeCodeForPhoneNumber";
+    public static final String ACTIVE_CODE_FOR_PHONE_NUMBER = "activeCodeForPhoneNumber";
     public static final String ACTIVE_CODE_FOR_EMAIL = "activeCodeForEmail";
+    public static final String IMAGE_CAPTCHA = "imageCaptcha";
+    public static final String ORDER_ID = "orderId";
 
     private RedisKit() {
 
@@ -111,7 +116,7 @@ public class RedisKit {
      * @param code   active code(uuid)
      */
     public static void setActiveCodeForPhoneNumber(String number, String code) {
-        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).setex(code, 15 * 60, number);
+        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMBER).setex(code, 15 * 60, number);
     }
 
     /**
@@ -122,7 +127,7 @@ public class RedisKit {
      */
     public static String setActiveCodeForPhoneNumberAndGet(String number) {
         String code = StrKit.getRandomUUID();
-        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).setex(code, 15 * 60, number);
+        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMBER).setex(code, 15 * 60, number);
         return code;
     }
 
@@ -133,7 +138,7 @@ public class RedisKit {
      * @return phone number or null
      */
     public static String getPhoneNumberByActiveCode(String code) {
-        return null == code ? null : Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).get(code);
+        return null == code ? null : Redis.use(ACTIVE_CODE_FOR_PHONE_NUMBER).get(code);
     }
 
     /**
@@ -142,7 +147,7 @@ public class RedisKit {
      * @param code active code
      */
     public static void delActiveCodeForPhoneNumber(String code) {
-        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMER).del(code);
+        Redis.use(ACTIVE_CODE_FOR_PHONE_NUMBER).del(code);
     }
 
     /**
@@ -180,6 +185,10 @@ public class RedisKit {
         if (null != token) {
             Redis.use(TOKEN).del(token);
         }
+    }
+
+    public static long getCurrentOrderId() {
+        return Redis.use(ORDER_ID).decr(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE));
     }
 
 }

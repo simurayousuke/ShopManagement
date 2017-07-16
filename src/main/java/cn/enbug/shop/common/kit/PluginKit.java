@@ -39,7 +39,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * JFinal插件
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class PluginKit {
@@ -80,9 +80,11 @@ public class PluginKit {
         me.add(dp);
         me.add(getActiveRecordPlugin(dp));
         me.add(getRedisPlugin(RedisKit.TOKEN, PropKit.getInt("redis.database.token")));
-        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, PropKit.getInt("redis.database.captcha")));
-        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMER, PropKit.getInt("redis.database.activePhone")));
+        me.add(getRedisPlugin(RedisKit.SHORT_MESSAGE_CAPTCHA, PropKit.getInt("redis.database.messageCaptcha")));
+        me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_PHONE_NUMBER, PropKit.getInt("redis.database.activePhone")));
         me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, PropKit.getInt("redis.database.activeEmail")));
+        me.add(getRedisPlugin(RedisKit.IMAGE_CAPTCHA, PropKit.getInt("redis.database.imageCaptcha")));
+        me.add(getRedisPlugin(RedisKit.ORDER_ID, PropKit.getInt("redis.database.orderId")));
         me.add(getOssPlugin());
         me.add(getCron4jPlugin());
         me.add(getOpenSearchPlugin());
