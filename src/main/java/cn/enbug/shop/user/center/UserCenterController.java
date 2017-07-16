@@ -8,7 +8,7 @@ import com.jfinal.ext.interceptor.GET;
 /**
  * @author Forrest Yang
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 @Before({GET.class, NeedLogInInterceptor.class})
