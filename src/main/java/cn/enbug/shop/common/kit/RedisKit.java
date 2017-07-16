@@ -188,7 +188,7 @@ public class RedisKit {
     }
 
     public static long getCurrentOrderId() {
-        return Redis.use(ORDER_ID).decr(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE));
+        return Redis.use(ORDER_ID).incr(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE));
     }
 
 }
