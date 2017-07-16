@@ -1,0 +1,30 @@
+.no-decoration {
+    text-decoration: none
+}
+
+.one-of-orders {
+    padding-top: 20px;
+    height: 118px;
+    background: #FCFCFC;
+    border: 1px solid #dddddd;
+    border-top: 0;
+}
+
+.one-of-goods:hover {
+    background: #ebf2f9;
+}
+
+.good-photo {
+    height: 80px;
+    width: 80px;
+    border: 1px solid #dddddd;
+    position: relative;
+    left: 20px;
+}
+
+.hr-shopcar {
+    border: 1px solid #3280fc;
+    min-height: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
