@@ -8,7 +8,7 @@ import cn.enbug.shop.common.controller.BaseController;
 public class UserCenterController extends BaseController {
 
     public void index() {
-        render("index.html");
+        render("secure.html");
     }
 
 }

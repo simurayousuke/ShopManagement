@@ -1,0 +1,65 @@
+#set(title="用户中心")
+#@layout()
+#define body()
+<div class="container main">
+    <div style="height: 50px"></div>
+    <div class="container-fixed" style="max-width: 990px">
+        #include("centerNav.html")
+        <div class="centerContent">
+            <div class="info-title">您的基础信息</div>
+            <ul class="account-info">
+                <li>
+                    <span class="t">用户名</span>
+                    <span class="t-info">sdfjsldjfsdfj</span>
+                </li>
+                <br>
+                <li>
+                    <span class="t">登录邮箱</span>
+                    <span class="t-info">等填充@qq.com</span>
+                    <span class="t-op"><a style="text-decoration: none">绑定邮箱</a></span>
+                </li>
+                <br>
+                <li>
+                    <span class="t">绑定手机</span>
+                    <span class="t-info">+86等填充</span>
+                    <span class="t-op"><a style="text-decoration: none">绑定手机</a></span>
+                </li>
+            </ul>
+            <br>
+            <hr id="hr-secure">
+            <div class="info-title">您的安全服务</div>
+            <ul style="list-style: none">
+                <li class="item-identity">
+                    <div class="state">
+                        <img class="check-img" src="assets/img/checked.png">
+                    </div>
+                    <div class="title"><em>登&nbsp;录&nbsp;密&nbsp;码</em></div>
+                    <div class="supply">安全性高的密码可以使账号更安全。建议您定期更换密码，且设置一个包含数字和字母，并长度超过6位以上的密码。</div>
+                </li>
+                <li class="item-identity">
+                    <div class="state">
+                        <img class="check-img" src="assets/img/noSet.png" style="width: 40px;height: 36px">
+                    </div>
+                    <div class="title"><em>绑&nbsp;定&nbsp;邮&nbsp;箱</em></div>
+                    <div class="supply">是您找回登录密码的方式之一。建议您设置一个经常使用的邮箱，更有效保障您的密码安全。</div>
+                </li>
+                <li class="item-identity">
+                    <div class="state">
+                        <img class="check-img" src="assets/img/noSet.png" style="width: 40px;height: 36px">
+                    </div>
+                    <div class="title"><em>绑&nbsp;定&nbsp;手&nbsp;机</em></div>
+                    <div class="supply">绑定手机后，您即可享受淘宝丰富的手机服务，如手机找回密码等。</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/userCenter.css">
+#end
+
+#define js()
+<script src="assets/js/userCenter.js"></script>
+#end
