@@ -16,16 +16,40 @@
 
 package cn.enbug.shop.shop.order;
 
+import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @author Forrest Yang
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before({GET.class, HasShopInterceptor.class})
-public class ShopOrderController {
-    // todo 完成功能
+public class ShopOrderController extends BaseController {
+    public void index() {
+        render("all.html");
+    }
+
+    public void nopay() {
+        render("noPayPage.html");
+    }
+
+    public void nosend() {
+        render("noSendPage.html");
+    }
+
+    public void done() {
+        render("donePage.html");
+    }
+
+    public void refund() {
+        render("refundPage.html");
+    }
+
+    public void close() {
+        render("closePage.html");
+    }
 }
