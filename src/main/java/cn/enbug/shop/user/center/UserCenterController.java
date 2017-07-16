@@ -19,7 +19,7 @@ public class UserCenterController extends BaseController {
     }
 
     public void userinfo() {
-        render("userinfo.html");
+        render("userInfo.html");
     }
 
     public void recharge() {
