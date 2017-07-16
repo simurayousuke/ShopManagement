@@ -16,7 +16,11 @@ $(document).ready(function () {
             return;
         }
 
-        if ('block' === suggestion.css('display') && (38 === x || 40 === x)) {
+        if (suggestion.is(':hidden') && (38 === x || 40 === x)) {
+            suggestion.show();
+        }
+
+        if (suggestion.is(':visible') && (38 === x || 40 === x)) {
 
             var current = suggestion.find('li.hover');
 
@@ -73,7 +77,8 @@ $(document).ready(function () {
                     suggestion.append('<li>' + json[i].suggestion + '</li>');
                 }
 
-                $('#gov_search_suggest').css('display', 'block');
+                $('#gov_search_suggest').show();
+
                 suggestion.find('li')
                     .hover(function () {
                         suggestion.find('li').removeClass('hover');
@@ -81,11 +86,11 @@ $(document).ready(function () {
                     }, function () {
                         $(this).removeClass('hover');
                     })
-                    .bind('click', function () {
+                    .click(function () {
                         input.val(this.innerHTML);
                         hideSuggest();
                         input.focus();
-                        $('#search-button').click();
+                        console.log("/search/" + this.innerHTML)
                     });
 
             });
@@ -95,7 +100,7 @@ $(document).ready(function () {
     });
 
     function hideSuggest() {
-        $('#gov_search_suggest').css('display', 'none');
+        $('#gov_search_suggest').hide();
     }
 
 });
