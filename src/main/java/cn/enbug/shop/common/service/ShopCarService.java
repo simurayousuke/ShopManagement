@@ -22,11 +22,12 @@ import cn.enbug.shop.common.model.ShopCar;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Duang;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @author Hu Wenqiang
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class ShopCarService {
@@ -38,19 +39,19 @@ public class ShopCarService {
      * get shop car list.
      *
      * @param user User Object
-     * @return ArrayList&lt;ShopCar&gt;
+     * @return List&lt;ShopCar&gt;
      */
-    public ArrayList getShopCarListByUser(User user) {
-        return null == user ? null : (ArrayList) SHOP_CAR_DAO.find(SHOP_CAR_DAO.getSqlPara("shopcar.findByUserId", user.getId()));
+    public List<ShopCar> getShopCarListByUser(User user) {
+        return null == user ? null : SHOP_CAR_DAO.find(SHOP_CAR_DAO.getSqlPara("shopcar.findByUserId", user.getId()));
     }
 
     /**
      * get shop car list.
      *
      * @param token token
-     * @return ArrayList&lt;ShopCar&gt;
+     * @return List&lt;ShopCar&gt;
      */
-    public ArrayList getShopCarListByToken(String token) {
+    public List<ShopCar> getShopCarListByToken(String token) {
         return getShopCarListByUser(RedisKit.getUserByToken(token));
     }
 
@@ -146,6 +147,5 @@ public class ShopCarService {
         ShopCar shopCar = getShopCarByTokenAndGoodUuid(token, goodUuid);
         return null != shopCar && shopCar.setCount(count).update();
     }
-
 
 }

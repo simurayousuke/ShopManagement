@@ -21,17 +21,19 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.OrderNumber;
 import cn.enbug.shop.common.service.OrderService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.3
+ * @author Hu Wenqiang
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class UserOrderController extends BaseController {
+
     public void index() {
-        ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
+        List<OrderNumber> orderNumbers = OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
         if (null != orderNumbers) {
             setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
         }
@@ -41,7 +43,7 @@ public class UserOrderController extends BaseController {
     // todo 完成功能
     @SuppressWarnings("unchecked")
     public void nopay() {
-        ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
+        List<OrderNumber> orderNumbers = OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
         if (null != orderNumbers) {
             setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
         }

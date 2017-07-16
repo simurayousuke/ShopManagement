@@ -24,7 +24,8 @@ import java.util.List;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class CommentService {
@@ -44,7 +45,7 @@ public class CommentService {
      * @param goodId good id
      * @return List
      */
-    public List getListByGoodId(int goodId) {
+    public List<Comment> getListByGoodId(int goodId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodId", goodId));
     }
 
@@ -52,7 +53,7 @@ public class CommentService {
      * @param shopId shop id
      * @return List
      */
-    public List getListByShopId(int shopId) {
+    public List<Comment> getListByShopId(int shopId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByShopId", shopId));
     }
 
@@ -60,7 +61,7 @@ public class CommentService {
      * @param userId user id
      * @return List
      */
-    public List getListByUserId(int userId) {
+    public List<Comment> getListByUserId(int userId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByUserId", userId));
     }
 
@@ -68,7 +69,7 @@ public class CommentService {
      * @param goodId good id
      * @return List
      */
-    public List getGoodListByGoodId(int goodId) {
+    public List<Comment> getGoodListByGoodId(int goodId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodIdAndGood", goodId));
     }
 
@@ -76,7 +77,7 @@ public class CommentService {
      * @param shopId shop id
      * @return List
      */
-    public List getGoodListByShopId(int shopId) {
+    public List<Comment> getGoodListByShopId(int shopId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByShopIdAndGood", shopId));
     }
 
@@ -84,7 +85,7 @@ public class CommentService {
      * @param goodId good id
      * @return List
      */
-    public List getBadListByGoodId(int goodId) {
+    public List<Comment> getBadListByGoodId(int goodId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodIdAndBad", goodId));
     }
 
@@ -92,7 +93,7 @@ public class CommentService {
      * @param shopId shop id
      * @return List
      */
-    public List getBadListByShopId(int shopId) {
+    public List<Comment> getBadListByShopId(int shopId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByShopIdAndBad", shopId));
     }
 
