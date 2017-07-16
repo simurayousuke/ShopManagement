@@ -11,4 +11,12 @@ public class UserCenterController extends BaseController {
         render("secure.html");
     }
 
+    public void userinfo() {
+        render("userinfo.html");
+    }
+
+    public void recharge() {
+        render("recharge.html");
+    }
+
 }
