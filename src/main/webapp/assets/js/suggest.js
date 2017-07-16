@@ -70,7 +70,6 @@ $(document).ready(function () {
 
                 if (!data.status) {
                     hideSuggest();
-                    $.msg('服务器错误');
                     return;
                 }
 
