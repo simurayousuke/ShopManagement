@@ -6,28 +6,26 @@
     <div class="container-fixed" style="max-width: 990px">
         #include("centerNav.html",userinfo='class="active" onclick="return false;"')
         <div class="centerContent">
-            <div class="info-title">填写您的资料，有助于让你的朋友找到你哦</div>
-            <form action="" class="form-horizontal" id="">
-                <div class="form-group">
-                    <label for="good-name" class="form-label">商品名称：</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" placeholder="商品名称" type="text" id="good-name" name="name">
+            <div class="info-title">个人资料</div>
+            <div class="user-photo-container">
+                <span>当前头像：</span>
+                <img alt="" src="//smcdn.yangzhizhuang.net/good/default.jpg" id="user-photo">
+                <div id="upload" class="uploader" style="padding-left: 65px;">
+                    <div class="uploader-message text-center">
+                        <div class="content"></div>
+                        <button type="button" class="close">×</button>
+                    </div>
+                    <div class="uploader-files file-list file-list-grid"></div>
+                    <div>
+                        <hr class="divider">
+                        <div class="uploader-status pull-right text-muted"></div>
+                        <button type="button" class="btn btn-link uploader-btn-browse"><em class="icon icon-plus"></em>
+                            选择文件
+                        </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="good-prize" class="form-label">商品价格：</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" placeholder="商品价格" type="text" id="good-prize" name="price">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="good-stock" class="form-label">商品库存：</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" placeholder="商品库存" type="text" id="good-stock" name="number">
-                    </div>
-                </div>
-                <input type="hidden" name="avator" id="create-good-avator" value="">
-            </form>
+                <button class="btn btn-primary">确认</button>
+            </div>
         </div>
     </div>
 </div>
