@@ -41,7 +41,6 @@ public class UserOrderController extends BaseController {
     }
 
     // todo 完成功能
-    @SuppressWarnings("unchecked")
     public void nopay() {
         List<OrderNumber> orderNumbers = OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
         if (null != orderNumbers) {
