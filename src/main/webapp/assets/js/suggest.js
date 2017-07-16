@@ -98,7 +98,9 @@ $(document).ready(function () {
                     })
                     .bind('click', function () {
                         var $this = $(this);
-                        input.val($this.text());
+                        var val = $this.text();
+                        input.val(val);
+                        console.log(val);
                         hideSuggest();
                         input.focus();
                     });
