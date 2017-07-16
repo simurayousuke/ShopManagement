@@ -10,6 +10,8 @@
         <div class="tab-pane fade" id="noPay">#include("orderPanel/noPay.html",orderNumber=o.orderNumber,list=o.list)
         </div>
         #end
+        #else
+        #include("noOrder.html")
         #end
     </div>
 </div>

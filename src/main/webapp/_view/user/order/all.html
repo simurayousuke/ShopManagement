@@ -49,6 +49,9 @@
         </div>
         #end
         #end
+        #if(!normalOrders&&!payedOrders&&!checkedOrders&&!nocmtOrders&&!doneOrders&&!refundOrders&&!closedOrders)
+        #include("noOrder.html")
+        #end
     </div>
 </div>
 #end
