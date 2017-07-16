@@ -22,16 +22,19 @@ import cn.enbug.shop.common.model.OrderNumber;
 import cn.enbug.shop.common.service.OrderService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.1
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class UserOrderController extends BaseController {
     public void index() {
+        ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
+        if (null != orderNumbers) {
+            setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
+        }
         render("all.html");
     }
 
@@ -40,17 +43,9 @@ public class UserOrderController extends BaseController {
     public void nopay() {
         ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
         if (null != orderNumbers) {
-            ArrayList<Object> list = new ArrayList<>();
-            for (OrderNumber o : orderNumbers) {
-                HashMap<String, Object> order = new HashMap<>();
-                order.put("orderNumber", o.getOrderNumber());
-                order.put("list", OrderService.ME.getOrderListByOrderNumber(o.getOrderNumber()));
-                list.add(order);
-            }
-            setAttr("normalOrders", list);
+            setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
         }
         render("noPayPage.html");
-
     }
 
     public void nosend() {
