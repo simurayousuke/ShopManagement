@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow:/login
+Disallow:/register
+Disallow:/user
+Disallow:/user/
+Disallow:/shop
+Disallow:/shop/
