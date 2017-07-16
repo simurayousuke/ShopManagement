@@ -87,6 +87,9 @@ public class JsoupFilter {
 
     /**
      * 过滤 content，但保留换行回车符
+     *
+     * @param content 带过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String filterContentKeepNewline(String content) {
         return null == content ? null : Jsoup.clean(content, "", contentWhitelist, notPrettyPrint);
@@ -97,6 +100,9 @@ public class JsoupFilter {
      * windows换行为：\r\n
      * linux 换行为：\n
      * mac os 换行为：\r
+     *
+     * @param content 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String filterNewlineToBrTag(String content) {
         return null == content ? null : content.replaceAll("\r\n", "<br>").replaceAll("\r", "<br>").replaceAll("\n", "<br>");
@@ -104,6 +110,9 @@ public class JsoupFilter {
 
     /**
      * 获取 html 中的纯文本信息，过滤所有 tag
+     *
+     * @param html 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String getText(String html) {
         return null == html ? null : Jsoup.clean(html, Whitelist.none());
@@ -112,6 +121,9 @@ public class JsoupFilter {
     /**
      * 使用Whitelist.simpleText() 白名单，获取 simple html 内容
      * 允许的 tag："b", "em", "i", "strong", "u"
+     *
+     * @param html 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String getSimpleHtml(String html) {
         return null == html ? null : Jsoup.clean(html, Whitelist.simpleText());
@@ -122,6 +134,9 @@ public class JsoupFilter {
      * 允许的 tag："a", "b", "blockquote", "br", "cite", "code", "dd", "dl", "dt", "em",
      * "i", "li", "ol", "p", "pre", "q", "small", "span", "strike", "strong", "sub",
      * "sup", "u", "ul"
+     *
+     * @param html 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String getBasic(String html) {
         return null == html ? null : Jsoup.clean(html, Whitelist.basic());
@@ -129,6 +144,9 @@ public class JsoupFilter {
 
     /**
      * 使用Whitelist.basicWithImages() 白名单，获取的 basic with images 内容
+     *
+     * @param html 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String getBasicWithImages(String html) {
         return null == html ? null : Jsoup.clean(html, Whitelist.basicWithImages());
@@ -140,6 +158,9 @@ public class JsoupFilter {
      * "colgroup", "dd", "div", "dl", "dt", "em", "h1", "h2", "h3", "h4", "h5", "h6",
      * "i", "img", "li", "ol", "p", "pre", "q", "small", "span", "strike", "strong",
      * "sub", "sup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "u", "ul"
+     *
+     * @param html 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String getRelaxed(String html) {
         return null == html ? null : Jsoup.clean(html, Whitelist.relaxed());
@@ -147,6 +168,10 @@ public class JsoupFilter {
 
     /**
      * 使用指定的 Whitelist 进行过滤
+     *
+     * @param html      待过滤的字符串
+     * @param whitelist 不过滤的标签
+     * @return 过滤后的字符串
      */
     public static String getWithWhitelist(String html, Whitelist whitelist) {
         return null == html ? null : Jsoup.clean(html, whitelist);
@@ -154,6 +179,10 @@ public class JsoupFilter {
 
     /**
      * 使用指定的 tags 进行过滤
+     *
+     * @param html 待过滤的字符串
+     * @param tags 需要过滤的标签
+     * @return 过滤后的字符串
      */
     public static String getWithTags(String html, String... tags) {
         return null == html ? null : Jsoup.clean(html, Whitelist.none().addTags(tags));
@@ -161,6 +190,9 @@ public class JsoupFilter {
 
     /**
      * 获取第一个 img 的 src 属性值
+     *
+     * @param html 待过滤的字符串
+     * @return 过滤后的字符串
      */
     public static String getFirstImgSrc(String html) {
         if (html == null) {

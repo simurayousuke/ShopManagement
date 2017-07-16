@@ -66,6 +66,7 @@ public class GoodService {
      * @param description good description
      * @param price       good price
      * @param avator      good avator
+     * @param number      number
      * @return boolean
      */
     @Before(Tx.class)

@@ -99,6 +99,7 @@ public class ShopService {
      * @param description shop description
      * @param token       owner token
      * @param ip          ip address
+     * @param avator      avator
      * @return boolean
      */
     public boolean createShop(String name, String description, String token, String ip, String avator) {

@@ -163,7 +163,7 @@ public class UserService {
      * transfer money
      *
      * @param user  user
-     * @param user  target user
+     * @param to    target user
      * @param value value
      * @return boolean
      */

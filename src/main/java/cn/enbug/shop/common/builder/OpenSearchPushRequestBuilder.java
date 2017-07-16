@@ -39,6 +39,11 @@ public class OpenSearchPushRequestBuilder {
      * @param saleCount   sale count
      * @param price       price
      * @param status      status
+     * @param number      number
+     * @param ownerId     owner id
+     * @param ownerName   owner name
+     * @param shopName    shop name
+     * @param uuid        uuid
      */
     public OpenSearchPushRequestBuilder(String id, String name, String description, int shopId, String avator, int saleCount, BigDecimal price, int status, int number, String uuid, String shopName, int ownerId, String ownerName) {
         fields = new HashMap<>();

@@ -24,8 +24,9 @@ package cn.enbug.shop.common.exception;
  * @since 1.0.0
  */
 public class NoEnoughMoneyException extends RuntimeException {
+
     /**
-     * @see java.lang.RuntimeException
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public NoEnoughMoneyException() {
         // RunTimeException默认构造函数
@@ -33,28 +34,36 @@ public class NoEnoughMoneyException extends RuntimeException {
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param message message
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public NoEnoughMoneyException(String message) {
         super(message);
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param message message
+     * @param cause   cause
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public NoEnoughMoneyException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param cause cause
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public NoEnoughMoneyException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param message            message
+     * @param cause              cause
+     * @param enableSuppression  enable suppression
+     * @param writableStackTrace writable stack trace
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public NoEnoughMoneyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);

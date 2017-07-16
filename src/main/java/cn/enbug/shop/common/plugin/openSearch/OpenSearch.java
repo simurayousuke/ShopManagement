@@ -207,9 +207,10 @@ public class OpenSearch {
     /**
      * search
      *
-     * @param index   index type
-     * @param keyWord key word
-     * @param filter  filter
+     * @param indexName index name
+     * @param index     index type
+     * @param keyWord   key word
+     * @param filter    filter
      * @return ArrayList
      */
     public static ArrayList search(String indexName, String index, String keyWord, String filter) {
@@ -237,8 +238,9 @@ public class OpenSearch {
     /**
      * search
      *
-     * @param index   index type
-     * @param keyWord key word
+     * @param indexName index name
+     * @param index     index type
+     * @param keyWord   key word
      * @return ArrayList
      */
     public static ArrayList search(String indexName, String index, String keyWord) {
@@ -264,6 +266,7 @@ public class OpenSearch {
     /**
      * search suggestions
      *
+     * @param indexName   index name
      * @param suggestName suggest name
      * @param keyWord     key word
      * @return ArrayList&lt;Map&lt;"suggestions",value&gt;

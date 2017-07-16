@@ -25,7 +25,7 @@ package cn.enbug.shop.common.exception;
  */
 public class MoneyTransferException extends RuntimeException {
     /**
-     * @see java.lang.RuntimeException
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public MoneyTransferException() {
         // RunTimeException默认构造函数
@@ -33,28 +33,36 @@ public class MoneyTransferException extends RuntimeException {
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param message message
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public MoneyTransferException(String message) {
         super(message);
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param message message
+     * @param cause   cause
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public MoneyTransferException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param cause cause
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public MoneyTransferException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * @see java.lang.RuntimeException
+     * @param message            message
+     * @param cause              cause
+     * @param enableSuppression  enable suppression
+     * @param writableStackTrace writable stack trace
+     * @see java.lang.RuntimeException#RuntimeException()
      */
     public MoneyTransferException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
