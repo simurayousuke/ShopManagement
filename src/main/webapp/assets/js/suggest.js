@@ -90,7 +90,7 @@ $(document).ready(function () {
                         input.val(this.innerHTML);
                         hideSuggest();
                         input.focus();
-                        console.log("/search/" + this.innerHTML)
+                        location.href = '/search/' + this.innerHTML;
                     });
 
             });
