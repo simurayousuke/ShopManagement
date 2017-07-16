@@ -1,0 +1,15 @@
+.admit-address{
+    border: 1px solid #FF4400;
+
+}
+.one-of-address{
+    display: block;
+}
+.font-phonenum{
+    color: grey;
+    font-size: 16px;
+    font-weight: 700;
+}
+.font-address{
+    font-size: 13px;
+}
