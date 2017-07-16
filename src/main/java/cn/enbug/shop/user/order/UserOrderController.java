@@ -26,49 +26,58 @@ import java.util.ArrayList;
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class UserOrderController extends BaseController {
+
     public void index() {
         ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
         if (null != orderNumbers) {
             setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
         }
+        setAttr("normalOrders", UserOrderService.ME.getUnpayedList(OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID))));
+        setAttr("payedOrders", OrderService.ME.getUnSentListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("sendingOrders", OrderService.ME.getSendingListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("nocmtOrders", OrderService.ME.getCheckedNotCommentedListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("doneOrders", OrderService.ME.getCheckedListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("refundOrders", OrderService.ME.getRefundingListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("closedOrders", OrderService.ME.getClosedListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("all.html");
     }
 
-    // todo 完成功能
-    @SuppressWarnings("unchecked")
     public void nopay() {
-        ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
-        if (null != orderNumbers) {
-            setAttr("normalOrders", UserOrderService.ME.getUnpayedList(orderNumbers));
-        }
+        setAttr("normalOrders", UserOrderService.ME.getUnpayedList(OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID))));
         render("noPayPage.html");
     }
 
     public void nosend() {
+        setAttr("payedOrders", OrderService.ME.getUnSentListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("noSendPage.html");
     }
 
     public void norec() {
+        setAttr("sendingOrders", OrderService.ME.getSendingListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("noRecPage.html");
     }
 
     public void nocmt() {
+        setAttr("nocmtOrders", OrderService.ME.getCheckedNotCommentedListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("noCmtPage.html");
     }
 
     public void done() {
+        setAttr("doneOrders", OrderService.ME.getCheckedListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("donePage.html");
     }
 
     public void refund() {
+        setAttr("refundOrders", OrderService.ME.getRefundingListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("refundPage.html");
     }
 
     public void close() {
+        setAttr("closedOrders", OrderService.ME.getClosedListByTokenForBuyer(getCookie(RedisKit.COOKIE_ID)));
         render("closePage.html");
     }
 }

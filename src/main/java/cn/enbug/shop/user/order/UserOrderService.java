@@ -21,6 +21,7 @@ import cn.enbug.shop.common.service.OrderService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Yang Zhizhuang
@@ -31,7 +32,10 @@ public class UserOrderService {
 
     public static final UserOrderService ME = new UserOrderService();
 
-    public ArrayList<Object> getUnpayedList(ArrayList<OrderNumber> orderNumbers) {
+    public ArrayList<Object> getUnpayedList(List<OrderNumber> orderNumbers) {
+        if (null == orderNumbers) {
+            return null;
+        }
         ArrayList<Object> list = new ArrayList<>();
         for (OrderNumber o : orderNumbers) {
             HashMap<String, Object> order = new HashMap<>();

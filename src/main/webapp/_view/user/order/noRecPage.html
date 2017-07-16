@@ -5,8 +5,8 @@
 <div class="container-fixed">
     #include("orderHeader.html",norecTab='class="active" onclick="return false;"')
     <div class="tab-content">
-        #if(checkedOrders)
-        <div class="tab-pane fade active in" id="noRec">#include("orderPanel/noRec.html",list=checkedOrders)
+        #if(sendingOrders)
+        <div class="tab-pane fade active in" id="noRec">#include("orderPanel/noRec.html",list=sendingOrders)
         </div>
         #else
         #include("noOrder.html")
