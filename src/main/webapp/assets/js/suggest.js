@@ -96,9 +96,12 @@ $(document).ready(function () {
                     }, function () {
                         $(this).removeClass('hover');
                     })
-                    .bind('click', function () {
+                    .click(function () {
                         var $this = $(this);
-                        location.href = '/search/' + $this.text();
+                        var val = $this.text();
+                        input.val(val);
+                        hideSuggest();
+                        input.focus();
                     });
 
             });
