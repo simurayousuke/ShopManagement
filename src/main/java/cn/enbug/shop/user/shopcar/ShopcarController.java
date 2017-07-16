@@ -17,15 +17,40 @@
 package cn.enbug.shop.user.shopcar;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
+import cn.enbug.shop.common.kit.RedisKit;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
  */
+@Before(NeedLogInInterceptor.class)
 public class ShopcarController extends BaseController {
 
+    @Before(GET.class)
     public void index() {
         render("index.html");
+    }
+
+    @Before(POST.class)
+    public void add() {
+        renderJson(ShopcarService.ME.add(getCookie(RedisKit.COOKIE_ID),
+                getPara("uuid"), getParaToInt("count")));
+    }
+
+    @Before(POST.class)
+    public void modify() {
+        renderJson(ShopcarService.ME.modifyCount(getCookie(RedisKit.COOKIE_ID),
+                getPara("uuid"), getParaToInt("count")));
+    }
+
+    @Before(POST.class)
+    public void del() {
+        renderJson(ShopcarService.ME.del(getCookie(RedisKit.COOKIE_ID),
+                getPara("uuid")));
     }
 }
