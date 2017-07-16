@@ -80,11 +80,7 @@ public class ShortMessageKit {
         } catch (ApiException e) {
             LOG.error(e.toString(), e);
         }
-        if (null == rsp) {
-            return "";
-        } else {
-            return rsp.getBody();
-        }
+        return null == rsp ? "" : rsp.getBody();
     }
 
 }

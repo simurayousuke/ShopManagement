@@ -63,10 +63,7 @@ public class ShopCarService {
      * @return ShopCar Object
      */
     public ShopCar getShopCarByUserAndGood(User user, Good good) {
-        if (null == user || null == good) {
-            return null;
-        }
-        return SHOP_CAR_DAO.findFirst(SHOP_CAR_DAO.getSqlPara("shopcar.findByUserIdAndGoodId", user.getId(), good.getId()));
+        return (null == user || null == good) ? null : SHOP_CAR_DAO.findFirst(SHOP_CAR_DAO.getSqlPara("shopcar.findByUserIdAndGoodId", user.getId(), good.getId()));
     }
 
     /**

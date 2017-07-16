@@ -59,10 +59,7 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByUser(User user) {
-        if (null == user) {
-            return null;
-        }
-        return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByOwnerUserId", user.getId()));
+        return null == user ? null : SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByOwnerUserId", user.getId()));
     }
 
     /**
@@ -86,10 +83,7 @@ public class ShopService {
      * @return Shop Object
      */
     public Shop findShopByShopName(String shopName) {
-        if (null == shopName) {
-            return null;
-        }
-        return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByShopName", shopName));
+        return null == shopName ? null : SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByShopName", shopName));
     }
 
     /**

@@ -23,10 +23,10 @@ public class SearchController extends BaseController {
     @Clear(NoUrlPara.class)
     public void index() {
         String word = getPara();
-        if (!StrKit.isBlank(word)) {
+        if (StrKit.notBlank(word)) {
             word = UrlKit.decode(word, "utf-8");
             ArrayList arrayList = OpenSearchService.ME.search("name", UrlKit.decode(getPara(), "utf-8"));
-            if (arrayList != null) {
+            if (null != arrayList) {
                 setAttr("list", arrayList);
             }
             setAttr("word", word);

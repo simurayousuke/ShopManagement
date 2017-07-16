@@ -30,16 +30,12 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  * @version 1.0.0
  * @since 1.0.0
  */
-@Before({GET.class, UserInterceptor.class})
+@Before({GET.class, UserInterceptor.class, GoodValidator.class})
 public class GoodController extends BaseController {
 
     @Clear(NoUrlPara.class)
     public void index() {
         String uuid = getPara();
-        if (null == uuid) {
-            redirect("/search");
-            return;
-        }
         Good good = GoodService.ME.findGoodByUuid(uuid);
         if (null == good) {
             redirect("/search");

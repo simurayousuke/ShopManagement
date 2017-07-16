@@ -18,13 +18,9 @@ import com.jfinal.ext.interceptor.POST;
 public class SuggestController extends BaseController {
 
     @Clear(NoUrlPara.class)
-    @Before(POST.class)
+    @Before({POST.class, SuggestValidator.class})
     public void index() {
         String key = getPara();
-        if (null == key) {
-            renderJson(Ret.fail("Fail"));
-            return;
-        }
         key = UrlKit.decode(key, "utf-8");
         String result = OpenSearchService.ME.suggest("name", key);
         if (null == result) {

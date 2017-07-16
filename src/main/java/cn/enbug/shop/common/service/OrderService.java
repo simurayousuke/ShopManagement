@@ -62,8 +62,7 @@ public class OrderService {
     private String getCurrentOrder() {
         long orderNum = RedisKit.getCurrentOrderId();
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String order = date + String.format("%08d", orderNum);
-        return order;
+        return date + String.format("%08d", orderNum);
     }
 
     /**
@@ -73,10 +72,7 @@ public class OrderService {
      * @return List
      */
     public List<Order> getOrderListByOrderNumber(String number) {
-        if (null == number) {
-            return null;
-        }
-        return ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOrderNumber", number));
+        return null == number ? null : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOrderNumber", number));
     }
 
     /**
@@ -88,10 +84,7 @@ public class OrderService {
      */
     public List<Order> getOrderListByTokenAndStatusForBuyer(String token, int status) {
         User user = RedisKit.getUserByToken(token);
-        if (null == user) {
-            return null;
-        }
-        return ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByUserIdAndStatus", user.getId(), status));
+        return null == user ? null : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByUserIdAndStatus", user.getId(), status));
     }
 
     /**
@@ -103,10 +96,7 @@ public class OrderService {
      */
     public List<Order> getOrderListByTokenAndStatusForSeller(String token, int status) {
         User user = RedisKit.getUserByToken(token);
-        if (null == user) {
-            return null;
-        }
-        return ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOwnerIdAndStatus", user.getId(), status));
+        return null == user ? null : ORDER_DAO.find(ORDER_DAO.getSqlPara("order.findByOwnerIdAndStatus", user.getId(), status));
     }
 
     /**
@@ -117,10 +107,7 @@ public class OrderService {
      * @return Order Object
      */
     public Order getOrderByOrderNumAndGoodId(String number, int id) {
-        if (null == number) {
-            return null;
-        }
-        return ORDER_DAO.findFirst(ORDER_DAO.getSqlPara("order.findByOrderNumberAndGoodId", number, id));
+        return null == number ? null : ORDER_DAO.findFirst(ORDER_DAO.getSqlPara("order.findByOrderNumberAndGoodId", number, id));
     }
 
     /**

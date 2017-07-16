@@ -50,10 +50,7 @@ public class GoodService {
 
     public List<Good> getGoodListByToken(String token) {
         Shop shop = ShopService.ME.findShopByToken(token);
-        if (null == shop) {
-            return null;
-        }
-        return getGoodListByShopId(shop.getId());
+        return null == shop ? null : getGoodListByShopId(shop.getId());
     }
 
 
@@ -109,10 +106,7 @@ public class GoodService {
      * @return Good Object
      */
     public Good findGoodByUuid(String uuid) {
-        if (null == uuid) {
-            return null;
-        }
-        return GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("good.findByUuid", uuid));
+        return null == uuid ? null : GOOD_DAO.findFirst(GOOD_DAO.getSqlPara("good.findByUuid", uuid));
     }
 
     /**
