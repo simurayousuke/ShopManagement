@@ -98,11 +98,7 @@ $(document).ready(function () {
                     })
                     .bind('click', function () {
                         var $this = $(this);
-                        var val = $this.text();
-                        input.val(val);
-                        hideSuggest();
-                        input.focus();
-                        $('#search-button').click();
+                        location.href = '/search/' + $this.text();
                     });
 
             });
