@@ -48,8 +48,11 @@ public class UserOrderController extends BaseController {
                 list.add(order);
             }
             setAttr("normalOrders", list);
+            render("noPayPage.html");
+        } else {
+            renderText("null");
         }
-        render("noPayPage.html");
+
     }
 
     public void nosend() {
