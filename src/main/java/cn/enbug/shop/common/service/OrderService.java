@@ -45,7 +45,7 @@ import java.util.Objects;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.7
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class OrderService {
@@ -59,23 +59,11 @@ public class OrderService {
         return CONFIG_DAO.findFirst(CONFIG_DAO.getSql("order.config"));
     }
 
-    // todo 线程安全
     private String getCurrentOrder() {
-        Config config = getConfig();
-        int orderNum = config.getOrder();
+        long orderNum = RedisKit.getCurrentOrderId();
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String order = date + String.format("%08d", orderNum);
-        config.setOrder(orderNum + 1);
-        return config.update() ? order : null;
-    }
-
-    /**
-     * reset daily order number.
-     *
-     * @return boolean
-     */
-    public boolean reset() {
-        return getConfig().setOrder(1).update();
+        return order;
     }
 
     /**
