@@ -1,6 +1,10 @@
 .admit-address {
     border: 1px solid #FF4400;
+}
 
+.admit-address div {
+    font-weight: bold;
+!important;
 }
 
 .one-of-address {
@@ -21,6 +25,12 @@
     margin-top: 3px;
     margin-bottom: 3px
 }
-div.one-of-address >i{
-    display:none;
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline-block;
+!important;
 }
