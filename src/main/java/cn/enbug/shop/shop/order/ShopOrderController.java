@@ -16,11 +16,16 @@
 
 package cn.enbug.shop.shop.order;
 
+import cn.enbug.shop.shop.HasShopInterceptor;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
+
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
+@Before({GET.class, HasShopInterceptor.class})
 public class ShopOrderController {
     // todo 完成功能
 }
