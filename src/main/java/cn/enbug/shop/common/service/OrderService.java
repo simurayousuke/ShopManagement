@@ -45,7 +45,7 @@ import java.util.Objects;
  * -2 or 3/4 means finished
  *
  * @author Yang Zhizhuang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
@@ -174,6 +174,9 @@ public class OrderService {
             order.setOrderNumber(orderNum);
             order.setOrderStatus(0);
             order.setAddressId(addressId);
+            order.setShopName(shop.getShopName());
+            order.setGoodName(good.getGoodName());
+            order.setAvator(good.getAvator());
             if (!order.save()) {
                 throw new CreateOrderException("Fail to create order.(2)");
             }

@@ -126,4 +126,31 @@ public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> impleme
         return (M) this;
     }
 
+    public java.lang.String getGoodName() {
+        return get("good_name");
+    }
+
+    public M setGoodName(java.lang.String goodName) {
+        set("good_name", goodName);
+        return (M) this;
+    }
+
+    public java.lang.String getShopName() {
+        return get("shop_name");
+    }
+
+    public M setShopName(java.lang.String shopName) {
+        set("shop_name", shopName);
+        return (M) this;
+    }
+
+    public java.lang.String getAvator() {
+        return get("avator");
+    }
+
+    public M setAvator(java.lang.String avator) {
+        set("avator", avator);
+        return (M) this;
+    }
+
 }
