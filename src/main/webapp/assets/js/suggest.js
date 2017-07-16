@@ -97,8 +97,9 @@ $(document).ready(function () {
                         $(this).removeClass('hover');
                     })
                     .bind('click', function () {
-                        var $this = $(this);
-                        location.href = '/search/' + $this.text();
+                        input.val(this.innerHTML);
+                        hideSuggest();
+                        input.focus();
                     });
 
             });
