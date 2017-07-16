@@ -17,18 +17,18 @@
 package cn.enbug.shop.common.exception;
 
 /**
- * Url 编解码异常
+ * RSA 加解密异常
  *
  * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
-public class UrlEncodingException extends RuntimeException {
+public class RsaException extends RuntimeException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()
      */
-    public UrlEncodingException() {
+    public RsaException() {
         super();
     }
 
@@ -36,7 +36,7 @@ public class UrlEncodingException extends RuntimeException {
      * @param message message
      * @see java.lang.RuntimeException#RuntimeException()
      */
-    public UrlEncodingException(String message) {
+    public RsaException(String message) {
         super(message);
     }
 
@@ -45,7 +45,7 @@ public class UrlEncodingException extends RuntimeException {
      * @param cause   cause
      * @see java.lang.RuntimeException#RuntimeException()
      */
-    public UrlEncodingException(String message, Throwable cause) {
+    public RsaException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -53,7 +53,7 @@ public class UrlEncodingException extends RuntimeException {
      * @param cause cause
      * @see java.lang.RuntimeException#RuntimeException()
      */
-    public UrlEncodingException(Throwable cause) {
+    public RsaException(Throwable cause) {
         super(cause);
     }
 
@@ -64,7 +64,7 @@ public class UrlEncodingException extends RuntimeException {
      * @param writableStackTrace writable stack trace
      * @see java.lang.RuntimeException#RuntimeException()
      */
-    public UrlEncodingException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public RsaException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

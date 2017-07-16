@@ -16,7 +16,12 @@
 
 package cn.enbug.shop.common.kit;
 
+import cn.enbug.shop.common.exception.RsaException;
+
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.*;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
@@ -28,7 +33,7 @@ import java.security.spec.X509EncodedKeySpec;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class RsaKit {
@@ -55,17 +60,21 @@ public class RsaKit {
      * @return String
      */
     public static String encrypt(RSAPublicKey publicKey, String text) {
+
         byte[] obj = text.getBytes();
-        if (publicKey != null) {
-            try {
-                Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
-                cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-                return Base64Kit.encode(cipher.doFinal(obj));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+        if (null == publicKey) {
+            return null;
         }
-        return null;
+
+        try {
+            Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            return Base64Kit.encode(cipher.doFinal(obj));
+        } catch (InvalidKeyException | NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException e) {
+            throw new RsaException(e);
+        }
+
     }
 
     /**
@@ -76,17 +85,22 @@ public class RsaKit {
      * @return String
      */
     public static String decrypt(RSAPrivateKey privateKey, String base64String) {
+
         byte[] obj = Base64Kit.decode(base64String);
-        if (privateKey != null) {
-            try {
-                Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
-                cipher.init(Cipher.DECRYPT_MODE, privateKey);
-                return bytesToString(cipher.doFinal(obj));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+        if (null == privateKey) {
+            return null;
         }
-        return null;
+
+        try {
+            Cipher cipher = Cipher.getInstance(KEY_ALGORITHM);
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            return bytesToString(cipher.doFinal(obj));
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException
+                | InvalidKeyException | IllegalBlockSizeException e) {
+            throw new RsaException(e);
+        }
+
     }
 
     /**
@@ -94,12 +108,17 @@ public class RsaKit {
      *
      * @param keySize key size
      * @return KeyPair
-     * @throws NoSuchAlgorithmException NoSuchAlgorithmException
      */
-    public static KeyPair generateKeyPair(int keySize) throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
-        keyPairGen.initialize(keySize);
-        return keyPairGen.generateKeyPair();
+    public static KeyPair generateKeyPair(int keySize) {
+
+        try {
+            KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
+            keyPairGen.initialize(keySize);
+            return keyPairGen.generateKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RsaException(e);
+        }
+
     }
 
     /**
@@ -107,14 +126,18 @@ public class RsaKit {
      *
      * @param key string
      * @return key
-     * @throws NoSuchAlgorithmException NoSuchAlgorithmException
-     * @throws InvalidKeySpecException  InvalidKeySpecException
      */
-    public static RSAPublicKey restorePublicKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(Base64Kit.decode(key));
-        KeyFactory factory = KeyFactory.getInstance(KEY_ALGORITHM);
-        PublicKey publicKey = factory.generatePublic(x509EncodedKeySpec);
-        return (RSAPublicKey) publicKey;
+    public static RSAPublicKey restorePublicKey(String key) {
+
+        try {
+            X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(Base64Kit.decode(key));
+            KeyFactory factory = KeyFactory.getInstance(KEY_ALGORITHM);
+            PublicKey publicKey = factory.generatePublic(x509EncodedKeySpec);
+            return (RSAPublicKey) publicKey;
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RsaException(e);
+        }
+
     }
 
     /**
@@ -122,31 +145,39 @@ public class RsaKit {
      *
      * @param key string
      * @return key
-     * @throws NoSuchAlgorithmException NoSuchAlgorithmException
-     * @throws InvalidKeySpecException  InvalidKeySpecException
      */
-    public static RSAPrivateKey restorePrivateKey(String key) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(Base64Kit.decode(key));
-        KeyFactory factory = KeyFactory.getInstance(KEY_ALGORITHM);
-        PrivateKey privateKey = factory.generatePrivate(pkcs8EncodedKeySpec);
-        return (RSAPrivateKey) privateKey;
+    public static RSAPrivateKey restorePrivateKey(String key) {
+
+        try {
+            PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(Base64Kit.decode(key));
+            KeyFactory factory = KeyFactory.getInstance(KEY_ALGORITHM);
+            PrivateKey privateKey = factory.generatePrivate(pkcs8EncodedKeySpec);
+            return (RSAPrivateKey) privateKey;
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RsaException(e);
+        }
+
     }
 
     /**
      * generate key pair to file.
      *
      * @param keySize key size
-     * @throws IOException              IOException
-     * @throws NoSuchAlgorithmException NoSuchAlgorithmException
      */
-    public static void generateToFile(int keySize) throws IOException, NoSuchAlgorithmException {
-        KeyPair keyPair = generateKeyPair(keySize);
-        FileWriter fw = new FileWriter("rsa_public.key");
-        fw.write(Base64Kit.encode(keyPair.getPublic().getEncoded()));
-        fw.close();
-        fw = new FileWriter("rsa_private.key");
-        fw.write(Base64Kit.encode(keyPair.getPrivate().getEncoded()));
-        fw.close();
+    public static void generateToFile(int keySize) {
+
+        try (FileWriter fw1 = new FileWriter("rsa_public.key");
+             FileWriter fw2 = new FileWriter("rsa_private.key")) {
+
+            KeyPair keyPair = generateKeyPair(keySize);
+
+            fw1.write(Base64Kit.encode(keyPair.getPublic().getEncoded()));
+            fw2.write(Base64Kit.encode(keyPair.getPrivate().getEncoded()));
+
+        } catch (IOException e) {
+            throw new RsaException(e);
+        }
+
     }
 
     /**
@@ -154,19 +185,25 @@ public class RsaKit {
      *
      * @param path key file path
      * @return key
-     * @throws IOException              IOException
-     * @throws InvalidKeySpecException  InvalidKeySpecException
-     * @throws NoSuchAlgorithmException NoSuchAlgorithmException
      */
-    public static RSAPublicKey getPublicKeyFromFile(String path) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(path)));
-        StringBuilder key = new StringBuilder();
-        String tempString;
-        while ((tempString = reader.readLine()) != null) {
-            key.append(tempString);
+    public static RSAPublicKey getPublicKeyFromFile(String path) {
+
+        try (FileReader fr = new FileReader(new File(path));
+             BufferedReader br = new BufferedReader(fr)) {
+
+            StringBuilder key = new StringBuilder();
+            String temp;
+
+            while (null != (temp = br.readLine())) {
+                key.append(temp);
+            }
+
+            return restorePublicKey(key.toString());
+
+        } catch (IOException e) {
+            throw new RsaException(e);
         }
-        reader.close();
-        return restorePublicKey(key.toString());
+
     }
 
     /**
@@ -174,19 +211,25 @@ public class RsaKit {
      *
      * @param path key file path
      * @return key
-     * @throws IOException              IOException
-     * @throws InvalidKeySpecException  InvalidKeySpecException
-     * @throws NoSuchAlgorithmException NoSuchAlgorithmException
      */
-    public static RSAPrivateKey getPrivateKeyFromFile(String path) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(path)));
-        StringBuilder key = new StringBuilder();
-        String tempString;
-        while ((tempString = reader.readLine()) != null) {
-            key.append(tempString);
+    public static RSAPrivateKey getPrivateKeyFromFile(String path) {
+
+        try (FileReader fr = new FileReader(new File(path));
+             BufferedReader br = new BufferedReader(fr)) {
+
+            StringBuilder key = new StringBuilder();
+            String temp;
+
+            while (null != (temp = br.readLine())) {
+                key.append(temp);
+            }
+
+            return restorePrivateKey(key.toString());
+
+        } catch (IOException e) {
+            throw new RsaException(e);
         }
-        reader.close();
-        return restorePrivateKey(key.toString());
+
     }
 
 }

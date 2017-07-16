@@ -18,13 +18,8 @@ package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.kit.RsaKit;
 import com.jfinal.kit.PropKit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
-import java.security.spec.InvalidKeySpecException;
 
 /**
  * @author Yang Zhizhuang
@@ -34,18 +29,13 @@ import java.security.spec.InvalidKeySpecException;
 public class RsaService {
 
     public static final RsaService ME = new RsaService();
-    private static final Logger LOG = LoggerFactory.getLogger(RsaService.class);
-    private static RSAPrivateKey privateKey;
+    private static RSAPrivateKey privateKey = RsaKit.getPrivateKeyFromFile(PropKit.get("rsa.privateKey"));
 
     /**
      * load private key
      */
-    public RsaService() {
-        try {
-            privateKey = RsaKit.getPrivateKeyFromFile(PropKit.get("rsa.privateKey"));
-        } catch (IOException | InvalidKeySpecException | NoSuchAlgorithmException e) {
-            LOG.error(e.toString(), e);
-        }
+    private RsaService() {
+
     }
 
     /**
