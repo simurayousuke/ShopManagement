@@ -1,0 +1,18 @@
+<div class="radio col-md-12 #(addr.is_default==1?'admit-address':'one-of-address')">
+    <div class="col-md-1">
+        <div class="hide #(addr.is_default==1?'show':'')">
+            <em class="icon icon-map-marker icon-2x" style="color: #3280fc "></em>
+            <span style="position: relative;bottom: 4px"><strong>寄送至</strong></span>
+        </div>
+    </div>
+    <label class="col-md-10">
+        <div class="col-md-5 font-address">
+            <input type="radio" name="address" value="#(addr.id)" #(addr.is_default==1?'checked':'')>
+            #(addr.address)（#(addr.reciver_name) 收)
+        </div>
+        <div class="font-phonenum col-md-3">#(addr.phone_number)</div>
+        #if(addr.is_default==1)
+        <div class="font-phonenum col-md-3">（默认地址）</div>
+        #end
+    </label>
+</div>
