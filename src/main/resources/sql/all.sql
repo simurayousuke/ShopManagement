@@ -19,3 +19,6 @@
 #namespace("orderNumber")
 #include("orderNumber.sql")
 #end
+#namespace("address")
+#include("address.sql")
+#end

@@ -171,4 +171,31 @@ public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> impleme
         return (M) this;
     }
 
+    public java.lang.String getReciverName() {
+        return get("reciver_name");
+    }
+
+    public M setReciverName(java.lang.String reciverName) {
+        set("reciver_name", reciverName);
+        return (M) this;
+    }
+
+    public java.lang.String getReciverPhone() {
+        return get("reciver_phone");
+    }
+
+    public M setReciverPhone(java.lang.String reciverPhone) {
+        set("reciver_phone", reciverPhone);
+        return (M) this;
+    }
+
+    public java.lang.String getReciverAddress() {
+        return get("reciver_address");
+    }
+
+    public M setReciverAddress(java.lang.String reciverAddress) {
+        set("reciver_address", reciverAddress);
+        return (M) this;
+    }
+
 }
