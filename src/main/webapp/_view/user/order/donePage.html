@@ -6,10 +6,8 @@
     #include("orderHeader.html",doneTab='class="active" onclick="return false;"')
     <div class="tab-content">
         #if(doneOrders)
-        #for(o : doneOrders)
-        <div class="tab-pane fade" id="done">#include("orderPanel/done.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade" id="done">#include("orderPanel/done.html".list=doneOrders)
         </div>
-        #end
         #else
         #include("noOrder.html")
         #end

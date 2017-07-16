@@ -6,10 +6,8 @@
     #include("orderHeader.html",norecTab='class="active" onclick="return false;"')
     <div class="tab-content">
         #if(checkedOrders)
-        #for(o : checkedOrders)
-        <div class="tab-pane fade" id="noRec">#include("orderPanel/noRec.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade" id="noRec">#include("orderPanel/noRec.html",list=checkedOrders)
         </div>
-        #end
         #else
         #include("noOrder.html")
         #end

@@ -7,47 +7,36 @@
     <div class="tab-content">
         #if(normalOrders)
         #for(o : normalOrders.close)
-        <div class="tab-pane fade" id="noPay">#include("orderPanel/noPay.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in " id="noPay">
+            #include("orderPanel/noPay.html",orderNumber=o.orderNumber,list=o.list)
         </div>
         #end
         #end
         #if(payedOrders)
-        #for(o : payedOrders.close)
-        <div class="tab-pane fade" id="noSend">
-            #include("orderPanel/noSend.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in " id="noSend">
+            #include("orderPanel/noSend.html",list=payedOrders)
         </div>
-        #end
         #end
         #if(checkedOrders)
-        #for(o : checkedOrders.close)
-        <div class="tab-pane fade" id="noRec">#include("orderPanel/noRec.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in" id="noRec">#include("orderPanel/noRec.html",list=payedOrders)
         </div>
-        #end
         #end
         #if(nocmtOrders)
-        #for(o : nocmtOrders.close)
-        <div class="tab-pane fade" id="noCmt">#include("orderPanel/noCmt.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in" id="noCmt">#include("orderPanel/noCmt.html",list=nocmtOrders)
         </div>
-        #end
         #end
         #if(doneOrders)
-        #for(o : doneOrders.close)
-        <div class="tab-pane fade" id="done">#include("orderPanel/done.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in" id="done">#include("orderPanel/done.html",list=doneOrders)
         </div>
-        #end
         #end
         #if(refundOrders)
-        #for(o : refundOrders.close)
-        <div class="tab-pane fade" id="refund">
-            #include("orderPanel/refund.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in" id="refund">
+            #include("orderPanel/refund.html",list=refundOrders)
         </div>
-        #end
         #end
         #if(closedOrders)
-        #for(o : closedOrders.close)
-        <div class="tab-pane fade" id="close">#include("orderPanel/close.html",orderNumber=o.orderNumber,list=o.list)
+        <div class="tab-pane fade active in" id="close">#include("orderPanel/close.html",list=closedOrders)
         </div>
-        #end
         #end
         #if(!normalOrders&&!payedOrders&&!checkedOrders&&!nocmtOrders&&!doneOrders&&!refundOrders&&!closedOrders)
         #include("noOrder.html")

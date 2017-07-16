@@ -32,6 +32,14 @@ em:hover {
     border-top: 0;
 }
 
+.one-of-goods {
+    padding-top: 20px;
+    margin-top: 10px;
+    height: 118px;
+    background: #FCFCFC;
+    border: 1px solid #cccccc;
+}
+
 .one-of-goods:hover {
     background: #ebf2f9;
 }
