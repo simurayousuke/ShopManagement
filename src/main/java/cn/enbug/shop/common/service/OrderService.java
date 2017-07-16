@@ -45,7 +45,7 @@ import java.util.Objects;
  * -2 or 3/4 means finished
  *
  * @author Yang Zhizhuang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
@@ -54,6 +54,7 @@ public class OrderService {
     public static final OrderService ME = Duang.duang(OrderService.class);
     private static final Config CONFIG_DAO = new Config().dao();
     private static final Order ORDER_DAO = new Order().dao();
+    private static final OrderNumber ORDER_NUMBER_DAO = new OrderNumber().dao();
 
     private Config getConfig() {
         return CONFIG_DAO.findFirst(CONFIG_DAO.getSql("order.config"));
@@ -138,17 +139,28 @@ public class OrderService {
     /**
      * createOrderFromShopCar
      *
-     * @param token buyer token
+     * @param token     buyer token
+     * @param addressId address id
      * @return boolean
      */
     @Before(Tx.class)
-    public boolean createOrderFromShopCar(String token) {
+    public boolean createOrderFromShopCar(String token, int addressId) {
         User user = RedisKit.getUserByToken(token);
         ArrayList<ShopCar> arrayList = ShopCarService.ME.getShopCarListByUser(user);
         if (null == arrayList) {
             return false;
         }
+        if (!AddressService.ME.verifyAddress(user, addressId)) {
+            return false;
+        }
         String orderNum = getCurrentOrder();
+        OrderNumber orderNumber = new OrderNumber();
+        orderNumber.setOrderNumber(orderNum);
+        orderNumber.setUserId(user.getId());
+        orderNumber.setStatus(0);
+        if (!orderNumber.save()) {
+            throw new CreateOrderException("Fail to create order.(1)");
+        }
         for (ShopCar o : arrayList) {
             Shop shop = ShopService.ME.findShopById(o.getShopId());
             Good good = GoodService.ME.findGoodById(o.getGoodId());
@@ -161,8 +173,9 @@ public class OrderService {
             order.setPrice(good.getPrice().multiply(new BigDecimal(o.getCount())));
             order.setOrderNumber(orderNum);
             order.setOrderStatus(0);
+            order.setAddressId(addressId);
             if (!order.save()) {
-                throw new CreateOrderException("Fail to create order.");
+                throw new CreateOrderException("Fail to create order.(2)");
             }
         }
         return true;
@@ -214,6 +227,10 @@ public class OrderService {
             return null;
         }
         return orders;
+    }
+
+    private OrderNumber getOrderNumberByOrderNumber(String number) {
+        return null == number ? null : ORDER_NUMBER_DAO.findFirst((ORDER_NUMBER_DAO.getSqlPara("orderNumber.findByOrderNumber", number)));
     }
 
     /**
@@ -302,6 +319,9 @@ public class OrderService {
         Order first = orders.get(0);
         if (!Objects.equals(first.getUserId(), user.getId())) {
             return false;
+        }
+        if (!getOrderNumberByOrderNumber(orderNum).setStatus(1).update()) {
+            throw new ModifyOrderStatusException("Fail to pay good.(1)");
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
         for (Order o : orders) {

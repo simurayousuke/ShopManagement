@@ -16,3 +16,6 @@
 #namespace("comment")
 #include("comment.sql")
 #end
+#namespace("orderNumber")
+#include("orderNumber.sql")
+#end

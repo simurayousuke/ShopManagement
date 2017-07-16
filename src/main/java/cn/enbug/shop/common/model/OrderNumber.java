@@ -7,5 +7,5 @@ import cn.enbug.shop.common.model.base.BaseOrderNumber;
  */
 @SuppressWarnings("serial")
 public class OrderNumber extends BaseOrderNumber<OrderNumber> {
-	
+
 }
