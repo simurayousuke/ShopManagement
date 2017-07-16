@@ -1,15 +1,26 @@
-.admit-address{
+.admit-address {
     border: 1px solid #FF4400;
 
 }
-.one-of-address{
+
+.one-of-address {
     display: block;
+
 }
-.font-phonenum{
+
+.font-phonenum {
     color: grey;
     font-size: 16px;
     font-weight: 700;
+    margin-top: 2px;
+    margin-bottom: 2px
 }
-.font-address{
+
+.font-address {
     font-size: 13px;
+    margin-top: 3px;
+    margin-bottom: 3px
+}
+div.one-of-address >i{
+    display:none;
 }
