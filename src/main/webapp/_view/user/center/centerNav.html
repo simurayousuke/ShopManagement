@@ -1,10 +1,12 @@
 <div class="nav-container">
-    <div class="headsculpture"><img src="/assets/img/noOrder.jpg" style="width: 137px;height: 137px"></div>
+    <div class="headsculpture"><img alt="" src="/assets/img/noOrder.jpg" style="width: 137px;height: 137px"></div>
     <nav class="menu" data-ride="menu">
         <ul class="nav nav-primary">
-            <li><a style="border-radius: 0;border-left: 0;border-right: 0;">安全中心</a></li>
-            <li><a style="border-radius: 0;border-left: 0;border-right: 0;">个人资料</a></li>
-            <li><a style="border-radius: 0;border-left: 0;border-right: 0;">余额充值</a></li>
+            <li #(secure)><a href="user/center" style="border-radius: 0;border-left: 0;border-right: 0;">安全中心</a></li>
+            <li #(userinfo)><a href="user/center/userinfo"
+                               style="border-radius: 0;border-left: 0;border-right: 0;">个人资料</a></li>
+            <li #(recharge)><a href="user/center/recharge"
+                               style="border-radius: 0;border-left: 0;border-right: 0;">余额充值</a></li>
         </ul>
     </nav>
 </div>

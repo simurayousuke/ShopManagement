@@ -148,7 +148,7 @@ public class UserService {
             return false;
         }
         BigDecimal money = user.getMoney();
-        if (money.compareTo(value) == -1) {
+        if (money.compareTo(value) < -1) {
             return false;
         }
         user.setMoney(user.getMoney().subtract(value));
@@ -170,7 +170,7 @@ public class UserService {
     @Before(Tx.class)
     public boolean transfer(User user, User to, BigDecimal value) {
         BigDecimal money = user.getMoney();
-        if (money.compareTo(value) == -1) {
+        if (money.compareTo(value) < -1) {
             return false;
         }
         user.setMoney(user.getMoney().subtract(value));
@@ -188,7 +188,7 @@ public class UserService {
             return false;
         }
         BigDecimal money = user.getMoney();
-        if (money.compareTo(value) == -1) {
+        if (money.compareTo(value) < -1) {
             return false;
         }
         user.setMoney(money.subtract(value));

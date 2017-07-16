@@ -8,7 +8,15 @@ import cn.enbug.shop.common.controller.BaseController;
 public class UserCenterController extends BaseController {
 
     public void index() {
-        render("index.html");
+        render("secure.html");
+    }
+
+    public void userinfo() {
+        render("userinfo.html");
+    }
+
+    public void recharge() {
+        render("recharge.html");
     }
 
 }

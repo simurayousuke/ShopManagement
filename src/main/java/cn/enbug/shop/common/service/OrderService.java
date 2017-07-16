@@ -16,9 +16,7 @@
 
 package cn.enbug.shop.common.service;
 
-import cn.enbug.shop.common.exception.CreateOrderException;
-import cn.enbug.shop.common.exception.ModifyOrderStatusException;
-import cn.enbug.shop.common.exception.NoEnoughMoneyException;
+import cn.enbug.shop.common.exception.*;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.*;
 import com.jfinal.aop.Before;
@@ -45,7 +43,7 @@ import java.util.Objects;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.0
+ * @version 1.1.1
  * @since 1.0.0
  */
 public class OrderService {
@@ -138,6 +136,14 @@ public class OrderService {
         for (ShopCar o : arrayList) {
             Shop shop = ShopService.ME.findShopById(o.getShopId());
             Good good = GoodService.ME.findGoodById(o.getGoodId());
+            int number = good.getNumber();
+            if (number < o.getCount()) {
+                throw new NoEnoughGoodException("Fail to create order.");
+            }
+            good.setNumber(number - o.getCount());
+            if (!good.update()) {
+                throw new ModifyGoodException("Fail to create order.");
+            }
             Order order = new Order();
             order.setUserId(user.getId());
             order.setShopId(shop.getId());
@@ -307,7 +313,11 @@ public class OrderService {
         if (!Objects.equals(first.getUserId(), user.getId())) {
             return false;
         }
-        if (!getOrderNumberByOrderNumber(orderNum).setStatus(1).update()) {
+        OrderNumber number = getOrderNumberByOrderNumber(orderNum);
+        if (null == number) {
+            return false;
+        }
+        if (!number.setStatus(1).update()) {
             throw new ModifyOrderStatusException("Fail to pay good.(1)");
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
