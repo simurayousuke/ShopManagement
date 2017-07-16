@@ -176,6 +176,8 @@ public class OrderService {
             order.setShopName(shop.getShopName());
             order.setGoodName(good.getGoodName());
             order.setAvator(good.getAvator());
+            order.setShopUuid(shop.getUuid());
+            order.setGoodUuid(shop.getUuid());
             if (!order.save()) {
                 throw new CreateOrderException("Fail to create order.(2)");
             }
