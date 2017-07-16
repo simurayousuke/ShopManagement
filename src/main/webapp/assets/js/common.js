@@ -22,6 +22,30 @@
         }).show();
     };
 
+    $.alert = function (title, msg) {
+        bootbox.alert({
+            size: "small",
+            title: title,
+            message: msg
+        })
+    };
+
+    $.confirm = function (msg, buttonOK, buttonCancel, callback) {
+        bootbox.confirm({
+            size: "small",
+            message: msg,
+            buttons: {
+                confirm: {
+                    label: buttonOK
+                },
+                cancel: {
+                    label: buttonCancel
+                }
+            },
+            callback: callback
+        });
+    };
+
     $.post = function (url, data, success, error) {
 
         error = error || function () {
@@ -59,4 +83,5 @@
         return positiveIntPattern.test(number);
     }
 
-})(jQuery);
+})
+(jQuery);
