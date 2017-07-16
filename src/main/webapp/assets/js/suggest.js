@@ -98,11 +98,9 @@ $(document).ready(function () {
                     })
                     .bind('click', function () {
                         var $this = $(this);
-                        console.log($this.html());
-                        input.val(this.innerHTML);
+                        input.val($this.text());
                         hideSuggest();
                         input.focus();
-                        var href = '/search/' + this.innerHTML;
                     });
 
             });
