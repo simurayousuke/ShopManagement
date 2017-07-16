@@ -1,0 +1,81 @@
+#set(title="我的订单")
+#@layout()
+#define body()
+
+<div class="container-fixed">
+    #include("orderHeader.html",allTab='class="active" onclick="return false;"')
+    <div class="tab-content">
+        #if(normalOrders)
+        <div class="tab-pane fade active in " id="noPay">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span>待付款</span>
+                </div>
+                <div class="panel-body">
+                    #include("orderPanel/noPay.html",list=normalOrders)
+                </div>
+            </div>
+        </div>
+        #end
+        #if(payedOrders)
+        <div class="tab-pane fade active in " id="noSend">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span>待发货</span>
+                </div>
+                <div class="panel-body">
+                    #include("orderPanel/noSend.html",list=payedOrders)
+                </div>
+            </div>
+        </div>
+        #end
+        #if(doneOrders)
+        <div class="tab-pane fade active in" id="done">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span>已完成</span>
+                </div>
+                <div class="panel-body">
+                    #include("orderPanel/done.html",list=doneOrders)
+                </div>
+            </div>
+        </div>
+        #end
+        #if(refundOrders)
+        <div class="tab-pane fade active in" id="refund">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span>待退款</span>
+                </div>
+                <div class="panel-body">
+                    #include("orderPanel/refund.html",list=refundOrders)
+                </div>
+            </div>
+        </div>
+        #end
+        #if(closedOrders)
+        <div class="tab-pane fade active in" id="close">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span>已关闭</span>
+                </div>
+                <div class="panel-body">
+                    #include("orderPanel/close.html",list=closedOrders)
+                </div>
+            </div>
+        </div>
+        #end
+        #if(!normalOrders&&!payedOrders&&!doneOrders&&!refundOrders&&!closedOrders)
+        #include("noOrder.html")
+        #end
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/order.css">
+#end
+
+#define js()
+<script src="assets/js/order.js"></script>
+#end
