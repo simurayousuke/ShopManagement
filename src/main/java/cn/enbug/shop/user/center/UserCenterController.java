@@ -1,10 +1,17 @@
 package cn.enbug.shop.user.center;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
 
 /**
- * Created by forre on 2017/7/16.
+ * @author Forrest Yang
+ * @author Yang Zhizhuang
+ * @version 1.0.0
+ * @since 1.0.0
  */
+@Before({GET.class, NeedLogInInterceptor.class})
 public class UserCenterController extends BaseController {
 
     public void index() {
