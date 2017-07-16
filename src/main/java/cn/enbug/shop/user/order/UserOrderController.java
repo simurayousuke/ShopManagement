@@ -17,6 +17,12 @@
 package cn.enbug.shop.user.order;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.model.OrderNumber;
+import cn.enbug.shop.common.service.OrderService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Yang Zhizhuang
@@ -30,7 +36,19 @@ public class UserOrderController extends BaseController {
     }
 
     // todo 完成功能
+    @SuppressWarnings("unchecked")
     public void nopay() {
+        ArrayList<OrderNumber> orderNumbers = (ArrayList) OrderService.ME.getUnpayedOrderNumberList(getCookie(RedisKit.COOKIE_ID));
+        if (null != orderNumbers) {
+            ArrayList<Object> list = new ArrayList<>();
+            for (OrderNumber o : orderNumbers) {
+                HashMap<String, Object> order = new HashMap<>();
+                order.put("orderNumber", o.getOrderNumber());
+                order.put("list", OrderService.ME.getOrderListByOrderNumber(o.getOrderNumber()));
+                list.add(order);
+            }
+            setAttr("normalOrders", list);
+        }
         render("noPayPage.html");
     }
 

@@ -6,7 +6,7 @@
     #include("orderHeader.html",nosendTab='class="active" onclick="return false;"')
     <div class="tab-content">
         #if(payedOrders)
-        #for(o : payedOrders.close)
+        #for(o : payedOrders)
         <div class="tab-pane fade" id="noSend">
             #include("orderPanel/noSend.html",orderNumber=o.orderNumber,list=o.list)
         </div>

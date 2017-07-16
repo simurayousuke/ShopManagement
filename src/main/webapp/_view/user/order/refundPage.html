@@ -6,7 +6,7 @@
     #include("orderHeader.html",refundTab='class="active" onclick="return false;"')
     <div class="tab-content">
         #if(refundOrders)
-        #for(o : refundOrders.close)
+        #for(o : refundOrders)
         <div class="tab-pane fade" id="refund">
             #include("orderPanel/refund.html",orderNumber=o.orderNumber,list=o.list)
         </div>

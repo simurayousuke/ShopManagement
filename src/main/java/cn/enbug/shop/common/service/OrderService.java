@@ -233,6 +233,10 @@ public class OrderService {
         return null == number ? null : ORDER_NUMBER_DAO.findFirst((ORDER_NUMBER_DAO.getSqlPara("orderNumber.findByOrderNumber", number)));
     }
 
+    private List getOrderNumberListByUserId(int id) {
+        return ORDER_NUMBER_DAO.find(ORDER_NUMBER_DAO.getSqlPara("orderNumber.findByUserId", id));
+    }
+
     /**
      * closeGood
      *
@@ -566,6 +570,15 @@ public class OrderService {
      */
     public List getCommentedListByTokenForSeller(String token) {
         return getOrderListByTokenAndStatusForSeller(token, 4);
+    }
+
+    /**
+     * @param token buyer token
+     * @return List
+     */
+    public List getUnpayedOrderNumberList(String token) {
+        User user = RedisKit.getUserByToken(token);
+        return null == user ? null : getOrderNumberListByUserId(user.getId());
     }
 
 }
