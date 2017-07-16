@@ -24,6 +24,7 @@ package cn.enbug.shop.common.exception;
  * @since 1.0.0
  */
 public class CreateOrderException extends RuntimeException {
+
     /**
      * @see java.lang.RuntimeException#RuntimeException()
      */

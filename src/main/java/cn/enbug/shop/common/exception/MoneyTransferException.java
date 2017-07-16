@@ -24,6 +24,7 @@ package cn.enbug.shop.common.exception;
  * @since 1.0.0
  */
 public class MoneyTransferException extends RuntimeException {
+
     /**
      * @see java.lang.RuntimeException#RuntimeException()
      */
@@ -67,4 +68,5 @@ public class MoneyTransferException extends RuntimeException {
     public MoneyTransferException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+
 }

@@ -16,11 +16,10 @@
 
 package cn.enbug.shop.common.service;
 
-import cn.enbug.shop.common.plugin.openSearch.OpenSearch;
+import cn.enbug.shop.common.plugin.opensearch.OpenSearch;
 import com.jfinal.kit.PropKit;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -68,7 +67,7 @@ public class OpenSearchService {
      * @param fields hash map
      * @return String
      */
-    public boolean update(HashMap<String, Object> fields) {
+    public boolean update(Map<String, Object> fields) {
         return OpenSearch.update(INDEX_NAME, TABLE_NAME, fields);
     }
 
@@ -80,9 +79,9 @@ public class OpenSearchService {
      * @param filter           filter
      * @param sortKey          sort key
      * @param positiveSequence positive sequence
-     * @return ArrayList
+     * @return List
      */
-    public ArrayList search(String index, String keyWord, String filter, String sortKey, boolean positiveSequence) {
+    public List search(String index, String keyWord, String filter, String sortKey, boolean positiveSequence) {
         return OpenSearch.search(INDEX_NAME, index, keyWord, filter, sortKey, positiveSequence);
     }
 
@@ -95,7 +94,7 @@ public class OpenSearchService {
      * @param positiveSequence positive sequence
      * @return ArrayList
      */
-    public ArrayList search(String index, String keyWord, String sortKey, boolean positiveSequence) {
+    public List search(String index, String keyWord, String sortKey, boolean positiveSequence) {
         return OpenSearch.search(INDEX_NAME, index, keyWord, sortKey, positiveSequence);
     }
 
@@ -105,9 +104,9 @@ public class OpenSearchService {
      * @param index   index type
      * @param keyWord key word
      * @param filter  filter
-     * @return ArrayList
+     * @return List
      */
-    public ArrayList search(String index, String keyWord, String filter) {
+    public List search(String index, String keyWord, String filter) {
         return OpenSearch.search(INDEX_NAME, index, keyWord, filter);
     }
 
@@ -116,9 +115,9 @@ public class OpenSearchService {
      *
      * @param index   index type
      * @param keyWord key word
-     * @return ArrayList
+     * @return List
      */
-    public ArrayList search(String index, String keyWord) {
+    public List search(String index, String keyWord) {
         return OpenSearch.search(INDEX_NAME, index, keyWord);
     }
 
@@ -127,7 +126,7 @@ public class OpenSearchService {
      *
      * @param suggestName suggest name
      * @param keyWord     key word
-     * @return ArrayList&lt;Map&lt;"suggestions",value&gt;
+     * @return List&lt;Map&lt;"suggestions",value&gt;
      */
     public String suggest(String suggestName, String keyWord) {
         return OpenSearch.suggest(INDEX_NAME, suggestName, keyWord);

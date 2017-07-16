@@ -21,11 +21,11 @@
 .good-name {
     margin-bottom: 20px;
     min-height: 21px;
-    _height: 21px;
+    height: 21px;
     font-size: 19px;
     font-weight: 700;
     line-height: 21px;
-    color: #3C3C3C;
+    color: #3c3c3c;
 }
 
 .good-property {
@@ -47,18 +47,16 @@
 
 .a-btn-buy {
     color: #E5511D;
-    border-color: #F0CAB6;
-    background: #FFE4D0;
+    background: #ffe4d0;
     display: block;
     cursor: pointer;
     width: 134px;
     height: 38px;
     text-align: center;
-    font-family: "Hiragino Sans GB", "microsoft yahei", sans-serif;
+    font-family: 'Hiragino Sans GB', 'microsoft yahei', sans-serif;
     font-size: 16px;
     line-height: 38px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #f0cab6;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -66,15 +64,14 @@
 }
 
 .a-btn-buy:hover {
-    border-color: #F0CAB6;
-    background: #FFD9BC;
+    border-color: #f0cab6;
+    background: #ffd9bc;
 }
 
 .a-btn-add {
     width: 180px;
-    color: #FFF;
-    border-color: #F40;
-    background: #F40;
+    color: #fff;
+    background: #f40;
     display: block;
     cursor: pointer;
     height: 38px;
@@ -82,8 +79,7 @@
     font-family: "Hiragino Sans GB", "microsoft yahei", sans-serif;
     font-size: 16px;
     line-height: 38px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #f40;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -91,8 +87,8 @@
 }
 
 .a-btn-add:hover {
-    border-color: #F22D00;
-    background: #F22D00;
+    border-color: #f22d00;
+    background: #f22d00;
 }
 
 #good-number {
@@ -108,5 +104,5 @@
 }
 
 .input-group-addon:hover {
-    background: #dddddd;
+    background: #ddd;
 }

@@ -86,7 +86,7 @@ $(document).ready(function () {
                     suggestion.append('<li>' + json[i].suggestion + '</li>');
                 }
 
-                $('#gov_search_suggest').show();
+                $('#gov-search-suggest').show();
 
                 suggestion.find('li')
                     .hover(function () {
@@ -109,7 +109,7 @@ $(document).ready(function () {
     });
 
     function hideSuggest() {
-        $('#gov_search_suggest').hide();
+        $('#gov-search-suggest').hide();
     }
 
 });

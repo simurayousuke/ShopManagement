@@ -26,14 +26,14 @@
 }
 
 em:hover {
-    background: #FFF6CB;
+    background: #fff6cb;
 }
 
 .one-of-orders {
     padding-top: 20px;
     height: 118px;
-    background: #FCFCFC;
-    border: 1px solid #dddddd;
+    background: #fcfcfc;
+    border: 1px solid #ddd;
     border-top: 0;
 }
 
@@ -41,8 +41,8 @@ em:hover {
     padding-top: 20px;
     margin-top: 10px;
     height: 118px;
-    background: #FCFCFC;
-    border: 1px solid #cccccc;
+    background: #fcfcfc;
+    border: 1px solid #ccc;
 }
 
 .one-of-goods:hover {
@@ -52,7 +52,7 @@ em:hover {
 .good-photo {
     height: 80px;
     width: 80px;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     position: relative;
     left: 20px;
 }

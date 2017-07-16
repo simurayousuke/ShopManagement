@@ -16,33 +16,37 @@
 
 package cn.enbug.shop.common.kit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.enbug.shop.common.exception.UrlEncodingException;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class UrlKit {
 
-    private static final Logger log = LoggerFactory.getLogger(UrlKit.class);
+    private UrlKit() {
+
+    }
 
     public static String encode(String text, String enc) {
         try {
-            return java.net.URLEncoder.encode(text, enc);
+            return URLEncoder.encode(text, enc);
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new UrlEncodingException(e);
         }
     }
 
     public static String decode(String text, String enc) {
         try {
-            return java.net.URLDecoder.decode(text, enc);
+            return URLDecoder.decode(text, enc);
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new UrlEncodingException(e);
         }
     }
 

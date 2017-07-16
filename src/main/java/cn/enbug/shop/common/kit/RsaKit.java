@@ -35,6 +35,10 @@ public class RsaKit {
 
     private static final String KEY_ALGORITHM = "RSA";
 
+    private RsaKit() {
+
+    }
+
     private static String bytesToString(byte[] encrytpByte) {
         StringBuilder result = new StringBuilder();
         for (Byte bytes : encrytpByte) {

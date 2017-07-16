@@ -63,7 +63,7 @@
     };
 
     var emailPattern = /^['_A-Za-z0-9-]+(\.['_A-Za-z0-9-]+)*@([A-Za-z0-9-])+(\.[A-Za-z0-9-]+)*((\.[A-Za-z0-9]{2,})|(\.[A-Za-z0-9]{2,}\.[A-Za-z0-9]{2,}))$/;
-    var phonePattern = /^1[3|4|5|7|8][0-9]{9}$/;
+    var phonePattern = /^1[34578][0-9]{9}$/;
     var pricePattern = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))|0+$/;
     var positiveIntPattern = /^\d+$/;
 
@@ -83,5 +83,4 @@
         return positiveIntPattern.test(number);
     }
 
-})
-(jQuery);
+})(jQuery);

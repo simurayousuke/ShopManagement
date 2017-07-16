@@ -37,8 +37,6 @@ class UploadService {
     private static final OssService SRV = OssService.ME;
 
     Ret upload(File file, User user, String ip, String folder) {
-        System.out.println(file.getParent());
-        System.out.println(file.getName());
         String filename = file.getName();
         String key = SRV.generateKey(folder, filename);
         String fileType = SRV.getFileType(filename);

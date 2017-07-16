@@ -17,7 +17,7 @@
 package cn.enbug.shop.common.kit;
 
 import cn.enbug.shop.common.model.MappingKit;
-import cn.enbug.shop.common.plugin.openSearch.OpenSearchPlugin;
+import cn.enbug.shop.common.plugin.opensearch.OpenSearchPlugin;
 import cn.enbug.shop.common.plugin.oss.OssPlugin;
 import cn.enbug.shop.common.service.RsaService;
 import com.alibaba.druid.filter.stat.StatFilter;

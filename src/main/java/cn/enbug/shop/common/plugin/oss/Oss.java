@@ -38,6 +38,10 @@ public class Oss {
     private static String bucketName;
     private static OSSClient client;
 
+    private Oss() {
+
+    }
+
     static void init(String bucketName, String endpoint, String key, String secret) {
         Oss.bucketName = bucketName;
         client = new OSSClient(endpoint, key, secret);

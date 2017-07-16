@@ -5,8 +5,8 @@
 .one-of-orders {
     padding-top: 20px;
     height: 118px;
-    background: #FCFCFC;
-    border: 1px solid #dddddd;
+    background: #fcfcfc;
+    border: 1px solid #ddd;
     border-top: 0;
 }
 
@@ -17,7 +17,7 @@
 .good-photo {
     height: 80px;
     width: 80px;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     position: relative;
     left: 20px;
 }

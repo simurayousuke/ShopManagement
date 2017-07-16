@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package cn.enbug.shop.common.plugin.openSearch;
+package cn.enbug.shop.common.plugin.opensearch;
 
 import cn.enbug.shop.common.exception.OpenSearchException;
 import com.aliyun.opensearch.CloudsearchClient;
@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,8 +47,11 @@ public class OpenSearch {
     private static final String JSON = "json";
     private static final String OK = "ok";
     private static final Logger LOG = LoggerFactory.getLogger(OpenSearch.class);
-
     private static CloudsearchClient client;
+
+    private OpenSearch() {
+
+    }
 
     static boolean init(String accessKey, String secret, String host, Map<String, Object> opts, KeyTypeEnum keyType) {
         try {
@@ -89,7 +93,7 @@ public class OpenSearch {
         return OK.equalsIgnoreCase(map.get(STATUS).toString());
     }
 
-    private static ArrayList handleSearch(String json) {
+    private static List handleSearch(String json) {
         HashMap jMap = JsonKit.parse(json, HashMap.class);
         if (!OK.equalsIgnoreCase(jMap.get(STATUS).toString())) {
             return null;
@@ -127,7 +131,7 @@ public class OpenSearch {
      * @param fields    hash map
      * @return String
      */
-    public static boolean update(String indexName, String tableName, HashMap<String, Object> fields) {
+    public static boolean update(String indexName, String tableName, Map<String, Object> fields) {
         CloudsearchDoc doc = new CloudsearchDoc(indexName, client);
         doc.update(fields);
         try {
@@ -146,9 +150,9 @@ public class OpenSearch {
      * @param filter           filter
      * @param sortKey          sort key
      * @param positiveSequence positive sequence
-     * @return ArrayList
+     * @return List
      */
-    public static ArrayList search(String indexName, String index, String keyWord, String filter, String sortKey, boolean positiveSequence) {
+    public static List search(String indexName, String index, String keyWord, String filter, String sortKey, boolean positiveSequence) {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(indexName);
@@ -180,9 +184,9 @@ public class OpenSearch {
      * @param keyWord          key word
      * @param sortKey          sort key
      * @param positiveSequence positive sequence
-     * @return ArrayList
+     * @return List
      */
-    public static ArrayList search(String indexName, String index, String keyWord, String sortKey, boolean positiveSequence) {
+    public static List search(String indexName, String index, String keyWord, String sortKey, boolean positiveSequence) {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(indexName);
@@ -211,9 +215,9 @@ public class OpenSearch {
      * @param index     index type
      * @param keyWord   key word
      * @param filter    filter
-     * @return ArrayList
+     * @return List
      */
-    public static ArrayList search(String indexName, String index, String keyWord, String filter) {
+    public static List search(String indexName, String index, String keyWord, String filter) {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(indexName);
@@ -241,9 +245,9 @@ public class OpenSearch {
      * @param indexName index name
      * @param index     index type
      * @param keyWord   key word
-     * @return ArrayList
+     * @return List
      */
-    public static ArrayList search(String indexName, String index, String keyWord) {
+    public static List search(String indexName, String index, String keyWord) {
         CloudsearchSearch search = new CloudsearchSearch(client);
         // 添加指定搜索的应用：
         search.addIndex(indexName);

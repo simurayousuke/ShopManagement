@@ -6,13 +6,13 @@
 .nav-container {
     width: 139px;
     float: left;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     height: 400px;
 }
 
-.centerContent {
+.center-content {
     display: block;
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
     border-left: 0;
     margin-left: 139px;
     height: 400px;
@@ -31,7 +31,7 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 0;
-    background-color: #D5E5F4;
+    background-color: #d5e5f4;
     height: 1px;
     border: none;
 }
@@ -87,7 +87,7 @@
 
 .check-img {
     width: 40px;
-    height: 36px
+    height: 36px;
 }
 
 #user-photo {

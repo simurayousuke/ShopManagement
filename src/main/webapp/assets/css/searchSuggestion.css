@@ -1,22 +1,22 @@
-.search_suggest {
+.search-suggest {
     position: absolute;
     z-index: 999;
     width: 615px;
     border: 1px solid #999999;
-    background-color: #FFFFFF;
+    background-color: #fff;
     display: none;
 }
 
-.search_suggest li {
+.search-suggest li {
     height: 24px;
     color: #999999;
     overflow: hidden;
     padding-left: 3px;
     line-height: 24px;
-    background: #FFFFFF;
+    background: #fff;
     cursor: default;
 }
 
-.search_suggest li.hover {
+.search-suggest li.hover {
     background: #ebf2f9;
 }

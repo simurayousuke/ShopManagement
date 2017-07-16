@@ -1,9 +1,9 @@
 @font-face {
-    font-family: "rei";
-    src: url("//i.alipayobjects.com/common/fonts/rei.eot?20150616#iefix") format("embedded-opentype"),
-    url("//i.alipayobjects.com/common/fonts/rei.woff?20150616") format("woff"),
-    url("//i.alipayobjects.com/common/fonts/rei.ttf?20150616") format("truetype"),
-    url("//i.alipayobjects.com/common/fonts/rei.svg?20150616#rei") format("svg");
+    font-family: 'rei';
+    src: url('//i.alipayobjects.com/common/fonts/rei.eot?20150616#iefix') format('embedded-opentype'),
+    url('//i.alipayobjects.com/common/fonts/rei.woff?20150616') format('woff'),
+    url('//i.alipayobjects.com/common/fonts/rei.ttf?20150616') format('truetype'),
+    url('//i.alipayobjects.com/common/fonts/rei.svg?20150616#rei') format('svg');
 }
 
 .footer {

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package cn.enbug.shop.common.plugin.openSearch;
+package cn.enbug.shop.common.plugin.opensearch;
 
 import com.aliyun.opensearch.object.KeyTypeEnum;
 import com.jfinal.plugin.IPlugin;
