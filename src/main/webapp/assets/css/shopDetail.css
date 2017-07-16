@@ -1,0 +1,36 @@
+.shop {
+    width: 100%;
+}
+
+.shop-head {
+    width: 300px;
+    float: left;
+}
+
+.shop-photo-container {
+    margin: 20px;
+    border-radius: 5px;
+    border: 2px solid #0a67fb;
+}
+
+.shop-content {
+    margin-top: 20px;
+    padding-right: 30px;
+    width: 800px;
+    float: right;
+}
+
+.shop-name {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.card {
+    width: 280px;
+    height: 284px;
+}
+
+.card-content {
+    padding-bottom: 0;
+}
