@@ -313,7 +313,11 @@ public class OrderService {
         if (!Objects.equals(first.getUserId(), user.getId())) {
             return false;
         }
-        if (!getOrderNumberByOrderNumber(orderNum).setStatus(1).update()) {
+        OrderNumber number = getOrderNumberByOrderNumber(orderNum);
+        if (null == number) {
+            return false;
+        }
+        if (!number.setStatus(1).update()) {
             throw new ModifyOrderStatusException("Fail to pay good.(1)");
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
