@@ -1,8 +1,8 @@
-#seize {
+.seize {
     display: none;
 }
 
-#login-container {
+.login-container {
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
@@ -15,12 +15,12 @@
 
 @media (min-width: 768px) {
 
-    #seize {
+    .seize {
         display: inline-block;
         width: 328px;
     }
 
-    #login-container {
+    .login-container {
         display: inline-block;
         max-width: 100%;
         min-width: 300px;
@@ -30,7 +30,7 @@
 
 @media (min-width: 992px) {
 
-    #seize {
+    .seize {
         display: inline-block;
         width: 552px;
     }
@@ -38,7 +38,7 @@
 }
 
 @media (min-width: 1200px) {
-    #seize {
+    .seize {
         display: inline-block;
         width: 760px;
     }
@@ -46,7 +46,7 @@
 
 @media (min-width: 1600px) {
 
-    #seize {
+    .seize {
         display: inline-block;
         width: 1160px;
     }
