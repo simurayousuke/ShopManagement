@@ -26,7 +26,7 @@ import com.jfinal.ext.interceptor.GET;
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 @Before({GET.class, HasShopInterceptor.class})
@@ -36,7 +36,7 @@ public class ShopOrderController extends BaseController {
         setAttr("payedOrders", OrderService.ME.getUnSentListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         setAttr("doneOrders", OrderService.ME.getCheckedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         setAttr("refundOrders", OrderService.ME.getRefundingListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
-        setAttr("closeOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("closedOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("all.html");
     }
 
@@ -61,7 +61,7 @@ public class ShopOrderController extends BaseController {
     }
 
     public void close() {
-        setAttr("closeOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("closedOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("closePage.html");
     }
 }
