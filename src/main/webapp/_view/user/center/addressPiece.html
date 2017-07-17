@@ -1,0 +1,16 @@
+<div style="margin-left: 30px">
+    <div class="col-md-5 font-address">
+        #(addr.address)（#(addr.reciver_name) 收)
+    </div>
+    <div class="font-phonenum col-md-3">#(addr.phone_number)</div>
+    <div class="col-md-1">
+        <button class="btn btn-sm btn-link">删除</button>
+    </div>
+    #if(addr.is_default==1)
+    <div class="font-phonenum col-md-3">（默认地址）</div>
+    #else
+    <div class="font-phonenum col-md-3">
+        <button class="btn btn-sm btn-link">设为默认</button>
+    </div>
+    #end
+</div>
