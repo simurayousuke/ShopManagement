@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-
-    var redirect = decodeURIComponent(location.pathname.substr(7));
+    var href = location.href;
+    var redirect = decodeURIComponent(href.substr(href.indexOf('/login?') + 7));
     if (redirect === '') {
         redirect = '/';
     }
