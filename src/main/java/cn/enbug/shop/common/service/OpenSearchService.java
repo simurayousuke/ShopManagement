@@ -133,7 +133,7 @@ public class OpenSearchService {
     }
 
     public List getHot() {
-        return OpenSearch.getHot();
+        return OpenSearch.getHot(INDEX_NAME);
     }
 
 }
