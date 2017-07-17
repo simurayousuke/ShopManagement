@@ -16,13 +16,17 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.exception.LogException;
 import cn.enbug.shop.common.model.Log;
 import cn.enbug.shop.common.plugin.oss.Oss;
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.PutObjectResult;
+import com.jfinal.aop.Before;
+import com.jfinal.aop.Duang;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
 import java.io.File;
 import java.io.InputStream;
@@ -39,11 +43,7 @@ import java.util.List;
  */
 public class OssService {
 
-    public static final OssService ME = new OssService();
-
-    private OssService() {
-        // singleton
-    }
+    public static final OssService ME = Duang.duang(OssService.class);
 
     /**
      * generate key for oss.
@@ -71,15 +71,20 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    // todo 事务
     // todo 上传成功判断
+    @Before(Tx.class)
     public PutObjectResult upload(String key, String filename, int userId,
                                   String ip, String fileType, InputStream input, long size) {
         cn.enbug.shop.common.model.File f = new cn.enbug.shop.common.model.File()
                 .setUrl(key).setFileName(filename).setSize(size).setFileType(fileType);
-        f.save();
+        if (!f.save()) {
+            return null;
+        }
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
-        log.setJoinId(f.getId()).save();
+        log.setJoinId(f.getId());
+        if (!log.save()) {
+            throw new LogException("cannot log when save oss file");
+        }
         return Oss.upload(key, input);
     }
 
@@ -96,15 +101,20 @@ public class OssService {
      * @throws OSSException    OSSException
      * @throws ClientException ClientException
      */
-    // todo 事务
     // todo 上传成功判断
+    @Before(Tx.class)
     public PutObjectResult upload(String key, String filename, int userId,
                                   String ip, String fileType, File file) {
         cn.enbug.shop.common.model.File f = new cn.enbug.shop.common.model.File()
                 .setUrl(key).setFileName(filename).setSize(file.length()).setFileType(fileType);
-        f.save();
+        if (!f.save()) {
+            return null;
+        }
         Log log = new Log().setIp(ip).setOperation("upload").setUserId(userId);
-        log.setJoinId(f.getId()).save();
+        log.setJoinId(f.getId());
+        if (!log.save()) {
+            throw new LogException("cannot log when save oss file");
+        }
         return Oss.upload(key, file);
     }
 

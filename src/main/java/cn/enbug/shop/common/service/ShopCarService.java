@@ -49,7 +49,7 @@ public class ShopCarService {
      * @return List&lt;ShopCar&gt;
      */
     public List<ShopCar> getShopCarListByUser(User user) {
-        return null == user ? null : SHOP_CAR_DAO.find(SHOP_CAR_DAO.getSqlPara("shopcar.findByUserId", user.getId()));
+        return null == user ? new ArrayList<>() : SHOP_CAR_DAO.find(SHOP_CAR_DAO.getSqlPara("shopcar.findByUserId", user.getId()));
     }
 
     /**
@@ -64,7 +64,7 @@ public class ShopCarService {
 
     public List<Record> getShopCarRecordListByUser(User user) {
         if (null == user) {
-            return null;
+            return new ArrayList<>();
         }
         return Db.find(Db.getSqlPara("shopcar.findRecordByUserId", user.getId()));
     }
@@ -176,7 +176,7 @@ public class ShopCarService {
 
     @Before(Tx.class)
     public boolean clean(String token) {
-        ArrayList<ShopCar> list = (ArrayList) getShopCarListByToken(token);
+        List<ShopCar> list = getShopCarListByToken(token);
         if (null == list) {
             return false;
         }
