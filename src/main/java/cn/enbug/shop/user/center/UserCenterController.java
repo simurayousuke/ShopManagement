@@ -26,4 +26,12 @@ public class UserCenterController extends BaseController {
         render("recharge.html");
     }
 
+    public void bindphone() {
+        render("bindPhone.html");
+    }
+
+    public void bindemail() {
+        render("bindEmail.html");
+    }
+
 }
