@@ -41,4 +41,12 @@ public class ShopcarService {
         return SRV.del(token, uuid) ? Ret.succeed() : Ret.fail("Fail.");
     }
 
+    public Ret modifyCount(String token, int id, int count) {
+        return SRV.modifyCount(token, id, count) ? Ret.succeed() : Ret.fail("Fail.");
+    }
+
+    public Ret del(String token, int id) {
+        return SRV.del(token, id) ? Ret.succeed() : Ret.fail("Fail.");
+    }
+
 }

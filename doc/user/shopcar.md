@@ -17,7 +17,7 @@
 
 参数:
 
-* uuid 商品的uuid
+* id shopcar的id
 * count 商品的数量
 
 
@@ -28,7 +28,7 @@
 
 参数:
 
-* uuid 商品的uuid
+* id shopcar的id
 
 </li>
 </ol>

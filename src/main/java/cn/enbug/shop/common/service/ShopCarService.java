@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class ShopCarService {
@@ -90,6 +90,10 @@ public class ShopCarService {
      */
     public ShopCar getShopCarByTokenAndGoodUuid(String token, String uuid) {
         return getShopCarByUserAndGood(RedisKit.getUserByToken(token), GoodService.ME.findGoodByUuid(uuid));
+    }
+
+    public ShopCar getShopCarById(int id) {
+        return SHOP_CAR_DAO.findFirst(SHOP_CAR_DAO.getSqlPara("shopcar.findById", id));
     }
 
     /**
@@ -154,6 +158,14 @@ public class ShopCarService {
         return null == shopCar || shopCar.delete();
     }
 
+    public boolean del(String token, int id) {
+        if (null == UserService.ME.validateToken(token)) {
+            return false;
+        }
+        ShopCar shopCar = getShopCarById(id);
+        return null == shopCar || shopCar.delete();
+    }
+
     /**
      * modify good count
      *
@@ -164,6 +176,22 @@ public class ShopCarService {
      */
     public boolean modifyCount(String token, String goodUuid, int count) {
         ShopCar shopCar = getShopCarByTokenAndGoodUuid(token, goodUuid);
+        return null != shopCar && shopCar.setCount(count).update();
+    }
+
+    /**
+     * modify good count
+     *
+     * @param token token
+     * @param id    shopcar id
+     * @param count count
+     * @return boolean
+     */
+    public boolean modifyCount(String token, int id, int count) {
+        if (null == UserService.ME.validateToken(token)) {
+            return false;
+        }
+        ShopCar shopCar = getShopCarById(id);
         return null != shopCar && shopCar.setCount(count).update();
     }
 

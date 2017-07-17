@@ -50,12 +50,12 @@ public class ShopcarController extends BaseController {
     @Before(POST.class)
     public void modify() {
         renderJson(ShopcarService.ME.modifyCount(getCookie(RedisKit.COOKIE_ID),
-                getPara("uuid"), getParaToInt("count")));
+                getParaToInt("id"), getParaToInt("count")));
     }
 
     @Before(POST.class)
     public void del() {
         renderJson(ShopcarService.ME.del(getCookie(RedisKit.COOKIE_ID),
-                getPara("uuid")));
+                getParaToInt("id")));
     }
 }

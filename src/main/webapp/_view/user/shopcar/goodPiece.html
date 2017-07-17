@@ -12,7 +12,7 @@
                 <span class="input-group-addon">
                 <em class="icon icon-minus"></em>
             </span>
-            <input class="good-number" type="text" value="#(shopcar.count)">
+            <input class="good-number" type="text" value="#(shopcar.count)" data-id="#(shopcar.id)">
             <span class="input-group-addon">
                 <em class="icon icon-plus"></em>
             </span>
@@ -20,5 +20,5 @@
 
     </div>
     <div class="col-md-1 col-sm-1"><strong>¥#(shopcar.count*shopcar.price)</strong></div>
-    <div class="col-md-1 col-sm-1"><a class="no-decoration">删除</a></div>
+    <div class="col-md-1 col-sm-1"><a class="no-decoration del-button" data-id="#(shopcar.id)">删除</a></div>
 </div>
