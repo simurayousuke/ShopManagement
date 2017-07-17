@@ -104,7 +104,7 @@
 
 .form-horizontal {
     margin-left: 12px;
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
 .user-photo-container {
@@ -147,6 +147,10 @@
 .size-word {
     width: 200px;
     height: 60px;
+}
+
+.input-group {
+    margin-bottom: 20px;
 }
 
 @media (min-width: 540px) {

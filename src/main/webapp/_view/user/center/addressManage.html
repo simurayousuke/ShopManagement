@@ -10,26 +10,32 @@
             #include("address.html",addressList=addresses)
             <hr class="hr-secure" style="margin-top: 0;">
             <div class="info-title">新增地址</div>
-            <form action="" class="form-horizontal" id="create-address-form">
-                <div class="form-group">
-                    <label class="form-label">收货人：</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" placeholder="收货人" type="text" name="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">收货电话：</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" placeholder="收货电话" type="text" name="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">收货地址：</label>
-                    <div class="col-sm-10">
-                        <textarea placeholder="收货地址" name=""></textarea>
-                    </div>
+            <form action="" class="form-horizontal col-md-9" id="create-address-form" style="margin-left: 90px;">
+                <div class="input-group" style="width: 60%">
+                    <span class="input-group-addon">
+                        <em class="icon icon-user"></em>
+                    </span>
+                    <input type="text" class="form-control" placeholder="收货人姓名">
+                    <span class="input-group-addon">
+                        <em class="icon icon-phone-sign"></em>
+                    </span>
+                    <input type="text" class="form-control" placeholder="收货人电话号码">
                 </div>
 
+                <div class="input-group">
+                    <span class="input-group-addon"><em class="icon icon-map-marker"></em></span>
+                    <input type="text" class="form-control" placeholder="省">
+                    <span class="input-group-addon fix-border fix-padding"></span>
+                    <input type="text" class="form-control" placeholder="市/县">
+                    <span class="input-group-addon fix-border fix-padding"></span>
+                    <input type="text" class="form-control" placeholder="区">
+                    <span class="input-group-addon fix-border fix-padding"></span>
+                    <input type="text" class="form-control" placeholder="街道" style="width: 130%">
+                </div>
+                <div style="margin-top: 40px">
+                    <div class="col-md-4"></div>
+                    <button class="btn btn-primary" type="button">增添地址</button>
+                </div>
             </form>
         </div>
     </div>
