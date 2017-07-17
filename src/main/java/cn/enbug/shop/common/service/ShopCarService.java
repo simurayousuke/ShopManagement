@@ -62,7 +62,7 @@ public class ShopCarService {
         if (null == user) {
             return null;
         }
-        return Db.find("findRecordByUserId", user.getId());
+        return Db.find(Db.getSqlPara("shopcar.findRecordByUserId", user.getId()));
     }
 
     public List<Record> getShopCarRecordListByToken(String token) {
