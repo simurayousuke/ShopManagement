@@ -18,6 +18,7 @@ package cn.enbug.shop.index;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.UserInterceptor;
+import cn.enbug.shop.common.service.OpenSearchService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.NoUrlPara;
 
@@ -26,7 +27,7 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before(NoUrlPara.class)
@@ -37,6 +38,7 @@ public class IndexController extends BaseController {
      */
     @Before(UserInterceptor.class)
     public void index() {
+        setAttr("list", OpenSearchService.ME.getHot());
         render("index.html");
     }
 

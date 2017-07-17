@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.0
+ * @version 1.1.1
  * @since 1.0.0
  */
 public class OpenSearchService {
@@ -130,6 +130,11 @@ public class OpenSearchService {
      */
     public String suggest(String suggestName, String keyWord) {
         return OpenSearch.suggest(INDEX_NAME, suggestName, keyWord);
+    }
+
+    public List getHot() {
+        return OpenSearch.search(INDEX_NAME, "status", "1",
+                "sale_count>0", "sale_count", false);
     }
 
 }
