@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.1
+ * @version 1.1.2
  * @since 1.0.0
  */
 public class OpenSearchService {
@@ -34,7 +34,7 @@ public class OpenSearchService {
      * singleton
      */
     public static final OpenSearchService ME = new OpenSearchService();
-    private static final String INDEX_NAME = PropKit.get("openSearcher.appName");
+    public static final String INDEX_NAME = PropKit.get("openSearcher.appName");
     private static final String TABLE_NAME = "main";
 
     private OpenSearchService() {
@@ -133,8 +133,7 @@ public class OpenSearchService {
     }
 
     public List getHot() {
-        return OpenSearch.search(INDEX_NAME, "status", "1",
-                "sale_count>0", "sale_count", false);
+        return OpenSearch.getHot();
     }
 
 }

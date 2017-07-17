@@ -17,6 +17,7 @@
 package cn.enbug.shop.common.plugin.opensearch;
 
 import cn.enbug.shop.common.exception.OpenSearchException;
+import cn.enbug.shop.common.service.OpenSearchService;
 import com.aliyun.opensearch.CloudsearchClient;
 import com.aliyun.opensearch.CloudsearchDoc;
 import com.aliyun.opensearch.CloudsearchSearch;
@@ -38,7 +39,8 @@ import java.util.Map;
  * Open Search
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class OpenSearch {
@@ -292,6 +294,32 @@ public class OpenSearch {
         }
         return jsonResult.get("suggestions").toString();
         // arrayList<String,Map> --> Map<"suggestions",value>
+    }
+
+    /**
+     * getHot
+     *
+     * @return List
+     */
+    public static List getHot() {
+        CloudsearchSearch search = new CloudsearchSearch(client);
+        search.addCustomConfig("hits", "8");
+        // 添加指定搜索的应用：
+        search.addIndex(OpenSearchService.INDEX_NAME);
+        // 指定搜索的关键词，这里要指定在哪个索引上搜索，如果不指定的话默认在使用“default”索引（索引字段名称是您在您的数据结构中的“索引到”字段。）
+        search.setQueryString("status:'1'");
+        // 指定搜索返回的格式。
+        search.setFormat(JSON);
+        // 设定过滤条件
+        search.addFilter("sale_count>0");
+        // 设定排序方式 + 表示正序 - 表示降序
+        search.addSort("sale_count", "-");
+        // 返回搜索结果
+        try {
+            return handleSearch(search.search());
+        } catch (IOException e) {
+            throw new OpenSearchException(e);
+        }
     }
 
 }
