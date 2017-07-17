@@ -55,6 +55,9 @@ $(document).ready(function () {
         var that = $(this);
         var countInput = that.parent().parent().find('input');
         var count = countInput.val();
+        if (count <= 1) {
+            return;
+        }
         countInput.val(--count);
         updateCount(countInput);
     });
