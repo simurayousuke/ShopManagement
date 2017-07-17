@@ -47,13 +47,8 @@ import java.util.*;
 public class OrderService {
 
     public static final OrderService ME = Duang.duang(OrderService.class);
-    private static final Config CONFIG_DAO = new Config().dao();
     private static final Order ORDER_DAO = new Order().dao();
     private static final OrderNumber ORDER_NUMBER_DAO = new OrderNumber().dao();
-
-    private Config getConfig() {
-        return CONFIG_DAO.findFirst(CONFIG_DAO.getSql("order.config"));
-    }
 
     private String getCurrentOrder() {
         long orderNum = RedisKit.getCurrentOrderId();

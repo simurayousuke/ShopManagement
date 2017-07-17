@@ -4,9 +4,6 @@ SELECT * FROM t_order WHERE shop_id = #para(0);
 #sql("findByUserId")
 SELECT * FROM t_order WHERE user_id = #para(0);
 #end
-#sql("config")
-SELECT * FROM t_config WHERE id = 1;
-#end
 #sql("findByOwnerId")
 SELECT * FROM t_order WHERE owner_id = #para(0);
 #end

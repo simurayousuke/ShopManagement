@@ -54,31 +54,4 @@ public abstract class BaseShopCar<M extends BaseShopCar<M>> extends Model<M> imp
         return (M) this;
     }
 
-    public java.lang.String getAvator() {
-        return get("avator");
-    }
-
-    public M setAvator(java.lang.String avator) {
-        set("avator", avator);
-        return (M) this;
-    }
-
-    public java.lang.String getGoodUuid() {
-        return get("good_uuid");
-    }
-
-    public M setGoodUuid(java.lang.String goodUuid) {
-        set("good_uuid", goodUuid);
-        return (M) this;
-    }
-
-    public java.lang.String getShopUuid() {
-        return get("shop_uuid");
-    }
-
-    public M setShopUuid(java.lang.String shopUuid) {
-        set("shop_uuid", shopUuid);
-        return (M) this;
-    }
-
 }
