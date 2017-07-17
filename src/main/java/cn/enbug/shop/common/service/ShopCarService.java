@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 public class ShopCarService {
@@ -110,6 +110,9 @@ public class ShopCarService {
      */
     public boolean add(String token, Good good, int count) {
         if (null == good) {
+            return false;
+        }
+        if (good.getNumber() < count) {
             return false;
         }
         User user = RedisKit.getUserByToken(token);

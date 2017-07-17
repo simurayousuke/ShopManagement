@@ -33,7 +33,7 @@ $(document).ready(function () {
                     }
                 });
             } else {
-                $.alert('Error', '添加失败');
+                $.alert('Error', '添加失败，失败原因' + data.msg);
             }
         }, function () {
             $.alert('Error', '网络异常');
