@@ -6,8 +6,31 @@
     <div class="container-fixed" style="max-width: 990px">
         #include("centerNav.html",addressmanage='class="active" onclick="return false;"')
         <div class="center-content">
-            <div class="info-title">地址管理</div>
+            <div class="info-title">我的地址</div>
+            #include("address.html",addressList=addresses)
+            <hr class="hr-secure" style="margin-top: 0;">
+            <div class="info-title">新增地址</div>
+            <form action="" class="form-horizontal" id="create-address-form">
+                <div class="form-group">
+                    <label class="form-label">收货人：</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" placeholder="收货人" type="text" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">收货电话：</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" placeholder="收货电话" type="text" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">收货地址：</label>
+                    <div class="col-sm-10">
+                        <textarea placeholder="收货地址" name=""></textarea>
+                    </div>
+                </div>
 
+            </form>
         </div>
     </div>
 </div>

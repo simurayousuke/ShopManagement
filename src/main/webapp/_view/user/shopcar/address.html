@@ -3,12 +3,14 @@
 #if(addressList)
 #for(o:addressList)
 #include("addressPiece.html",addr=o)
-<div style="margin-top: 30px; float: right; color: #0a67fb; font-size: 15px" class="col-md-2"><strong>管理我的地址</strong>
+<div style="margin-top: 30px; float: right; color: #0a67fb; font-size: 15px" class="col-md-2"><a
+        style="text-decoration: none" href="user/center/addressmanage">管理我的地址</a>
 </div>
 #end
 #else
 #include("noAddress.html")
-<div style="margin-top: 80px; float: right; color: #0a67fb; font-size: 15px" class="col-md-2"><strong>管理我的地址</strong>
+<div style="margin-top: 80px; float: right; color: #0a67fb; font-size: 15px" class="col-md-2"><a
+        style="text-decoration: none" href="user/center/addressmanage">管理我的地址</a>
 </div>
 #end
 
