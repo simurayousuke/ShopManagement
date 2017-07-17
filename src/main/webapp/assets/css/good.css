@@ -89,7 +89,7 @@
     background: #f22d00;
 }
 
-#good-number {
+.good-number {
     width: 30px;
     height: 20px;
     text-align: center;

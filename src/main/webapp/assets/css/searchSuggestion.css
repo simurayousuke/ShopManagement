@@ -22,10 +22,10 @@
     background: #ebf2f9;
 }
 
-#search-suggestion {
+.search-suggestion {
     padding: 0;
 }
 
-#search-suggestion li {
+.search-suggestion li {
     padding-left: 8px;
 }

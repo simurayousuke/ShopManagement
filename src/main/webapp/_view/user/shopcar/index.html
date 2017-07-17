@@ -15,14 +15,14 @@
             <div class="col-md-1 col-sm-1" style="height: 50px;">操作</div>
         </div>
     </div>
-
+    <hr class="col-md-12 col-sm-12 hr-shopcar up">
     #set(total=0)
 
     #for(good:shopcars)
     #include("goodPiece.html",shopcar=good)
     #set(total=total+good.price*good.count)
     #else
-    <!-- todo 显示购物车内没有商品 -->
+    #include("emptyShopCar.html")
     #end
 
     #include("address.html",addressList=addresses)
