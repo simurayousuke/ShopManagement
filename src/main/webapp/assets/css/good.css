@@ -3,6 +3,10 @@
     width: 400px;
 }
 
+.num-position {
+    bottom: 23px;
+    left: 80px;
+}
 .good-ul {
     list-style: none;
     padding-left: 0;
