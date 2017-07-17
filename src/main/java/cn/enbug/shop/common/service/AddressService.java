@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class AddressService {
@@ -57,9 +57,15 @@ public class AddressService {
         return ADDRESS_DAO.findFirst(ADDRESS_DAO.getSqlPara("address.findDefaultByUserId", userId));
     }
 
-    public boolean verifyAddress(User user, int addressId) {
+    public Address verifyAddress(User user, int addressId) {
         Address address = getById(addressId);
-        return null != address && address.getUserId().equals(user.getId());
+        if (null == address) {
+            return null;
+        }
+        if (!address.getUserId().equals(user.getId())) {
+            return null;
+        }
+        return address;
     }
 
     public Address verifyAddress(String token, int addressId) {

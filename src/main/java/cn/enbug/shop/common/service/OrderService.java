@@ -41,7 +41,7 @@ import java.util.*;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.3
+ * @version 1.1.4
  * @since 1.0.0
  */
 public class OrderService {
@@ -115,7 +115,8 @@ public class OrderService {
         if (null == arrayList) {
             return false;
         }
-        if (!AddressService.ME.verifyAddress(user, addressId)) {
+        Address address = AddressService.ME.verifyAddress(user, addressId);
+        if (null == address) {
             return false;
         }
         String orderNum = getCurrentOrder();
@@ -160,6 +161,9 @@ public class OrderService {
             order.setAvator(good.getAvator());
             order.setShopUuid(shop.getUuid());
             order.setGoodUuid(good.getUuid());
+            order.setReciverAddress(address.getAddress());
+            order.setReciverName(address.getReciverName());
+            order.setReciverPhone(address.getPhoneNumber());
             if (!order.save()) {
                 throw new CreateOrderException("储存订单详情失败！");
             }
