@@ -16,6 +16,7 @@
 
 package cn.enbug.shop.common.safe;
 
+import cn.enbug.shop.common.model.Address;
 import cn.enbug.shop.common.model.Comment;
 import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Shop;
@@ -83,6 +84,13 @@ public class JsoupFilter {
     public static void filterComment(Comment m) {
         String description = m.getDescription();
         m.setDescription(getText(description));
+    }
+
+    public static void filterAddress(Address m) {
+        String receiverName = m.getReciverName();
+        m.setReciverName(getText(receiverName));
+        String address = m.getAddress();
+        m.setAddress(getText(address));
     }
 
     /**
