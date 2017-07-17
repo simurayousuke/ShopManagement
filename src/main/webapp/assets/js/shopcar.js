@@ -68,9 +68,7 @@ $(document).ready(function () {
 
     $('.good-number').focus(function () {
         motoNum = $(this).val();
-    });
-
-    $('.good-number').change(function () {
+    }).change(function () {
         var that = $(this);
         var count = that.val();
         var number = that.parent().parent().parent().find('strong[data-type="good-number"]').text();
