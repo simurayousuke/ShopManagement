@@ -17,7 +17,7 @@
 package cn.enbug.shop.common;
 
 import cn.enbug.shop.admin.AdminRoutes;
-import cn.enbug.shop.captcha.RedisCaptchaCache;
+import cn.enbug.shop.captcha.ShopCaptchaCache;
 import cn.enbug.shop.common.directive.CompressDirective;
 import cn.enbug.shop.common.handler.StaticHandler;
 import cn.enbug.shop.common.interceptor.ExceptionInterceptor;
@@ -86,7 +86,7 @@ public class Config extends JFinalConfig {
         me.setViewType(ViewType.JFINAL_TEMPLATE);
         me.setBaseUploadPath(P.get("baseUploadFile"));
         me.setRenderFactory(new ShopRenderFactory());
-        me.setCaptchaCache(new RedisCaptchaCache());
+        me.setCaptchaCache(new ShopCaptchaCache());
     }
 
     /**
@@ -142,7 +142,7 @@ public class Config extends JFinalConfig {
     public void afterJFinalStart() {
         PluginKit.afterPluginStart();
         initShortMessageKit();
-        CaptchaManager.me().setCaptchaCache(new RedisCaptchaCache());
+        CaptchaManager.me().setCaptchaCache(new ShopCaptchaCache());
     }
 
     private void initShortMessageKit() {

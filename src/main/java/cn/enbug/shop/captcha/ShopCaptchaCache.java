@@ -28,7 +28,7 @@ import com.jfinal.plugin.redis.Redis;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class RedisCaptchaCache implements ICaptchaCache {
+public class ShopCaptchaCache implements ICaptchaCache {
 
     public void put(Captcha captcha) {
         Redis.use(RedisKit.IMAGE_CAPTCHA).setex(captcha.getKey(), Captcha.DEFAULT_EXPIRE_TIME, captcha);
