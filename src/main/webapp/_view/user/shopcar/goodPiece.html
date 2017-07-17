@@ -1,0 +1,24 @@
+<div class=" one-of-goods col-md-12 col-sm-12">
+    <div class="col-md-2 col-sm-2">
+        <img alt="" src="//smcdn.yangzhizhuang.net/#(shopcar.avator)" id="good-photo">
+    </div>
+    <div class="col-md-3 col-sm-3" style="right: 30px">
+        <a href="good/#(shopcar.good_uuid)" class="no-decoration">#(shopcar.good_name)</a></div>
+    <div class="col-md-3 col-sm-3"><a href="store/#(shopcar.shop_uuid)" class="no-decoration"><strong>店铺：#(shopcar.shop_name)</strong></a>
+    </div>
+    <div class="col-md-1 col-sm-1"><strong>¥#(shopcar.price)</strong></div>
+    <div class="col-md-1 col-sm-1" style="right: 10px">
+        <div class="input-group">
+                <span class="input-group-addon">
+                <em class="icon icon-minus"></em>
+            </span>
+            <input id="good-number" type="text" value="#(shopcar.count)">
+            <span class="input-group-addon">
+                <em class="icon icon-plus"></em>
+            </span>
+        </div>
+
+    </div>
+    <div class="col-md-1 col-sm-1"><strong>¥#(shopcar.count*shopcar.price)</strong></div>
+    <div class="col-md-1 col-sm-1"><a class="no-decoration">删除</a></div>
+</div>

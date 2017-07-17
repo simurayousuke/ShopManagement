@@ -19,6 +19,7 @@ package cn.enbug.shop.user.shopcar;
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.service.AddressService;
 import cn.enbug.shop.common.service.ShopCarService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
@@ -34,7 +35,9 @@ public class ShopcarController extends BaseController {
 
     @Before(GET.class)
     public void index() {
-        setAttr("addresses", ShopCarService.ME.getShopCarListByToken(getCookie(RedisKit.COOKIE_ID)));
+        String token = getCookie(RedisKit.COOKIE_ID);
+        setAttr("shopcars", ShopCarService.ME.getShopCarRecordListByToken(token));
+        setAttr("addresses", AddressService.ME.getListByToken(token));
         render("index.html");
     }
 
