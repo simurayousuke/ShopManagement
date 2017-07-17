@@ -55,6 +55,11 @@ em:hover {
     left: 20px;
 }
 
+.no-address-png {
+    display: inline;
+    margin-left: 200px
+}
+
 .good-number {
     width: 30px;
     height: 20px;
@@ -166,4 +171,9 @@ em:hover {
         width: 350px;
     }
 
+}
+
+.no-address {
+    height: 100px;
+    width: 100px;
 }
