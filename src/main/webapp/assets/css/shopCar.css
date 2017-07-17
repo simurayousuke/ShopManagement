@@ -41,7 +41,7 @@ em:hover {
     background: #ebf2f9;
 }
 
-#good-photo {
+.good-photo {
     box-sizing: border-box;
     height: 80px;
     width: 80px;
@@ -50,7 +50,7 @@ em:hover {
     left: 20px;
 }
 
-#good-number {
+.good-number {
     width: 30px;
     height: 20px;
     text-align: center;
