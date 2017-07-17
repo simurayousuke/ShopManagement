@@ -123,9 +123,6 @@ public class ShopCarService {
             shopCar.setGoodId(good.getId());
             shopCar.setUserId(user.getId());
             shopCar.setCount(count);
-            shopCar.setAvator(good.getAvator());
-            shopCar.setGoodUuid(good.getUuid());
-            shopCar.setShopUuid(shop.getUuid());
             return shopCar.save();
         } else {
             shopCar.setCount(shopCar.getCount() + count);

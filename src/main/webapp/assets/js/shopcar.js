@@ -3,17 +3,30 @@ $(document).ready(function () {
     var motoNum;
 
     function updateCount(input) {
-        var id = input.dataset.id;
+        var id = input[0].dataset.id;
         var count = input.val();
         $.post('/user/shopcar/modify', {id: id, count: count}, function (data) {
-            if (data.status) {
-                location.reload();
-            } else {
-                $.msg('修改数量失败');
+            if (!data.status) {
+                $.warn('修改数量失败', function () {
+                    location.reload();
+                });
             }
         }, function () {
-            $.msg('网络异常');
+            $.warn('网络异常', function () {
+                location.reload();
+            });
         });
+        //修改单个物品价格
+        var parent = input.parent().parent().parent();
+        var price = parseFloat(parent.find('div[data-type="price"]').find('strong').text());
+        parent.find('div[data-type="total"]').find('strong').text($.formatFloat(count * price, 2));
+        //修改所有物品总价
+        var total = 0;
+        $('.one-of-goods').each(function () {
+            var that = $(this);
+            total += parseInt(that.find('div[data-type="total"]').find('strong').text());
+        });
+        $('.total-font').text('总计： ' + $.formatFloat(total, 2) + ' 元')
     }
 
     $('.del-button').click(function () {

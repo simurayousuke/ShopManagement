@@ -30,6 +30,15 @@
         })
     };
 
+    $.warn = function (msg, callback) {
+        bootbox.alert({
+            size: "small",
+            title: '警告',
+            message: msg,
+            callback: callback
+        })
+    };
+
     $.confirm = function (msg, buttonOK, buttonCancel, callback) {
         bootbox.confirm({
             size: "small",
@@ -60,6 +69,31 @@
             error: error
         });
 
+    };
+
+    $.formatFloat = function (value, num) {
+        var a, b, c, i;
+        a = value.toString();
+        b = a.indexOf(".");
+        c = a.length;
+        if (num === 0) {
+            if (b !== -1) {
+                a = a.substring(0, b);
+            }
+        } else {//如果没有小数点
+            if (b === -1) {
+                a = a + ".";
+                for (i = 1; i <= num; i++) {
+                    a = a + "0";
+                }
+            } else {//有小数点，超出位数自动截取，否则补0
+                a = a.substring(0, b + num + 1);
+                for (i = c; i <= b + num; i++) {
+                    a = a + "0";
+                }
+            }
+        }
+        return a;
     };
 
     var emailPattern = /^['_A-Za-z0-9-]+(\.['_A-Za-z0-9-]+)*@([A-Za-z0-9-])+(\.[A-Za-z0-9-]+)*((\.[A-Za-z0-9]{2,})|(\.[A-Za-z0-9]{2,}\.[A-Za-z0-9]{2,}))$/;
