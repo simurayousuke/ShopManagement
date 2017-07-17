@@ -15,7 +15,7 @@ t_good.avator,
 t_good.price,
 t_good.number
 FROM t_shop_car
- INNER JOIN t_shop ON t_shop_car.shop_id = t_shop.id
- INNER JOIN t_good ON t_shop_car.good_id = t_good.id
+ LEFT JOIN t_shop ON t_shop_car.shop_id = t_shop.id
+ LEFT JOIN t_good ON t_shop_car.good_id = t_good.id
  WHERE t_shop_car.user_id = #para(0);
 #end
