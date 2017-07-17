@@ -18,7 +18,7 @@
 }
 
 .panel-heading {
-    border: 1px solid #dddddd;
+    border: 1px solid #ddd;
 }
 
 .panel-body {
@@ -73,33 +73,33 @@ em:hover {
     text-align: center;
 }
 
-#size-div {
+.size-div {
     width: 80px;
     height: 90px;
     display: block;
     margin: 0 auto;
 }
 
-#size-word {
+.size-word {
     width: 200px;
     height: 60px;
 }
 
 @media (min-width: 540px) {
-    #none-order {
+    .none-order {
         height: 76px;
         width: 81px;
         margin-top: 30px;
     }
 
-    #size-div {
+    .size-div {
         width: 170px;
         height: 160px;
         display: inline-block;
         margin: 0 auto;
     }
 
-    #size-div, #size-both {
+    .size-div, .size-both {
         vertical-align: middle;
     }
 
@@ -110,23 +110,23 @@ em:hover {
 }
 
 @media (min-width: 789px) {
-    #none-order {
+    .none-order {
         height: 152px;
         width: 163px;
     }
 
-    #size-div {
+    .size-div {
         width: 170px;
         height: 160px;
         display: inline-block;
         margin: 0 auto;
     }
 
-    #size-both {
+    .size-both {
         margin-top: 50px;
     }
 
-    #size-div, #size-both {
+    .size-div, .size-both {
         vertical-align: middle;
     }
 
@@ -137,7 +137,7 @@ em:hover {
 }
 
 @media (min-width: 992px) {
-    #none-order {
+    .none-order {
         height: 152px;
         width: 163px;
     }
@@ -146,15 +146,15 @@ em:hover {
         font-size: 19px;
     }
 
-    #change-line {
+    .change-line {
         display: none;
     }
 
-    #size-div {
+    .size-div {
         width: 160px;
     }
 
-    #size-word {
+    .size-word {
         width: 350px;
     }
 
