@@ -1,0 +1,22 @@
+#set(title="用户中心")
+#@layout()
+#define body()
+<div class="container main">
+    <div style="height: 50px"></div>
+    <div class="container-fixed" style="max-width: 990px">
+        #include("centerNav.html",addressmanage='class="active" onclick="return false;"')
+        <div class="center-content">
+            <div class="info-title">地址管理</div>
+
+        </div>
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/userCenter.css">
+#end
+
+#define js()
+<script src="assets/js/userCenter.js"></script>
+#end

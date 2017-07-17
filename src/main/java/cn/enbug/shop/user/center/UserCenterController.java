@@ -8,7 +8,8 @@ import com.jfinal.ext.interceptor.GET;
 /**
  * @author Forrest Yang
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @author Forrest Yang
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before({GET.class, NeedLogInInterceptor.class})
@@ -32,6 +33,10 @@ public class UserCenterController extends BaseController {
 
     public void bindemail() {
         render("bindEmail.html");
+    }
+
+    public void addressmanage() {
+        render("addressManage.html");
     }
 
 }
