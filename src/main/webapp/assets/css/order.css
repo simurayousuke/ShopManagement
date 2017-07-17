@@ -1,5 +1,5 @@
 .no-decoration {
-    text-decoration: none
+    text-decoration: none;
 }
 
 .ul-order li {
@@ -30,6 +30,7 @@ em:hover {
 }
 
 .one-of-orders {
+    box-sizing: border-box;
     padding-top: 20px;
     height: 118px;
     background: #fcfcfc;
@@ -38,6 +39,7 @@ em:hover {
 }
 
 .one-of-goods {
+    box-sizing: border-box;
     padding-top: 20px;
     margin-top: 10px;
     height: 118px;
@@ -50,6 +52,7 @@ em:hover {
 }
 
 .good-photo {
+    box-sizing: border-box;
     height: 80px;
     width: 80px;
     border: 1px solid #ddd;
@@ -64,6 +67,7 @@ em:hover {
 }
 
 .no-order {
+    box-sizing: border-box;
     height: 270px;
     padding-top: 50px;
     text-align: center;

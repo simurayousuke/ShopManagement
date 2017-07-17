@@ -1,8 +1,9 @@
 .no-decoration {
-    text-decoration: none
+    text-decoration: none;
 }
 
 .one-of-orders {
+    box-sizing: border-box;
     padding-top: 20px;
     height: 118px;
     background: #fcfcfc;
@@ -15,6 +16,7 @@
 }
 
 .good-photo {
+    box-sizing: border-box;
     height: 80px;
     width: 80px;
     border: 1px solid #ddd;

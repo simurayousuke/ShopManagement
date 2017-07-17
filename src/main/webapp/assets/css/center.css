@@ -57,6 +57,7 @@
 }
 
 .shop-content {
+    box-sizing: border-box;
     margin-top: 20px;
     padding-right: 30px;
     width: 800px;

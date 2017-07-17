@@ -8,6 +8,7 @@
 }
 
 .hot-good {
+    box-sizing: border-box;
     border: 1px solid #ccc;
     width: 250px;
     height: 300px;
@@ -18,6 +19,7 @@
 }
 
 .hot-photo {
+    box-sizing: border-box;
     width: 250px;
     height: 225px;
     border-bottom: 1px solid #cccccc;

@@ -19,6 +19,7 @@
 }
 
 .good-photo-container {
+    box-sizing: border-box;
     width: 500px;
     display: inline;
     float: left;

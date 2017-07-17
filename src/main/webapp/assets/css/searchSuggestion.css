@@ -1,4 +1,5 @@
 .search-suggest {
+    box-sizing: border-box;
     position: absolute;
     z-index: 999;
     width: 615px;
@@ -9,7 +10,7 @@
 
 .search-suggest li {
     height: 24px;
-    color: #999999;
+    color: #999;
     overflow: hidden;
     padding-left: 3px;
     line-height: 24px;
@@ -19,4 +20,12 @@
 
 .search-suggest li.hover {
     background: #ebf2f9;
+}
+
+#search-suggestion {
+    padding: 0;
+}
+
+#search-suggestion li {
+    padding-left: 8px;
 }

@@ -4,7 +4,7 @@
 }
 
 .no-decoration {
-    text-decoration: none
+    text-decoration: none;
 }
 
 .table-head {
@@ -29,6 +29,7 @@ em:hover {
 }
 
 .one-of-goods {
+    box-sizing: border-box;
     padding-top: 20px;
     margin-top: 10px;
     height: 118px;
@@ -41,6 +42,7 @@ em:hover {
 }
 
 #good-photo {
+    box-sizing: border-box;
     height: 80px;
     width: 80px;
     border: 1px solid #ddd;
