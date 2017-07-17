@@ -17,6 +17,8 @@
 package cn.enbug.shop.shop.order;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.service.OrderService;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
@@ -24,32 +26,42 @@ import com.jfinal.ext.interceptor.GET;
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before({GET.class, HasShopInterceptor.class})
 public class ShopOrderController extends BaseController {
     public void index() {
+        setAttr("normalOrders", OrderService.ME.getUnPayedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("payedOrders", OrderService.ME.getUnSentListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("doneOrders", OrderService.ME.getCheckedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("refundOrders", OrderService.ME.getRefundingListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("closeOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("all.html");
     }
 
     public void nopay() {
+        setAttr("normalOrders", OrderService.ME.getUnPayedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("noPayPage.html");
     }
 
     public void nosend() {
+        setAttr("payedOrders", OrderService.ME.getUnSentListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("noSendPage.html");
     }
 
     public void done() {
+        setAttr("doneOrders", OrderService.ME.getCheckedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("donePage.html");
     }
 
     public void refund() {
+        setAttr("refundOrders", OrderService.ME.getRefundingListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("refundPage.html");
     }
 
     public void close() {
+        setAttr("closeOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("closePage.html");
     }
 }
