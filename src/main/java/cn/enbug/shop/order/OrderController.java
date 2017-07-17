@@ -26,7 +26,7 @@ import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 @Before({POST.class, NeedLogInInterceptor.class})
@@ -35,10 +35,14 @@ public class OrderController extends BaseController {
     public void create() {
         String token = getCookie(RedisKit.COOKIE_ID);
         int addressId = getParaToInt("address");
-        if (OrderService.ME.createOrderFromShopCar(token, addressId)) {
-            renderJson(Ret.succeed());
-        } else {
-            renderJson(Ret.fail("Fail."));
+        try {
+            if (OrderService.ME.createOrderFromShopCar(token, addressId)) {
+                renderJson(Ret.succeed());
+            } else {
+                renderJson(Ret.fail("Fail."));
+            }
+        } catch (RuntimeException e) {
+            renderJson(Ret.fail(e.getMessage()));
         }
     }
 

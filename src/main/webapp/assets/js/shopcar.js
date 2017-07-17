@@ -85,7 +85,7 @@ $(document).ready(function () {
             if (data.status) {
                 location.href = 'user/order';
             } else {
-                $.alert('错误', '创建订单失败');
+                $.alert('错误', '创建订单失败，失败原因：' + data.msg);
             }
         }, function () {
             $.alert('错误', '网络异常');
