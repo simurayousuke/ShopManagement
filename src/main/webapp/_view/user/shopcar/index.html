@@ -21,10 +21,6 @@
     #for(good:shopcars)
     #include("goodPiece.html",shopcar=good)
     #set(total=total+good.price*good.count)
-    #else
-    #include("emptyShopCar.html")
-    #end
-
     #include("address.html",addressList=addresses)
     <hr class="col-md-12 col-sm-12 hr-shopcar">
 
@@ -32,6 +28,11 @@
         <button class="btn btn-primary" id="pay">结算</button>
     </div>
     <div class="total-font">总计：&nbsp;#(total) 元</div>
+    #else
+    #include("emptyShopCar.html")
+    #end
+
+
 </div>
 #end
 
