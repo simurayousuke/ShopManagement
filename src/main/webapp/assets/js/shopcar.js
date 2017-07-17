@@ -47,7 +47,10 @@ $(document).ready(function () {
         var that = $(this);
         var countInput = that.parent().parent().find('input');
         var count = countInput.val();
-        countInput.val(++count);
+        if (that.parent().parent().find('strong[data-type="good-number"]').text() < ++count) {
+            return;
+        }
+        countInput.val(count);
         updateCount(countInput);
     });
 
@@ -69,7 +72,7 @@ $(document).ready(function () {
     $('.good-number').change(function () {
         var that = $(this);
         var count = that.val();
-        if (count <= 0 || isNaN(count)) {
+        if (count <= 0 || isNaN(count) || that.parent().parent().find('strong[data-type="good-number"]').text() < ++count) {
             that.val(motoNum);
         } else {
             updateCount(that);
