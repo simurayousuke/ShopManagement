@@ -5,7 +5,7 @@
             <span style="position: relative;bottom: 4px"><strong>寄送至</strong></span>
         </div>
     </div>
-    <label class="col-md-10">
+    <div class="col-md-10">
         <div class="col-md-5 font-address">
             <input type="radio" name="address" value="#(addr.id)" #(addr.is_default==1?'checked':'')>
             #(addr.address)（#(addr.reciver_name) 收)
@@ -14,5 +14,5 @@
         #if(addr.is_default==1)
         <div class="font-phonenum col-md-3">（默认地址）</div>
         #end
-    </label>
+    </div>
 </div>
