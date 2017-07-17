@@ -129,26 +129,26 @@ public class OrderService {
         orderNumber.setUserId(user.getId());
         orderNumber.setStatus(0);
         if (!orderNumber.save()) {
-            throw new CreateOrderException("Fail to create order.(1)");
+            throw new CreateOrderException("储存订单失败！");
         }
         for (ShopCar o : arrayList) {
             Shop shop = ShopService.ME.findShopById(o.getShopId());
             Good good = GoodService.ME.findGoodById(o.getGoodId());
             int number = good.getNumber();
             if (number < o.getCount()) {
-                throw new NoEnoughGoodException("Fail to create order.");
+                throw new NoEnoughGoodException("商品库存不足！");
             }
             good.setNumber(number - o.getCount());
             good.setSaleCount(good.getSaleCount() + o.getCount());
             if (!good.update()) {
-                throw new ModifyGoodException("Fail to create order.");
+                throw new ModifyGoodException("更新货物信息失败！");
             }
             HashMap<String, Object> update = new HashMap<>();
             update.put("id", good.getId());
             update.put("number", good.getNumber());
             update.put("sale_count", good.getSaleCount());
             if (!OpenSearchService.ME.update(update)) {
-                throw new OpenSearchException("Fail to update opensearch doc.");
+                throw new OpenSearchException("同步搜索引擎失败！");
             }
             Order order = new Order();
             order.setUserId(user.getId());
@@ -166,11 +166,11 @@ public class OrderService {
             order.setShopUuid(shop.getUuid());
             order.setGoodUuid(good.getUuid());
             if (!order.save()) {
-                throw new CreateOrderException("Fail to create order.(2)");
+                throw new CreateOrderException("储存订单详情失败！");
             }
         }
         if (!ShopCarService.ME.clean(token)) {
-            throw new CreateOrderException("Fail to create order.(3)");
+            throw new CreateOrderException("清空购物车失败！");
         }
         return true;
     }
