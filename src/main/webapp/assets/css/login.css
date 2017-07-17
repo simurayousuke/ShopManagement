@@ -58,7 +58,6 @@
 }
 
 .captcha {
-    display: inline-block;
     height: 30px;
     float: right;
 }

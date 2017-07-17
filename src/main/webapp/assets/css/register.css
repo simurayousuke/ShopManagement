@@ -14,7 +14,6 @@
 }
 
 .captcha {
-    display: inline-block;
     height: 30px;
     float: right;
 }
@@ -85,7 +84,7 @@
     color: #0a67fb;
 }
 
-div.progress-line.progress-active {
+.progress-line.progress-active {
     background: #0a67fb;
 }
 
