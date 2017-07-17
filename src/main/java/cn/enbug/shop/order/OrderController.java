@@ -14,34 +14,32 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.shop;
+package cn.enbug.shop.order;
 
+import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.common.service.ShopService;
-import com.jfinal.aop.Interceptor;
-import com.jfinal.aop.Invocation;
-import com.jfinal.core.Controller;
+import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.service.OrderService;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
  */
-public class HasShopInterceptor implements Interceptor {
-    @Override
-    public void intercept(Invocation inv) {
-        Controller c = inv.getController();
-        User user = RedisKit.getUserByToken(c.getCookie(RedisKit.COOKIE_ID));
-        if (user == null) {
-            c.redirect("/login");
-            return;
-        }
-        if (ShopService.ME.findShopByUser(user) == null) {
-            c.redirect("/shop/center");
+@Before({POST.class, NeedLogInInterceptor.class})
+public class OrderController extends BaseController {
+
+    public void create() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        int addressId = getParaToInt("address");
+        if (OrderService.ME.createOrderFromShopCar(token, addressId)) {
+            renderJson(Ret.succeed());
         } else {
-            c.setAttr("user", user);
-            inv.invoke();
+            renderJson(Ret.fail("Fail."));
         }
     }
+
 }

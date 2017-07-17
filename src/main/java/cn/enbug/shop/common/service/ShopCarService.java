@@ -16,21 +16,25 @@
 
 package cn.enbug.shop.common.service;
 
+import cn.enbug.shop.common.exception.CleanShopcarException;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.ShopCar;
 import cn.enbug.shop.common.model.User;
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 public class ShopCarService {
@@ -155,12 +159,33 @@ public class ShopCarService {
         return null == shopCar || shopCar.delete();
     }
 
+    /**
+     * delete
+     *
+     * @param token token
+     * @param id    shopcar id
+     * @return boolean
+     */
     public boolean del(String token, int id) {
         if (null == UserService.ME.validateToken(token)) {
             return false;
         }
         ShopCar shopCar = getShopCarById(id);
         return null == shopCar || shopCar.delete();
+    }
+
+    @Before(Tx.class)
+    public boolean clean(String token) {
+        ArrayList<ShopCar> list = (ArrayList) getShopCarListByToken(token);
+        if (null == list) {
+            return false;
+        }
+        for (ShopCar car : list) {
+            if (!car.delete()) {
+                throw new CleanShopcarException("Fail to clean shopcar.");
+            }
+        }
+        return true;
     }
 
     /**

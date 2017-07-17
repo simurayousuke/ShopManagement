@@ -73,4 +73,17 @@ $(document).ready(function () {
         }
     });
 
+    $('#pay').click(function () {
+        var addressId = $('input[name="address"]:checked').val();
+        $.post('/order/create', {address: addressId}, function (data) {
+            if (data.status) {
+                location.href = 'user/order';
+            } else {
+                $.alert('错误', '创建订单失败');
+            }
+        }, function () {
+            $.alert('错误', '网络异常');
+        });
+    });
+
 });

@@ -164,6 +164,9 @@ public class OrderService {
                 throw new CreateOrderException("Fail to create order.(2)");
             }
         }
+        if (!ShopCarService.ME.clean(token)) {
+            throw new CreateOrderException("Fail to create order.(3)");
+        }
         return true;
     }
 

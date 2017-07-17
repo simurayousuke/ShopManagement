@@ -20,6 +20,7 @@ import cn.enbug.shop.captcha.CaptchaController;
 import cn.enbug.shop.good.GoodController;
 import cn.enbug.shop.index.IndexController;
 import cn.enbug.shop.login.LoginController;
+import cn.enbug.shop.order.OrderController;
 import cn.enbug.shop.register.RegisterController;
 import cn.enbug.shop.search.SearchController;
 import cn.enbug.shop.shop.center.ShopCenterController;
@@ -67,5 +68,6 @@ public class FrontRoutes extends Routes {
         add("/user/center", UserCenterController.class);
         add("/shop/order", ShopOrderController.class);
         add("/shop/detail", ShopDetailController.class);
+        add("/order", OrderController.class);
     }
 }
