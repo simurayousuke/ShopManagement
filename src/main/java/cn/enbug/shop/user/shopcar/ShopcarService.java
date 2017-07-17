@@ -30,7 +30,7 @@ public class ShopcarService {
     private static final ShopCarService SRV = ShopCarService.ME;
 
     public Ret add(String token, String uuid, int count) {
-        return SRV.add(token, uuid, count) ? Ret.succeed() : Ret.fail("Fail.");
+        return SRV.add(token, uuid, count) ? Ret.succeed() : Ret.fail("商品不存在，登录超时或库存不足。");
     }
 
     public Ret modifyCount(String token, String uuid, int count) {
