@@ -16,7 +16,7 @@
 
 package cn.enbug.shop.common.interceptor;
 
-import cn.enbug.shop.common.exception.*;
+import cn.enbug.shop.common.exception.ShopException;
 import cn.enbug.shop.common.kit.Ret;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * 捕获记录日志失败的异常
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class ExceptionInterceptor implements Interceptor {
@@ -40,8 +40,7 @@ public class ExceptionInterceptor implements Interceptor {
 
         try {
             inv.invoke();
-        } catch (LogException | OpenSearchException | MoneyTransferException |
-                ModifyOrderStatusException | CreateOrderException | NoEnoughMoneyException e) {
+        } catch (ShopException e) {
             LOG.error(e.getMessage(), e);
             Controller c = inv.getController();
             c.renderJson(Ret.fail(e.getMessage()));

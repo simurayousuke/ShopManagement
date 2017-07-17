@@ -20,10 +20,11 @@ package cn.enbug.shop.common.exception;
  * Url 编解码异常
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class UrlEncodingException extends RuntimeException {
+@SuppressWarnings("serial")
+public class UrlEncodingException extends ShopException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()

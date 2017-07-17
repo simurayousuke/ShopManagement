@@ -20,10 +20,11 @@ package cn.enbug.shop.common.exception;
  * RSA 加解密异常
  *
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class RsaException extends RuntimeException {
+@SuppressWarnings("serial")
+public class RsaException extends ShopException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()

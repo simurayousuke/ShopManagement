@@ -20,10 +20,12 @@ package cn.enbug.shop.common.exception;
  * Exception occurred during logging.
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class LogException extends RuntimeException {
+@SuppressWarnings("serial")
+public class LogException extends ShopException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()
