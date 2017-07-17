@@ -20,7 +20,7 @@
 
     #for(good:shopcars)
     #include("goodPiece.html",shopcar=good)
-    #set(total=good.price*good.count)
+    #set(total=total+good.price*good.count)
     #else
     <!-- todo 显示购物车内没有商品 -->
     #end
