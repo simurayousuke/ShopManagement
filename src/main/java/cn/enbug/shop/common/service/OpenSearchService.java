@@ -19,14 +19,13 @@ package cn.enbug.shop.common.service;
 import cn.enbug.shop.common.plugin.opensearch.OpenSearch;
 import com.jfinal.kit.PropKit;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.2
+ * @version 1.1.3
  * @since 1.0.0
  */
 public class OpenSearchService {
@@ -134,13 +133,12 @@ public class OpenSearchService {
     }
 
     public List getHot() {
-        ArrayList list = (ArrayList) OpenSearch.getHot(INDEX_NAME);
-        ArrayList res = new ArrayList();
-        int max = list.size() > 8 ? 8 : list.size();
-        for (int i = 0; i < max; ++i) {
-            res.add(list.get(i));
+        List list = OpenSearch.getHot(INDEX_NAME);
+        if (list.size() > 8) {
+            return list.subList(0, 8);
+        } else {
+            return list;
         }
-        return res;
     }
 
 }
