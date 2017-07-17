@@ -5,8 +5,10 @@ $(document).ready(function () {
     function updateCount(input) {
         var id = input.dataset.id;
         var count = input.val();
-        $.post('/user/shopcar/modify', {id: id}, function (data) {
-            if (!data.status) {
+        $.post('/user/shopcar/modify', {id: id, count: count}, function (data) {
+            if (data.status) {
+                location.reload();
+            } else {
                 $.msg('修改数量失败');
             }
         }, function () {
