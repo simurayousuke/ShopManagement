@@ -60,6 +60,10 @@ em:hover {
     margin-left: 200px;
 }
 
+.shopcar-good-number {
+    overflow: visible;
+}
+
 .good-number {
     width: 30px;
     height: 20px;

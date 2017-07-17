@@ -24,73 +24,19 @@
                 热销商品
             </div>
             <div class="panel-body hot-body">
-                <div class="hot-good col-md-3">
-                    <img alt="" src="assets/img/good.jpg" class="hot-photo">
-                    <div class="good-name">
-                        <div class="hot-font"><strong>小鞋子</strong></div>
+                <div class="cards">
+                    #for(x:list)
+                    <div class="col-md-4 col-sm-6 col-lg-3">
+                        <a class="card" href="good/#(x.uuid)">
+                            <img alt="" src="//smcdn.yangzhizhuang.net/#(x.avator)" style="width: 280px;height: 198px">
+                            <div class="caption">去看看！</div>
+                            <div class="card-heading"><strong>#(x.name)</strong></div>
+                            <div class="card-content text-muted" style="padding-bottom: 0">售价：#(x.price)元&nbsp;&nbsp;销售量：#(x.sale_count)件&nbsp;&nbsp;库存：#(x.number)件</div>
+                            <div class="card-content text-muted">店铺：#(x.shop_name)</div>
+                        </a>
                     </div>
-                    <div class="information">
-                        售价：¥76 售货量：3件 库存：231件
-                        <br>
-                        店铺：小A君的店铺
-                    </div>
+                    #end
                 </div>
-                <div class="hot-good col-md-3">
-                    <img alt="" src="assets/img/good.jpg" class="hot-photo">
-                    <div class="good-name">
-                        <div class="hot-font"><strong>小鞋子</strong></div>
-                    </div>
-                    <div class="information">
-                        售价：¥76 售货量：3件 库存：231件
-                        <br>
-                        店铺：小A君的店铺
-                    </div>
-                </div>
-                <div class="hot-good col-md-3">
-                    <img alt="" src="assets/img/good.jpg" class="hot-photo">
-                    <div class="good-name">
-                        <div class="hot-font"><strong>小鞋子</strong></div>
-                    </div>
-                    <div class="information">
-                        售价：¥76 售货量：3件 库存：231件
-                        <br>
-                        店铺：小A君的店铺
-                    </div>
-                </div>
-                <div class="hot-good col-md-3">
-                    <img alt="" src="assets/img/good.jpg" class="hot-photo">
-                    <div class="good-name">
-                        <div class="hot-font"><strong>小鞋子</strong></div>
-                    </div>
-                    <div class="information">
-                        售价：¥76 售货量：3件 库存：231件
-                        <br>
-                        店铺：小A君的店铺
-                    </div>
-                </div>
-                <div class="hot-good col-md-3">
-                    <img alt="" src="assets/img/good.jpg" class="hot-photo">
-                    <div class="good-name">
-                        <div class="hot-font"><strong>小鞋子</strong></div>
-                    </div>
-                    <div class="information">
-                        售价：¥76 售货量：3件 库存：231件
-                        <br>
-                        店铺：小A君的店铺
-                    </div>
-                </div>
-                <div class="hot-good col-md-3">
-                    <img alt="" src="assets/img/good.jpg" class="hot-photo">
-                    <div class="good-name">
-                        <div class="hot-font"><strong>小鞋子</strong></div>
-                    </div>
-                    <div class="information">
-                        售价：¥76 售货量：3件 库存：231件
-                        <br>
-                        店铺：小A君的店铺
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
