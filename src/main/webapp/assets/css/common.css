@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'rei';
-    src: url('//i.alipayobjects.com/common/fonts/rei.eot?20150616#iefix') format('embedded-opentype'),
-    url('//i.alipayobjects.com/common/fonts/rei.woff?20150616') format('woff'),
-    url('//i.alipayobjects.com/common/fonts/rei.ttf?20150616') format('truetype'),
-    url('//i.alipayobjects.com/common/fonts/rei.svg?20150616#rei') format('svg');
+    src: url('../fonts/rei.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/rei.woff') format('woff'),
+    url('../fonts/rei.ttf') format('truetype'),
+    url('../fonts/rei.svg?#rei') format('svg');
 }
 
 .footer {
@@ -15,7 +15,6 @@
     background-color: #eee;
     color: #666;
     font-weight: 300;
-
 }
 
 a:focus {
