@@ -61,3 +61,10 @@ em:hover {
     height: 20px;
     padding: 0;
 }
+
+.total-font {
+    float: right;
+    margin-top: 5px;
+    font-size: 15px;
+    margin-right: 10px;
+}
