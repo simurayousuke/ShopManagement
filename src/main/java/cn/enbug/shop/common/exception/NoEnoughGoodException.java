@@ -20,10 +20,12 @@ package cn.enbug.shop.common.exception;
  * Exception occurred during NoEnoughGood.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class NoEnoughGoodException extends RuntimeException {
+@SuppressWarnings("serial")
+public class NoEnoughGoodException extends ShopException {
 
     /**
      * @see RuntimeException#RuntimeException()

@@ -20,10 +20,12 @@ package cn.enbug.shop.common.exception;
  * Exception occurred during ModifyOrderStatus.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class ModifyOrderStatusException extends RuntimeException {
+@SuppressWarnings("serial")
+public class ModifyOrderStatusException extends ShopException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()

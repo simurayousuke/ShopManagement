@@ -20,10 +20,12 @@ package cn.enbug.shop.common.exception;
  * Exception occurred during NoEnoughMoney.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class NoEnoughMoneyException extends RuntimeException {
+@SuppressWarnings("serial")
+public class NoEnoughMoneyException extends ShopException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()

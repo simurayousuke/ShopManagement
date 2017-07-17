@@ -20,10 +20,12 @@ package cn.enbug.shop.common.exception;
  * Exception occurred during CreateOrder.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class CreateOrderException extends RuntimeException {
+@SuppressWarnings("serial")
+public class CreateOrderException extends ShopException {
 
     /**
      * @see java.lang.RuntimeException#RuntimeException()

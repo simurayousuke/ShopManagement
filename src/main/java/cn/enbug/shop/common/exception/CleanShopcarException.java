@@ -20,10 +20,12 @@ package cn.enbug.shop.common.exception;
  * Exception occurred during CleanShopcar.
  *
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.1.0
  * @since 1.0.0
  */
-public class CleanShopcarException extends RuntimeException {
+@SuppressWarnings("serial")
+public class CleanShopcarException extends ShopException {
 
     /**
      * @see RuntimeException#RuntimeException()
