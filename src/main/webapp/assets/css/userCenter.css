@@ -44,7 +44,10 @@
     list-style: none;
     margin-top: 5px;
     margin-bottom: 20px;
+}
 
+.account-info li {
+    height: 30px;
 }
 
 .t {
