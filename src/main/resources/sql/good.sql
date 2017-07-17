@@ -5,5 +5,5 @@ SELECT * FROM t_good WHERE id = #para(0);
 SELECT * FROM t_good WHERE uuid = #para(0);
 #end
 #sql("findByShopId")
-SELECT * FROM t_good WHERE shop_id = #para(0);
+SELECT * FROM t_good WHERE shop_id = #para(0) ORDER BY id;
 #end
