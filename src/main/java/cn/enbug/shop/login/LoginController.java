@@ -33,7 +33,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.8
+ * @version 1.0.9
  * @since 1.0.0
  */
 @Before({NoUrlPara.class, LoginInterceptor.class})
@@ -45,6 +45,7 @@ public class LoginController extends BaseController {
      * 登录页面
      */
     @Before(GET.class)
+    @Clear(NoUrlPara.class)
     public void index() {
         render("index.html");
     }
