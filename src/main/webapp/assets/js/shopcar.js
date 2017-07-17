@@ -72,7 +72,7 @@ $(document).ready(function () {
         var that = $(this);
         var count = that.val();
         var number = that.parent().parent().parent().find('strong[data-type="good-number"]').text();
-        if (count <= 0 || isNaN(count) || number < count + 1) {
+        if (count <= 0 || isNaN(count) || number < count) {
             that.val(motoNum);
         } else {
             updateCount(that);
