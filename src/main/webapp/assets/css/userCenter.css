@@ -29,7 +29,7 @@
     position: relative;
 }
 
-#hr-secure {
+.hr-secure {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 0;
@@ -93,7 +93,7 @@
     height: 36px;
 }
 
-#user-photo {
+.user-photo {
     width: 80px;
     height: 80px;
     margin-bottom: 10px;
