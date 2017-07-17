@@ -24,6 +24,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,14 +41,14 @@ public class AddressService {
         return ADDRESS_DAO.findFirst(ADDRESS_DAO.getSqlPara("address.findById", id));
     }
 
-    public List getListByUserId(int userId) {
+    public List<Address> getListByUserId(int userId) {
         return ADDRESS_DAO.find(ADDRESS_DAO.getSqlPara("address.findByUserId", userId));
     }
 
-    public List getListByToken(String token) {
+    public List<Address> getListByToken(String token) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
-            return null;
+            return new ArrayList<>();
         }
         return getListByUserId(user.getId());
     }
