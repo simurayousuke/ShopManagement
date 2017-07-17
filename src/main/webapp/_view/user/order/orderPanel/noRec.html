@@ -8,11 +8,16 @@
         <p class="order-number">订单号：#(o.order_number)</p></div>
     <div class="col-md-3 col-sm-3">
         <a href="/store/#(o.shop_uuid)" class="no-decoration"><strong>店铺：#(o.shop_name)</strong></a>
+        <p><strong>收货地址：</strong>#(o.address)</p>
     </div>
     <div class="col-md-1 col-sm-1"><strong>¥#(o.price)</strong></div>
     <div class="col-md-1 col-sm-1">#(o.count)个</div>
     <div class="col-md-1 col-sm-1"></div>
-    #include("component/op-noRec.html")
+    <div class="col-md-1 col-sm-1">
+        <p style="margin: 0">配送中</p>
+        <p style="margin: 0"><a class="no-decoration">确认收货</a></p>
+        <p style="margin: 0"><a class="no-decoration">申请退款</a></p>
+    </div>
 </div>
 #end
 
