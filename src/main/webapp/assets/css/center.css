@@ -28,7 +28,7 @@
     background: #fcfcfb !important;
 }
 
-#none-shop {
+.none-shop {
     height: 76px;
     width: 81px;
 }
@@ -70,38 +70,38 @@
     border: 2px solid #0a67fb;
 }
 
-#size-div {
+.size-div {
     width: 80px;
     height: 90px;
     display: block;
     margin: 0 auto;
 }
 
-#size-word {
+.size-word {
     width: 200px;
     height: 60px;
 }
 
-#size-but {
+.size-but {
     width: 200px;
     height: 50px;
 }
 
 @media (min-width: 540px) {
-    #none-shop {
+    .none-shop {
         height: 76px;
         width: 81px;
         margin-top: 30px;
     }
 
-    #size-div {
+    .size-div {
         width: 170px;
         height: 160px;
         display: inline-block;
         margin: 0 auto;
     }
 
-    #size-div, #size-both {
+    .size-div, .size-both {
         vertical-align: middle;
     }
 
@@ -112,23 +112,23 @@
 }
 
 @media (min-width: 789px) {
-    #none-shop {
+    .none-shop {
         height: 152px;
         width: 163px;
     }
 
-    #size-div {
+    .size-div {
         width: 170px;
         height: 160px;
         display: inline-block;
         margin: 0 auto;
     }
 
-    #size-both {
+    .size-both {
         margin-top: 50px;
     }
 
-    #size-div, #size-both {
+    .size-div, .size-both {
         vertical-align: middle;
     }
 
@@ -136,13 +136,13 @@
         font-size: 16px;
     }
 
-    #size-but {
+    .size-but {
         margin-top: 20px;
     }
 }
 
 @media (min-width: 992px) {
-    #none-shop {
+    .none-shop {
         height: 152px;
         width: 163px;
     }
@@ -151,19 +151,19 @@
         font-size: 19px;
     }
 
-    #change-line {
+    .change-line {
         display: none;
     }
 
-    #size-div {
+    .size-div {
         width: 160px;
     }
 
-    #size-word {
+    .size-word {
         width: 350px;
     }
 
-    #size-but {
+    .size-but {
         width: 350px;
     }
 
