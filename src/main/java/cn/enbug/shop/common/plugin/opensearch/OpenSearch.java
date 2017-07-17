@@ -17,7 +17,6 @@
 package cn.enbug.shop.common.plugin.opensearch;
 
 import cn.enbug.shop.common.exception.OpenSearchException;
-import cn.enbug.shop.common.service.OpenSearchService;
 import com.aliyun.opensearch.CloudsearchClient;
 import com.aliyun.opensearch.CloudsearchDoc;
 import com.aliyun.opensearch.CloudsearchSearch;
@@ -301,11 +300,11 @@ public class OpenSearch {
      *
      * @return List
      */
-    public static List getHot() {
+    public static List getHot(String indexName) {
         CloudsearchSearch search = new CloudsearchSearch(client);
         search.addCustomConfig("hits", "8");
         // 添加指定搜索的应用：
-        search.addIndex(OpenSearchService.INDEX_NAME);
+        search.addIndex(indexName);
         // 指定搜索的关键词，这里要指定在哪个索引上搜索，如果不指定的话默认在使用“default”索引（索引字段名称是您在您的数据结构中的“索引到”字段。）
         search.setQueryString("status:'1'");
         // 指定搜索返回的格式。
