@@ -14,8 +14,8 @@
 
 .good-pic-container {
     width: 500px;
-    display: inline;
-    float: left
+    display: inline-block;
+    vertical-align: top;
 }
 
 .good-name {
@@ -29,8 +29,7 @@
 }
 
 .good-property {
-    display: inline;
-    float: left;
+    display: inline-block;
     font-size: 15px;
     width: 80px;
     color: #6c6c6c;
@@ -38,11 +37,6 @@
 
 .btn-area {
     margin-top: 40px;
-}
-
-.btn-buy {
-    margin-right: 9px;
-    float: left;
 }
 
 .a-btn-buy {
