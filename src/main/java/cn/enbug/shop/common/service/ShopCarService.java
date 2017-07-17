@@ -18,9 +18,12 @@ package cn.enbug.shop.common.service;
 
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Good;
+import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.ShopCar;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Duang;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 
 import java.util.List;
 
@@ -53,6 +56,18 @@ public class ShopCarService {
      */
     public List<ShopCar> getShopCarListByToken(String token) {
         return getShopCarListByUser(RedisKit.getUserByToken(token));
+    }
+
+    public List<Record> getShopCarRecordListByUser(User user) {
+        if (null == user) {
+            return null;
+        }
+        return Db.find("findRecordByUserId", user.getId());
+    }
+
+    public List<Record> getShopCarRecordListByToken(String token) {
+        User user = RedisKit.getUserByToken(token);
+        return getShopCarRecordListByUser(user);
     }
 
     /**
@@ -95,11 +110,18 @@ public class ShopCarService {
         }
         ShopCar shopCar = getShopCarByUserAndGood(user, good);
         if (null == shopCar) {
+            Shop shop = ShopService.ME.findShopById(good.getShopId());
+            if (null == shop) {
+                return false;
+            }
             shopCar = new ShopCar();
             shopCar.setShopId(good.getShopId());
             shopCar.setGoodId(good.getId());
             shopCar.setUserId(user.getId());
             shopCar.setCount(count);
+            shopCar.setAvator(good.getAvator());
+            shopCar.setGoodUuid(good.getUuid());
+            shopCar.setShopUuid(shop.getUuid());
             return shopCar.save();
         } else {
             shopCar.setCount(shopCar.getCount() + count);

@@ -16,30 +16,14 @@
         </div>
     </div>
 
+    #set(total=0)
 
-    <div class=" one-of-goods col-md-12 col-sm-12">
-        <div class="col-md-2 col-sm-2">
-            <img alt="" src="assets/img/good.jpg" id="good-photo">
-        </div>
-        <div class="col-md-3 col-sm-3" style="right: 30px">
-            <a href="" class="no-decoration">2017新款凉鞋女夏松糕厚底鱼嘴女凉鞋罗马高跟坡跟防水台凉鞋女鞋</a></div>
-        <div class="col-md-3 col-sm-3"><a href="" class="no-decoration"><strong>店铺：马天荟的店铺</strong></a></div>
-        <div class="col-md-1 col-sm-1"><strong>¥76.00</strong></div>
-        <div class="col-md-1 col-sm-1" style="right: 10px">
-            <div class="input-group">
-                <span class="input-group-addon">
-                <em class="icon icon-minus"></em>
-            </span>
-                <input id="good-number" type="text">
-                <span class="input-group-addon">
-                <em class="icon icon-plus"></em>
-            </span>
-            </div>
-
-        </div>
-        <div class="col-md-1 col-sm-1"><strong>¥76.00</strong></div>
-        <div class="col-md-1 col-sm-1"><a class="no-decoration">删除</a></div>
-    </div>
+    #for(good:shopcars)
+    #include("goodPiece",shopcar=good)
+    #set(total=good.price*good.count)
+    #else
+    <!-- todo 显示购物车内没有商品 -->
+    #end
 
     #include("address.html",addressList=addresses)
     <hr class="col-md-12 col-sm-12 hr-shopcar">
@@ -47,7 +31,7 @@
     <div class="col-md-1 col-sm-1" style="float: right">
         <button class="btn btn-primary" id="pay">结算</button>
     </div>
-    <div class="col-md-1 col-sm-1" style="float: right;margin-top: 5px">总计：&nbsp;0 元</div>
+    <div class="col-md-1 col-sm-1" style="float: right;margin-top: 5px">总计：&nbsp;#(total) 元</div>
 </div>
 #end
 #define css()

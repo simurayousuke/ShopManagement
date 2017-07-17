@@ -44,6 +44,14 @@ public class AddressService {
         return ADDRESS_DAO.find(ADDRESS_DAO.getSqlPara("address.findByUserId", userId));
     }
 
+    public List getListByToken(String token) {
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return null;
+        }
+        return getListByUserId(user.getId());
+    }
+
     public Address getDefaultByUserId(int userId) {
         return ADDRESS_DAO.findFirst(ADDRESS_DAO.getSqlPara("address.findDefaultByUserId", userId));
     }
