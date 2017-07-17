@@ -1,0 +1,32 @@
+#set(title="我的订单")
+#@layout()
+#define body()
+
+<div class="container-fixed">
+    #include("orderHeader.html",norecTab='class="active" onclick="return false;"')
+    <div class="tab-content">
+        #if(sendingOrders)
+        <div class="tab-pane fade active in" id="noRec">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span>待收货</span>
+                </div>
+                <div class="panel-body">
+                    #include("orderPanel/noRec.html",list=sendingOrders)
+                </div>
+            </div>
+        </div>
+        #else
+        #include("noOrder.html")
+        #end
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/order.css">
+#end
+
+#define js()
+<script src="assets/js/order.js"></script>
+#end
