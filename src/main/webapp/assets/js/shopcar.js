@@ -16,10 +16,10 @@ $(document).ready(function () {
 
     $('.del-button').click(function () {
         var that = $(this);
-        var id = that.dataset.id;
+        var id = that[0].dataset.id;
         $.post('/user/shopcar/del', {id: id}, function (data) {
             if (data.status) {
-                $.msg('删除成功');
+                location.reload();
             } else {
                 $.msg('删除失败');
             }
