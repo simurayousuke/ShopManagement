@@ -44,7 +44,7 @@ public class OpenSearchService {
     /**
      * push
      *
-     * @param data OpenSearchPushRequestBuilder.build
+     * @param data data
      * @return String
      */
     public boolean push(String data) {

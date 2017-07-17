@@ -16,11 +16,11 @@
 
 package cn.enbug.shop.common.service;
 
-import cn.enbug.shop.common.builder.OpenSearchPushRequestBuilder;
 import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.model.Shop;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
+import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import org.slf4j.Logger;
@@ -37,6 +37,7 @@ import java.util.List;
  * @version 1.0.4
  * @since 1.0.0
  */
+@SuppressWarnings("unchecked")
 public class GoodService {
 
     public static final GoodService ME = Duang.duang(GoodService.class);
@@ -84,8 +85,20 @@ public class GoodService {
             return false;
         }
         //String id, String name, String description, int shopId, String avator, int saleCount, BigDecimal price, int status
-        OpenSearchPushRequestBuilder builder = new OpenSearchPushRequestBuilder(good.getId().toString(), goodName, description, shopId, avator, 0, price, 1, number, uuid, shopName, ownerId, ownerName);
-        OPEN_SEARCH_SERVICE.add(builder.build());
+        Kv kv = Kv.by("id", good.getId().toString())
+                .set("name", goodName)
+                .set("description", description)
+                .set("shop_id", shopId)
+                .set("avator", avator)
+                .set("sale_count", 0)
+                .set("price", price)
+                .set("status", 1)
+                .set("number", number)
+                .set("uuid", uuid)
+                .set("shop_name", shopName)
+                .set("owner_id", ownerId)
+                .set("owner_name", ownerName);
+        OPEN_SEARCH_SERVICE.add(kv);
         return true;
     }
 

@@ -76,7 +76,7 @@ public class OpenSearch {
      *
      * @param indexName index name
      * @param tableName table name
-     * @param data      OpenSearchPushRequestBuilder.build
+     * @param data      data
      * @return String
      */
     public static boolean push(String indexName, String tableName, String data) {
