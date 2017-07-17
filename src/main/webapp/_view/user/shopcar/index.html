@@ -22,7 +22,7 @@
     #include("goodPiece.html",shopcar=good)
     #set(total=total+good.price*good.count)
     #else
-    <!-- todo 显示购物车内没有商品 -->
+    #include("emptyShopCar.html")
     #end
 
     #include("address.html",addressList=addresses)

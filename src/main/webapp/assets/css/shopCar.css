@@ -68,3 +68,97 @@ em:hover {
     font-size: 15px;
     margin-right: 10px;
 }
+
+.no-order {
+    box-sizing: border-box;
+    height: 270px;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.size-div {
+    width: 80px;
+    height: 90px;
+    display: block;
+    margin: 0 auto;
+}
+
+.size-word {
+    width: 200px;
+    height: 60px;
+}
+
+@media (min-width: 540px) {
+    .none-order {
+        height: 76px;
+        width: 81px;
+        margin-top: 30px;
+    }
+
+    .size-div {
+        width: 170px;
+        height: 160px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .size-div, .size-both {
+        vertical-align: middle;
+    }
+
+    .none-font {
+        font-size: 16px;
+    }
+
+}
+
+@media (min-width: 789px) {
+    .none-order {
+        height: 152px;
+        width: 163px;
+    }
+
+    .size-div {
+        width: 170px;
+        height: 160px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    .size-both {
+        margin-top: 50px;
+    }
+
+    .size-div, .size-both {
+        vertical-align: middle;
+    }
+
+    .none-font {
+        font-size: 16px;
+    }
+
+}
+
+@media (min-width: 992px) {
+    .none-order {
+        height: 152px;
+        width: 163px;
+    }
+
+    .none-font {
+        font-size: 19px;
+    }
+
+    .change-line {
+        display: none;
+    }
+
+    .size-div {
+        width: 160px;
+    }
+
+    .size-word {
+        width: 350px;
+    }
+
+}
