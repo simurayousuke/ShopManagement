@@ -12,7 +12,7 @@
 }
 
 .panel-body {
-    background: #fcfcfb !important;
+    background: #fcfcfb;
 }
 
 .none-font {
@@ -22,10 +22,6 @@
 .no-shop {
     padding-top: 50px;
     text-align: center;
-}
-
-.panel-body {
-    background: #fcfcfb !important;
 }
 
 .none-shop {
