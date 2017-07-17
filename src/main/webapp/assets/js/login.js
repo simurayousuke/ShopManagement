@@ -1,10 +1,9 @@
 $(document).ready(function () {
 
 
-    var redriect = location.pathname;
-    redriect = redriect.substr(redriect.lastIndexOf('/') + 1);
-    if (redriect === 'login') {
-        redriect = '/';
+    var redirect = location.pathname.substr(6);
+    if (redirect === '') {
+        redirect = '/';
     }
 
     var captchaImg = $('.captcha');
@@ -82,7 +81,7 @@ $(document).ready(function () {
         }
         $.post('/login/username', data, function (data) {
             if (data.status) {
-                location.href = redriect;
+                location.href = redirect;
             } else {
                 $.msg(data.msg);
                 updateCaptcha();
@@ -111,7 +110,7 @@ $(document).ready(function () {
         }
         $.post('/login/email', data, function (data) {
             if (data.status) {
-                location.href = redriect;
+                location.href = redirect;
             } else {
                 $.msg(data.msg);
                 updateCaptcha();
@@ -135,7 +134,7 @@ $(document).ready(function () {
         }
         $.post('/login/phone', data, function (data) {
             if (data.status) {
-                location.href = redriect;
+                location.href = redirect;
             } else {
                 $.msg(data.msg);
                 updateCaptcha();
