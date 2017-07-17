@@ -26,10 +26,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * order status:
@@ -44,7 +41,7 @@ import java.util.Objects;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.1.1
+ * @version 1.1.2
  * @since 1.0.0
  */
 public class OrderService {
@@ -142,8 +139,16 @@ public class OrderService {
                 throw new NoEnoughGoodException("Fail to create order.");
             }
             good.setNumber(number - o.getCount());
+            good.setSaleCount(good.getSaleCount() + o.getCount());
             if (!good.update()) {
                 throw new ModifyGoodException("Fail to create order.");
+            }
+            HashMap<String, Object> update = new HashMap<>();
+            update.put("id", good.getId());
+            update.put("number", good.getNumber());
+            update.put("sale_count", good.getSaleCount());
+            if (!OpenSearchService.ME.update(update)) {
+                throw new OpenSearchException("Fail to update opensearch doc.");
             }
             Order order = new Order();
             order.setUserId(user.getId());
