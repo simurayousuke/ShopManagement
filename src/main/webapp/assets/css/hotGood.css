@@ -1,40 +1,4 @@
-.hot-block {
-    padding: 5px;
-}
-
-.hot-body {
-    padding-left: 40px;
-    padding-top: 20px;
-}
-
-.hot-good {
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    width: 250px;
-    height: 300px;
-    margin-bottom: 16px;
-    margin-right: 16px;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.hot-photo {
-    box-sizing: border-box;
-    width: 250px;
-    height: 225px;
-    border-bottom: 1px solid #cccccc;
-}
-
-.hot-font {
-    color: #145ccd;
-
-}
-
-.good-name {
-    margin: 5px;
-}
-
-.information {
-    color: #808080;
-    margin: 5px;
+.panel {
+    width: 1220px;
+    margin: auto;
 }
