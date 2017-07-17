@@ -298,6 +298,7 @@ public class OpenSearch {
     /**
      * getHot
      *
+     * @param indexName index name
      * @return List
      */
     public static List getHot(String indexName) {
