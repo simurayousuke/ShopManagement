@@ -27,7 +27,7 @@ $(document).ready(function () {
     $('#create-good-button').click(function (e) {
         var form = $('#create-good-form');
         var data = form.serializeObject();
-        var description = data.description = $("iframe").contents().find("body").html();
+        var description = data.description = $("iframe").contents().find("body").text();
         var name = data.name;
         var price = data.price;
         var number = data.number;
