@@ -14,15 +14,10 @@
     margin-bottom: 30px;
 }
 
-.form-label {
-    float: left;
-}
-
 .good-photo-container {
     box-sizing: border-box;
     width: 500px;
-    display: inline;
-    float: left;
+    display: inline-block;
     padding-left: 80px;
 }
 
