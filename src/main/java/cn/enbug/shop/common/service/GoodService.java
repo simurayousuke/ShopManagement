@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,9 +52,8 @@ public class GoodService {
 
     public List<Good> getGoodListByToken(String token) {
         Shop shop = ShopService.ME.findShopByToken(token);
-        return null == shop ? null : getGoodListByShopId(shop.getId());
+        return null == shop ? new ArrayList<>() : getGoodListByShopId(shop.getId());
     }
-
 
     /**
      * insert.
