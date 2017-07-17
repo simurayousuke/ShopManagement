@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    var redirect = location.pathname.substr(6);
+    var redirect = decodeURIComponent(location.pathname.substr(7));
     if (redirect === '') {
         redirect = '/';
     }
