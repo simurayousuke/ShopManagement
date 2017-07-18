@@ -26,7 +26,8 @@ import com.jfinal.core.Controller;
  * 邮箱注册验证器
  *
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @author Yang Zhizhuang
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class EmailRegisterValidator extends BaseValidator {
@@ -35,7 +36,7 @@ public class EmailRegisterValidator extends BaseValidator {
     protected void validate(Controller c) {
         validateEmail("email", Ret.MSG, "wrong format email");
         User user = LoginService.me.findUserByEmail(c.getPara("email"));
-        if (null != user) {
+        if (null != user && user.getEmailStatus() != 0) {
             addError(Ret.MSG, "email already used");
         }
     }
