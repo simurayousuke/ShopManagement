@@ -61,7 +61,7 @@ public class UserModifyController extends BaseController {
     @Clear(POST.class)
     public void active() {
         UserModifyService.ME.activeEmail(getPara());
-        redirect("user/center");
+        redirect("/user/center");
 
     }
 
