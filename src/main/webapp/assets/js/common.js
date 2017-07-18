@@ -63,6 +63,19 @@
         });
     };
 
+    $.form = function (form, title, script) {
+        bootbox.dialog({
+            message: form + "<br><div style=\"margin-top:10px\"><button onclick=\"bootbox.hideAll();\" class=\"btn btn-danger\"" +
+            " style=\"width:80px\">取消</button>&nbsp;" +
+            "<button onclick=\"bootbox.hideAll();\" class=\"btn btn-primary\"" +
+            " id=\"modal-temp-button\" style=\"width:80px\">" + title + "</button></div>" +
+            // "<script>var s=$('.bootbox-body');var b=s.css('height');" +
+            //"s.css('height',parseInt(b)+50+'px');</script>" +
+            "<script>$('#modal-temp-button').click(function(){" + script + "});</script>",
+            closeButton: false
+        });
+    };
+
     $.post = function (url, data, success, error) {
 
         error = error || function () {

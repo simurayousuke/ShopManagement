@@ -64,7 +64,31 @@ public class OrderController extends BaseController {
         if (OrderService.ME.refundGood(token, order, id)) {
             renderJson(Ret.succeed());
         } else {
-            renderJson(Ret.fail("支付失败！"));
+            renderJson(Ret.fail("申请失败！"));
+        }
+    }
+
+    public void check() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        String order = getPara("order");
+        int id = getParaToInt("id");
+        if (OrderService.ME.checkGood(token, order, id)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("确认收货失败！"));
+        }
+    }
+
+    public void comment() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        String order = getPara("order");
+        int id = getParaToInt("id");
+        String context = getPara("context");
+        boolean good = getParaToBoolean("good");
+        if (OrderService.ME.commentGood(token, order, id, context, good)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("评价失败！"));
         }
     }
 
