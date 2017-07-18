@@ -17,6 +17,7 @@
 package cn.enbug.shop.common.interceptor;
 
 import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.kit.UrlKit;
 import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.UserService;
 import com.jfinal.aop.Interceptor;
@@ -37,6 +38,9 @@ public class UserInterceptor implements Interceptor {
         Controller c = inv.getController();
         User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
         c.setAttr("user", user);
+        String redirect = inv.getControllerKey() + "/" + inv.getMethodName();
+        redirect = UrlKit.encode(redirect, "utf-8");
+        c.setAttr("redirect", redirect);
         inv.invoke();
     }
 
