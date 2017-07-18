@@ -4,7 +4,7 @@ $(document).ready(function () {
     uuid = uuid.substr(uuid.lastIndexOf('/') + 1);
 
     var add = $.getPara('add');
-    if (add !== '' && add > 0 && isNaN(add)) {
+    if (add !== '' && add > 0 && !isNaN(add)) {
         $.post('/user/shopcar/add', {uuid: uuid, count: add}, function (data) {
             if (data.status) {
                 $.confirm('添加成功', '前往购物车', '继续购物', function (result) {

@@ -21,6 +21,7 @@ import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.LoginInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.kit.UrlKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
@@ -103,7 +104,8 @@ public class LoginController extends BaseController {
     public void logout() {
         RedisKit.delToken(getCookie(RedisKit.TOKEN));
         removeCookie(RedisKit.COOKIE_ID);
-        redirect("/");
+        String url = UrlKit.decode(getRequest().getRequestURI().substring("/logout".length()), "utf-8");
+        redirect(url);
     }
 
 }
