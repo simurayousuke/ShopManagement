@@ -129,11 +129,39 @@ public class GoodService {
         if (!good.update()) {
             return false;
         }
-        Kv kv = Kv.by("name", goodName)
+        Kv kv = Kv.by("id", good.getId().toString())
+                .set("name", goodName)
                 .set("description", description)
                 .set("avator", avator)
                 .set("price", price)
                 .set("number", number);
+        OPEN_SEARCH_SERVICE.update(kv);
+        return true;
+    }
+
+    /**
+     * del
+     *
+     * @param token token
+     * @param uuid  good uuid
+     * @return boolean
+     */
+    @Before(Tx.class)
+    public boolean del(String token, String uuid) {
+        Shop shop = ShopService.ME.findShopByToken(token);
+        Good good = findGoodByUuid(uuid);
+        if (null == shop || null == good) {
+            return false;
+        }
+        good.setStatus(0);
+        if (shop.getId() != good.getShopId()) {
+            return false;
+        }
+        if (!good.update()) {
+            return false;
+        }
+        Kv kv = Kv.by("id", good.getId().toString())
+                .set("status", 0);
         OPEN_SEARCH_SERVICE.update(kv);
         return true;
     }

@@ -1,6 +1,7 @@
 #set(title=good.goodName+"|EnBug购物网")
 #@layout()
 #define body()
+#if(good.status==1)
 <div class="container-fixed">
     <div style="height:400px" id="top">
         <div class="good-pic-container">
@@ -51,6 +52,8 @@
     #include("comment.html")
     #include("fix.html",url='/good/'+good.uuid)
 </div>
+#else
+<!--todo 商品已下架-->
 #end
 
 #define css()
