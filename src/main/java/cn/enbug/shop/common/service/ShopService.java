@@ -30,7 +30,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 public class ShopService {
@@ -84,6 +84,16 @@ public class ShopService {
      */
     public Shop findShopByShopName(String shopName) {
         return null == shopName ? null : SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByShopName", shopName));
+    }
+
+    /**
+     * find shop by shop uuid.
+     *
+     * @param uuid shop uuid
+     * @return Shop Object
+     */
+    public Shop findShopByUuid(String uuid) {
+        return null == uuid ? null : SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findByUuid", uuid));
     }
 
     /**
