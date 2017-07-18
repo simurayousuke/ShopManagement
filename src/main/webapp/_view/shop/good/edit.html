@@ -28,7 +28,7 @@
         </div>
         <div style="display: inline-block;vertical-align:top;margin-left:50px;">
             <h2>商品信息：</h2>
-            <form action="" class="form-horizontal" id="create-good-form">
+            <form action="" class="form-horizontal" id="update-good-form">
                 <div class="form-group">
                     <label for="good-name" class="form-label col-sm-3">商品名称：</label>
                     <div class="col-sm-9 input-group">
@@ -47,7 +47,7 @@
                         <input class="form-control" value="#(good.number)" type="text" id="good-stock" name="number">
                     </div>
                 </div>
-                <input type="hidden" name="avator" id="create-good-avator" value="">
+                <input type="hidden" name="avator" id="update-good-avator" value="#(good.avator)">
             </form>
         </div>
     </div>
@@ -64,7 +64,7 @@
             </div>
             <img alt="" src="" class="captcha" style="height: 32px;width: 86.4px" title="点击刷新">
         </div>
-        <button class="btn btn-primary" id="create-good-button">确认修改</button>
+        <button class="btn btn-primary" id="update-good-button">确认修改</button>
     </div>
 </div>
 #end
@@ -77,5 +77,5 @@
 #define js()
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
 <script src="//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/kindeditor.min.js"></script>
-<script src="assets/js/newGood.js"></script>
+<script src="assets/js/updateGood.js"></script>
 #end

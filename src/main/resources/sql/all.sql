@@ -22,3 +22,6 @@
 #namespace("address")
 #include("address.sql")
 #end
+#namespace("file")
+#include("file.sql")
+#end

@@ -32,6 +32,7 @@ import com.jfinal.ext.interceptor.POST;
 @Before({POST.class, NeedLogInInterceptor.class})
 public class OrderController extends BaseController {
 
+    @Before(CreateOrderValidator.class)
     public void create() {
         String token = getCookie(RedisKit.COOKIE_ID);
         int addressId = getParaToInt("address");

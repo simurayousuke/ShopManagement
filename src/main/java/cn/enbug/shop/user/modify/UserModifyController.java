@@ -27,12 +27,14 @@ import java.math.BigDecimal;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @author Hu Wenqiang
+ * @version 1.0.4
  * @since 1.0.0
  */
 @Before({POST.class, NeedLogInInterceptor.class})
 public class UserModifyController extends BaseController {
 
+    @Before(AvatorModifyValidator.class)
     public void avator() {
         renderJson(UserModifyService.ME.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
     }

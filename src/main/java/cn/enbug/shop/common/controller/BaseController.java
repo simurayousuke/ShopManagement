@@ -24,6 +24,7 @@ import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.render.RenderManager;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
 /**
@@ -134,6 +135,12 @@ public abstract class BaseController extends Controller {
     @Override
     public boolean validateCaptcha(String paraName) {
         return ShopCaptchaRender.validate(this, getPara(paraName));
+    }
+
+    public boolean isAjax() {
+        HttpServletRequest request = getRequest();
+        String requestType = request.getHeader("X-Requested-With");
+        return null != requestType && "XMLHttpRequest".equals(requestType);
     }
 
 }
