@@ -28,7 +28,8 @@ import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
 @Before(NeedLogInInterceptor.class)
@@ -42,22 +43,23 @@ public class ShopcarController extends BaseController {
         render("index.html");
     }
 
-    @Before(POST.class)
+    @Before({POST.class, AddShopcarValidator.class})
     @Clear(NeedLogInInterceptor.class)
     public void add() {
         renderJson(ShopcarService.ME.add(getCookie(RedisKit.COOKIE_ID),
                 getPara("uuid"), getParaToInt("count")));
     }
 
-    @Before(POST.class)
+    @Before({POST.class, ModifyShopcarValidator.class})
     public void modify() {
         renderJson(ShopcarService.ME.modifyCount(getCookie(RedisKit.COOKIE_ID),
                 getParaToInt("id"), getParaToInt("count")));
     }
 
-    @Before(POST.class)
+    @Before({POST.class, DelShopCarValidator.class})
     public void del() {
         renderJson(ShopcarService.ME.del(getCookie(RedisKit.COOKIE_ID),
                 getParaToInt("id")));
     }
+
 }
