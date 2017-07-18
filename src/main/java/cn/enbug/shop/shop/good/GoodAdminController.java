@@ -85,4 +85,15 @@ public class GoodAdminController extends BaseController {
             renderJson(Ret.fail("保存失败"));
         }
     }
+
+    public void remove() {
+        String token = getCookie(RedisKit.TOKEN);
+        String uuid = getPara("uuid");
+        GoodService.ME.del(token, uuid);
+        if (GoodService.ME.del(token, uuid)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("删除失败"));
+        }
+    }
 }
