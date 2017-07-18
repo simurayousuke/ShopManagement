@@ -42,9 +42,9 @@ $(document).ready(function () {
         $.post('', data, function (data) {
             if (!data.status) {
                 $.msg(data.msg);
-                form[0].reset();
             } else {
                 $.msg('添加成功');
+                form[0].reset();
             }
         });
     });
