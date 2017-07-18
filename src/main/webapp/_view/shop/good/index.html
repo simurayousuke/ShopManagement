@@ -34,7 +34,8 @@
                         <td>#(x.number)件</td>
                         <td>
                             <a href="shop/good/edit/#(x.uuid)"><em class="icon-edit"></em> </a>
-                            <a href="shop/good/remove/#(x.uuid)" class="text-danger"><em class="icon-trash"></em></a>
+                            <button data-uuid="#(x.uuid)" class="text-danger del-button btn btn-link"><em
+                                    class="icon-trash"></em></button>
                         </td>
                     </tr>
                     #end
