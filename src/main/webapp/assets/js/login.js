@@ -1,9 +1,11 @@
 $(document).ready(function () {
 
     var href = location.href;
-    var redirect = decodeURIComponent(href.substr(href.indexOf('/login?') + 7));
-    if (redirect === '') {
-        redirect = '/';
+    var index = href.indexOf('?');
+    var redirect = '/';
+
+    if (index !== -1) {
+        redirect = decodeURIComponent(href.substr(index + 1));
     }
 
     var captchaImg = $('.captcha');
