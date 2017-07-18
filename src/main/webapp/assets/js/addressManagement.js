@@ -30,8 +30,8 @@ $(document).ready(function () {
             $.msg('请输入区');
             return;
         }
-        if (dist.trim() === '') {
-            $.msg('请输入想信息');
+        if (detail.trim() === '') {
+            $.msg('请输入详细信息');
             return;
         }
         var data = {
@@ -43,8 +43,7 @@ $(document).ready(function () {
             if (!data.status) {
                 $.msg(data.msg);
             } else {
-                $.msg('添加成功');
-                form[0].reset();
+                location.reload();
             }
         });
     });
