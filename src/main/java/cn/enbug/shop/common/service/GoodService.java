@@ -35,7 +35,7 @@ import java.util.List;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
@@ -99,6 +99,42 @@ public class GoodService {
                 .set("owner_id", ownerId)
                 .set("owner_name", ownerName);
         OPEN_SEARCH_SERVICE.add(kv);
+        return true;
+    }
+
+    /**
+     * update good
+     *
+     * @param token       token
+     * @param uuid        good uuid
+     * @param goodName    good name
+     * @param description description
+     * @param price       price
+     * @param avator      avator
+     * @param number      number
+     * @return boolean
+     */
+    @Before(Tx.class)
+    public boolean update(String token, String uuid, String goodName, String description, BigDecimal price, String avator, int number) {
+        Shop shop = ShopService.ME.findShopByToken(token);
+        Good good = findGoodByUuid(uuid);
+        if (null == shop || null == good) {
+            return false;
+        }
+        good.setGoodName(goodName).setDescription(description)
+                .setPrice(price).setAvator(avator).setNumber(number);
+        if (shop.getId() != good.getShopId()) {
+            return false;
+        }
+        if (!good.update()) {
+            return false;
+        }
+        Kv kv = Kv.by("name", goodName)
+                .set("description", description)
+                .set("avator", avator)
+                .set("price", price)
+                .set("number", number);
+        OPEN_SEARCH_SERVICE.update(kv);
         return true;
     }
 
