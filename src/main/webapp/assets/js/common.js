@@ -55,6 +55,14 @@
         });
     };
 
+    $.prompt = function (title, inputType, callback) {
+        bootbox.prompt({
+            title: title,
+            inputType: inputType,
+            callback: callback
+        });
+    };
+
     $.post = function (url, data, success, error) {
 
         error = error || function () {
