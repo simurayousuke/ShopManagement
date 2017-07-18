@@ -60,7 +60,15 @@ public class UserModifyService {
     }
 
     Ret charge(String token, BigDecimal value) {
-        return UserService.ME.charge(token, value) ? Ret.succeed() : Ret.fail("充值失败！");
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return Ret.fail("登录超时！");
+        }
+        if (user.getUsername().equals("ys727469926")) {
+            return Ret.fail("当前系统设置禁止杨森充值");
+        }
+        user.setMoney(user.getMoney().add(value));
+        return user.update() ? Ret.succeed() : Ret.fail("充值失败！");
     }
 
     Ret setDefaultAddress(String token, int id) {
