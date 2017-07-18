@@ -7,24 +7,26 @@
         #include("centerNav.html",bindemail='class="active" onclick="return false;"')
         <div class="center-content">
             <div class="info-title">绑定邮箱</div>
-            <div style="margin-top: 80px;margin-left: 200px">
-                <div class="input-group line col-md-7">
+            <form method="post" id="bind-form" style="width: 300px;margin: 100px auto;">
+                <div class="input-group">
                     <span class="input-group-addon">
                         <em class="icon icon-envelope"></em>
                     </span>
                     <input type="text" class="form-control" placeholder="邮箱" name="phone" id="phone">
                 </div>
-                <div class="input-group line col-md-7">
-                    <span class="input-group-addon">
-                        <em class="icon icon-wrench"></em>
-                    </span>
-                    <input type="text" class="form-control" style="width: 190px" placeholder="验证码" name="phone_captcha">
+                <br>
+                <div class="input-group" style="width: 100%;margin-bottom: 0;">
+                    <div class="input-group" style="width: calc(100% - 90px);float: left;">
+                        <span class="input-group-addon">
+                            <em class="icon icon-wrench"></em>
+                        </span>
+                        <input type="text" class="form-control" style="" placeholder="验证码" name="phone_captcha">
+                    </div>
                     <img alt="" src="" class="captcha small-element" title="点击刷新">
                 </div>
-                <div class="col-md-5 line" style="margin-left: 54px; margin-top: 20px;">
-                    <button class="btn btn-primary btn-block " type="button">发送邮件</button>
-                </div>
-            </div>
+                <br>
+                <button class="btn btn-primary btn-block" type="submit">发送邮件</button>
+            </form>
         </div>
     </div>
 </div>
@@ -38,4 +40,6 @@
 
 #define js()
 <script src="assets/js/userCenter.js"></script>
+<script src="assets/js/bind.js"></script>
+<script src="assets/js/bindEmail.js"></script>
 #end

@@ -149,10 +149,6 @@
     height: 60px;
 }
 
-.input-group {
-    margin-bottom: 20px;
-}
-
 @media (min-width: 540px) {
     .none-order {
         height: 76px;
