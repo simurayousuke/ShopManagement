@@ -38,7 +38,12 @@ public class UserInterceptor implements Interceptor {
         Controller c = inv.getController();
         User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
         c.setAttr("user", user);
-        String redirect = inv.getControllerKey() + "/" + inv.getMethodName();
+        String key = inv.getControllerKey();
+        String method = inv.getMethodName();
+        if (method.equalsIgnoreCase("/index")) {
+            method = "";
+        }
+        String redirect = key + method;
         redirect = UrlKit.encode(redirect, "utf-8");
         c.setAttr("redirect", redirect);
         inv.invoke();
