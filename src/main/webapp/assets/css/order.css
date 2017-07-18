@@ -10,6 +10,12 @@
     padding-left: 0;
 }
 
+.pay-button {
+    text-decoration: none;
+    float: right;
+    padding-left: 8px;
+}
+
 .ul-order li {
     width: 12.5%;
     text-align: center;
