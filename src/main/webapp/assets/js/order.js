@@ -2,7 +2,7 @@ $('#comment-button').click(function () {
 
     $('.pay-button').click(function () {
         var that = $(this);
-        var order = that.parent().find('span').innerText.substr(4);
+        var order = that.parent().find('span').text().substr(4);
         $.post('/order/pay', {order: order}, function (data) {
             if (data.status) {
                 $.warn('支付成功！', function () {
