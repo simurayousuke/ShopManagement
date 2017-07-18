@@ -1,6 +1,7 @@
 package cn.enbug.shop.store;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.service.GoodService;
 import cn.enbug.shop.common.service.ShopService;
@@ -13,7 +14,7 @@ import com.jfinal.ext.interceptor.GET;
  * @version 1.0.0
  * @since 1.0.0
  */
-@Before(GET.class)
+@Before({GET.class, UserInterceptor.class})
 public class StoreController extends BaseController {
 
     public void index() {
