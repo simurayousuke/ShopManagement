@@ -17,6 +17,7 @@
 package cn.enbug.shop.common.kit;
 
 import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.UserService;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.redis.Redis;
 
@@ -28,7 +29,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.11
+ * @version 1.1.0
  * @since 1.0.0
  */
 public class RedisKit {
@@ -67,6 +68,23 @@ public class RedisKit {
      * @return User Object or null
      */
     public static User getUserByToken(String token) {
+        if (null == token) {
+            return null;
+        }
+        User user = Redis.use(TOKEN).get(token);
+        if (null == user) {
+            return null;
+        }
+        return UserService.ME.findUserById(user.getId());
+    }
+
+    /**
+     * get User Object by token without refresh.
+     *
+     * @param token token
+     * @return User Object or null
+     */
+    public static User getUserByTokenWithoutRefresh(String token) {
         return null == token ? null : Redis.use(TOKEN).get(token);
     }
 
