@@ -65,4 +65,8 @@ public class GoodAdminController extends BaseController {
         renderJson(GoodAdminService.ME.add(token, ip, name, description, price, avator, number));
     }
 
+    public void edit() {
+        setAttr("good", GoodService.ME.findGoodByUuid(getPara()));
+        render("edit.html");
+    }
 }

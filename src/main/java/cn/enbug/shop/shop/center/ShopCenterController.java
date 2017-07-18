@@ -46,4 +46,5 @@ public class ShopCenterController extends BaseController {
         render("newShop.html");
     }
 
+
 }

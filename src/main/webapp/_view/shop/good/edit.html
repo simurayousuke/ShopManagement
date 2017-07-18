@@ -1,0 +1,81 @@
+#set(title="商品编辑")
+#@layout()
+#define body()
+<div class="container-fixed">
+    <ol class="breadcrumb">
+        <li><a href="">EnBug购物网</a></li>
+        <li><a href="shop/center">店铺管理</a></li>
+        <li><a href="shop/good">商品管理</a></li>
+        <li class="active">商品编辑</li>
+    </ol>
+    <div style="height:350px" id="top">
+        <div class="good-photo-container">
+            <h2>商品图片：</h2>
+            <img alt="" src="//smcdn.yangzhizhuang.net/#(good.avator)" class="good-photo">
+            <div id="upload" class="uploader">
+                <div class="uploader-message text-center">
+                    <div class="content"></div>
+                    <button type="button" class="close">×</button>
+                </div>
+                <div class="uploader-files file-list file-list-grid"></div>
+                <div>
+                    <hr class="divider">
+                    <div class="uploader-status pull-right text-muted"></div>
+                    <button type="button" class="btn btn-link uploader-btn-browse"><em class="icon icon-plus"></em> 选择文件
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div style="display: inline-block;vertical-align:top;margin-left:50px;">
+            <h2>商品信息：</h2>
+            <form action="" class="form-horizontal" id="create-good-form">
+                <div class="form-group">
+                    <label for="good-name" class="form-label col-sm-3">商品名称：</label>
+                    <div class="col-sm-9 input-group">
+                        <input class="form-control" value="#(good.good_name)" type="text" id="good-name" name="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="good-prize" class="form-label col-sm-3">商品价格：</label>
+                    <div class="col-sm-9 input-group">
+                        <input class="form-control" value="#(good.price)" type="text" id="good-prize" name="price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="good-stock" class="form-label col-sm-3">商品库存：</label>
+                    <div class="col-sm-9 input-group">
+                        <input class="form-control" value="#(good.number)" type="text" id="good-stock" name="number">
+                    </div>
+                </div>
+                <input type="hidden" name="avator" id="create-good-avator" value="">
+            </form>
+        </div>
+    </div>
+    <div class="good-description" id="description">
+        <h2 style="margin-bottom: 25px;">商品描述：</h2>
+        <textarea id="good-content" value="#(good.description)" class="form-control kindeditor"
+                  style="height:150px;"></textarea>
+    </div>
+    <div class="form-horizontal" style="margin-left: 80px;margin-top: 10px">
+        <div class="form-group" style="margin-bottom: 10px">
+            <label for="good-captcha" class="form-label" style="margin-left: 10px">验证码：</label>
+            <div class="col-sm-6" style="display: inline">
+                <input class="form-control" placeholder="验证码" type="text" id="good-captcha" name="captcha">
+            </div>
+            <img alt="" src="" class="captcha" style="height: 32px;width: 86.4px" title="点击刷新">
+        </div>
+        <button class="btn btn-primary" id="create-good-button">确认修改</button>
+    </div>
+</div>
+#end
+
+#define css()
+<link href="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+<link href="assets/css/newGood.css" rel="stylesheet">
+#end
+
+#define js()
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/kindeditor.min.js"></script>
+<script src="assets/js/newGood.js"></script>
+#end
