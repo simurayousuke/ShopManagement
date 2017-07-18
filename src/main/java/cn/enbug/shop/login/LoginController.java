@@ -104,7 +104,7 @@ public class LoginController extends BaseController {
     public void logout() {
         RedisKit.delToken(getCookie(RedisKit.TOKEN));
         removeCookie(RedisKit.COOKIE_ID);
-        String url = UrlKit.decode(getRequest().getRequestURI().substring("/logout".length()), "utf-8");
+        String url = UrlKit.decode(getRequest().getRequestURI().substring("/logout?".length()), "utf-8");
         redirect(url);
     }
 
