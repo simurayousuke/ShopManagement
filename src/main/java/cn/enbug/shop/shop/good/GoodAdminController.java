@@ -19,6 +19,7 @@ package cn.enbug.shop.shop.good;
 import cn.enbug.shop.captcha.ImageCaptchaValidator;
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.service.GoodService;
 import cn.enbug.shop.shop.HasShopInterceptor;
@@ -68,5 +69,20 @@ public class GoodAdminController extends BaseController {
     public void edit() {
         setAttr("good", GoodService.ME.findGoodByUuid(getPara()));
         render("edit.html");
+    }
+
+    public void update() {
+        String token = getCookie(RedisKit.TOKEN);
+        String name = getPara("name");
+        String description = getPara("description");
+        String uuid = getPara("uuid");
+        BigDecimal price = getParaToBigDecimal("price", new BigDecimal("0"));
+        int number = getParaToInt("number", 0);
+        String avator = getPara("avator", "good/default.jpg");
+        if (GoodService.ME.update(token, uuid, name, description, price, avator, number)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("保存失败"));
+        }
     }
 }
