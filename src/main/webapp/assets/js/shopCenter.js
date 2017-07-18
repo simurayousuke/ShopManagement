@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#modify-shop-name').click(function () {
-        bootbox.prompt("请输入新店铺名", function (result) {
+        $.prompt("请输入新店铺名", "text", function (result) {
             if (result === null) {
                 return;
             }
@@ -17,24 +17,20 @@ $(document).ready(function () {
         });
     });
     $('#modify-shop-description').click(function () {
-        bootbox.prompt({
-            title: "请输入新店铺描述",
-            inputType: "textarea",
-            callback: function (result) {
-                if (result === null) {
-                    return;
-                }
-                $.post('/shop/modify/description', {description: result}, function (data) {
-                    if (data.status) {
-                        $.msg('修改成功');
-                        location.reload();
-                    } else {
-                        $.msg('修改失败');
-                    }
-                }, function () {
-                    $.msg('网络异常');
-                });
+        $.prompt("请输入新店铺描述", "textarea", function (result) {
+            if (result === null) {
+                return;
             }
+            $.post('/shop/modify/description', {description: result}, function (data) {
+                if (data.status) {
+                    $.msg('修改成功');
+                    location.reload();
+                } else {
+                    $.msg('修改失败');
+                }
+            }, function () {
+                $.msg('网络异常');
+            });
         });
     });
 
