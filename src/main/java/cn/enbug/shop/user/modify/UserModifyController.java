@@ -55,7 +55,7 @@ public class UserModifyController extends BaseController {
 
     @Before(BindPhoneValidator.class)
     public void bindphone() {
-        renderJson(UserModifyService.ME.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone"), getPara("phone_captcha")));
+        renderJson(UserModifyService.ME.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone")));
     }
 
     @Before(BindEmailValidator.class)

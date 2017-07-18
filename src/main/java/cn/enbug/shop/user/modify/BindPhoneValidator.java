@@ -17,6 +17,8 @@
 package cn.enbug.shop.user.modify;
 
 import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.UserService;
 import cn.enbug.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -30,6 +32,11 @@ public class BindPhoneValidator extends BaseValidator {
     @Override
     protected void validate(Controller c) {
         validatePhone("phone", Ret.MSG, "手机号格式错误");
+        String phone = c.getPara("phone");
+        User user = UserService.ME.findUserByPhoneNumber(phone);
+        if (null != user) {
+            addError(Ret.MSG, "手机号已被使用");
+        }
         validatePhoneCaptcha("phone", "phone_captcha", Ret.MSG, "验证码错误");
     }
 
