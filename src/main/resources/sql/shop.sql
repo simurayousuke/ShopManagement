@@ -7,3 +7,6 @@ SELECT * FROM t_shop WHERE shop_name = #para(0);
 #sql("findById")
 SELECT * FROM t_shop WHERE id = #para(0);
 #end
+#sql("findByUuid")
+SELECT * FROM t_shop WHERE uuid = #para(0);
+#end
