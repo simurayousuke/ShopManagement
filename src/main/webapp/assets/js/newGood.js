@@ -1,4 +1,4 @@
-var editor = KindEditor.create('textarea.kindeditor', {
+KindEditor.create('textarea.kindeditor', {
     basePath: '//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/',
     bodyClass: 'article-content',
     resizeType: 1,
