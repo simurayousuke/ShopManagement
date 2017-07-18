@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+    $('.set-default-address').click(function () {
+        var that = $(this);
+        var id = that.data().addressid;
+        $.post('/user/modify/defaultaddress', {id: id}, function (data) {
+            if (!data.status) {
+                $.alert("错误", data.msg);
+            } else {
+                $.msg("设置成功");
+            }
+        });
+
+    });
+
     $('#create-address-form').submit(function (e) {
         e.preventDefault();
         var form = $(this);

@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before({POST.class, NeedLogInInterceptor.class})
@@ -43,6 +43,10 @@ public class UserModifyController extends BaseController {
 
     public void charge() {
         renderJson(UserModifyService.ME.charge(getCookie(RedisKit.COOKIE_ID), new BigDecimal(getPara("value"))));
+    }
+
+    public void defaultaddress() {
+        renderJson(UserModifyService.ME.setDefaultAddress(getCookie(RedisKit.COOKIE_ID), getParaToInt("id")));
     }
 
 }

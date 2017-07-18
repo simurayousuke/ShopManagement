@@ -21,6 +21,15 @@
 * address 收货地址
 
 </li>
+<li>设置默认收货地址
+
+请求地址：/user/modify/defaultaddress
+
+参数:
+
+* id 收货地址id
+
+</li>
 </ol>
 
 * 返回值:

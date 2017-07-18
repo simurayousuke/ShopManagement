@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class UserModifyService {
@@ -47,11 +47,11 @@ public class UserModifyService {
     }
 
     Ret charge(String token, BigDecimal value) {
-        if (UserService.ME.charge(token, value)) {
-            return Ret.succeed();
-        } else {
-            return Ret.fail("充值失败！");
-        }
+        return UserService.ME.charge(token, value) ? Ret.succeed() : Ret.fail("充值失败！");
+    }
+
+    Ret setDefaultAddress(String token, int id) {
+        return AddressService.ME.setDefault(token, id) ? Ret.succeed() : Ret.fail("设置失败！");
     }
 
 }
