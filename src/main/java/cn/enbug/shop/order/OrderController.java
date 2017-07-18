@@ -46,4 +46,25 @@ public class OrderController extends BaseController {
         }
     }
 
+    public void pay() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        String order = getPara("order");
+        if (OrderService.ME.payOrder(token, order)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("支付失败！"));
+        }
+    }
+
+    public void refund() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        String order = getPara("order");
+        int id = getParaToInt("id");
+        if (OrderService.ME.refundGood(token, order, id)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("支付失败！"));
+        }
+    }
+
 }
