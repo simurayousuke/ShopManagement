@@ -178,7 +178,10 @@ public class UserService {
         }
         user.setMoney(user.getMoney().subtract(value));
         to.setMoney(to.getMoney().add(value));
-        if (!user.update() || to.update()) {
+        if (!user.update()) {
+            return false;
+        }
+        if (!to.update()) {
             throw new MoneyTransferException("Fail to transfer money.");
         }
         return true;
@@ -186,17 +189,22 @@ public class UserService {
 
     @Before(Tx.class)
     public boolean transfer(User user, int userId, BigDecimal value) {
-        User to = findUserById(userId);
-        if (null == to) {
-            return false;
-        }
+
         BigDecimal money = user.getMoney();
         if (money.compareTo(value) < -1) {
             return false;
         }
         user.setMoney(money.subtract(value));
+        if (!user.update()) {
+            return false;
+        }
+
+        User to = findUserById(userId);
+        if (null == to) {
+            return false;
+        }
         to.setMoney(to.getMoney().add(value));
-        if (!user.update() || to.update()) {
+        if (!to.update()) {
             throw new MoneyTransferException("Fail to transfer money.");
         }
         return true;
