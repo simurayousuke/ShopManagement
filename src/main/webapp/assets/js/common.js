@@ -96,6 +96,19 @@
         return a;
     };
 
+    /**
+     * @return {string}
+     */
+    $.getPara = function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r !== null) {
+            return decodeURIComponent(r[2]);
+        }
+        return "";
+    };
+
+
     var emailPattern = /^['_A-Za-z0-9-]+(\.['_A-Za-z0-9-]+)*@([A-Za-z0-9-])+(\.[A-Za-z0-9-]+)*((\.[A-Za-z0-9]{2,})|(\.[A-Za-z0-9]{2,}\.[A-Za-z0-9]{2,}))$/;
     var phonePattern = /^1[34578][0-9]{9}$/;
     var pricePattern = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))|0+$/;

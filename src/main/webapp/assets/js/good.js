@@ -3,6 +3,26 @@ $(document).ready(function () {
     var uuid = location.pathname;
     uuid = uuid.substr(uuid.lastIndexOf('/') + 1);
 
+    var add = $.getPara('add');
+    if (add !== '' && add > 0 && isNaN(add)) {
+        $.post('/user/shopcar/add', {uuid: uuid, count: add}, function (data) {
+            if (data.status) {
+                $.confirm('添加成功', '前往购物车', '继续购物', function (result) {
+                    if (result) {
+                        location.href = "/user/shopcar";
+                    }
+                });
+            } else {
+                if (data.code === -1) {
+                    location.href = encodeURIComponent("login?" + location.pathname + "?add=" + add);
+                }
+                $.alert('Error', '添加失败，失败原因' + data.msg);
+            }
+        }, function () {
+            $.alert('Error', '网络异常');
+        });
+    }
+
     var countInput = $('#good-number');
 
     $('#count-dec').click(function () {
@@ -34,7 +54,7 @@ $(document).ready(function () {
                 });
             } else {
                 if (data.code === -1) {
-                    location.href = "login?" + location.pathname;
+                    encodeURIComponent("login?" + location.pathname + "?add=" + countInput.val());
                 }
                 $.alert('Error', '添加失败，失败原因' + data.msg);
             }
