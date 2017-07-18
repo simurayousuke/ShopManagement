@@ -18,7 +18,9 @@ $(document).ready(function () {
             if (!data.status) {
                 $.msg(data.msg);
             } else {
-                $.msg('绑定成功');
+                $.warn('Tip', '绑定成功', function () {
+                    location.href = '/user/center';
+                });
             }
         });
     });
