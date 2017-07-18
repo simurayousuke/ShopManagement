@@ -70,10 +70,8 @@ public class RegisterService {
     @Before(Tx.class)
     Ret registerByEmail(String email, String ip) {
         User curr = UserService.ME.findUserByEmail(email);
-        if (null != curr) {
-            if (curr.getEmailStatus() != 0) {
-                return Ret.fail("邮箱已被注册");
-            }
+        if (null != curr && curr.getEmailStatus() != 0) {
+            return Ret.fail("邮箱已被注册");
         }
         User user = new User().setUuid(StrKit.getRandomUUID()).setEmail(email).setEmailStatus(0);
         Log log = new Log().setIp(ip).setOperation("initEmail");

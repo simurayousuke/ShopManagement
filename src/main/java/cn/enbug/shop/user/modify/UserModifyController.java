@@ -23,12 +23,10 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.POST;
 
-import java.math.BigDecimal;
-
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.4
+ * @version 1.0.5
  * @since 1.0.0
  */
 @Before({POST.class, NeedLogInInterceptor.class})
@@ -39,23 +37,28 @@ public class UserModifyController extends BaseController {
         renderJson(UserModifyService.ME.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
     }
 
+    @Before(AddAddressValidator.class)
     public void addaddress() {
         renderJson(UserModifyService.ME.addAddress(getCookie(RedisKit.COOKIE_ID), getPara("name"),
                 getPara("phone"), getPara("address")));
     }
 
+    @Before(ChargeValidator.class)
     public void charge() {
-        renderJson(UserModifyService.ME.charge(getCookie(RedisKit.COOKIE_ID), new BigDecimal(getPara("value"))));
+        renderJson(UserModifyService.ME.charge(getCookie(RedisKit.COOKIE_ID), getParaToBigDecimal("value")));
     }
 
+    @Before(DefaultAddressValidator.class)
     public void defaultaddress() {
         renderJson(UserModifyService.ME.setDefaultAddress(getCookie(RedisKit.COOKIE_ID), getParaToInt("id")));
     }
 
+    @Before(BindPhoneValidator.class)
     public void bindphone() {
-        renderJson(UserModifyService.ME.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone"), getPara("phone_captcha")));
+        renderJson(UserModifyService.ME.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone")));
     }
 
+    @Before(BindEmailValidator.class)
     public void bindemail() {
         renderJson(UserModifyService.ME.bindEmail(getCookie(RedisKit.COOKIE_ID), getPara("email")));
     }

@@ -28,7 +28,8 @@ import java.math.BigDecimal;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.6
+ * @author Hu Wenqiang
+ * @version 1.0.7
  * @since 1.0.0
  */
 public class UserModifyService {
@@ -75,26 +76,15 @@ public class UserModifyService {
         return AddressService.ME.setDefault(token, id) ? Ret.succeed() : Ret.fail("设置失败！");
     }
 
-    Ret bindPhone(String token, String number, String captcha) {
-        User curr = UserService.ME.findUserByPhoneNumber(number);
-        if (curr != null) {
-            return Ret.fail("手机号已被使用");
-        }
+    Ret bindPhone(String token, String number) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return Ret.fail("登录超时");
-        }
-        if (!captcha.equals(RedisKit.getCaptcha(number))) {
-            return Ret.fail("手机验证码错误");
         }
         return user.setPhone(number).update() ? Ret.succeed() : Ret.fail("设置失败");
     }
 
     Ret bindEmail(String token, String email) {
-        User curr = UserService.ME.findUserByEmail(email);
-        if (curr != null && curr.getEmailStatus() != 0) {
-            return Ret.fail("邮箱已被使用");
-        }
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return Ret.fail("登录超时");

@@ -26,7 +26,8 @@ import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @author Hu Wenqiang
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before({POST.class, NeedLogInInterceptor.class})
@@ -47,6 +48,7 @@ public class OrderController extends BaseController {
         }
     }
 
+    @Before(PayOrderValidator.class)
     public void pay() {
         String token = getCookie(RedisKit.COOKIE_ID);
         String order = getPara("order");
@@ -57,6 +59,7 @@ public class OrderController extends BaseController {
         }
     }
 
+    @Before(RefundOrderValidator.class)
     public void refund() {
         String token = getCookie(RedisKit.COOKIE_ID);
         String order = getPara("order");
@@ -68,6 +71,7 @@ public class OrderController extends BaseController {
         }
     }
 
+    @Before(CheckOrderValidator.class)
     public void check() {
         String token = getCookie(RedisKit.COOKIE_ID);
         String order = getPara("order");
@@ -79,6 +83,7 @@ public class OrderController extends BaseController {
         }
     }
 
+    @Before(CommentOrderValidator.class)
     public void comment() {
         String token = getCookie(RedisKit.COOKIE_ID);
         String order = getPara("order");
