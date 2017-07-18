@@ -1,4 +1,4 @@
-$('#comment-button').click(function () {
+$(document).ready(function () {
 
     $('.pay-button').click(function () {
         var that = $(this);
