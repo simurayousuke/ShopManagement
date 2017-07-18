@@ -18,11 +18,8 @@ package cn.enbug.shop.user.center;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
-import cn.enbug.shop.common.kit.RedisKit;
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
-import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Forrest Yang
@@ -56,12 +53,6 @@ public class UserCenterController extends BaseController {
 
     public void addressmanage() {
         render("addressManage.html");
-    }
-
-    @Clear(GET.class)
-    @Before(POST.class)
-    public void avator() {
-        renderJson(UserCenterService.ME.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
     }
 
 }

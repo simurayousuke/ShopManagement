@@ -31,6 +31,7 @@ import cn.enbug.shop.store.StoreController;
 import cn.enbug.shop.suggest.SuggestController;
 import cn.enbug.shop.upload.UploadController;
 import cn.enbug.shop.user.center.UserCenterController;
+import cn.enbug.shop.user.modify.UserModifyController;
 import cn.enbug.shop.user.order.UserOrderController;
 import cn.enbug.shop.user.pay.UserPayController;
 import cn.enbug.shop.user.shopcar.ShopcarController;
@@ -40,7 +41,7 @@ import com.jfinal.config.Routes;
  * This is the route config of the program.
  *
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class FrontRoutes extends Routes {
@@ -69,5 +70,6 @@ public class FrontRoutes extends Routes {
         add("/shop/order", ShopOrderController.class);
         add("/store", StoreController.class);
         add("/order", OrderController.class);
+        add("/user/modify", UserModifyController.class);
     }
 }

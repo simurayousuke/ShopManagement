@@ -3,7 +3,7 @@
 <ol>
 <li>设置头像
 
-请求地址：/user/avator
+请求地址：/user/modify/avator
 
 参数:
 

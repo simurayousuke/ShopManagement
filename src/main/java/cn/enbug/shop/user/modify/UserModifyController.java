@@ -14,28 +14,24 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.user.center;
+package cn.enbug.shop.user.modify;
 
+import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
-import cn.enbug.shop.common.kit.Ret;
-import cn.enbug.shop.common.model.User;
+import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
  * @version 1.0.0
  * @since 1.0.0
  */
-public class UserCenterService {
+@Before({POST.class, NeedLogInInterceptor.class})
+public class UserModifyController extends BaseController {
 
-    public static final UserCenterService ME = new UserCenterService();
-
-    public Ret setAvator(String token, String avator) {
-        User user = RedisKit.getUserByToken(token);
-        if (null == user) {
-            return Ret.fail("登录超时");
-        }
-        user.setAvator(avator);
-        return user.update() ? Ret.succeed() : Ret.fail("设置失败");
+    public void avator() {
+        renderJson(UserModifyService.ME.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
     }
 
 }

@@ -27,7 +27,7 @@ $(document).ready(function () {
     });
 
     $('#set-user-photo').click(function () {
-        $.post('/user/avator', {avator: $('#create-user-avator').val()}, function (data) {
+        $.post('/user/modify/avator', {avator: $('#create-user-avator').val()}, function (data) {
             if (data.status) {
                 $.warn('上传成功', function () {
                     location.reload();
