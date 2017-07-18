@@ -24,7 +24,8 @@ public class NeedLogInInterceptor implements Interceptor {
             redirect = UrlKit.encode(redirect, "utf-8");
             c.redirect("/login?" + redirect);
         } else {
-            if (user.getPhone() == null && !c.getRequest().getRequestURI().equals("/user/center/bindphone")) {
+            if (user.getPhone() == null && !(c.getRequest().getRequestURI().equals("/user/center/bindphone") ||
+                    c.getRequest().getRequestURI().equals("/user/modify/bindphone"))) {
                 c.redirect("/user/center/bindphone");
             } else {
                 c.setAttr("user", user);
