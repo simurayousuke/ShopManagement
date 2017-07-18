@@ -18,6 +18,8 @@ package cn.enbug.shop.user.center;
 
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
+import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.service.AddressService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
 
@@ -52,6 +54,7 @@ public class UserCenterController extends BaseController {
     }
 
     public void addressmanage() {
+        setAttr("addressList", AddressService.ME.getListByToken(getCookie(RedisKit.COOKIE_ID)));
         render("addressManage.html");
     }
 
