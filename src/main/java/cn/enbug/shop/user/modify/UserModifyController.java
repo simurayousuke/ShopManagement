@@ -22,6 +22,8 @@ import cn.enbug.shop.common.kit.RedisKit;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.POST;
 
+import java.math.BigDecimal;
+
 /**
  * @author Yang Zhizhuang
  * @version 1.0.1
@@ -37,6 +39,10 @@ public class UserModifyController extends BaseController {
     public void addaddress() {
         renderJson(UserModifyService.ME.addAddress(getCookie(RedisKit.COOKIE_ID), getPara("name"),
                 getPara("phone"), getPara("address")));
+    }
+
+    public void charge() {
+        renderJson(UserModifyService.ME.charge(getCookie(RedisKit.COOKIE_ID), new BigDecimal(getPara("value"))));
     }
 
 }

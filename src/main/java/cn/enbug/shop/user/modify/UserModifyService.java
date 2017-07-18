@@ -20,17 +20,20 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.AddressService;
+import cn.enbug.shop.common.service.UserService;
+
+import java.math.BigDecimal;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 public class UserModifyService {
 
     public static final UserModifyService ME = new UserModifyService();
 
-    public Ret setAvator(String token, String avator) {
+    Ret setAvator(String token, String avator) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return Ret.fail("登录超时");
@@ -39,8 +42,16 @@ public class UserModifyService {
         return user.update() ? Ret.succeed() : Ret.fail("设置失败");
     }
 
-    public Ret addAddress(String token, String name, String phone, String address) {
+    Ret addAddress(String token, String name, String phone, String address) {
         return AddressService.ME.insert(token, name, phone, address) ? Ret.succeed() : Ret.fail("设置失败");
+    }
+
+    Ret charge(String token, BigDecimal value) {
+        if (UserService.ME.charge(token, value)) {
+            return Ret.succeed();
+        } else {
+            return Ret.fail("充值失败！");
+        }
     }
 
 }
