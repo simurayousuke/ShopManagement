@@ -60,7 +60,7 @@ $(document).ready(function () {
                 $.msg(data.msg);
                 button.removeProp('disabled');
             } else {
-                $('form').reset();
+                form[0].reset();
                 location.reload();
             }
         });
