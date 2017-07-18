@@ -76,11 +76,7 @@ public class UserModifyService {
         return AddressService.ME.setDefault(token, id) ? Ret.succeed() : Ret.fail("设置失败！");
     }
 
-    Ret bindPhone(String token, String number, String captcha) {
-        User curr = UserService.ME.findUserByPhoneNumber(number);
-        if (curr != null) {
-            return Ret.fail("手机号已被使用");
-        }
+    Ret bindPhone(String token, String number) {
         User user = RedisKit.getUserByToken(token);
         if (null == user) {
             return Ret.fail("登录超时");
