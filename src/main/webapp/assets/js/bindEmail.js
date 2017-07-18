@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#bind-form').submit(function (e) {
+    $('.bind-form').submit(function (e) {
         e.preventDefault();
         var form = $(this);
         var data = form.serializeObject();
