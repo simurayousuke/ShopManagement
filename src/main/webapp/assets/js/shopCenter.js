@@ -40,19 +40,14 @@ $(document).ready(function () {
 
     $('#transfer-shop').click(function () {
         $.prompt("请输入密码", "password", function (result) {
-
             if (result === null) {
                 return;
             }
-
             var pwd = result;
-
-            bootbox.prompt("请输入对方用户名", function (result) {
-
+            $.prompt("请输入对方用户名", "text", function (result) {
                 if (result === null) {
                     return;
                 }
-
                 $.post('/shop/modify/transfer', {username: result, pwd: pwd}, function (data) {
                     if (data.status) {
                         $.msg('转让成功');
@@ -61,11 +56,8 @@ $(document).ready(function () {
                         $.msg('转让失败');
                     }
                 });
-
             });
-
         });
-
     });
 
 });
