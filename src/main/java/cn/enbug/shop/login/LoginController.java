@@ -34,7 +34,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.9
+ * @version 1.0.10
  * @since 1.0.0
  */
 @Before({NoUrlPara.class, LoginInterceptor.class})
@@ -104,7 +104,11 @@ public class LoginController extends BaseController {
     public void logout() {
         RedisKit.delToken(getCookie(RedisKit.TOKEN));
         removeCookie(RedisKit.COOKIE_ID);
-        String url = UrlKit.decode(getRequest().getRequestURI().substring("/logout?".length()), "utf-8");
+        String url = UrlKit.decode(getRequest().getQueryString(), "utf-8");
+        int index = url.indexOf('?');
+        if (index != -1) {
+            url = url.substring(0, index);
+        }
         redirect(url);
     }
 
