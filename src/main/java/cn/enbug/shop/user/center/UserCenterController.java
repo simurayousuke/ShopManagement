@@ -54,7 +54,7 @@ public class UserCenterController extends BaseController {
     }
 
     public void addressmanage() {
-        setAttr("addressList", AddressService.ME.getListByToken(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("addresses", AddressService.ME.getListByToken(getCookie(RedisKit.COOKIE_ID)));
         render("addressManage.html");
     }
 
