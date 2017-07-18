@@ -1,19 +1,6 @@
 #for(o : list)
 <div class=" one-of-orders col-md-12 col-sm-12">
-    <div class="col-md-2 col-sm-2">
-        <img alt="" src="//smcdn.yangzhizhuang.net/#(o.avator)" class="good-photo">
-    </div>
-    <div class="col-md-3 col-sm-3" style="right: 30px">
-        <a href="good/#(o.good_uuid)" class="no-decoration">#(o.good_name)</a>
-        <p class="order-number">订单号：#(o.order_number)</p>
-        <p class="order-number">下单时间：#(o.order_time)</p></div>
-    <div class="col-md-3 col-sm-3">
-        <a href="/store/#(o.shop_uuid)" class="no-decoration"><strong>店铺：#(o.shop_name)</strong></a>
-        <p><strong>收货地址：</strong>#(o.reciver_address)</p>
-    </div>
-    <div class="col-md-1 col-sm-1"><strong>¥#(o.price)</strong></div>
-    <div class="col-md-1 col-sm-1">#(o.count)个</div>
-    <div class="col-md-1 col-sm-1"></div>
+    #include("baseOrder.html")
     <div class="col-md-1 col-sm-1">
         <p>
             <button class="btn-sm btn-link">申请退款</button>
