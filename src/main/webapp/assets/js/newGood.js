@@ -1,4 +1,4 @@
-KindEditor.create('textarea.kindeditor', {
+var editor = KindEditor.create('textarea.kindeditor', {
     basePath: '//cdn.bootcss.com/zui/1.7.0/lib/kindeditor/',
     bodyClass: 'article-content',
     resizeType: 1,
@@ -10,6 +10,7 @@ KindEditor.create('textarea.kindeditor', {
         'insertunorderedlist', '|', 'emoticons'
     ]
 });
+
 
 $(document).ready(function () {
     var captchaImg = $('.captcha');
