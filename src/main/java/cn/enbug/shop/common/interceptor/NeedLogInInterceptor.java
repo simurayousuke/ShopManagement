@@ -1,6 +1,7 @@
 package cn.enbug.shop.common.interceptor;
 
 import cn.enbug.shop.common.kit.RedisKit;
+import cn.enbug.shop.common.kit.UrlKit;
 import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.UserService;
 import com.jfinal.aop.Interceptor;
@@ -19,7 +20,9 @@ public class NeedLogInInterceptor implements Interceptor {
         Controller c = inv.getController();
         User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
         if (null == user) {
-            c.redirect("/login");
+            String redirect = inv.getControllerKey() + "/" + inv.getMethodName();
+            redirect = UrlKit.encode(redirect, "utf-8");
+            c.redirect("/login?" + redirect);
         } else {
             c.setAttr("user", user);
             inv.invoke();
