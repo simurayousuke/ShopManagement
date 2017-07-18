@@ -53,9 +53,12 @@ $(document).ready(function () {
             name: name,
             phone: phone
         };
+        var button = $('#new-address-button');
+        button.prop('disabled', true);
         $.post('/user/modify/addaddress', data, function (data) {
             if (!data.status) {
                 $.msg(data.msg);
+                button.removeProp('disabled');
             } else {
                 $('form').reset();
                 location.reload();
