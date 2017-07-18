@@ -11,6 +11,7 @@ KindEditor.create('textarea.kindeditor', {
     ]
 });
 
+
 $(document).ready(function () {
     var captchaImg = $('.captcha');
 
