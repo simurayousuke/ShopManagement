@@ -14,7 +14,7 @@ $(document).ready(function () {
                 });
             } else {
                 if (data.code === -1) {
-                    location.href = encodeURIComponent("login?" + location.pathname + "?add=" + add);
+                    location.href = "login?" + encodeURIComponent(location.pathname + "?add=" + add);
                 }
                 $.alert('Error', '添加失败，失败原因' + data.msg);
             }
@@ -54,7 +54,7 @@ $(document).ready(function () {
                 });
             } else {
                 if (data.code === -1) {
-                    location.href = encodeURIComponent("login?" + location.pathname + "?add=" + countInput.val());
+                    location.href = "login?" + encodeURIComponent(location.pathname + "?add=" + countInput.val());
                 }
                 $.alert('Error', '添加失败，失败原因' + data.msg);
             }
