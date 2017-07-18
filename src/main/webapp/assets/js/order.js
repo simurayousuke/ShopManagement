@@ -1,17 +1,19 @@
 $('#comment-button').click(function () {
 
-
-    $.prompt("请输入评论", "text", function (result) {
-        if (result === null) {
-            return;
-        }
-        $.post('', {comment: result}, function (data) {
+    $('.pay-button').click(function () {
+        var that = $(this);
+        var order = that.parent().find('span').innerText.substr(4);
+        $.post('/order/pay', {order: order}, function (data) {
             if (data.status) {
-                $.msg('评论成功');
-                location.reload();
+                $.warn('支付成功！', function () {
+                    location.reload();
+                });
             } else {
-                $.msg('评论失败');
+                $.alert('错误', data.msg);
             }
+        }, function () {
+            $.alert('错误', '网络异常');
         });
     });
+
 });
