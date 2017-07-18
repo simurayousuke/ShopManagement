@@ -43,6 +43,7 @@ $(document).ready(function () {
             if (!data.status) {
                 $.msg(data.msg);
             } else {
+                $('form').reset();
                 location.reload();
             }
         });
