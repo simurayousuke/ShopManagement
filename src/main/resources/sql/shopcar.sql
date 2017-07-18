@@ -1,5 +1,5 @@
 #sql("findByUserId")
-SELECT * FROM t_shop_car WHERE user_id = #para(0);
+SELECT * FROM t_shop_car WHERE user_id = #para(0) ORDER BY id;
 #end
 #sql("findById")
 SELECT * FROM t_shop_car WHERE id = #para(0);
@@ -20,5 +20,5 @@ t_good.number
 FROM t_shop_car
  LEFT JOIN t_shop ON t_shop_car.shop_id = t_shop.id
  LEFT JOIN t_good ON t_shop_car.good_id = t_good.id
- WHERE t_shop_car.user_id = #para(0);
+ WHERE t_shop_car.user_id = #para(0) ORDER BY id;
 #end

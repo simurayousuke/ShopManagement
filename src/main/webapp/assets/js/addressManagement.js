@@ -8,6 +8,7 @@ $(document).ready(function () {
                 $.alert("错误", data.msg);
             } else {
                 $.msg("设置成功");
+                location.reload();
             }
         });
 
