@@ -1,6 +1,7 @@
 package cn.enbug.shop.store;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.service.GoodService;
 import cn.enbug.shop.common.service.ShopService;
 import com.jfinal.aop.Before;
@@ -16,7 +17,9 @@ import com.jfinal.ext.interceptor.GET;
 public class StoreController extends BaseController {
 
     public void index() {
-        setAttr("list", GoodService.ME.getGoodListByShopId(ShopService.ME.findShopByUuid(getPara()).getId()));
+        Shop shop = ShopService.ME.findShopByUuid(getPara());
+        setAttr("shop", shop);
+        setAttr("list", GoodService.ME.getGoodListByShopId(shop.getId()));
         render("index.html");
     }
 
