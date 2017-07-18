@@ -10,30 +10,30 @@
             #include("address.html",addressList=addresses)
             <hr class="hr-secure" style="margin-top: 0;">
             <div class="info-title">新增地址</div>
-            <form action="" class="form-horizontal col-md-9" id="create-address-form" style="margin-left: 90px;">
+            <form class="form-horizontal" id="create-address-form" style="margin: 0 auto;width: 700px;">
                 <div class="input-group" style="width: 60%">
                     <span class="input-group-addon">
                         <em class="icon icon-user"></em>
                     </span>
-                    <input type="text" class="form-control" placeholder="收货人姓名">
+                    <input type="text" class="form-control" name="name" placeholder="收货人姓名">
                     <span class="input-group-addon">
                         <em class="icon icon-phone-sign"></em>
                     </span>
-                    <input type="text" class="form-control" placeholder="收货人电话号码">
+                    <input type="text" class="form-control" name="phone" placeholder="收货人电话号码">
                 </div>
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon"><em class="icon icon-map-marker"></em></span>
-                    <input type="text" class="form-control" placeholder="省">
+                    <input type="text" class="form-control" name="province" placeholder="省">
                     <span class="input-group-addon fix-border fix-padding"></span>
-                    <input type="text" class="form-control" placeholder="市/县">
+                    <input type="text" class="form-control" name="city" placeholder="市/县">
                     <span class="input-group-addon fix-border fix-padding"></span>
-                    <input type="text" class="form-control" placeholder="区">
+                    <input type="text" class="form-control" name="dist" placeholder="区">
                     <span class="input-group-addon fix-border fix-padding"></span>
-                    <input type="text" class="form-control" placeholder="街道" style="width: 130%">
+                    <input type="text" class="form-control" name="detail" placeholder="街道" style="width: 130%">
                 </div>
                 <br>
-                <button class="btn btn-primary btn-block" style="width: 80px;margin: 0 auto;" type="button">增添地址
+                <button class="btn btn-primary btn-block" style="width: 80px;margin: 0 auto;" type="submit">增添地址
                 </button>
             </form>
         </div>
@@ -47,4 +47,5 @@
 
 #define js()
 <script src="assets/js/userCenter.js"></script>
+<script src="assets/js/addressManagement.js"></script>
 #end
