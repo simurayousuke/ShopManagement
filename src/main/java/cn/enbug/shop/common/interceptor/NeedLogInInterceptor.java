@@ -20,12 +20,7 @@ public class NeedLogInInterceptor implements Interceptor {
         Controller c = inv.getController();
         User user = UserService.ME.validateToken(c.getCookie(RedisKit.COOKIE_ID));
         if (null == user) {
-            String key = inv.getControllerKey();
-            String method = inv.getMethodName();
-            if (method.equalsIgnoreCase("/index")) {
-                method = "";
-            }
-            String redirect = key + method;
+            String redirect = c.getRequest().getRequestURI();
             redirect = UrlKit.encode(redirect, "utf-8");
             c.redirect("/login?" + redirect);
         } else {
