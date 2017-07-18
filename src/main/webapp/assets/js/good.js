@@ -33,6 +33,9 @@ $(document).ready(function () {
                     }
                 });
             } else {
+                if (data.code === -1) {
+                    location.href = "login?" + location.pathname;
+                }
                 $.alert('Error', '添加失败，失败原因' + data.msg);
             }
         }, function () {

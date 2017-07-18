@@ -109,14 +109,27 @@ public class ShopCarService {
      * @return boolean
      */
     public boolean add(String token, Good good, int count) {
-        if (null == good) {
+        return add(RedisKit.getUserByToken(token), good, count);
+    }
+
+    /**
+     * add
+     *
+     * @param token    token
+     * @param goodUuid good uuid
+     * @param count    count
+     * @return boolean
+     */
+    public boolean add(String token, String goodUuid, int count) {
+        Good good = GoodService.ME.findGoodByUuid(goodUuid);
+        return add(token, good, count);
+    }
+
+    public boolean add(User user, Good good, int count) {
+        if (null == good || null == user) {
             return false;
         }
         if (good.getNumber() < count) {
-            return false;
-        }
-        User user = RedisKit.getUserByToken(token);
-        if (null == user) {
             return false;
         }
         ShopCar shopCar = getShopCarByUserAndGood(user, good);
@@ -135,19 +148,6 @@ public class ShopCarService {
             shopCar.setCount(shopCar.getCount() + count);
             return shopCar.update();
         }
-    }
-
-    /**
-     * add
-     *
-     * @param token    token
-     * @param goodUuid good uuid
-     * @param count    count
-     * @return boolean
-     */
-    public boolean add(String token, String goodUuid, int count) {
-        Good good = GoodService.ME.findGoodByUuid(goodUuid);
-        return add(token, good, count);
     }
 
     /**

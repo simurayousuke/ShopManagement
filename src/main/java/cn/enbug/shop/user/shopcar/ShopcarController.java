@@ -22,6 +22,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.service.AddressService;
 import cn.enbug.shop.common.service.ShopCarService;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.POST;
 
@@ -42,6 +43,7 @@ public class ShopcarController extends BaseController {
     }
 
     @Before(POST.class)
+    @Clear(NeedLogInInterceptor.class)
     public void add() {
         renderJson(ShopcarService.ME.add(getCookie(RedisKit.COOKIE_ID),
                 getPara("uuid"), getParaToInt("count")));
