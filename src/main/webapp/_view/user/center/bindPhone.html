@@ -53,4 +53,7 @@
 <script src="assets/js/userCenter.js"></script>
 <script src="assets/js/bind.js"></script>
 <script src="assets/js/bindPhone.js"></script>
+#if(!user.phone)
+<script>$.alert('Tip', '根据《中华人民共和国网络安全法》规定，若要使用EnBug购物网的服务，必须完成实名认证，请绑定手机号。');</script>
+#end
 #end
