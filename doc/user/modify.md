@@ -10,6 +10,17 @@
 * avator 头像key
 
 </li>
+<li>添加收货地址
+
+请求地址：/user/modify/address
+
+参数:
+
+* name 收货人姓名
+* phone 收货人手机号
+* address 收货地址
+
+</li>
 </ol>
 
 * 返回值:

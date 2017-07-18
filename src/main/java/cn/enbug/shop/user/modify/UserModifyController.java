@@ -24,7 +24,7 @@ import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 @Before({POST.class, NeedLogInInterceptor.class})
@@ -32,6 +32,11 @@ public class UserModifyController extends BaseController {
 
     public void avator() {
         renderJson(UserModifyService.ME.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
+    }
+
+    public void addaddress() {
+        renderJson(UserModifyService.ME.addAddress(getCookie(RedisKit.COOKIE_ID), getPara("name"),
+                getPara("phone"), getPara("address")));
     }
 
 }

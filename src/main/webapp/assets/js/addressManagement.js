@@ -36,10 +36,10 @@ $(document).ready(function () {
         }
         var data = {
             address: province + city + dist + detail,
-            reciver_name: name,
+            name: name,
             phone: phone
         };
-        $.post('', data, function (data) {
+        $.post('/user/modify/addaddress', data, function (data) {
             if (!data.status) {
                 $.msg(data.msg);
             } else {

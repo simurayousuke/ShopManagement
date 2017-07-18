@@ -19,10 +19,11 @@ package cn.enbug.shop.user.modify;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.AddressService;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class UserModifyService {
@@ -36,6 +37,10 @@ public class UserModifyService {
         }
         user.setAvator(avator);
         return user.update() ? Ret.succeed() : Ret.fail("设置失败");
+    }
+
+    public Ret addAddress(String token, String name, String phone, String address) {
+        return AddressService.ME.insert(token, name, phone, address) ? Ret.succeed() : Ret.fail("设置失败");
     }
 
 }
