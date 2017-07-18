@@ -153,7 +153,7 @@ public class UserService {
         }
         user.setMoney(user.getMoney().subtract(value));
         to.setMoney(to.getMoney().add(value));
-        if (!user.update() || to.update()) {
+        if (!user.update() || !to.update()) {
             throw new MoneyTransferException("Fail to transfer money.");
         }
         return true;
