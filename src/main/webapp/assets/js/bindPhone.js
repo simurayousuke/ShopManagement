@@ -14,7 +14,7 @@ $(document).ready(function () {
             $.msg('请输入验证码');
             return;
         }
-        $.post('', data, function (data) {
+        $.post('/user/modify/bindphone', data, function (data) {
             if (!data.status) {
                 $.msg(data.msg);
             } else {

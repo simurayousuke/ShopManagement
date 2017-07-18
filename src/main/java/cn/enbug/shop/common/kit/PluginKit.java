@@ -85,6 +85,7 @@ public class PluginKit {
         me.add(getRedisPlugin(RedisKit.ACTIVE_CODE_FOR_EMAIL, PropKit.getInt("redis.database.activeEmail")));
         me.add(getRedisPlugin(RedisKit.IMAGE_CAPTCHA, PropKit.getInt("redis.database.imageCaptcha")));
         me.add(getRedisPlugin(RedisKit.ORDER_ID, PropKit.getInt("redis.database.orderId")));
+        me.add(getRedisPlugin(RedisKit.BIND_EMAIL, PropKit.getInt("redis.database.bindEmail")));
         me.add(getOssPlugin());
         me.add(getCron4jPlugin());
         me.add(getOpenSearchPlugin());

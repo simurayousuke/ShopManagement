@@ -16,22 +16,35 @@
 
 package cn.enbug.shop.user.modify;
 
+import cn.enbug.shop.common.bean.Email;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.AddressService;
+import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.UserService;
 
 import java.math.BigDecimal;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.3
+ * @version 1.0.6
  * @since 1.0.0
  */
 public class UserModifyService {
 
     public static final UserModifyService ME = new UserModifyService();
+
+    private boolean sendBindEmail(String email, User user) {
+        String activeCode = RedisKit.setActiveCodeForEmailAndGet(email);
+        RedisKit.setUserForActiveCode(activeCode, user);
+        String title = "您正在绑定邮箱";
+        String url = "https://shop.yangzhizhuang.net/user/modify/active/" + activeCode;
+        String context = "您正在EnBug购物网绑定邮箱，<a href=\"" + url + "\">点击绑定</a>" +
+                "<br>若上方链接不可用，您也可以复制地址到浏览器地址栏访问" +
+                "<br>" + url;
+        return EmailService.ME.send(new Email(email, title, context), "bind");
+    }
 
     Ret setAvator(String token, String avator) {
         User user = RedisKit.getUserByToken(token);
@@ -52,6 +65,59 @@ public class UserModifyService {
 
     Ret setDefaultAddress(String token, int id) {
         return AddressService.ME.setDefault(token, id) ? Ret.succeed() : Ret.fail("设置失败！");
+    }
+
+    Ret bindPhone(String token, String number, String captcha) {
+        User curr = UserService.ME.findUserByPhoneNumber(number);
+        if (curr != null) {
+            return Ret.fail("手机号已被使用");
+        }
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return Ret.fail("登录超时");
+        }
+        if (!captcha.equals(RedisKit.getCaptcha(number))) {
+            return Ret.fail("手机验证码错误");
+        }
+        return user.setPhone(number).update() ? Ret.succeed() : Ret.fail("设置失败");
+    }
+
+    Ret bindEmail(String token, String email) {
+        User curr = UserService.ME.findUserByEmail(email);
+        if (curr != null && curr.getEmailStatus() != 0) {
+            return Ret.fail("邮箱已被使用");
+        }
+        User user = RedisKit.getUserByToken(token);
+        if (null == user) {
+            return Ret.fail("登录超时");
+        }
+        if (sendBindEmail(email, user)) {
+            return Ret.succeed();
+        } else {
+            return Ret.fail("邮件发送失败");
+        }
+    }
+
+    boolean activeEmail(String code) {
+        User user = RedisKit.getUserFromActiveCode(code);
+        String email = RedisKit.getEmailAddressByActiveCode(code);
+        if (null == user || null == email) {
+            return false;
+        }
+        User curr = UserService.ME.findUserByEmail(email);
+        if (curr != null) {
+            if (curr.getEmailStatus() != 0) {
+                return false;
+            } else {
+                curr.delete();
+            }
+        }
+        if (user.setEmail(email).setEmailStatus(1).update()) {
+            RedisKit.delActiveCodeForEmail(code);
+            RedisKit.delUserForActiveCode(code);
+            return true;
+        }
+        return false;
     }
 
 }

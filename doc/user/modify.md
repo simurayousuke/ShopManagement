@@ -30,6 +30,30 @@
 * id 收货地址id
 
 </li>
+<li>绑定手机
+
+请求地址：/user/modify/bindphone
+
+参数:
+
+* phone 手机号
+* phone_captcha 手机验证码
+
+</li>
+<li>绑定邮箱
+
+请求地址：/user/modify/bindemail
+
+参数:
+
+* email 邮箱地址
+
+</li>
+<li>激活邮箱
+
+请求地址：/user/modify/active/激活码
+
+</li>
 </ol>
 
 * 返回值:

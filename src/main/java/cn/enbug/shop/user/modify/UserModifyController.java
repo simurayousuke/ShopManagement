@@ -20,6 +20,7 @@ import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.POST;
 
 import java.math.BigDecimal;
@@ -47,6 +48,21 @@ public class UserModifyController extends BaseController {
 
     public void defaultaddress() {
         renderJson(UserModifyService.ME.setDefaultAddress(getCookie(RedisKit.COOKIE_ID), getParaToInt("id")));
+    }
+
+    public void bindphone() {
+        renderJson(UserModifyService.ME.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone"), getPara("phone_captcha")));
+    }
+
+    public void bindemail() {
+        renderJson(UserModifyService.ME.bindEmail(getCookie(RedisKit.COOKIE_ID), getPara("email")));
+    }
+
+    @Clear(POST.class)
+    public void active() {
+        UserModifyService.ME.activeEmail(getPara());
+        redirect("user/center");
+
     }
 
 }

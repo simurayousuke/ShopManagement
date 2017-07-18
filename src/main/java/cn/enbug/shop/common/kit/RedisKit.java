@@ -44,6 +44,7 @@ public class RedisKit {
     public static final String ACTIVE_CODE_FOR_EMAIL = "activeCodeForEmail";
     public static final String IMAGE_CAPTCHA = "imageCaptcha";
     public static final String ORDER_ID = "orderId";
+    public static final String BIND_EMAIL = "bindEmail";
 
     private RedisKit() {
 
@@ -207,6 +208,18 @@ public class RedisKit {
 
     public static long getCurrentOrderId() {
         return Redis.use(ORDER_ID).incr(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE));
+    }
+
+    public static void setUserForActiveCode(String code, User user) {
+        Redis.use(BIND_EMAIL).setex(code, 7200, user);
+    }
+
+    public static User getUserFromActiveCode(String code) {
+        return Redis.use(BIND_EMAIL).get(code);
+    }
+
+    public static void delUserForActiveCode(String code) {
+        Redis.use(BIND_EMAIL).del(code);
     }
 
 }

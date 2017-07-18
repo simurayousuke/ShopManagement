@@ -14,11 +14,11 @@ $(document).ready(function () {
             $.msg('请输入验证码');
             return;
         }
-        $.post('', data, function (data) {
+        $.post('/user/modify/bindemail', data, function (data) {
             if (!data.status) {
                 $.msg(data.msg);
             } else {
-                $.msg('绑定成功');
+                $.msg('已发送邮件，请前往邮箱查看。');
             }
         });
     });
