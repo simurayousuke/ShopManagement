@@ -23,7 +23,6 @@ $(document).ready(function () {
         });
     });
 
-    var captchaImg = $('.captcha');
     var captchaInput = $('#input-captcha');
     var phone = $('#phone');
 
