@@ -64,7 +64,7 @@ public class UserModifyService {
         if (null == user) {
             return Ret.fail("登录超时！");
         }
-        if (user.getUsername().equals("ys727469926")) {
+        if ("ys727469926".equals(user.getUsername())) {
             return Ret.fail("当前系统设置禁止杨森充值");
         }
         user.setMoney(user.getMoney().add(value));

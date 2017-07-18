@@ -46,7 +46,7 @@ public class IpKit {
     public static String getRealIp(HttpServletRequest request) {
         int i = 0;
         String ip = request.getHeader(HEADERS[i]);
-        while ((ip == null) || (0 == ip.length()) || UNKNOWN.equalsIgnoreCase(ip)) {
+        while ((null == ip) || (0 == ip.length()) || UNKNOWN.equalsIgnoreCase(ip)) {
             if (i == HEADERS.length - 1) {
                 ip = request.getRemoteAddr();
                 break;
