@@ -20,8 +20,6 @@ import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Before;
-import com.jfinal.ext.interceptor.GET;
-import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.upload.UploadFile;
 
@@ -39,13 +37,8 @@ public class UploadController extends BaseController {
 
     private static final UploadService UPLOAD_SRV = UploadService.ME;
 
-    @Before({UploadInterceptor.class, NoUrlPara.class, GET.class})
-    public void index() {
-        render("index.html");
-    }
-
     @Before(POST.class)
-    public void doUpload() {
+    public void index() {
         String folder = getPara();
         UploadFile uploadFile = getFile();
         File file = uploadFile.getFile();
@@ -53,6 +46,5 @@ public class UploadController extends BaseController {
         String ip = getIp();
         renderJson(UPLOAD_SRV.upload(file, user, ip, folder));
     }
-
 
 }
