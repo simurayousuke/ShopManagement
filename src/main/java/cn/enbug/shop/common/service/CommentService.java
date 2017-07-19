@@ -19,6 +19,8 @@ package cn.enbug.shop.common.service;
 import cn.enbug.shop.common.model.Comment;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Duang;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 
 import java.util.List;
 
@@ -47,6 +49,10 @@ public class CommentService {
      */
     public List<Comment> getListByGoodId(int goodId) {
         return COMMENT_DAO.find(COMMENT_DAO.getSqlPara("comment.findByGoodId", goodId));
+    }
+
+    public List<Record> getCommentRecordByGoodId(int goodId) {
+        return Db.find(Db.getSqlPara("comment.findRecordByGoodId", goodId));
     }
 
     /**
