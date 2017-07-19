@@ -1,0 +1,45 @@
+#set(title="用户中心")
+#@layout()
+#define body()
+<div class="container main">
+    <div style="height: 50px"></div>
+    <div class="container-fixed" style="max-width: 990px">
+        #include("centerNav.html",modiypwd='class="active" onclick="return false;"')
+        <div class="center-content">
+            <div class="info-title">绑定邮箱</div>
+            <form method="post" class="bind-form" style="width: 300px;margin: 100px auto;">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <em class="icon icon-envelope"></em>
+                    </span>
+                    <input type="text" class="form-control" placeholder="邮箱" name="email" id="email">
+                </div>
+                <br>
+                <div class="input-group" style="width: 100%;margin-bottom: 0;">
+                    <div class="input-group" style="width: calc(100% - 90px);float: left;">
+                        <span class="input-group-addon">
+                            <em class="icon icon-wrench"></em>
+                        </span>
+                        <input type="text" class="form-control" style="" placeholder="验证码" name="captcha">
+                    </div>
+                    <img alt="" src="" class="captcha small-element" title="点击刷新">
+                </div>
+                <br>
+                <button class="btn btn-primary btn-block" type="submit">发送邮件</button>
+            </form>
+        </div>
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/userCenter.css">
+<link rel="stylesheet" href="assets/css/login.css">
+<link rel="stylesheet" href="assets/css/bind.css">
+#end
+
+#define js()
+<script src="assets/js/userCenter.js"></script>
+<script src="assets/js/bind.js"></script>
+<script src="assets/js/bindEmail.js"></script>
+#end

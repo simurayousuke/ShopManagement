@@ -53,6 +53,10 @@ public class UserCenterController extends BaseController {
         render("bindEmail.html");
     }
 
+    public void modifypwd() {
+        render("modifyPwd.html");
+    }
+
     public void addressmanage() {
         setAttr("addresses", AddressService.ME.getListByToken(getCookie(RedisKit.COOKIE_ID)));
         render("addressManage.html");
