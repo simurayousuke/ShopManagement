@@ -35,10 +35,4 @@ public class PhoneLoginValidator extends BaseValidator {
         validatePhoneCaptcha("phone", "phone_captcha", Ret.MSG, "wrong phone captcha");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

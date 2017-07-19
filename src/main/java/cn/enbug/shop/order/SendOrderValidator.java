@@ -33,10 +33,4 @@ public class SendOrderValidator extends BaseValidator {
         validateRequired("id", Ret.MSG, "请选择商品");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

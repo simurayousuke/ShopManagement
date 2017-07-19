@@ -33,10 +33,4 @@ public class ChargeValidator extends BaseValidator {
         validateMoney("value", Ret.MSG, "充值金额格式错误");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

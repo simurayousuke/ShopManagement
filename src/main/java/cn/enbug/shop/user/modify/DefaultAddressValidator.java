@@ -32,10 +32,4 @@ public class DefaultAddressValidator extends BaseValidator {
         validateInteger("id", Ret.MSG, "请选择地址");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

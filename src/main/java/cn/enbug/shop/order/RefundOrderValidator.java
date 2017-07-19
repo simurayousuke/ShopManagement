@@ -34,10 +34,4 @@ public class RefundOrderValidator extends BaseValidator {
         validateInteger("id", Ret.MSG, "请输入商品id");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

@@ -32,10 +32,4 @@ public class AvatorModifyValidator extends BaseValidator {
         validateFile("avator", Ret.MSG, "请选择用户头像");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

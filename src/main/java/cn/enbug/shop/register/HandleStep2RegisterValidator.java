@@ -1,6 +1,5 @@
 package cn.enbug.shop.register;
 
-import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.validator.BaseValidator;
 import cn.enbug.shop.login.LoginService;
@@ -17,21 +16,13 @@ public class HandleStep2RegisterValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        String code = c.getPara("activeCode");
+        validateRequired("activeCode", Ret.MSG, "请输入激活码");
+        validateString("username", 1, 20, Ret.MSG, "用户名长度错误");
+        validateString("pwd", 6, 32, Ret.MSG, "密码长度错误");
         String username = c.getPara("username");
         if (null != LoginService.me.findUserByUsername(username)) {
             addError(Ret.MSG, "User already exists.");
         }
-        String phone = RedisKit.getPhoneNumberByActiveCode(code);
-        if (null != LoginService.me.findUserByPhone(phone)) {
-            addError(Ret.MSG, "");
-        }
-    }
-
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
     }
 
 }

@@ -22,7 +22,8 @@ import com.jfinal.core.Controller;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class AddAddressValidator extends BaseValidator {
@@ -31,13 +32,7 @@ public class AddAddressValidator extends BaseValidator {
     protected void validate(Controller c) {
         validateRequired("name", Ret.MSG, "请输入收货人姓名");
         validatePhone("phone", Ret.MSG, "请输入正确格式手机号");
-        validateEmail("email", Ret.MSG, "请输入正确格式邮箱");
-    }
-
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
+        validateRequired("address", Ret.MSG, "请输入地址");
     }
 
 }

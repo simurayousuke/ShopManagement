@@ -4,19 +4,37 @@ $(document).ready(function () {
     var phone = $('#phone');
 
     var updateCaptcha = function () {
-        captchaImg.prop('src', '/captcha/image?v=' + Math.random());
+        captchaImg.prop('src', 'captcha/image?v=' + Math.random());
     };
 
     var captchaInput = $('#input-captcha-phone');
     updateCaptcha();
 
-    $('[data-tab]').on('show.zui.tab', function () {
-        var target = $(this).attr("data-target");
-        if (target === '#register-email') {
-            captchaInput = $('#input-captcha-email');
-        } else if (target === '#register-phone') {
-            captchaInput = $('#input-captcha-phone');
+    captchaImg.click(function () {
+        updateCaptcha();
+    });
+
+    $('#email-form').submit(function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var data = $this.serializeObject();
+        var email = data.email;
+        var captcha = data.captcha;
+        if (!$.validateEmailFormat(email)) {
+            $.msg('邮箱格式错误');
+            return;
         }
+        if (captcha.trim().length !== 4) {
+            $.msg('请输入验证码');
+            return;
+        }
+        $.post('/forget/validateEmail', data, function (data) {
+            if (!data.status) {
+                $.msg(data.msg);
+            } else {
+                $.msg('邮件发送成功,请查收');
+            }
+        });
     });
 
     $('#send-button').click(function () {
@@ -30,7 +48,7 @@ $(document).ready(function () {
         that.prop('disabled', true);
         $.post('/captcha/phone', {captcha: captcha, phone: number}, function (data) {
             if (!data.status) {
-                $.msg('发送失败');
+                $.msg(data.msg);
                 updateCaptcha();
                 that.removeProp('disabled');
                 return;
@@ -39,7 +57,7 @@ $(document).ready(function () {
             var count = 59;
             var timer = setInterval(function () {
                 that.prop('value', count-- + 's');
-                if (count === 0) {
+                if (0 === count) {
                     that.prop('value', '重新获取');
                     that.removeProp('disabled');
                     clearInterval(timer);
@@ -50,30 +68,6 @@ $(document).ready(function () {
             that.removeProp('disabled');
         });
 
-    });
-
-    $('#email-form').submit(function (e) {
-        e.preventDefault();
-        var form = $(this);
-        var data = form.serializeObject();
-        var email = data.email;
-        var captcha = data.captcha;
-        if (!$.validateEmailFormat(email)) {
-            $.msg('邮箱格式错误');
-            return;
-        }
-        if (captcha.length !== 4) {
-            $.msg('验证码长度应为4位');
-            return;
-        }
-        $.post('/register/email', data, function (data) {
-            if (data.status) {
-                $.msg('邮件已发送')
-            } else {
-                $.msg(data.msg);
-                updateCaptcha();
-            }
-        });
     });
 
     $('#phone-form').submit(function (e) {
@@ -90,18 +84,14 @@ $(document).ready(function () {
             $.msg('请输入验证码');
             return;
         }
-        $.post('/register/phone', data, function (data) {
+        $.post('/forget/validatePhone', data, function (data) {
             if (data.status) {
-                location.href = '/register/step2/' + data.activeCode;
+                location.href = '/forget/reset/' + data.code;
             } else {
                 $.msg(data.msg);
                 updateCaptcha();
             }
         });
-    });
-
-    captchaImg.click(function () {
-        updateCaptcha();
     });
 
 });

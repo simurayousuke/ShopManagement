@@ -33,10 +33,4 @@ public class AddShopcarValidator extends BaseValidator {
         validateInteger("count", Ret.MSG, "请输入数量");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

@@ -11,32 +11,34 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  limitations under the License.
  */
 
-package cn.enbug.shop.user.modify;
+package cn.enbug.shop.forget;
 
 import cn.enbug.shop.common.kit.Ret;
-import cn.enbug.shop.common.model.User;
-import cn.enbug.shop.common.service.UserService;
 import cn.enbug.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.StrKit;
 
 /**
  * @author Hu Wenqiang
  * @version 1.0.0
  * @since 1.0.0
  */
-public class BindEmailValidator extends BaseValidator {
+public class ResetValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateEmail("email", Ret.MSG, "邮箱格式错误");
-        String email = c.getPara("email");
-        User user = UserService.ME.findUserByEmail(email);
-        if (null != user && 0 != user.getEmailStatus()) {
-            addError(Ret.MSG, "邮箱已被使用");
+        String code = c.getPara();
+        if (StrKit.isBlank(code)) {
+            addError(Ret.MSG, "激活码不存在");
         }
+    }
+
+    @Override
+    protected void handleError(Controller c) {
+        c.redirect("/forget");
     }
 
 }

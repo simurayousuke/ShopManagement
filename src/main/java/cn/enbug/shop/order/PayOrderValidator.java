@@ -32,10 +32,4 @@ public class PayOrderValidator extends BaseValidator {
         validateRequired("order", Ret.MSG, "请输入订单号");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

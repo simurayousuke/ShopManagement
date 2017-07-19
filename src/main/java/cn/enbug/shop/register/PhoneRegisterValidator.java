@@ -39,10 +39,4 @@ public class PhoneRegisterValidator extends BaseValidator {
         }
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }
