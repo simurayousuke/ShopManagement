@@ -10,16 +10,16 @@ $(document).ready(function () {
     function comment(order, id) {
         $.form("<div>" +
             "<label class=\"radio-inline\">" +
-            " <input type=\"radio\" id=\"good-cmt\" name=\"positive\"> 好评" +
+            " <input type=\"radio\" id=\"good-cmt\" name=\"good\"> 好评" +
             "  </label>" +
             "  <label class=\"radio-inline\">" +
-            "  <input type=\"radio\" name=\"negative\">差评" +
+            "  <input type=\"radio\" name=\"good\">差评" +
             "  </label>" +
             " </div>" +
             " <div>" +
             " <textarea id='cmt-text' style='resize: none' class=\"form-control\" placeholder=\"评论\"></textarea>" +
             " </div>", "评论", "var context=$('#cmt-text').val();" +
-            "var good=$('#good-cmt').attr('checked')?true:false;" +
+            "var good=$('#good-cmt:checked').length===1?true:false;" +
             "var order='" + order + "';" +
             "var id=" + id + ";" +
             "$.post('/order/comment',{order:order,id:id,context:context,good:good},function(data){" +
