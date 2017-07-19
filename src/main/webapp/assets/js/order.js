@@ -47,4 +47,38 @@ $(document).ready(function () {
         });
     });
 
+    $('.refund-button').click(function () {
+        var that = $(this);
+        var order = that.parent().parent().parent().find('.order-number')[0].innerText.substr(4);
+        var id = that.data().goodid;
+        $.post('/order/refund', {order: order, id: id}, function (data) {
+            if (data.status) {
+                $.warn('申请成功！', function () {
+                    location.reload();
+                });
+            } else {
+                $.alert('错误', data.msg);
+            }
+        }, function () {
+            $.alert('错误', '网络异常');
+        });
+    });
+
+    $('.check-button').click(function () {
+        var that = $(this);
+        var order = that.parent().parent().parent().find('.order-number')[0].innerText.substr(4);
+        var id = that.data().goodid;
+        $.post('/order/check', {order: order, id: id}, function (data) {
+            if (data.status) {
+                $.warn('确认收货成功，记得评价哦！', function () {
+                    location.reload();
+                });
+            } else {
+                $.alert('错误', data.msg);
+            }
+        }, function () {
+            $.alert('错误', '网络异常');
+        });
+    });
+
 });
