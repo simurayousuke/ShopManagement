@@ -31,7 +31,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.14
+ * @version 1.2.15
  * @since 1.0.0
  */
 public class UserService {
@@ -219,6 +219,63 @@ public class UserService {
     public BigDecimal getMoney(String token) {
         User user = RedisKit.getUserByToken(token);
         return null == token ? new BigDecimal(0) : user.getMoney();
+    }
+
+    /**
+     * change password.
+     *
+     * @param old old password
+     * @param pwd new password
+     * @return boolean
+     */
+    public boolean changePassword(String token, String old, String pwd) {
+        User user = RedisKit.getUserByToken(token);
+        return null != user && hash(old, user.getSalt()).equals(user.getPwd()) && user.setPwd(hash(pwd, user.getSalt())).update();
+    }
+
+    /**
+     * resetPasswordByPhone
+     *
+     * @param activeCode active code
+     * @param pwd        new password
+     * @return boolean
+     */
+    public boolean resetPasswordByPhone(String activeCode, String pwd) {
+        String phone = RedisKit.getPhoneNumberByActiveCode(activeCode);
+        User user = findUserByPhoneNumber(phone);
+        return null != user && user.setPwd(hash(pwd, user.getSalt())).update();
+    }
+
+    /**
+     * resetPasswordByEmail
+     *
+     * @param activeCode active code
+     * @param pwd        new password
+     * @return boolean
+     */
+    public boolean resetPasswordByEmail(String activeCode, String pwd) {
+        String email = RedisKit.getEmailAddressByActiveCode(activeCode);
+        User user = findUserByEmail(email);
+        return null != user && user.setPwd(hash(pwd, user.getSalt())).update();
+    }
+
+    /**
+     * resetPassword
+     *
+     * @param activeCode active code
+     * @param pwd        password
+     * @return boolean
+     */
+    public boolean resetPassword(String activeCode, String pwd) {
+        User user;
+        String phone = RedisKit.getPhoneNumberByActiveCode(activeCode);
+        if (null == phone) {
+            String email = RedisKit.getEmailAddressByActiveCode(activeCode);
+            user = findUserByEmail(email);
+        } else {
+            user = findUserByPhoneNumber(phone);
+        }
+        return null != user && user.setPwd(hash(pwd, user.getSalt())).update();
     }
 
 }
