@@ -6,14 +6,16 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.0
+ * @author Hu Wenqiang
+ * @version 1.0.1
  * @since 1.0.0
  */
-@Before({POST.class, HasShopInterceptor.class})
+@Before({POST.class, NoUrlPara.class, HasShopInterceptor.class})
 public class ShopModifyController extends BaseController {
 
     private static final ShopModifyService SRV = ShopModifyService.ME;

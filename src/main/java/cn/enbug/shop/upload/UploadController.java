@@ -21,6 +21,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.upload.UploadFile;
 
@@ -30,7 +31,7 @@ import java.io.File;
  * 上传文件Controller
  *
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before(UploadValidator.class)
@@ -38,7 +39,7 @@ public class UploadController extends BaseController {
 
     private static final UploadService UPLOAD_SRV = UploadService.ME;
 
-    @Before({UploadInterceptor.class, GET.class})
+    @Before({UploadInterceptor.class, NoUrlPara.class, GET.class})
     public void index() {
         render("index.html");
     }

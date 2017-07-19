@@ -22,15 +22,16 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.service.AddressService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * @author Forrest Yang
  * @author Yang Zhizhuang
- * @author Forrest Yang
+ * @author Hu Wenqiang
  * @version 1.0.4
  * @since 1.0.0
  */
-@Before({GET.class, NeedLogInInterceptor.class})
+@Before({GET.class, NoUrlPara.class, NeedLogInInterceptor.class})
 public class UserCenterController extends BaseController {
 
     public void index() {

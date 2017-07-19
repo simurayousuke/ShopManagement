@@ -24,15 +24,16 @@ import cn.enbug.shop.common.service.ShopCarService;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
-@Before(NeedLogInInterceptor.class)
+@Before({NoUrlPara.class, NeedLogInInterceptor.class})
 public class ShopcarController extends BaseController {
 
     @Before(GET.class)

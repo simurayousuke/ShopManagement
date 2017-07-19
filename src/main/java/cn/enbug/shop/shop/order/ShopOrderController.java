@@ -22,15 +22,18 @@ import cn.enbug.shop.common.service.OrderService;
 import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * @author Yang Zhizhuang
  * @author Forrest Yang
- * @version 1.0.4
+ * @author Hu Wenqiang
+ * @version 1.0.5
  * @since 1.0.0
  */
-@Before({GET.class, HasShopInterceptor.class})
+@Before({GET.class, NoUrlPara.class, HasShopInterceptor.class})
 public class ShopOrderController extends BaseController {
+
     public void index() {
         setAttr("normalOrders", OrderService.ME.getUnPayedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         setAttr("payedOrders", OrderService.ME.getUnSentListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));

@@ -26,6 +26,7 @@ import cn.enbug.shop.shop.HasShopInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 import java.math.BigDecimal;
@@ -33,10 +34,11 @@ import java.util.List;
 
 /**
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @author Hu Wenqiang
+ * @version 1.0.3
  * @since 1.0.0
  */
-@Before(HasShopInterceptor.class)
+@Before({NoUrlPara.class, HasShopInterceptor.class})
 public class GoodAdminController extends BaseController {
 
     @Before(GET.class)
@@ -66,6 +68,7 @@ public class GoodAdminController extends BaseController {
         renderJson(GoodAdminService.ME.add(token, ip, name, description, price, avator, number));
     }
 
+    @Clear(NoUrlPara.class)
     public void edit() {
         setAttr("good", GoodService.ME.findGoodByUuid(getPara()));
         render("edit.html");
@@ -96,4 +99,5 @@ public class GoodAdminController extends BaseController {
             renderJson(Ret.fail("删除失败"));
         }
     }
+
 }

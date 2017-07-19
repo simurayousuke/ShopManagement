@@ -42,7 +42,8 @@ import com.jfinal.config.Routes;
  * This is the route config of the program.
  *
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @author Hu Wenqiang
+ * @version 1.0.3
  * @since 1.0.0
  */
 public class FrontRoutes extends Routes {
@@ -52,26 +53,32 @@ public class FrontRoutes extends Routes {
      */
     @Override
     public void config() {
+
         setBaseViewPath("/_view");
+
         add("/", IndexController.class, "index");
         add("/login", LoginController.class);
         add("/register", RegisterController.class);
         add("/captcha", CaptchaController.class);
         add("/upload", UploadController.class);
-        add("/shop/center", ShopCenterController.class);
         add("/good", GoodController.class);
         add("/search", SearchController.class);
+        add("/suggest", SuggestController.class);
+        add("/store", StoreController.class);
+        add("/order", OrderController.class);
+
+        add("/shop/center", ShopCenterController.class);
+        add("/shop/all", ShopAllController.class);
         add("/shop/good", GoodAdminController.class);
         add("/shop/modify", ShopModifyController.class);
-        add("/suggest", SuggestController.class);
+        add("/shop/order", ShopOrderController.class);
+
         add("/user/shopcar", ShopcarController.class);
         add("/user/order", UserOrderController.class);
         add("/user/pay", UserPayController.class);
         add("/user/center", UserCenterController.class);
-        add("/shop/order", ShopOrderController.class);
-        add("/store", StoreController.class);
-        add("/order", OrderController.class);
         add("/user/modify", UserModifyController.class);
-        add("/shop/all", ShopAllController.class);
+
     }
+
 }

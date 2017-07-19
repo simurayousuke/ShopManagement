@@ -11,20 +11,24 @@ import com.jfinal.ext.interceptor.GET;
 /**
  * @author Forrest Yang
  * @author Yang Zhizhuang
- * @version 1.0.2
+ * @author Hu Wenqiang
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before({GET.class, UserInterceptor.class})
 public class StoreController extends BaseController {
 
+    private static final ShopService SHOP_SRV = ShopService.ME;
+    private static final GoodService GOOD_SRV = GoodService.ME;
+
     public void index() {
         String para = getPara();
-        Shop shop = ShopService.ME.findShopByUuid(para);
+        Shop shop = SHOP_SRV.findShopByUuid(para);
         if (null == shop) {
-            shop = ShopService.ME.findShopById(Integer.parseInt(para));
+            shop = SHOP_SRV.findShopById(getParaToInt());
         }
         setAttr("shop", shop);
-        setAttr("list", GoodService.ME.getGoodListByShopId(shop.getId()));
+        setAttr("list", GOOD_SRV.getGoodListByShopId(shop.getId()));
         render("index.html");
     }
 

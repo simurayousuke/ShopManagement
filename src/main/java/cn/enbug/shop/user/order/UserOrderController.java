@@ -21,7 +21,6 @@ import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.OrderNumber;
 import cn.enbug.shop.common.service.OrderService;
-import cn.enbug.shop.common.service.UserService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
 
@@ -31,14 +30,13 @@ import java.util.List;
  * @author Yang Zhizhuang
  * @author Forrest Yang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 @Before({GET.class, NeedLogInInterceptor.class})
 public class UserOrderController extends BaseController {
 
     private static final UserOrderService SRV = UserOrderService.ME;
-    private static final UserService USER_SRV = UserService.ME;
     private static final OrderService ORDER_SRV = OrderService.ME;
 
     public void index() {

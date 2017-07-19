@@ -21,53 +21,55 @@ import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
-@Before({POST.class, NeedLogInInterceptor.class})
+@Before({POST.class, NoUrlPara.class, NeedLogInInterceptor.class})
 public class UserModifyController extends BaseController {
+
+    private static final UserModifyService SRV = UserModifyService.ME;
 
     @Before(AvatorModifyValidator.class)
     public void avator() {
-        renderJson(UserModifyService.ME.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
+        renderJson(SRV.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
     }
 
     @Before(AddAddressValidator.class)
     public void addaddress() {
-        renderJson(UserModifyService.ME.addAddress(getCookie(RedisKit.COOKIE_ID), getPara("name"),
+        renderJson(SRV.addAddress(getCookie(RedisKit.COOKIE_ID), getPara("name"),
                 getPara("phone"), getPara("address")));
     }
 
     @Before(ChargeValidator.class)
     public void charge() {
-        renderJson(UserModifyService.ME.charge(getCookie(RedisKit.COOKIE_ID), getParaToBigDecimal("value")));
+        renderJson(SRV.charge(getCookie(RedisKit.COOKIE_ID), getParaToBigDecimal("value")));
     }
 
     @Before(DefaultAddressValidator.class)
     public void defaultaddress() {
-        renderJson(UserModifyService.ME.setDefaultAddress(getCookie(RedisKit.COOKIE_ID), getParaToInt("id")));
+        renderJson(SRV.setDefaultAddress(getCookie(RedisKit.COOKIE_ID), getParaToInt("id")));
     }
 
     @Before(BindPhoneValidator.class)
     public void bindphone() {
-        renderJson(UserModifyService.ME.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone")));
+        renderJson(SRV.bindPhone(getCookie(RedisKit.COOKIE_ID), getPara("phone")));
     }
 
     @Before(BindEmailValidator.class)
     public void bindemail() {
-        renderJson(UserModifyService.ME.bindEmail(getCookie(RedisKit.COOKIE_ID), getPara("email")));
+        renderJson(SRV.bindEmail(getCookie(RedisKit.COOKIE_ID), getPara("email")));
     }
 
-    @Clear(POST.class)
+    @Clear({POST.class, NoUrlPara.class})
     public void active() {
-        UserModifyService.ME.activeEmail(getPara());
+        SRV.activeEmail(getPara());
         redirect("/user/center");
-
     }
 
 }
