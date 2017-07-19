@@ -96,6 +96,11 @@ public class UserModifyService {
         }
     }
 
+    Ret modifyPwd(String token, String oldPwd, String newPwd) {
+        boolean b = UserService.ME.changePassword(token, oldPwd, newPwd);
+        return b ? Ret.succeed() : Ret.fail();
+    }
+
     boolean activeEmail(String code) {
         User user = RedisKit.getUserFromActiveCode(code);
         String email = RedisKit.getEmailAddressByActiveCode(code);

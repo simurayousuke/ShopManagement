@@ -67,6 +67,11 @@ public class UserModifyController extends BaseController {
         renderJson(SRV.bindEmail(getCookie(RedisKit.COOKIE_ID), getPara("email")));
     }
 
+    @Before(ChangePwdValidator.class)
+    public void changepwd() {
+        renderJson(SRV.modifyPwd(getCookie(RedisKit.COOKIE_ID), getPara("old_pwd"), getPara("new_pwd")));
+    }
+
     @Clear({POST.class, NoUrlPara.class})
     @Before(GET.class)
     public void active() {
