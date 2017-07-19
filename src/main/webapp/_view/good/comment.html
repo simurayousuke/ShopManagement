@@ -3,32 +3,24 @@
         <h2>所有评论</h2>
     </header>
     <section class="comments-list">
+        #for(x:comments)
         <div class="comment">
             <a href="#" class="avatar">
                 <em class="icon-user icon-2x"></em>
             </a>
             <div class="content">
-                <div class="pull-right text-muted">3 个小时前</div>
-                <div><a href="#"><strong>杨森</strong></a></div>
-                <div class="text">肉不新鲜..大家别买了</div>
+                <div class="pull-right text-muted">#date(x.comment_time, 'yyyy-MM-dd HH:mm:ss')</div>
+                <div><a href="#"><strong>#(x.username)</strong></a></div>
+                <div class="text">#(x.description)</div>
                 <div class="actions">
                     <a href="#">回复</a>
                 </div>
             </div>
         </div>
-
-        <div class="comment">
-            <a href="#" class="avatar">
-                <em class="icon-user icon-2x"></em>
-            </a>
-            <div class="content">
-                <div class="pull-right text-muted">2 个小时前</div>
-                <div><a href="#"><strong>郑照宇</strong></a></div>
-                <div class="text">曹迈肉真好吃</div>
-                <div class="actions">
-                    <a href="#">回复</a>
-                </div>
-            </div>
+        #else
+        <div class="comment" style="text-align: center">
+            暂无评论
         </div>
+        #end
     </section>
 </div>

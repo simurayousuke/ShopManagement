@@ -19,6 +19,7 @@ package cn.enbug.shop.good;
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.model.Good;
+import cn.enbug.shop.common.service.CommentService;
 import cn.enbug.shop.common.service.GoodService;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
@@ -41,6 +42,7 @@ public class GoodController extends BaseController {
             redirect("/search");
             return;
         }
+        setAttr("comments", CommentService.ME.getCommentRecordByGoodId(good.getId()));
         setAttr("good", good);
         render("index.html");
     }
