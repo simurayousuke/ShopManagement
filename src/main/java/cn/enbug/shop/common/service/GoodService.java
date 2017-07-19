@@ -23,8 +23,6 @@ import com.jfinal.aop.Duang;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,7 +41,6 @@ public class GoodService {
 
     public static final GoodService ME = Duang.duang(GoodService.class);
     private static final OpenSearchService OPEN_SEARCH_SERVICE = OpenSearchService.ME;
-    private static final Logger LOG = LoggerFactory.getLogger(GoodService.class);
     private static final Good GOOD_DAO = new Good().dao();
 
     public List<Good> getGoodListByShopId(int id) {
