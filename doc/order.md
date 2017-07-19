@@ -51,6 +51,26 @@
 * good 是否好评（bool）
 
 </li>
+<li>发货
+
+请求地址：/order/send
+
+参数:
+
+* order 订单号
+* id 商品id
+
+</li>
+<li>同意退款
+
+请求地址：/order/close
+
+参数:
+
+* order 订单号
+* id 商品id
+
+</li>
 </ol>
 
 * 返回值:

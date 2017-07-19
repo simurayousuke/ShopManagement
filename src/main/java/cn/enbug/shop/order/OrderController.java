@@ -97,4 +97,26 @@ public class OrderController extends BaseController {
         }
     }
 
+    public void send() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        String order = getPara("order");
+        int id = getParaToInt("id");
+        if (OrderService.ME.sendGood(token, order, id)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("发货失败！"));
+        }
+    }
+
+    public void close() {
+        String token = getCookie(RedisKit.COOKIE_ID);
+        String order = getPara("order");
+        int id = getParaToInt("id");
+        if (OrderService.ME.closeGood(token, order, id)) {
+            renderJson(Ret.succeed());
+        } else {
+            renderJson(Ret.fail("退款失败！"));
+        }
+    }
+
 }
