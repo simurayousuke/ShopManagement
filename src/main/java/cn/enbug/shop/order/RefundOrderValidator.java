@@ -22,7 +22,8 @@ import com.jfinal.core.Controller;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.0
+ * @author Yang Zhizhuang
+ * @version 1.0.1
  * @since 1.0.0
  */
 public class RefundOrderValidator extends BaseValidator {
@@ -31,8 +32,6 @@ public class RefundOrderValidator extends BaseValidator {
     protected void validate(Controller c) {
         validateRequired("order", Ret.MSG, "请输入订单号");
         validateInteger("id", Ret.MSG, "请输入商品id");
-        validateRequired("context", Ret.MSG, "请输入评价内容");
-        validateBoolean("good", Ret.MSG, "请选择评价");
     }
 
     @Override
