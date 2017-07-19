@@ -17,7 +17,6 @@
 package cn.enbug.shop.user.modify;
 
 import cn.enbug.shop.common.kit.Ret;
-import cn.enbug.shop.common.service.FileService;
 import cn.enbug.shop.common.validator.BaseValidator;
 import com.jfinal.core.Controller;
 
@@ -30,11 +29,7 @@ public class AvatorModifyValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateRequiredString("avator", Ret.MSG, "请设置文件");
-        String avator = c.getPara("avator");
-        if (!FileService.ME.isFileExist(avator)) {
-            addError(Ret.MSG, "文件不存在");
-        }
+        validateFile("avator", Ret.MSG, "请选择用户头像");
     }
 
     @Override

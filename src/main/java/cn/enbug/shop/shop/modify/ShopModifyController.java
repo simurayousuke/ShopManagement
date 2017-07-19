@@ -12,7 +12,7 @@ import com.jfinal.ext.interceptor.POST;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
 @Before({POST.class, NoUrlPara.class, HasShopInterceptor.class})
@@ -28,6 +28,7 @@ public class ShopModifyController extends BaseController {
         renderJson(SRV.modifyName(token, name, ip));
     }
 
+    @Before(DescriptionModifyShopValidator.class)
     public void description() {
         String token = getCookie(RedisKit.TOKEN);
         String description = getPara("description");
@@ -35,6 +36,7 @@ public class ShopModifyController extends BaseController {
         renderJson(SRV.modifyDescription(token, description, ip));
     }
 
+    @Before(TransferModifyShopValidator.class)
     public void transfer() {
         String token = getCookie(RedisKit.TOKEN);
         String username = getPara("username");
@@ -44,7 +46,7 @@ public class ShopModifyController extends BaseController {
     }
 
     @Clear(HasShopInterceptor.class)
-    @Before(ImageCaptchaValidator.class)
+    @Before({ImageCaptchaValidator.class, AddShopValidator.class})
     public void add() {
         String token = getCookie(RedisKit.TOKEN);
         String name = getPara("name");

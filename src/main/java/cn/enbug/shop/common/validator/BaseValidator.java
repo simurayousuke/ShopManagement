@@ -19,6 +19,7 @@ package cn.enbug.shop.common.validator;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.model.User;
+import cn.enbug.shop.common.service.FileService;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
 import cn.enbug.shop.common.service.UserService;
 import com.jfinal.kit.LogKit;
@@ -100,6 +101,15 @@ public abstract class BaseValidator extends Validator {
         User user = UserService.ME.validateToken(controller.getCookie(RedisKit.COOKIE_ID));
         if (null == user) {
             addError(Ret.MSG, "need login");
+        }
+    }
+
+    protected void validateFile(String field, String errorKey, String errorMessage) {
+        String fileName = controller.getPara(field);
+        if (null != fileName) {
+            if (!FileService.ME.isFileExist(fileName)) {
+                addError(errorKey, errorMessage);
+            }
         }
     }
 

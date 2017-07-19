@@ -33,11 +33,11 @@ public class HasShopInterceptor implements Interceptor {
     public void intercept(Invocation inv) {
         Controller c = inv.getController();
         User user = RedisKit.getUserByToken(c.getCookie(RedisKit.COOKIE_ID));
-        if (user == null) {
+        if (null == user) {
             c.redirect("/login");
             return;
         }
-        if (ShopService.ME.findShopByUser(user) == null) {
+        if (null == ShopService.ME.findShopByUser(user)) {
             c.redirect("/shop/center");
         } else {
             c.setAttr("user", user);

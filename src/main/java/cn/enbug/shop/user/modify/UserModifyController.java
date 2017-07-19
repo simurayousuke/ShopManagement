@@ -28,7 +28,7 @@ import com.jfinal.ext.interceptor.POST;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.6
+ * @version 1.0.7
  * @since 1.0.0
  */
 @Before({POST.class, NoUrlPara.class, NeedLogInInterceptor.class})
@@ -38,7 +38,7 @@ public class UserModifyController extends BaseController {
 
     @Before(AvatorModifyValidator.class)
     public void avator() {
-        renderJson(SRV.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator")));
+        renderJson(SRV.setAvator(getCookie(RedisKit.COOKIE_ID), getPara("avator", "user/default.jpg")));
     }
 
     @Before(AddAddressValidator.class)

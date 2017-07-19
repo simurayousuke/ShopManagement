@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.shop.good;
+package cn.enbug.shop.shop.modify;
 
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.validator.BaseValidator;
@@ -25,15 +25,11 @@ import com.jfinal.core.Controller;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class UpdateGoodValidator extends BaseValidator {
+public class DescriptionModifyShopValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateRequired("name", Ret.MSG, "请输入商品名");
-        validateRequired("description", Ret.MSG, "请输入商品描述");
-        validateRequired("uuid", Ret.MSG, "请选择商品");
-        validateMoney("price", Ret.MSG, "价格格式错误");
-        validateInteger("number", Ret.MSG, "请输入数量");
+        validateRequired("description", Ret.MSG, "请输入描述");
     }
 
     @Override
