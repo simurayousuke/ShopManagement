@@ -32,13 +32,14 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.8
+ * @version 1.0.9
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
 public abstract class BaseValidator extends Validator {
 
     private static final String PHONE_PATTERN = "^1[3|4|5|7|8][0-9]{9}$";
+    private static final String MONEY_PATTERN = "^(([1-9][0-9]*)|([0-9]))(.\\d{1,2})$";
 
     public BaseValidator() {
         super();
@@ -89,6 +90,10 @@ public abstract class BaseValidator extends Validator {
         if (!ShortMessageCaptchaService.ME.validate(phone, captcha)) {
             addError(errorKey, errorMessage);
         }
+    }
+
+    protected void validateMoney(String field, String errorKey, String errorMessage) {
+        validateRegex(field, MONEY_PATTERN, errorKey, errorMessage);
     }
 
     protected void validateLogin() {

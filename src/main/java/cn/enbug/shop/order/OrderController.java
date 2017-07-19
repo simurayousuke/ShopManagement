@@ -28,7 +28,7 @@ import com.jfinal.ext.interceptor.POST;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Before({NoUrlPara.class, POST.class, NeedLogInInterceptor.class})
@@ -98,6 +98,7 @@ public class OrderController extends BaseController {
         }
     }
 
+    @Before(SendOrderValidator.class)
     public void send() {
         String token = getCookie(RedisKit.COOKIE_ID);
         String order = getPara("order");
@@ -109,6 +110,7 @@ public class OrderController extends BaseController {
         }
     }
 
+    @Before(CloseOrderValidator.class)
     public void close() {
         String token = getCookie(RedisKit.COOKIE_ID);
         String order = getPara("order");

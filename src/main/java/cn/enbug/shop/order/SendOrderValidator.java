@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.enbug.shop.user.modify;
+package cn.enbug.shop.order;
 
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.validator.BaseValidator;
@@ -22,15 +22,15 @@ import com.jfinal.core.Controller;
 
 /**
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @version 1.0.0
  * @since 1.0.0
  */
-public class ChargeValidator extends BaseValidator {
+public class SendOrderValidator extends BaseValidator {
 
     @Override
     protected void validate(Controller c) {
-        validateRequired("value", Ret.MSG, "请输入充值金额");
-        validateMoney("value", Ret.MSG, "充值金额格式错误");
+        validateRequired("order", Ret.MSG, "请选择订单");
+        validateRequired("id", Ret.MSG, "请选择商品");
     }
 
     @Override

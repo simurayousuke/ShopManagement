@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 @Before({NoUrlPara.class, HasShopInterceptor.class})
@@ -56,7 +56,7 @@ public class GoodAdminController extends BaseController {
     }
 
     @Clear(HasShopInterceptor.class)
-    @Before({POST.class, ImageCaptchaValidator.class})
+    @Before({POST.class, ImageCaptchaValidator.class, AddGoodValidator.class})
     public void add() {
         String token = getCookie(RedisKit.TOKEN);
         String name = getPara("name");
@@ -74,7 +74,7 @@ public class GoodAdminController extends BaseController {
         render("edit.html");
     }
 
-    @Before(POST.class)
+    @Before({POST.class, UpdateGoodValidator.class})
     public void update() {
         String token = getCookie(RedisKit.TOKEN);
         String name = getPara("name");
@@ -90,7 +90,7 @@ public class GoodAdminController extends BaseController {
         }
     }
 
-    @Before(POST.class)
+    @Before({POST.class, RemoveGoodValidator.class})
     public void remove() {
         String token = getCookie(RedisKit.TOKEN);
         String uuid = getPara("uuid");
