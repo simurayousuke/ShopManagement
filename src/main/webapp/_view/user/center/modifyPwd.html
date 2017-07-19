@@ -7,12 +7,26 @@
         #include("centerNav.html",modiypwd='class="active" onclick="return false;"')
         <div class="center-content">
             <div class="info-title">绑定邮箱</div>
-            <form method="post" class="bind-form" style="width: 300px;margin: 100px auto;">
+            <form method="post" class="bind-form" style="width: 300px;margin: 50px auto;">
                 <div class="input-group">
                     <span class="input-group-addon">
                         <em class="icon icon-envelope"></em>
                     </span>
-                    <input type="text" class="form-control" placeholder="邮箱" name="email" id="email">
+                    <input type="text" class="form-control" placeholder="旧密码" name="old-pwd">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <em class="icon icon-envelope"></em>
+                    </span>
+                    <input type="text" class="form-control" placeholder="新密码" name="new-pwd">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <em class="icon icon-envelope"></em>
+                    </span>
+                    <input type="text" class="form-control" placeholder="再次确认" name="confirm-pwd">
                 </div>
                 <br>
                 <div class="input-group" style="width: 100%;margin-bottom: 0;">
@@ -25,7 +39,7 @@
                     <img alt="" src="" class="captcha small-element" title="点击刷新">
                 </div>
                 <br>
-                <button class="btn btn-primary btn-block" type="submit">发送邮件</button>
+                <button class="btn btn-primary btn-block" type="submit">确认修改</button>
             </form>
         </div>
     </div>
