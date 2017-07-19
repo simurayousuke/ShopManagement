@@ -25,12 +25,14 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
+import java.util.List;
+
 /**
  * Shop service.
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.5
+ * @version 1.0.6
  * @since 1.0.0
  */
 public class ShopService {
@@ -50,6 +52,10 @@ public class ShopService {
 
     public Shop findShopById(int id) {
         return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findById", id));
+    }
+
+    public List getAll() {
+        return SHOP_DAO.find("SELECT * from t_shop;");
     }
 
     /**
