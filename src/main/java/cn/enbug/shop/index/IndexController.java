@@ -42,4 +42,8 @@ public class IndexController extends BaseController {
         render("index.html");
     }
 
+    public void agreement() {
+        render("agreement.html");
+    }
+
 }
