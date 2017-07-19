@@ -34,6 +34,7 @@ public class UpdateGoodValidator extends BaseValidator {
         validateRequired("uuid", Ret.MSG, "请选择商品");
         validateMoney("price", Ret.MSG, "价格格式错误");
         validateInteger("number", Ret.MSG, "请输入数量");
+        validateFile("avator", Ret.MSG, "图片不存在");
     }
 
     @Override

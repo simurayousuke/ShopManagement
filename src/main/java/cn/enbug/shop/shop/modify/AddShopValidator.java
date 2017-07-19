@@ -31,6 +31,7 @@ public class AddShopValidator extends BaseValidator {
     protected void validate(Controller c) {
         validateRequired("name", Ret.MSG, "请输入店铺名称");
         validateRequired("description", Ret.MSG, "请输入店铺描述");
+        validateFile("avator", Ret.MSG, "图片不存在");
     }
 
     @Override
