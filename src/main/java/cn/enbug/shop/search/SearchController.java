@@ -5,8 +5,7 @@ import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.kit.UrlKit;
 import cn.enbug.shop.common.service.OpenSearchService;
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Clear;
-import com.jfinal.ext.interceptor.NoUrlPara;
+import com.jfinal.ext.interceptor.GET;
 import com.jfinal.kit.StrKit;
 
 import java.util.List;
@@ -17,10 +16,9 @@ import java.util.List;
  * @version 1.0.4
  * @since 1.0.
  */
-@Before(UserInterceptor.class)
+@Before({GET.class, UserInterceptor.class})
 public class SearchController extends BaseController {
 
-    @Clear(NoUrlPara.class)
     public void index() {
         String word = getPara();
         if (StrKit.notBlank(word)) {

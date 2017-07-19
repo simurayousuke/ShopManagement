@@ -22,6 +22,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.service.ShopService;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
@@ -31,7 +32,7 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  * @version 1.0.2
  * @since 1.0.0
  */
-@Before({NoUrlPara.class, NeedLogInInterceptor.class})
+@Before({NoUrlPara.class, GET.class, NeedLogInInterceptor.class})
 public class ShopCenterController extends BaseController {
 
     private static final ShopService SHOP_SRV = ShopService.ME;

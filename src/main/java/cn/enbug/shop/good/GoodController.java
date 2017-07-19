@@ -22,9 +22,7 @@ import cn.enbug.shop.common.model.Good;
 import cn.enbug.shop.common.service.CommentService;
 import cn.enbug.shop.common.service.GoodService;
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
-import com.jfinal.ext.interceptor.NoUrlPara;
 
 /**
  * @author Yang Zhizhuang
@@ -34,7 +32,6 @@ import com.jfinal.ext.interceptor.NoUrlPara;
 @Before({GET.class, UserInterceptor.class, GoodValidator.class})
 public class GoodController extends BaseController {
 
-    @Clear(NoUrlPara.class)
     public void index() {
         String uuid = getPara();
         Good good = GoodService.ME.findGoodByUuid(uuid);

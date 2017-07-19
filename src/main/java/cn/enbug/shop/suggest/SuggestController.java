@@ -21,8 +21,6 @@ import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.kit.UrlKit;
 import cn.enbug.shop.common.service.OpenSearchService;
 import com.jfinal.aop.Before;
-import com.jfinal.aop.Clear;
-import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
@@ -33,7 +31,6 @@ import com.jfinal.ext.interceptor.POST;
  */
 public class SuggestController extends BaseController {
 
-    @Clear(NoUrlPara.class)
     @Before({POST.class, SuggestValidator.class})
     public void index() {
         String key = getPara();

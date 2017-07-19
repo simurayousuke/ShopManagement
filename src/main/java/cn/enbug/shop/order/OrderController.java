@@ -22,6 +22,7 @@ import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
 import cn.enbug.shop.common.service.OrderService;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
@@ -30,7 +31,7 @@ import com.jfinal.ext.interceptor.POST;
  * @version 1.0.2
  * @since 1.0.0
  */
-@Before({POST.class, NeedLogInInterceptor.class})
+@Before({NoUrlPara.class, POST.class, NeedLogInInterceptor.class})
 public class OrderController extends BaseController {
 
     @Before(CreateOrderValidator.class)

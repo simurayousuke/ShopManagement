@@ -21,6 +21,7 @@ import cn.enbug.shop.common.interceptor.NeedLogInInterceptor;
 import cn.enbug.shop.common.kit.RedisKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
@@ -67,6 +68,7 @@ public class UserModifyController extends BaseController {
     }
 
     @Clear({POST.class, NoUrlPara.class})
+    @Before(GET.class)
     public void active() {
         SRV.activeEmail(getPara());
         redirect("/user/center");

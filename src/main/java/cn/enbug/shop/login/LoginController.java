@@ -46,7 +46,6 @@ public class LoginController extends BaseController {
      * 登录页面
      */
     @Before(GET.class)
-    @Clear(NoUrlPara.class)
     public void index() {
         render("index.html");
     }
@@ -112,6 +111,7 @@ public class LoginController extends BaseController {
         redirect(url);
     }
 
+    @Before(GET.class)
     public void forget() {
         render("forgetPassword.html");
     }

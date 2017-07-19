@@ -74,6 +74,7 @@ public class GoodAdminController extends BaseController {
         render("edit.html");
     }
 
+    @Before(POST.class)
     public void update() {
         String token = getCookie(RedisKit.TOKEN);
         String name = getPara("name");
@@ -89,6 +90,7 @@ public class GoodAdminController extends BaseController {
         }
     }
 
+    @Before(POST.class)
     public void remove() {
         String token = getCookie(RedisKit.TOKEN);
         String uuid = getPara("uuid");
