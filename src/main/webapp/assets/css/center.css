@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+textarea {
+    resize: none;
+}
+
 .boards {
     margin-top: 40px;
 }

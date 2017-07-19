@@ -17,7 +17,7 @@ $(document).ready(function () {
             "  </label>" +
             " </div>" +
             " <div>" +
-            " <textarea id='cmt-text' class=\"form-control\" placeholder=\"评论\"></textarea>" +
+            " <textarea id='cmt-text' style='resize: none' class=\"form-control\" placeholder=\"评论\"></textarea>" +
             " </div>", "评论", "var context=$('#cmt-text').val();" +
             "var good=$('#good-cmt').attr('checked')?true:false;" +
             "var order='" + order + "';" +
