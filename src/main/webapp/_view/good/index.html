@@ -53,12 +53,13 @@
     #include("fix.html",url='/good/'+good.uuid)
 </div>
 #else
-<!--todo 商品已下架-->
+#include("offShelf.html")
 #end
 #end
 
 #define css()
 <link rel="stylesheet" href="assets/css/good.css">
+<link rel="stylesheet" href="assets/css/noCommon.css">
 #end
 
 #define js()

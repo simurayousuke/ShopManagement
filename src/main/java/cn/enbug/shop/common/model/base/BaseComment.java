@@ -63,4 +63,13 @@ public abstract class BaseComment<M extends BaseComment<M>> extends Model<M> imp
         return (M) this;
     }
 
+    public java.util.Date getCommentTime() {
+        return get("comment_time");
+    }
+
+    public M setCommentTime(java.util.Date commentTime) {
+        set("comment_time", commentTime);
+        return (M) this;
+    }
+
 }
