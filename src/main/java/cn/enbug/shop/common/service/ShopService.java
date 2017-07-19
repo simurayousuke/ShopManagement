@@ -54,7 +54,7 @@ public class ShopService {
         return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findById", id));
     }
 
-    public List getAll() {
+    public List<Shop> getAll() {
         return SHOP_DAO.find("SELECT * from t_shop;");
     }
 
