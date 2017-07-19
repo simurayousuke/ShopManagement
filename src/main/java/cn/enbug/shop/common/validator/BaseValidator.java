@@ -106,10 +106,8 @@ public abstract class BaseValidator extends Validator {
 
     protected void validateFile(String field, String errorKey, String errorMessage) {
         String fileName = controller.getPara(field);
-        if (null != fileName) {
-            if (!FileService.ME.isFileExist(fileName)) {
-                addError(errorKey, errorMessage);
-            }
+        if (null != fileName && !FileService.ME.isFileExist(fileName)) {
+            addError(errorKey, errorMessage);
         }
     }
 
