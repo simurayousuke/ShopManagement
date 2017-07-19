@@ -11,7 +11,7 @@
             </a>
             <div class="content">
                 <div class="pull-right text-muted">#date(x.comment_time, 'yyyy-MM-dd HH:mm:ss')</div>
-                <div><a href="#"><strong>#(x.username)</strong>&nbsp;
+                <div><a><strong>#(x.username)</strong>&nbsp;
                     #if(x.is_good==1)
                     好评
                     #else
@@ -20,9 +20,6 @@
 
                 </a></div>
                 <div class="text">#(x.description)</div>
-                <div class="actions">
-                    <a href="#">回复</a>
-                </div>
             </div>
         </div>
         #else

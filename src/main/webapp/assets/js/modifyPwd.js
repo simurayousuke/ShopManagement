@@ -21,7 +21,7 @@ $(document).ready(function () {
             $.msg('两次密码不一致');
             return;
         }
-        $.post('/user/center/modifypwd', data, function (data) {
+        $.post('/user/modify/changepwd', data, function (data) {
             if (!data.status) {
                 $.msg(data.msg);
             } else {

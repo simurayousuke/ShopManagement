@@ -1,6 +1,7 @@
 package cn.enbug.shop.shop.all;
 
 import cn.enbug.shop.common.controller.BaseController;
+import cn.enbug.shop.common.interceptor.UserInterceptor;
 import cn.enbug.shop.common.service.ShopService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.GET;
@@ -11,10 +12,11 @@ import com.jfinal.ext.interceptor.NoUrlPara;
  *
  * @author Forrest Yang
  * @author Hu Wenqiang
- * @version 1.0.1
+ * @author Yang Zhizhuang
+ * @version 1.0.2
  * @since 1.0.0
  */
-@Before({NoUrlPara.class, GET.class})
+@Before({NoUrlPara.class, GET.class, UserInterceptor.class})
 public class ShopAllController extends BaseController {
 
     public void index() {

@@ -34,14 +34,14 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.10
+ * @version 1.0.11
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
 public abstract class BaseValidator extends Validator {
 
     private static final String PHONE_PATTERN = "^1[3|4|5|7|8][0-9]{9}$";
-    private static final String MONEY_PATTERN = "^(([1-9][0-9]*)|([0-9]))(.\\d{1,2})$";
+    private static final String MONEY_PATTERN = "^(([1-9][0-9]{0,11})|([0-9]))(\\.\\d{1,2})?$";
 
     public BaseValidator() {
         super();

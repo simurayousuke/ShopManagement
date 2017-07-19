@@ -29,7 +29,7 @@ import java.math.BigDecimal;
 /**
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.7
+ * @version 1.0.8
  * @since 1.0.0
  */
 public class UserModifyService {
@@ -98,7 +98,7 @@ public class UserModifyService {
 
     Ret modifyPwd(String token, String oldPwd, String newPwd) {
         boolean b = UserService.ME.changePassword(token, oldPwd, newPwd);
-        return b ? Ret.succeed() : Ret.fail();
+        return b ? Ret.succeed() : Ret.fail("修改失败");
     }
 
     boolean activeEmail(String code) {
