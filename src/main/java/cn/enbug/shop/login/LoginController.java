@@ -34,7 +34,7 @@ import com.jfinal.ext.interceptor.POST;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.0.10
+ * @version 1.0.11
  * @since 1.0.0
  */
 @Before({NoUrlPara.class, LoginInterceptor.class})
@@ -109,11 +109,6 @@ public class LoginController extends BaseController {
             url = url.substring(0, index);
         }
         redirect(url);
-    }
-
-    @Before(GET.class)
-    public void forget() {
-        render("forgetPassword.html");
     }
 
 }

@@ -17,6 +17,7 @@
 package cn.enbug.shop.common;
 
 import cn.enbug.shop.captcha.CaptchaController;
+import cn.enbug.shop.forget.ForgetController;
 import cn.enbug.shop.good.GoodController;
 import cn.enbug.shop.index.IndexController;
 import cn.enbug.shop.login.LoginController;
@@ -43,7 +44,7 @@ import com.jfinal.config.Routes;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.0.0
  */
 public class FrontRoutes extends Routes {
@@ -66,6 +67,7 @@ public class FrontRoutes extends Routes {
         add("/suggest", SuggestController.class);
         add("/store", StoreController.class);
         add("/order", OrderController.class);
+        add("/forget", ForgetController.class);
 
         add("/shop/center", ShopCenterController.class);
         add("/shop/all", ShopAllController.class);

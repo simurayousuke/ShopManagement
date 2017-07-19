@@ -34,17 +34,17 @@ import com.jfinal.ext.interceptor.POST;
 public class ForgetController extends BaseController {
 
     @Before(GET.class)
-    public void email() {
-
+    public void forget() {
+        render("forgetPassword.html");
     }
 
     @Before(GET.class)
-    public void phone() {
+    public void reset() {
 
     }
 
     @Before(POST.class)
-    public void reset() {
+    public void doreset() {
         String code = getPara("code");
         String pwd = getPara("pwd");
         if (UserService.ME.resetPassword(code, pwd)) {

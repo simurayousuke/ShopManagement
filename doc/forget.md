@@ -22,7 +22,7 @@
 </li>
 <li>重置密码
 
-请求地址：/forget/reset
+请求地址：/forget/doreset
 
 参数:
 
