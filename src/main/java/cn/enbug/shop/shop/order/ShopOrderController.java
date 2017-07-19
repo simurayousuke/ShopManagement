@@ -37,6 +37,7 @@ public class ShopOrderController extends BaseController {
         setAttr("doneOrders", OrderService.ME.getCheckedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         setAttr("refundOrders", OrderService.ME.getRefundingListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         setAttr("closedOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        setAttr("sendingOrders", OrderService.ME.getSendingListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("all.html");
     }
 
@@ -64,4 +65,10 @@ public class ShopOrderController extends BaseController {
         setAttr("closedOrders", OrderService.ME.getClosedListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
         render("closePage.html");
     }
+
+    public void norec() {
+        setAttr("sendingOrders", OrderService.ME.getSendingListByTokenForSeller(getCookie(RedisKit.COOKIE_ID)));
+        render("noRecPage.html");
+    }
+
 }
