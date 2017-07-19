@@ -27,6 +27,7 @@ $(document).ready(function () {
             } else {
                 $.msg('修改成功');
                 $this[0].reset();
+                location.href = '/user/center'
             }
         });
     });
