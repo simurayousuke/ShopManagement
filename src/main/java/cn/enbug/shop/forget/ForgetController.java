@@ -35,7 +35,7 @@ import com.jfinal.ext.interceptor.POST;
 public class ForgetController extends BaseController {
 
     @Before(GET.class)
-    public void forget() {
+    public void index() {
         render("forgetPassword.html");
     }
 
@@ -66,7 +66,7 @@ public class ForgetController extends BaseController {
     @Before(POST.class)
     public void validatePhone() {
         String phone = getPara("phone", "");
-        String captcha = getPara("captcha", "");
+        String captcha = getPara("phone_captcha", "");
         if (captcha.equals(RedisKit.getCaptcha(phone))) {
             renderJson(Ret.succeed().set("code", RedisKit.setActiveCodeForPhoneNumberAndGet(phone)));
         } else {
@@ -79,7 +79,7 @@ public class ForgetController extends BaseController {
         String email = getPara("email");
         String activeCode = RedisKit.setActiveCodeForEmailAndGet(email);
         String title = "您正在找回密码";
-        String url = "https://shop.yangzhizhuang.net/forget/email/" + activeCode;
+        String url = "https://shop.yangzhizhuang.net/forget/reset/" + activeCode;
         String context = "您正在EnBug购物网找回密码<a href=\"" + url + "\">点击重设密码</a>" +
                 "<br>若上方链接不可用，您也可以复制地址到浏览器地址栏访问" +
                 "<br>" + url;
