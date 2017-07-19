@@ -278,4 +278,16 @@ public class UserService {
         return null != user && user.setPwd(hash(pwd, user.getSalt())).update();
     }
 
+    public User getByActiveCode(String activeCode) {
+        User user;
+        String phone = RedisKit.getPhoneNumberByActiveCode(activeCode);
+        if (null == phone) {
+            String email = RedisKit.getEmailAddressByActiveCode(activeCode);
+            user = findUserByEmail(email);
+        } else {
+            user = findUserByPhoneNumber(phone);
+        }
+        return user;
+    }
+
 }

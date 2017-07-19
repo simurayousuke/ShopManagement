@@ -20,6 +20,7 @@ import cn.enbug.shop.common.bean.Email;
 import cn.enbug.shop.common.controller.BaseController;
 import cn.enbug.shop.common.kit.RedisKit;
 import cn.enbug.shop.common.kit.Ret;
+import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.UserService;
 import com.jfinal.aop.Before;
@@ -40,7 +41,15 @@ public class ForgetController extends BaseController {
 
     @Before(GET.class)
     public void reset() {
-
+        String code = getPara();
+        User user = UserService.ME.getByActiveCode(code);
+        if (null == user) {
+            redirect("/login");
+        } else {
+            setAttr("code", code);
+            setAttr("user", user);
+            render("newPassword.html");
+        }
     }
 
     @Before(POST.class)
