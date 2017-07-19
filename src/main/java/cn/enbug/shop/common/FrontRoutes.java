@@ -23,6 +23,7 @@ import cn.enbug.shop.login.LoginController;
 import cn.enbug.shop.order.OrderController;
 import cn.enbug.shop.register.RegisterController;
 import cn.enbug.shop.search.SearchController;
+import cn.enbug.shop.shop.all.ShopAllController;
 import cn.enbug.shop.shop.center.ShopCenterController;
 import cn.enbug.shop.shop.good.GoodAdminController;
 import cn.enbug.shop.shop.modify.ShopModifyController;
@@ -71,5 +72,6 @@ public class FrontRoutes extends Routes {
         add("/store", StoreController.class);
         add("/order", OrderController.class);
         add("/user/modify", UserModifyController.class);
+        add("/shop/all", ShopAllController.class);
     }
 }

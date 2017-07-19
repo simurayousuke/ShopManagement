@@ -1,0 +1,38 @@
+#set(title="店铺详情")
+#@layout()
+#define body()
+<div class="container main">
+    <div class="container-fixed">
+
+        <div class="panel panel-primary hot-good">
+            <div class="panel-heading" style="font-size: 19px">
+                店铺列表
+            </div>
+            <div class="panel-body">
+                <div class="cards">
+                    #for(x:allShop)
+                    <div class="col-md-4 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <a href="store/#(x.uuid)">
+                                <img alt="" src="//smcdn.yangzhizhuang.net/#(x.avator)"
+                                     style="width: 280px;height: 198px">
+                            </a>
+                            <div class="caption">去看看！</div>
+                            <div class="card-heading"><a href="store/#(x.uuid)"><strong>#(x.shop_name)</strong></a>
+                            </div>
+                            <div class="card-content text-muted" style="float: right">好评：#(x.good)</div>
+                            <div class="card-content text-muted">店主：#(x.username)
+                            </div>
+                        </div>
+                    </div>
+                    #end
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#end
+
+#define css()
+<link rel="stylesheet" href="assets/css/shopDetail.css">
+#end

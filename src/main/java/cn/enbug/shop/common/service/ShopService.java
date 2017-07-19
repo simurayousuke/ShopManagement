@@ -23,6 +23,8 @@ import cn.enbug.shop.common.model.Shop;
 import cn.enbug.shop.common.model.User;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Duang;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 
 import java.util.List;
@@ -54,8 +56,8 @@ public class ShopService {
         return SHOP_DAO.findFirst(SHOP_DAO.getSqlPara("shop.findById", id));
     }
 
-    public List<Shop> getAll() {
-        return SHOP_DAO.find("SELECT * from t_shop;");
+    public List<Record> getAll(boolean isGood) {
+        return Db.find(Db.getSqlPara("shop.countByShopIdAndIsGood", isGood ? 1 : 0));
     }
 
     /**
