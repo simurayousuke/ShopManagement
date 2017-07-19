@@ -1,0 +1,30 @@
+<div class="tab-pane fade active in input-gp" id="forget-phone">
+    <form action="" id="phone-form">
+        <div class="input-group">
+            <span class="input-group-addon">+86</span>
+            <input class="form-control" placeholder="手机号" type="text" id="phone" name="phone">
+        </div>
+        <br>
+        <div class="input-group full">
+            <div class="input-group captcha-div">
+                <span class="input-group-addon span-length">
+                    <em class="icon-wrench"></em>
+                </span>
+                <input class="form-control" placeholder="验证码" type="text" id="input-captcha-phone" name="captcha">
+            </div>
+            <img alt="" src="captcha/image" id="captcha-phone" class="captcha" title="点击刷新">
+        </div>
+        <br>
+        <div class="input-group full">
+            <div class="input-group captcha-div">
+                <span class="input-group-addon span-length">
+                    <em class="icon-comment"></em>
+                </span>
+                <input class="form-control" placeholder="短信验证码" type="text" id="short-message" name="phone_captcha">
+            </div>
+            <a class="btn captcha" type="button" id="send-button" style="width: 78px">立即发送</a>
+        </div>
+        <br>
+        <button class="btn btn-primary btn-block" type="submit">下一步</button>
+    </form>
+</div>

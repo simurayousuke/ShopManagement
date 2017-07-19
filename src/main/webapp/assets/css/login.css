@@ -2,6 +2,10 @@
     display: none;
 }
 
+.margin-top {
+    margin-top: 10px;
+}
+
 .login-container {
     box-sizing: border-box;
     margin-left: auto;

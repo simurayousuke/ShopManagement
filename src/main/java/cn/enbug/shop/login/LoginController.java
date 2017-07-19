@@ -112,4 +112,8 @@ public class LoginController extends BaseController {
         redirect(url);
     }
 
+    public void forget() {
+        render("forgetPassword.html");
+    }
+
 }
