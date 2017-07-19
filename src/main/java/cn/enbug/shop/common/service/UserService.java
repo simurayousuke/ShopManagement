@@ -31,7 +31,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.2.15
+ * @version 1.2.16
  * @since 1.0.0
  */
 public class UserService {
@@ -148,7 +148,7 @@ public class UserService {
             return false;
         }
         BigDecimal money = user.getMoney();
-        if (money.compareTo(value) < -1) {
+        if (money.compareTo(value) < 0) {
             return false;
         }
         user.setMoney(user.getMoney().subtract(value));
@@ -173,7 +173,7 @@ public class UserService {
     @Before(Tx.class)
     public boolean transfer(User user, User to, BigDecimal value) {
         BigDecimal money = user.getMoney();
-        if (money.compareTo(value) < -1) {
+        if (money.compareTo(value) < 0) {
             return false;
         }
         user.setMoney(user.getMoney().subtract(value));
@@ -191,7 +191,7 @@ public class UserService {
     public boolean transfer(User user, int userId, BigDecimal value) {
 
         BigDecimal money = user.getMoney();
-        if (money.compareTo(value) < -1) {
+        if (money.compareTo(value) < 0) {
             return false;
         }
         user.setMoney(money.subtract(value));
