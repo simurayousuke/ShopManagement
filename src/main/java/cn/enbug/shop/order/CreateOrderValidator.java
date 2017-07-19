@@ -32,10 +32,4 @@ public class CreateOrderValidator extends BaseValidator {
         validateInteger("address", Ret.MSG, "请先设置收货地址");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

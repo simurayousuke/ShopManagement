@@ -32,10 +32,4 @@ public class DelShopCarValidator extends BaseValidator {
         validateInteger("id", Ret.MSG, "请选择商品");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

@@ -34,10 +34,4 @@ public class AddShopValidator extends BaseValidator {
         validateFile("avator", Ret.MSG, "图片不存在");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

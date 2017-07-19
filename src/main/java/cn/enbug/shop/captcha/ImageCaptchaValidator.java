@@ -34,10 +34,4 @@ public class ImageCaptchaValidator extends BaseValidator {
         validateCaptcha("captcha", Ret.MSG, "wrong captcha");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

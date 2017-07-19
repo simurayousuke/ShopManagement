@@ -34,10 +34,4 @@ public class AddAddressValidator extends BaseValidator {
         validateEmail("email", Ret.MSG, "请输入正确格式邮箱");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

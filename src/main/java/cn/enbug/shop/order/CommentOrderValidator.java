@@ -36,10 +36,4 @@ public class CommentOrderValidator extends BaseValidator {
         validateBoolean("good", Ret.MSG, "请选择评价");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

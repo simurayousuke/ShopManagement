@@ -22,6 +22,7 @@ import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.FileService;
 import cn.enbug.shop.common.service.ShortMessageCaptchaService;
 import cn.enbug.shop.common.service.UserService;
+import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.validate.Validator;
@@ -33,7 +34,7 @@ import java.math.BigDecimal;
  *
  * @author Yang Zhizhuang
  * @author Hu Wenqiang
- * @version 1.0.9
+ * @version 1.0.10
  * @see com.jfinal.validate.Validator
  * @since 1.0.0
  */
@@ -109,6 +110,12 @@ public abstract class BaseValidator extends Validator {
         if (null != fileName && !FileService.ME.isFileExist(fileName)) {
             addError(errorKey, errorMessage);
         }
+    }
+
+    @Override
+    protected void handleError(Controller c) {
+        c.setAttr(Ret.STATUS, false);
+        c.renderJson();
     }
 
 }

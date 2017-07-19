@@ -33,10 +33,4 @@ public class TransferModifyShopValidator extends BaseValidator {
         validateRequired("pwd", Ret.MSG, "请输入密码");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

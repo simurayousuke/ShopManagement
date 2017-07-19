@@ -33,10 +33,4 @@ public class AddGoodValidator extends BaseValidator {
         validateRequired("description", Ret.MSG, "请输入商品描述");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

@@ -40,10 +40,4 @@ public class BindPhoneValidator extends BaseValidator {
         validatePhoneCaptcha("phone", "phone_captcha", Ret.MSG, "验证码错误");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }

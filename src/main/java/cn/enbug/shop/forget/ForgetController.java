@@ -24,7 +24,9 @@ import cn.enbug.shop.common.model.User;
 import cn.enbug.shop.common.service.EmailService;
 import cn.enbug.shop.common.service.UserService;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.ext.interceptor.POST;
 
 /**
@@ -32,6 +34,7 @@ import com.jfinal.ext.interceptor.POST;
  * @version 1.0.0
  * @since 1.0.0
  */
+@Before(NoUrlPara.class)
 public class ForgetController extends BaseController {
 
     @Before(GET.class)
@@ -39,6 +42,7 @@ public class ForgetController extends BaseController {
         render("forgetPassword.html");
     }
 
+    @Clear(NoUrlPara.class)
     @Before(GET.class)
     public void reset() {
         String code = getPara();
@@ -52,7 +56,7 @@ public class ForgetController extends BaseController {
         }
     }
 
-    @Before(POST.class)
+    @Before({POST.class, DoResetValidator.class})
     public void doreset() {
         String code = getPara("code");
         String pwd = getPara("pwd");
@@ -63,18 +67,13 @@ public class ForgetController extends BaseController {
         }
     }
 
-    @Before(POST.class)
+    @Before({POST.class, PhoneValidator.class})
     public void validatePhone() {
-        String phone = getPara("phone", "");
-        String captcha = getPara("phone_captcha", "");
-        if (captcha.equals(RedisKit.getCaptcha(phone))) {
-            renderJson(Ret.succeed().set("code", RedisKit.setActiveCodeForPhoneNumberAndGet(phone)));
-        } else {
-            renderJson(Ret.fail("验证码不正确"));
-        }
+        String phone = getPara("phone");
+        renderJson(Ret.succeed().set("code", RedisKit.setActiveCodeForPhoneNumberAndGet(phone)));
     }
 
-    @Before(POST.class)
+    @Before({POST.class, EmailValidator.class})
     public void validateEmail() {
         String email = getPara("email");
         String activeCode = RedisKit.setActiveCodeForEmailAndGet(email);

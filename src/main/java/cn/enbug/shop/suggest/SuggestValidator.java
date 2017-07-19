@@ -38,10 +38,4 @@ public class SuggestValidator extends BaseValidator {
 
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, true);
-        c.renderJson();
-    }
-
 }

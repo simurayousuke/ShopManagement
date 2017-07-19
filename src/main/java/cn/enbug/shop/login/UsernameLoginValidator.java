@@ -35,10 +35,4 @@ public class UsernameLoginValidator extends BaseValidator {
         validateString("pwd", 6, 32, Ret.MSG, "wrong password length");
     }
 
-    @Override
-    protected void handleError(Controller c) {
-        c.setAttr(Ret.STATUS, false);
-        c.renderJson();
-    }
-
 }
