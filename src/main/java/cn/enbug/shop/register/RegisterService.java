@@ -73,7 +73,7 @@ public class RegisterService {
         if (null != curr && curr.getEmailStatus() != 0) {
             return Ret.fail("邮箱已被注册");
         }
-        if (null != curr && curr.getEmailStatus() == 0) {
+        if (null == curr) {
             User user = new User().setUuid(StrKit.getRandomUUID()).setEmail(email).setEmailStatus(0);
             Log log = new Log().setIp(ip).setOperation("initEmail");
             if (!user.save()) {
