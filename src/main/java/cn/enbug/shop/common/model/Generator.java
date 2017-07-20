@@ -53,7 +53,7 @@ public class Generator {
         generator.setGenerateDaoInModel(false);
         generator.setDialect(new PostgreSqlDialect());
         generator.setGenerateChainSetter(true);
-        generator.setGenerateDataDictionary(false);
+        generator.setGenerateDataDictionary(true);
         generator.setRemovedTableNamePrefixes("t_");
         generator.setMappingKitClassName("MappingKit");
         generator.generate();

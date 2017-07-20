@@ -37,7 +37,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
  *
  * @author Hu Wenqiang
  * @author Yang Zhizhuang
- * @version 1.1.1
+ * @version 1.1.2
  * @since 1.0.0
  */
 public class RegisterService {
@@ -73,13 +73,15 @@ public class RegisterService {
         if (null != curr && curr.getEmailStatus() != 0) {
             return Ret.fail("邮箱已被注册");
         }
-        User user = new User().setUuid(StrKit.getRandomUUID()).setEmail(email).setEmailStatus(0);
-        Log log = new Log().setIp(ip).setOperation("initEmail");
-        if (!user.save()) {
-            return Ret.fail("unable to save into the database");
-        }
-        if (!log.setUserId(user.getId()).save()) {
-            throw new LogException("cannot log email register action");
+        if (null != curr && curr.getEmailStatus() == 0) {
+            User user = new User().setUuid(StrKit.getRandomUUID()).setEmail(email).setEmailStatus(0);
+            Log log = new Log().setIp(ip).setOperation("initEmail");
+            if (!user.save()) {
+                return Ret.fail("unable to save into the database");
+            }
+            if (!log.setUserId(user.getId()).save()) {
+                throw new LogException("cannot log email register action");
+            }
         }
         if (!sendRegisterEmail(email)) {
             return Ret.fail("fail to send email");
